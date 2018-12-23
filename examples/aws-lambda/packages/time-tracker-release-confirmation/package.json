@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "time-tracker-release-confirmation",
+  "version": "1.0.0",
+  "description": "Time Tracking Release Confirmation",
+  "main": "dist/index.js",
+  "dependencies": {
+    "dotenv-cli": "^1.4.0"
+  },
+  "devDependencies": {
+    "@aws-cdk/aws-stepfunctions": "^0.21.0",
+    "@types/node": "^10.12.18",
+    "nodemon": "^1.18.9",
+    "rimraf": "^2.6.2",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "clear": "rimraf -rf dist",
+    "build": "tsc",
+    "start": "dotenv -- node dist/index.js",
+    "dev": "dotenv -- ts-node-dev src/index.ts",
+    "aws:bootstrap": "cdk bootstrap",
+    "aws:deploy": "cdk deploy",
+    "deploy": "npm run clear && npm run build && cp -R node_modules ./dist && npm run aws:bootstrap && npm run aws:deploy"
+  }
+}

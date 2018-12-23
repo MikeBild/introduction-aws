@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "aws-lambda",
+  "version": "1.0.0",
+  "dependencies": {
+    "lerna": "^3.7.1"
+  },
+  "scripts": {
+    "bootstrap": "lerna clean && lerna run clear && lerna bootstrap",
+    "clear": "lerna run clear",
+    "build": "lerna run build --stream",
+    "deploy": "lerna run deploy --stream",
+    "dev": "lerna run dev",
+    "start": "lerna run start"
+  }
+}
