@@ -11,27 +11,31 @@
     * CloudFormation
     * Programmatically Deployments
     * Continuous-Delivery Pipeline
-  * AWS Cloud-Development-Kit (CDK) with JavaScript
-* AWS Cloud-Services (AWS-SDK)
+* Deployments with AWS Cloud-Development-Kit (CDK) and JavaScript
   * S3
   * Lambda
-  * Step-Functions
   * API-Gateway
+  * Step-Functions
+  * Route53
   * SNS
   * SQS
+* AWS Cloud-Services (AWS-SDK) with JavaScript/TypeScript
+  * S3
+  * Lambda
+  * API-Gateway
+  * Step-Functions
   * Route53
-  * IAM
-  * DynamoDB
-  * ElastiCache
-  * Batch
+  * SNS
+  * SQS
 * Use-Cases
-  * Web-Applications
-  * Data Processing
-  * Auth
-  * Security (CORS,SSL)
-  * GraphQL
-  * API-Gateways
-  * Custom Domains
+  * Web-Applications using Lambda-Functions
+  * Data-Processing using Lambda-Functions
+  * Workflows/Process-Manager using Step-Functions
+  * RESTful-APIs using API-Gateway
+  * GraphQL using Lambda-Functions
+  * GraphQL using AppSync
+  * Auth and Security
+  * DNS adn Custom-Domains
   * Multiple Environments and Experiments
 * Hands-On
   * Applicaion Structure
