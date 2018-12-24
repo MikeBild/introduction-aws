@@ -1,4 +1,4 @@
-# AWS Full Serverless Example
+# AWS Serverless Time-Tracker App Example
 
 ## Architecture
 
@@ -6,17 +6,18 @@
 
 ## Technologies
 
-* NodeJS
-* TypeScript
-* React
-* Apollo-GraphQL
-* Monorepo-Project with Lerna
-* Programmatically Serverless-Deployment with AWS-CDK
-* AWS Cloud-Service usage:
-  * S3
-  * API-Gateway
-  * Lambda Functions
-  * Step Functions
+* **NodeJS**
+* **JavaScript/TypeScript**
+* **React**
+* **Apollo-GraphQL**
+* Monorepo-Project with **Lerna**
+* Programmatically Serverless-Deployment with **AWS-CDK**
+* **AWS-SDK** Cloud-Service usage:
+  * Storage and WebSite-Hosting using **S3**
+  * Access via **API-Gateway**
+  * Data-Processing and Web-Services using **Lambda-Function**
+  * Workflow/Process-Manager via **Step-Function**
+  * EMail via **SES**
 
 ## Setup your AWS-Account
 
