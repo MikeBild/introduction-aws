@@ -43,6 +43,10 @@
   * Monorepo Applicaion Structure
   * [Time-Tracker](./examples/aws-lambda/README.md)
 
+## Tools
+
+* [CloudCraft - AWS Designer](https://cloudcraft.co)
+
 ## More Resources
 
 * [Introduction to NodeJS](https://github.com/mikebild/introduction-nodejs)
