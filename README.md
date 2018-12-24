@@ -17,16 +17,18 @@
   * API-Gateway
   * Step-Functions
   * Route53
-  * SNS
-  * SQS
+  * Simple-EMail-Services
+  * Simple-Notification-Services
+  * Simple-Queue-Services
 * AWS Cloud-Services (AWS-SDK) with JavaScript/TypeScript
   * S3
   * Lambda
   * API-Gateway
   * Step-Functions
   * Route53
-  * SNS
-  * SQS
+  * Simple-EMail-Services
+  * Simple-Notification-Services
+  * Simple-Queue-Services
 * Use-Cases
   * Web-Applications using Lambda-Functions
   * Data-Processing using Lambda-Functions
@@ -35,10 +37,10 @@
   * GraphQL using Lambda-Functions
   * GraphQL using AppSync
   * Auth and Security
-  * DNS adn Custom-Domains
+  * DNS and Custom-Domains
   * Multiple Environments and Experiments
 * Hands-On
-  * Applicaion Structure
+  * Monorepo Applicaion Structure
   * [Time-Tracker](./examples/aws-lambda/README.md)
 
 ## More Resources

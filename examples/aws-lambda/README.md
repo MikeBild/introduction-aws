@@ -1,10 +1,15 @@
 # AWS Full Serverless Example
 
-* Technologies
-  * NodeJS
-  * TypeScript
-  * React
-  * Apollo-GraphQL
+## Architecture
+
+![Architecture](./architecture.png)
+
+## Technologies
+
+* NodeJS
+* TypeScript
+* React
+* Apollo-GraphQL
 * Monorepo-Project with Lerna
 * Programmatically Serverless-Deployment with AWS-CDK
 * AWS Cloud-Service usage:
