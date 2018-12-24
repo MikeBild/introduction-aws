@@ -41,7 +41,7 @@
   * Multiple Environments and Experiments
 * Hands-On
   * Monorepo Applicaion Structure
-  * [Time-Tracker](./examples/aws-lambda/README.md)
+  * [Time-Tracker](./examples/time-tracker/README.md)
 
 ## Tools
 
