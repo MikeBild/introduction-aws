@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "name": "email-hook",
+  "version": "0.1.0",
+  "bin": {
+    "email-hook": "bin/email-hook.js"
+  },
+  "scripts": {
+    "build": "tsc -b ./ packages/*",
+    "watch": "tsc -b ./ packages/* -w",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/node": "^8.9.4",
+    "aws-cdk": "^0.21.0",
+    "lerna": "^3.8.0",
+    "typescript": "^3.1.2"
+  },
+  "dependencies": {
+    "@aws-cdk/cdk": "^0.21.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
