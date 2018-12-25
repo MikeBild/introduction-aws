@@ -1,4 +1,4 @@
-const { App, Stack, RemovalPolicy, Permission } = require('@aws-cdk/cdk');
+const { App, Stack, RemovalPolicy } = require('@aws-cdk/cdk');
 const { Bucket, EventType } = require('@aws-cdk/aws-s3');
 const { Function, Runtime, Code } = require('@aws-cdk/aws-lambda');
 const { S3EventSource } = require('@aws-cdk/aws-lambda-event-sources');
