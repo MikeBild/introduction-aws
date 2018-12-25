@@ -1,4 +1,5 @@
-const { App, Stack, Output } = require('@aws-cdk/cdk');
+const { App, Stack } = require('@aws-cdk/cdk');
+const { Bucket } = require('@aws-cdk/aws-s3');
 const { Function, Runtime, Code } = require('@aws-cdk/aws-lambda');
 const { LambdaRestApi, EndpointType } = require('@aws-cdk/aws-apigateway');
 
@@ -6,7 +7,7 @@ class MyStack extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
 
-    const backend = new Function(this, 'time-tracker-graphql-function', {
+    const lambda = new Function(this, 'time-tracker-graphql-function', {
       functionName : 'time-tracker-graphql',
       runtime      : Runtime.NodeJS810,
       handler      : 'index.handler',
@@ -14,7 +15,7 @@ class MyStack extends Stack {
     });
 
     const api = new LambdaRestApi(this, 'time-tracker-graphql-api', {
-      handler : backend,
+      handler : lambda,
       proxy   : false,
       options : {
         deploy        : true,
@@ -27,6 +28,12 @@ class MyStack extends Stack {
       },
     });
     api.root.addMethod('ANY');
+
+    const requestsBucket = Bucket.import(this, 'time-tracker-requests', {
+      bucketName : 'time-tracker-requests',
+    });
+
+    requestsBucket.grantReadWrite(lambda.role);
   }
 }
 
