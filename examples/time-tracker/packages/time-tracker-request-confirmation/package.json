@@ -1,13 +1,16 @@
 {
   "private": true,
-  "name": "time-tracker-release-confirmation",
+  "name": "time-tracker-request-confirmation",
   "version": "1.0.0",
-  "description": "Time Tracking Release Confirmation",
+  "description": "Time Tracking Request and Confirmation",
   "main": "dist/index.js",
   "dependencies": {
+    "aws-sdk": "^2.382.0",
     "dotenv-cli": "^1.4.0"
   },
   "devDependencies": {
+    "@aws-cdk/aws-iam": "^0.21.0",
+    "@aws-cdk/aws-lambda": "^0.21.0",
     "@aws-cdk/aws-stepfunctions": "^0.21.0",
     "@types/node": "^10.12.18",
     "nodemon": "^1.18.9",

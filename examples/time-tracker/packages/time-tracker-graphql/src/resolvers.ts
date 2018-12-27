@@ -1,4 +1,4 @@
-import { S3 } from 'aws-sdk';
+import { S3, Lambda } from 'aws-sdk';
 
 export default {
   Me:
@@ -47,9 +47,16 @@ export default {
       async requestForRelease(
         _: never,
         { input }: { input: any },
-        { s3 }: { s3: S3 }
+        { lambda }: { lambda: Lambda }
       ) {
-        console.log({ input });
+        const { Payload } = await lambda
+          .invoke({
+            FunctionName: 'time-tracker-request',
+            Payload: JSON.stringify({ input }),
+          })
+          .promise();
+
+        return JSON.parse(Payload.toString());
       },
       async recordHours(
         _: never,

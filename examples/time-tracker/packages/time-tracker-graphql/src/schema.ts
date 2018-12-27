@@ -28,6 +28,9 @@ export default gql`
 
   type Release {
     id: ID
+    taskToken: ID
+    executionArn: ID
+    startDate: String
   }
 
   type ReleaseFailure {

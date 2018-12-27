@@ -5,17 +5,18 @@
 ## Table of Contents
 
 * Introduction to Serverless-Computing
-  * Concepts and Architecte
+  * Concepts and Architecture
   * Serverless vs. Container/Kubernetes
   * Serverless-Computing and DevOps
     * CloudFormation
     * Programmatically Deployments
     * Continuous-Delivery Pipeline
 * Deployments with AWS Cloud-Development-Kit (CDK) and JavaScript
-  * S3
-  * Lambda
-  * API-Gateway
-  * Step-Functions
+  * [S3](s3.md)
+  * [Lambda](lambda-functions.md)
+  * [API-Gateway](api-gateway.md)
+  * [Step-Functions](step-functions.md)
+  * IAM - Roles, Permissions
   * Route53
   * Simple-EMail-Services
   * Simple-Notification-Services
@@ -40,7 +41,7 @@
   * DNS and Custom-Domains
   * Multiple Environments and Experiments
 * Hands-On
-  * Monorepo Applicaion Structure
+  * Monorepo Application Structure
   * [Time-Tracker](./examples/time-tracker/README.md)
 
 ## Tools
