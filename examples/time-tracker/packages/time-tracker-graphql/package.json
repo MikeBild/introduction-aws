@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "time-tracker-graphql",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Time Tracking GraphQL API",
   "main": "dist/index.js",
   "dependencies": {
