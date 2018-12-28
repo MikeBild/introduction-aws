@@ -37,3 +37,9 @@ yarn dev
 ```bash
 yarn bootstrap & yarn deploy
 ```
+
+## Release
+
+```bash
+npm lerna version
+```
