@@ -35,7 +35,7 @@ async function executeConfirmationStateMachine(
   const stateMachine = stepFunctions
     .startExecution({
       stateMachineArn:
-        'arn:aws:states:eu-central-1:044086961882:stateMachine:Time-Tracker-Release-Confirmation',
+        'arn:aws:states:eu-central-1:044086961882:stateMachine:Time-Tracker-Request-Confirmation',
       input: JSON.stringify(input),
     })
     .promise();
