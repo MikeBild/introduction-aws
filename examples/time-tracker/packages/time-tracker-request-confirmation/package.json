@@ -12,6 +12,7 @@
     "@aws-cdk/aws-iam": "^0.21.0",
     "@aws-cdk/aws-lambda": "^0.21.0",
     "@aws-cdk/aws-stepfunctions": "^0.21.0",
+    "@aws-cdk/cdk": "^0.20.0",
     "@types/node": "^10.12.18",
     "nodemon": "^1.18.9",
     "rimraf": "^2.6.2",
@@ -19,12 +20,9 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
-    "clear": "rimraf -rf dist",
-    "build": "tsc",
+    "build": "rimraf -rf dist && tsc && cp -R node_modules ./dist",
     "start": "dotenv -- node dist/index.js",
     "dev": "dotenv -- ts-node-dev src/index.ts",
-    "aws:bootstrap": "cdk bootstrap",
-    "aws:deploy": "cdk deploy",
-    "deploy": "npm run clear && npm run build && cp -R node_modules ./dist && npm run aws:bootstrap && npm run aws:deploy"
+    "deploy": "cdk deploy"
   }
 }

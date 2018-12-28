@@ -68,8 +68,8 @@ export default {
           await s3
             .putObject({
               Bucket: 'time-tracker-requests',
-              Key: `${request.name}/${request.id}`,
-              Body: JSON.stringify(request, null, 2),
+              Key: `${request.name}/${request.id}.json`,
+              Body: JSON.stringify(request),
             })
             .promise();
 

@@ -1,4 +1,5 @@
-const { App, Stack } = require('@aws-cdk/cdk');
+const { join } = require('path');
+const { Stack } = require('@aws-cdk/cdk');
 const { Function, Runtime, Code } = require('@aws-cdk/aws-lambda');
 const { PolicyStatement } = require('@aws-cdk/aws-iam');
 const {
@@ -8,7 +9,7 @@ const {
   StateMachine,
 } = require('@aws-cdk/aws-stepfunctions');
 
-class MyStack extends Stack {
+module.exports = class RequestConfirmation extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
 
@@ -16,7 +17,7 @@ class MyStack extends Stack {
       functionName : 'time-tracker-request',
       runtime      : Runtime.NodeJS810,
       handler      : 'request.handler',
-      code         : Code.asset('./dist'),
+      code         : Code.asset(join(__dirname, '../dist')),
     });
 
     const policy = new PolicyStatement().addAction('states:*').addResource('*');
@@ -29,7 +30,7 @@ class MyStack extends Stack {
         functionName : 'time-tracker-confirmation',
         runtime      : Runtime.NodeJS810,
         handler      : 'confirmation.handler',
-        code         : Code.asset('./dist'),
+        code         : Code.asset(join(__dirname, '../dist')),
       }
     );
 
@@ -47,16 +48,12 @@ class MyStack extends Stack {
 
     const stateMachine = new StateMachine(
       this,
-      'time-tracker-release-confirmation',
+      'time-tracker-request-confirmation',
       {
-        stateMachineName : 'Time-Tracker-Release-Confirmation',
+        stateMachineName : 'Time-Tracker-Request-Confirmation',
         timeoutSec       : 120,
         definition,
       }
     );
   }
-}
-
-const app = new App();
-const stack = new MyStack(app, 'time-tracker-release-confirmation');
-app.run();
+};

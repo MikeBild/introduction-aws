@@ -1,23 +1,19 @@
 {
   "private": true,
-  "name": "time-tracker-app",
+  "name": "time-tracker-webapp",
   "version": "1.0.0",
   "description": "Time Tracking App",
   "main": "index.js",
   "scripts": {
-    "clear": "rimraf -rf ./dist ./.cache",
-    "build": "dotenv -- parcel build src/index.html --public-url ./",
+    "build": "rimraf -rf ./dist ./.cache && dotenv -- parcel build src/index.html --public-url ./",
     "dev": "dotenv -- parcel serve src/index.html",
     "start": "dotenv -- http-server ./dist",
-    "aws:bootstrap": "cdk bootstrap",
-    "aws:deploy": "cdk deploy",
-    "deploy": "npm run clear && npm run build && npm run aws:bootstrap && npm run aws:deploy"
+    "deploy": "cdk deploy"
   },
   "dependencies": {
     "http-server": "^0.11.1"
   },
   "devDependencies": {
-    "@aws-cdk/aws-route53": "^0.21.0",
     "@aws-cdk/aws-s3": "^0.20.0",
     "@aws-cdk/aws-s3-deployment": "^0.20.0",
     "@aws-cdk/cdk": "^0.20.0",

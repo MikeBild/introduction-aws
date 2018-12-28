@@ -16,20 +16,17 @@
   * [Lambda](lambda-functions.md)
   * [API-Gateway](api-gateway.md)
   * [Step-Functions](step-functions.md)
+  * [Route53](route53.md)
   * IAM - Roles, Permissions
-  * Route53
   * Simple-EMail-Services
-  * Simple-Notification-Services
-  * Simple-Queue-Services
 * AWS Cloud-Services (AWS-SDK) with JavaScript/TypeScript
   * S3
   * Lambda
   * API-Gateway
   * Step-Functions
+  * [Athena](athena.md)
   * Route53
   * Simple-EMail-Services
-  * Simple-Notification-Services
-  * Simple-Queue-Services
 * Use-Cases
   * Web-Applications using Lambda-Functions
   * Data-Processing using Lambda-Functions
@@ -47,6 +44,7 @@
 ## Tools
 
 * [CloudCraft - AWS Designer](https://cloudcraft.co)
+* [AWS Vault](https://github.com/99designs/aws-vault)
 
 ## More Resources
 

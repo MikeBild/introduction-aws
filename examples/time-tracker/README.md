@@ -13,7 +13,7 @@
 * Monorepo-Project with **Lerna**
 * Programmatically Serverless-Deployment with **AWS-CDK**
 * **AWS-SDK** Cloud-Service usage:
-  * Storage and WebSite-Hosting using **S3**
+  * Storage and WebApp-Hosting using **S3**
   * Access via **API-Gateway**
   * Data-Processing and Web-Services using **Lambda-Function**
   * Workflow/Process-Manager via **Step-Function**
