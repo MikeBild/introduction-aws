@@ -68,5 +68,4 @@ export default gql`
     requestForRelease(input: ReleaseInput!): ReleaseResult
     recordHours(input: HoursInput!): HoursResult
   }
-
 `;
