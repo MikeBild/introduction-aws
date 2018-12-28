@@ -8,8 +8,6 @@
 ```bash
 yarn
 yarn dev
-yarn build
-yarn start
 ```
 
 ## Production
@@ -17,10 +15,9 @@ yarn start
 ```bash
 yarn
 yarn build
-yarn start
 ```
 
-## AWS Deploy
+## AWS-CDK Deploy
 
 ```bash
 yarn deploy

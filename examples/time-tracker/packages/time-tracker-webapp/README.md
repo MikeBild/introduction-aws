@@ -20,7 +20,7 @@ yarn build
 yarn start
 ```
 
-## AWS Deploy
+## AWS-CDK Deploy
 
 * S3 WebSite Deployment
 
