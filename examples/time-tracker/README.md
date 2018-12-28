@@ -6,6 +6,11 @@
 
 ![Architecture](./architecture.png)
 
+## Live
+
+* [React Web-App](https://s3.eu-central-1.amazonaws.com/time-tracker-webapp.mikebild.com/index.html)
+* [GraphQL API](https://ilk18d9m69.execute-api.eu-central-1.amazonaws.com/prod/)
+
 ## Technologies
 
 * **NodeJS**
