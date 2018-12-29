@@ -9,7 +9,7 @@ const app = new App();
 
 new ReportsGenerator(app, 'time-tracker-reports-generator');
 new RequestConfirmation(app, 'time-tracker-request-confirmation');
-const graphql = new GraphQL(app, 'time-tracker-graphql');
+new GraphQL(app, 'time-tracker-graphql');
 new WebApp(app, 'time-tracker-webapp');
 
 app.run();

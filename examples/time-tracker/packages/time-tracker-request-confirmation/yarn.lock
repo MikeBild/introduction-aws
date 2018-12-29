@@ -136,15 +136,6 @@
     "@aws-cdk/aws-iam" "^0.21.0"
     "@aws-cdk/cdk" "^0.21.0"
 
-"@aws-cdk/cdk@^0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cdk/-/cdk-0.20.0.tgz#cb3d3537e069e3109c29d6433333d79717e2021f"
-  integrity sha512-wzwQIrUUPtHN3Mj5v5w/Eu33Vk/81iM9ilNiBTTdcyw++52OjYQ7iTb47QXeVg8IxGz+lX+lRE/f4IJUNTzRfA==
-  dependencies:
-    "@aws-cdk/cx-api" "^0.20.0"
-    js-base64 "^2.4.5"
-    json-diff "^0.3.1"
-
 "@aws-cdk/cdk@^0.21.0":
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/cdk/-/cdk-0.21.0.tgz#0679e7063fdd52911cc524735aa37e9fdb201acf"
@@ -153,11 +144,6 @@
     "@aws-cdk/cx-api" "^0.21.0"
     js-base64 "^2.4.5"
     json-diff "^0.3.1"
-
-"@aws-cdk/cx-api@^0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cx-api/-/cx-api-0.20.0.tgz#bf024fa8147ad39eea07c3cfcceddddf350bcf31"
-  integrity sha512-tbV4msow2+V9xUIDiYzD3ZGBKkdOzMYicR7zXl98i5jJT3EphbMDzulsJ7LVEMKyFIV/1q0NA0k3SJ6T22nVSw==
 
 "@aws-cdk/cx-api@^0.21.0":
   version "0.21.0"
