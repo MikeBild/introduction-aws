@@ -1,5 +1,5 @@
 const { join } = require('path');
-const { Stack } = require('@aws-cdk/cdk');
+const { Stack, Output } = require('@aws-cdk/cdk');
 const { Bucket } = require('@aws-cdk/aws-s3');
 const { Function, Runtime, Code } = require('@aws-cdk/aws-lambda');
 const { LambdaRestApi, EndpointType } = require('@aws-cdk/aws-apigateway');
@@ -35,6 +35,8 @@ module.exports = class GraphQL extends Stack {
       },
     });
     api.root.addMethod('ANY');
+
+    new Output(this, 'url', { value: api.urlForPath() });
 
     Bucket.import(this, 'time-tracker-requests', {
       bucketName : 'time-tracker-requests',
