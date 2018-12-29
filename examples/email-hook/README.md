@@ -2,6 +2,10 @@
 
 Monorepo setup with lernajs and yarn workspaces (mostly taken from https://github.com/Quramy/lerna-yarn-workspaces-example)
 
+## Architecture
+
+![Architecture](./architecture.png)
+
 ## Components
 
 - SES
