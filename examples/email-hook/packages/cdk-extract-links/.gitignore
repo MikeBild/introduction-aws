@@ -1,4 +1,4 @@
 *.js
 *.d.ts
-!/resources/*.js
+!/resources/**/*.js
 node_modules
