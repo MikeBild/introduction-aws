@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "time-tracker-reports-generator",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Time Tracking Reports Generator",
   "main": "dist/index.js",
   "dependencies": {
