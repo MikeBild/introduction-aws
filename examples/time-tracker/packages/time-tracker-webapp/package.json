@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "time-tracker-webapp",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Time Tracking App",
   "main": "index.js",
   "scripts": {
