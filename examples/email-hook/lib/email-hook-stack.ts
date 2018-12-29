@@ -1,51 +1,49 @@
 import cdk = require("@aws-cdk/cdk");
-import { CfnReceiptRuleSet, CfnReceiptRule } from "@aws-cdk/aws-ses";
-import { CdkActivateSesRuleSet } from "cdk-activate-ses-rule-set";
+import { CfnReceiptRuleSet } from "@aws-cdk/aws-ses";
 import s3 = require("@aws-cdk/aws-s3");
+import sns = require("@aws-cdk/aws-sns");
+import { CdkSesToS3 } from "cdk-ses-to-s3";
+import { CdkActivateSesRuleSet } from "cdk-activate-ses-rule-set";
+import { CdkExtractLinks } from "cdk-extract-links";
 
 interface EmailHookStackProps {
-  bucketRef: s3.BucketRefProps;
+  bucketName: string;
   emails: string[];
 }
 
 export class EmailHookStack extends cdk.Stack {
+  public readonly bucket: s3.BucketRefProps;
+  public readonly topic: sns.TopicRefProps;
+
   constructor(parent: cdk.App, name: string, props: EmailHookStackProps) {
     super(parent, name);
 
-    const bucket = s3.Bucket.import(this, "EmailBucket", props.bucketRef);
+    const bucket = new s3.Bucket(this, props.bucketName, {
+      removalPolicy: cdk.RemovalPolicy.Orphan
+    });
+
+    const newUrlTopic = new sns.Topic(this, "NewUrlTopic", {
+      displayName: "New Url Topic"
+    });
+
     const inboundRuleSet = new CfnReceiptRuleSet(this, `InboundRuleSet`);
 
-    props.emails.forEach(email => {
-      this.inboundEmailAddress(email, inboundRuleSet, bucket);
+    new CdkSesToS3(this, "inbound-emails-to-s3", {
+      emails: props.emails,
+      inboundRuleSet: inboundRuleSet,
+      bucket: bucket
     });
 
-    new CdkActivateSesRuleSet(this, "ActivateSesRuleSet", {
-      inboundRuleSet
+    new CdkExtractLinks(this, "extract-links", {
+      bucket: bucket,
+      topic: newUrlTopic
     });
-  }
 
-  inboundEmailAddress(
-    emailAddress: string,
-    inboundRuleSet: CfnReceiptRuleSet,
-    bucket: s3.BucketRef
-  ): void {
-    const name = emailAddress.split("@")[0].replace("-", "");
-    new CfnReceiptRule(this, `Rule${name}`, {
-      rule: {
-        actions: [
-          {
-            s3Action: {
-              bucketName: bucket.bucketName,
-              objectKeyPrefix: name
-            }
-          }
-        ],
-        enabled: true,
-        name: name,
-        recipients: [emailAddress],
-        scanEnabled: true
-      },
-      ruleSetName: inboundRuleSet.receiptRuleSetName
+    new CdkActivateSesRuleSet(this, "activate-rule-set", {
+      inboundRuleSet: inboundRuleSet
     });
+
+    this.bucket = bucket.export();
+    this.topic = newUrlTopic.export();
   }
 }

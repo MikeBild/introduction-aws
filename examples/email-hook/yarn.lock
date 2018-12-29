@@ -90,6 +90,18 @@
     "@aws-cdk/aws-iam" "^0.21.0"
     "@aws-cdk/cdk" "^0.21.0"
 
+"@aws-cdk/aws-lambda-event-sources@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-lambda-event-sources/-/aws-lambda-event-sources-0.21.0.tgz#31a6f51e2649d449f6dcf4bff0c4f5a8c0e1c70c"
+  integrity sha512-4Vbfr5Fu+Nneby/FSqx7tRW7bjNxqGr74dlo1ZRW7cKw95+50XYpP/Qg4Q/yZoHtqRAT+PYCY9IxPSHgt7+E1Q==
+  dependencies:
+    "@aws-cdk/aws-iam" "^0.21.0"
+    "@aws-cdk/aws-lambda" "^0.21.0"
+    "@aws-cdk/aws-s3" "^0.21.0"
+    "@aws-cdk/aws-sns" "^0.21.0"
+    "@aws-cdk/aws-sqs" "^0.21.0"
+    "@aws-cdk/cdk" "^0.21.0"
+
 "@aws-cdk/aws-lambda@^0.21.0":
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-lambda/-/aws-lambda-0.21.0.tgz#0d64798b4325befa7e9168e4b00a547e517510d0"

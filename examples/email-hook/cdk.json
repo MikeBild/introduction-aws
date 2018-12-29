@@ -1,3 +1,4 @@
 {
-  "app": "node bin/email-hook.js"
+  "app": "node bin/email-hook.js",
+  "requireApproval": "never"
 }

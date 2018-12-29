@@ -6,10 +6,6 @@ import { PolicyStatement, PolicyStatementEffect } from "@aws-cdk/aws-iam";
 import path = require("path");
 
 export interface CdkActivateSesRuleSetProps {
-  /**
-   * The visibility timeout to be configured on the SQS Queue, in seconds.
-   *
-   */
   inboundRuleSet: CfnReceiptRuleSet;
 }
 

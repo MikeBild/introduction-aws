@@ -17,8 +17,9 @@
     "typescript": "^3.1.2"
   },
   "dependencies": {
-    "@aws-cdk/aws-iam": "^0.21.0",
     "@aws-cdk/aws-s3": "^0.21.0",
+    "@aws-cdk/aws-sns": "^0.21.0",
+    "@aws-cdk/aws-ses": "^0.21.0",
     "@aws-cdk/cdk": "^0.21.0"
   },
   "workspaces": [
