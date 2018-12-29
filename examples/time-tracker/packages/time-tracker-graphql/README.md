@@ -53,20 +53,6 @@ query Me {
 ### Mutations
 
 ```graphql
-mutation RequestForRelease {
-  requestForRelease(input: { id: "mike" }) {
-    success {
-      id
-      taskToken
-      executionArn
-      startDate
-    }
-    failure {
-      message
-    }
-  }
-}
-
 mutation RecordHours {
   recordHours(input: { name: "heike", hours: 10 }) {
     success {
@@ -74,6 +60,20 @@ mutation RecordHours {
       name
       hours
       date
+    }
+    failure {
+      message
+    }
+  }
+}
+
+mutation RequestForRelease {
+  requestForRelease(input: { id: "mike" }) {
+    success {
+      id
+      taskToken
+      executionArn
+      startDate
     }
     failure {
       message
