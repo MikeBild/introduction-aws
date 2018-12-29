@@ -24,6 +24,7 @@ module.exports = class ReportsGenerator extends Stack {
       runtime      : Runtime.NodeJS810,
       handler      : 'index.handler',
       code         : Code.asset(join(__dirname, '../dist')),
+      timeout      : 30,
     });
 
     requestsBucket.grantReadWrite(lambda.role);
