@@ -20,7 +20,8 @@
   * [Route53](route53.md)
   * [Simple Email Service](ses.md)
   * [Identity and Access Management](iam.md)
-* Deployments with AWS Cloud-Development-Kit (CDK) and JavaScript
+* AWS Cloud-Development-Kit (CDK)
+  * [CDK Projects](cdk/cdk-projects.md)
   * [Simple Storage Service](cdk/s3.md)
   * [Lambda-Functions](cdk/lambda-functions.md)
   * [API-Gateway](cdk/api-gateway.md)
@@ -28,7 +29,7 @@
   * [Route53](cdk/route53.md)
   * [Simple Email Service](cdk/ses.md)
   * [Permissions](cdk/permissions.md)
-* AWS Cloud-Services (AWS-SDK) with JavaScript/TypeScript
+* AWS Software-Development-Kit (AWS-SDK)
   * [Simple Storage Service](sdk/s3.md)
   * [Lambda-Functions](sdk/lambda-functions.md)
   * [Step-Functions](sdk/step-functions.md)
@@ -38,8 +39,8 @@
   * Web-Applications using Lambda-Functions
   * Data-Processing using Lambda-Functions
   * Workflows/Process-Manager using Step-Functions
-  * RESTful-APIs using API-Gateway
-  * GraphQL using Lambda-Functions
+  * RESTful-APIs using ExpressJS and API-Gateway
+  * GraphQL-API-Server using Lambda-Functions
   * Auth and Security
   * DNS and Custom-Domains
   * Multiple Environments
@@ -76,7 +77,7 @@ for more info.
 
 ## Thanks
 
-You like this **AWS introduction** and you want to see what coming next?
+You like this **AWS Serverless Introduction** and you want to see what coming next?
 Follow me on Twitter [`@mikebild`](https://twitter.com/mikebild).
 
 Enjoy!
