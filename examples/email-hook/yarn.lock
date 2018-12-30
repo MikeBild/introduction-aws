@@ -12,6 +12,19 @@
     source-map-support "^0.5.6"
     yaml "^1.1.0"
 
+"@aws-cdk/assets-docker@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/assets-docker/-/assets-docker-0.21.0.tgz#cf8dc6a6872e21edb9c1a80b4c6d9fa46918043d"
+  integrity sha512-5T4JmJT8L7aIudVTHhrw+R33zqC2MIR2O/aGsP8GhusNfW8kpbQTI/c0TGXPNw78Q773i1iqeX+vkClvw8eKAg==
+  dependencies:
+    "@aws-cdk/aws-cloudformation" "^0.21.0"
+    "@aws-cdk/aws-ecr" "^0.21.0"
+    "@aws-cdk/aws-iam" "^0.21.0"
+    "@aws-cdk/aws-lambda" "^0.21.0"
+    "@aws-cdk/aws-s3" "^0.21.0"
+    "@aws-cdk/cdk" "^0.21.0"
+    "@aws-cdk/cx-api" "^0.21.0"
+
 "@aws-cdk/assets@^0.21.0":
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/assets/-/assets-0.21.0.tgz#76bdce4c65eb849b04fb9f2b35ef4dfb358cb43b"
@@ -49,6 +62,33 @@
     "@aws-cdk/aws-iam" "^0.21.0"
     "@aws-cdk/cdk" "^0.21.0"
 
+"@aws-cdk/aws-codebuild@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-codebuild/-/aws-codebuild-0.21.0.tgz#ba85062dcc12123906ebd0c2ab5ca864a3109c7f"
+  integrity sha512-UzoDoLIhFLx8/1ySz1zrumTPR1YQOmvcOZInp58bz3cohqK30Yddf7TKv2rD286Mz/P9D4mvrDo3Ff/nvPBdpQ==
+  dependencies:
+    "@aws-cdk/assets" "^0.21.0"
+    "@aws-cdk/assets-docker" "^0.21.0"
+    "@aws-cdk/aws-cloudwatch" "^0.21.0"
+    "@aws-cdk/aws-codecommit" "^0.21.0"
+    "@aws-cdk/aws-codepipeline-api" "^0.21.0"
+    "@aws-cdk/aws-ecr" "^0.21.0"
+    "@aws-cdk/aws-events" "^0.21.0"
+    "@aws-cdk/aws-iam" "^0.21.0"
+    "@aws-cdk/aws-kms" "^0.21.0"
+    "@aws-cdk/aws-s3" "^0.21.0"
+    "@aws-cdk/cdk" "^0.21.0"
+
+"@aws-cdk/aws-codecommit@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-codecommit/-/aws-codecommit-0.21.0.tgz#e6d1d60655d4f04548c11a8b39fc23cef1c69a95"
+  integrity sha512-TxhZ7i/RtMMI0++ouoWAEwhrQXSgUgMeLCzabBk7Tm9R7QeNSIAs53VklcBQ5k1VcDf1aHD8KODsq1Ph1KSfRQ==
+  dependencies:
+    "@aws-cdk/aws-codepipeline-api" "^0.21.0"
+    "@aws-cdk/aws-events" "^0.21.0"
+    "@aws-cdk/aws-iam" "^0.21.0"
+    "@aws-cdk/cdk" "^0.21.0"
+
 "@aws-cdk/aws-codepipeline-api@^0.21.0":
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-codepipeline-api/-/aws-codepipeline-api-0.21.0.tgz#745bebee3d7cf365d40de0d447518c441a5bcc7e"
@@ -56,6 +96,17 @@
   dependencies:
     "@aws-cdk/aws-events" "^0.21.0"
     "@aws-cdk/aws-iam" "^0.21.0"
+    "@aws-cdk/cdk" "^0.21.0"
+
+"@aws-cdk/aws-codepipeline@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-codepipeline/-/aws-codepipeline-0.21.0.tgz#443f1fbd010a10ce1d24e1dd40058088ffea852c"
+  integrity sha512-lpd9pPuFic7v0kmQk5d+aWnqxl0pwZpYBPGX8J+tZN/ZuVb4Wm6o3Ksub00Nri1DeHzTvSSKUg/WBICFlxu5AQ==
+  dependencies:
+    "@aws-cdk/aws-codepipeline-api" "^0.21.0"
+    "@aws-cdk/aws-events" "^0.21.0"
+    "@aws-cdk/aws-iam" "^0.21.0"
+    "@aws-cdk/aws-s3" "^0.21.0"
     "@aws-cdk/cdk" "^0.21.0"
 
 "@aws-cdk/aws-ec2@^0.21.0":
@@ -66,6 +117,16 @@
     "@aws-cdk/aws-iam" "^0.21.0"
     "@aws-cdk/cdk" "^0.21.0"
     "@aws-cdk/cx-api" "^0.21.0"
+
+"@aws-cdk/aws-ecr@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-ecr/-/aws-ecr-0.21.0.tgz#4b7f23bbd1ac2a156e75719c6d8eebe3315b142d"
+  integrity sha512-xdlC2uIrTRBl1OO1Nkur00cFPoA4Cihreq/Oarbal991xTU2qUYnlDJexoa+dJQA5gd8WTkjlzDWJ9JZckvsCg==
+  dependencies:
+    "@aws-cdk/aws-codepipeline-api" "^0.21.0"
+    "@aws-cdk/aws-events" "^0.21.0"
+    "@aws-cdk/aws-iam" "^0.21.0"
+    "@aws-cdk/cdk" "^0.21.0"
 
 "@aws-cdk/aws-events@^0.21.0":
   version "0.21.0"

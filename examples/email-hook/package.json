@@ -8,6 +8,8 @@
   "scripts": {
     "build": "tsc -b ./ packages/*",
     "watch": "tsc -b ./ packages/* -w",
+    "synth-infra": "cdk synth -o build --app 'node bin/email-hook.js'",
+    "deploy-infra": "cdk deploy --app 'node bin/email-hook.js'",
     "cdk": "cdk"
   },
   "devDependencies": {
@@ -17,9 +19,13 @@
     "typescript": "^3.1.2"
   },
   "dependencies": {
+    "@aws-cdk/aws-cloudformation": "^0.21.0",
+    "@aws-cdk/aws-codebuild": "^0.21.0",
+    "@aws-cdk/aws-codepipeline": "^0.21.0",
+    "@aws-cdk/aws-codepipeline-api": "^0.21.0",
     "@aws-cdk/aws-s3": "^0.21.0",
-    "@aws-cdk/aws-sns": "^0.21.0",
     "@aws-cdk/aws-ses": "^0.21.0",
+    "@aws-cdk/aws-sns": "^0.21.0",
     "@aws-cdk/cdk": "^0.21.0"
   },
   "workspaces": [

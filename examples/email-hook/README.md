@@ -22,6 +22,12 @@ npm run watch
 cdk synth
 ```
 
+## Pipeline
+
+```
+aws ssm put-parameter --name /CDK/GitHubToken --type String --overwrite --value GITHUB_TOKEN
+```
+
 ## Useful commands
 
 - `npm run build` compile typescript to js

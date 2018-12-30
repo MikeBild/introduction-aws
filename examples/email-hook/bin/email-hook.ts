@@ -6,7 +6,7 @@ const app = new cdk.App();
 
 new EmailHookStack(app, "EmailHookStack", {
   bucketName: "inbound-emails",
-  emails: ["foo@example.org"]
+  emails: ["is24@email.webfeed.io"]
 });
 
 app.run();

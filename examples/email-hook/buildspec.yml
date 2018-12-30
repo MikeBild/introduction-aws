@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - cd examples/email-hook
+      - npm install -g yarn
+      - npm install -g aws-cdk
+      - yarn install
+  build:
+    commands:
+      - yarn run build
+      - yarn run synth-infra
+
+artifacts:
+  files:
+    - examples/email-hook/build/*
+  discard-paths: yes

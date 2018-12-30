@@ -36,7 +36,10 @@ export class EmailHookStack extends cdk.Stack {
 
     new CdkExtractLinks(this, "extract-links", {
       bucket: bucket,
-      topic: newUrlTopic
+      topic: newUrlTopic,
+      extractLinks: function(email) {
+        email;
+      }
     });
 
     new CdkActivateSesRuleSet(this, "activate-rule-set", {

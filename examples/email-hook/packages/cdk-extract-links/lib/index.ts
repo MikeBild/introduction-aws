@@ -4,10 +4,12 @@ import sns = require("@aws-cdk/aws-sns");
 import s3 = require("@aws-cdk/aws-s3");
 import { S3EventSource } from "@aws-cdk/aws-lambda-event-sources";
 import path = require("path");
+import fs = require("fs");
 
 export interface CdkExtractLinksProps {
   topic: sns.Topic;
   bucket: s3.Bucket;
+  extractLinks(email: any): void;
 }
 
 export class CdkExtractLinks extends cdk.Construct {
@@ -17,14 +19,20 @@ export class CdkExtractLinks extends cdk.Construct {
     props: CdkExtractLinksProps
   ) {
     super(parent, name);
-    const { topic, bucket } = props;
+    const { topic, bucket, extractLinks } = props;
+    const lambdaDir = path.dirname(
+      require.resolve("../resources/inbound-email-s3-hook")
+    );
+
+    fs.writeFileSync(
+      path.join(lambdaDir, "extract-links.js"),
+      extractLinks.toString()
+    );
 
     const s3Hook = new lambda.Function(this, "InboundEmailS3Hook", {
       runtime: lambda.Runtime.NodeJS810,
 
-      code: lambda.Code.asset(
-        path.dirname(require.resolve("../resources/inbound-email-s3-hook"))
-      ),
+      code: lambda.Code.asset(lambdaDir),
       handler: "index.main",
       timeout: 60,
       environment: {

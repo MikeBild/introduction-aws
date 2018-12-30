@@ -3,6 +3,7 @@ const { simpleParser } = require("mailparser");
 const cheerio = require("cheerio");
 const uuidv1 = require("uuid/v1");
 const hash = require("hash.js");
+const extractLinks = require("./extract-links.js");
 const s3 = new AWS.S3();
 const sns = new AWS.SNS();
 
