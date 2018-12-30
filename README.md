@@ -1,10 +1,10 @@
-# Introduction to AWS
+# Introduction to Serverless using AWS
 
 > Hands-On introduction to Serverless using AWS-Cloud-Services via JavaScript/TypeScript.
 
-## Table of Contents
-
-* Introduction to Serverless-Computing
+* Introduction
+  * Why Serverless-Computing
+  * Monolith vs. Microservices vs. Serverless
   * Concepts and Architecture
   * Serverless vs. Container/Kubernetes
   * Serverless-Computing and DevOps
@@ -48,14 +48,16 @@
 
 ## Tools
 
-* [CloudCraft - AWS Designer](https://cloudcraft.co)
-* [AWS Vault](https://github.com/99designs/aws-vault)
+* [CloudCraft - AWS-Designer](https://cloudcraft.co)
+* [AWS-Vault](https://github.com/99designs/aws-vault)
 
 ## More Resources
 
-* [Introduction to NodeJS](https://github.com/mikebild/introduction-nodejs)
-* [Introduction to Python](https://github.com/mikebild/introduction-python)
-* [Introduction to React](https://github.com/mikebild/introduction-react)
-* [Introduction to GraphQL](https://github.com/mikebild/introduction-graphql)
-* [Introduction to Docker](https://github.com/mikebild/introduction-docker)
-* [Introduction to Kubernetes](https://github.com/mikebild/introduction-kubernetes)
+### Introductions
+
+* [NodeJS](https://github.com/mikebild/introduction-nodejs)
+* [ReactJS](https://github.com/mikebild/introduction-react)
+* [GraphQL](https://github.com/mikebild/introduction-graphql)
+* [Docker](https://github.com/mikebild/introduction-docker)
+* [Kubernetes](https://github.com/mikebild/introduction-kubernetes)
+* [Python](https://github.com/mikebild/introduction-python)

@@ -1,7 +1,10 @@
 # Time-Tracker App
 
-* React
-* Apollo GraphQL
+* [ReactJS](https://reactjs.org/)
+* [React Apollo GraphQL](https://www.apollographql.com/docs/react/)
+* [Material-UI](https://material-ui.com/)
+* [ParcelJS](https://parceljs.org)
+* [TypeScript](https://www.typescriptlang.org/)
 
 ## Live
 
