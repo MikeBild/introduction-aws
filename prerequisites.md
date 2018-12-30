@@ -51,4 +51,4 @@ This Hands-On was tested using **v0.21.0** of the AWS-CDK.
 
 ## AWS Account and User
 
-**TBD**
+Using the AWS-CLI: `aws configure`

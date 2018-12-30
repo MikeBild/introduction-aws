@@ -15,6 +15,7 @@
 * AWS Cloud-Service Fundamentals
   * [Simple Storage Service](s3.md)
   * [Lambda-Functions](lambda-functions.md)
+  * [DynamoDB](dynamo-db.md)
   * [API-Gateway](api-gateway.md)
   * [Step-Functions](step-functions.md)
   * [Route53](route53.md)
@@ -25,6 +26,7 @@
   * [CDK Projects](cdk/cdk-projects.md)
   * [Simple Storage Service](cdk/s3.md)
   * [Lambda-Functions](cdk/lambda-functions.md)
+  * [DynamoDB](cdk/dynamo-db.md)
   * [API-Gateway](cdk/api-gateway.md)
   * [Step-Functions](cdk/step-functions.md)
   * [Route53](cdk/route53.md)
@@ -34,6 +36,7 @@
 * AWS Software-Development-Kit (AWS-SDK)
   * [Simple Storage Service](sdk/s3.md)
   * [Lambda-Functions](sdk/lambda-functions.md)
+  * [DynamoDB](sdk/dynamo-db.md)
   * [Step-Functions](sdk/step-functions.md)
   * [Athena](sdk/athena.md)
   * [Simple Email Service](sdk/ses.md)
