@@ -62,6 +62,7 @@ export default gql`
   input HoursInput {
     name: String
     hours: Float
+    date: Date
   }
 
   type Mutation {
