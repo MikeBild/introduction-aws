@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import codebuild = require("@aws-cdk/aws-codebuild");
 import codepipeline = require("@aws-cdk/aws-codepipeline");
-import cfn = require("@aws-cdk/aws-cloudformation");
 import cdk = require("@aws-cdk/cdk");
 
 class EmailHookPipeline extends cdk.Stack {
