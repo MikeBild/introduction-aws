@@ -30,6 +30,8 @@ Assets (i.e. lambda) aren't supported to be deployed via Cloudformation Build ac
 aws ssm put-parameter --name /CDK/GitHubToken --type String --overwrite --value GITHUB_TOKEN
 ```
 
+Note: Cloudformation can't handle `EncryptedString` for the Parameter Store at the moment.
+
 ## Useful commands
 
 - `npm run build` compile typescript to js
