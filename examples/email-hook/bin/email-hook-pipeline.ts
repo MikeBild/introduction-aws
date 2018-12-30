@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import codebuild = require("@aws-cdk/aws-codebuild");
 import codepipeline = require("@aws-cdk/aws-codepipeline");
+import iam = require("@aws-cdk/aws-iam");
 import cdk = require("@aws-cdk/cdk");
 
 class EmailHookPipeline extends cdk.Stack {
@@ -39,6 +40,11 @@ class EmailHookPipeline extends cdk.Stack {
       project,
       inputArtifact: source.outputArtifact
     });
+
+    // This should be reduced to the actual necessary permissions
+    project.addToRolePolicy(
+      new iam.PolicyStatement().addActions("*").addResource("*")
+    );
   }
 }
 
