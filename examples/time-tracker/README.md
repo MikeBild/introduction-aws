@@ -14,8 +14,8 @@
 
 ## Live
 
-* [React Web-App](https://s3.eu-central-1.amazonaws.com/time-tracker-webapp.mikebild.com/index.html)
-* [GraphQL API](https://eriuqjklw1.execute-api.eu-central-1.amazonaws.com/prod)
+* [Web-App](https://s3.eu-central-1.amazonaws.com/time-tracker-webapp.mikebild.com/index.html)
+* [GraphQL-API](https://eriuqjklw1.execute-api.eu-central-1.amazonaws.com/prod)
 
 ## Technologies
 
@@ -32,18 +32,19 @@
   * Workflow/Process-Manager via **Step-Function**
   * EMail via **SES**
 
-## Components
+## Application Packages
 
-### `time-tracker-webapp`
+### [SPA Web-App](packages/time-tracker-webapp/README.md)
 
 > Single-Page-Application User-Interface.
 
-* React SPA-Web-App
-* GraphQL Data Bindings (Apollo-Client)
-* Optimistic UI
+* ReactJS
+* GraphQL-Client
+* Material-UI
+* Optimistic-UI
 * AWS-S3 WebSite Deployment
 
-### `time-tracker-graphql`
+### [GraphQL-API](packages/time-tracker-graphql/README.md)
 
 > Uniform GraphQL based API for application queries and mutations.
 
@@ -54,14 +55,14 @@
 * Lambda-Function invocations
 * Deployment as Lambda-Function
 
-### `time-tracker-reports-generator`
+### [Reports Generator](packages/time-tracker-reports-generator/README.md)
 
 > Constant generation (via S3-Notification) of hours summary reports after entering hourly entries.
 
 * Deployment as Lambda-Function
 * S3-Storage Notification as Lambda-Trigger
 
-### `time-tracker-request-confirmation`
+### [Request Confirmation](packages/time-tracker-request-confirmation/README.md)
 
 > Orchestrate Lambda-Functions to start, aprrove or reject a user-based monthly Hour-Report request.
 
