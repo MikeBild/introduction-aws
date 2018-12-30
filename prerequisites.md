@@ -20,7 +20,7 @@ Nice to have:
 
 ## AWS-CLI
 
-* OSX `brew install aws-cli`
+* OSX `brew install awscli`
 * Windows [MSI](https://s3.amazonaws.com/aws-cli/AWSCLI64PY3.msi)
 * Linux/Unix `pip install awscli`
 
