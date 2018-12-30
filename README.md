@@ -1,6 +1,6 @@
 # Introduction to AWS
 
-> Hands-On introduction to AWS-Cloud-Services using AWS-CDK, NodeJS, TypeScript, GraphQL, etc.
+> Hands-On introduction to Serverless using AWS-Cloud-Services via JavaScript/TypeScript.
 
 ## Table of Contents
 
@@ -11,34 +11,39 @@
     * CloudFormation
     * Programmatically Deployments
     * Continuous-Delivery Pipeline
-* Deployments with AWS Cloud-Development-Kit (CDK) and JavaScript
-  * [S3](s3.md)
-  * [Lambda](lambda-functions.md)
+* AWS Cloud-Service Fundamentals
+  * [Simple Storage Service](s3.md)
+  * [Lambda-Functions](lambda-functions.md)
   * [API-Gateway](api-gateway.md)
   * [Step-Functions](step-functions.md)
   * [Route53](route53.md)
-  * IAM - Roles, Permissions
-  * Simple-EMail-Services
+  * [Simple Email Service](ses.md)
+  * [Identity and Access Management](iam.md)
+* Deployments with AWS Cloud-Development-Kit (CDK) and JavaScript
+  * [Simple Storage Service](cdk/s3.md)
+  * [Lambda-Functions](cdk/lambda-functions.md)
+  * [API-Gateway](cdk/api-gateway.md)
+  * [Step-Functions](cdk/step-functions.md)
+  * [Route53](cdk/route53.md)
+  * [Simple Email Service](cdk/ses.md)
+  * [Permissions](cdk/permissions.md)
 * AWS Cloud-Services (AWS-SDK) with JavaScript/TypeScript
-  * S3
-  * Lambda
-  * API-Gateway
-  * Step-Functions
-  * [Athena](athena.md)
-  * Route53
-  * Simple-EMail-Services
+  * [Simple Storage Service](sdk/s3.md)
+  * [Lambda-Functions](sdk/lambda-functions.md)
+  * [Step-Functions](sdk/step-functions.md)
+  * [Athena](sdk/athena.md)
+  * [Simple Email Service](sdk/ses.md)
 * Use-Cases
   * Web-Applications using Lambda-Functions
   * Data-Processing using Lambda-Functions
   * Workflows/Process-Manager using Step-Functions
   * RESTful-APIs using API-Gateway
   * GraphQL using Lambda-Functions
-  * GraphQL using AppSync
   * Auth and Security
   * DNS and Custom-Domains
-  * Multiple Environments and Experiments
+  * Multiple Environments
+  * Handle Features/Experiments
 * Hands-On
-  * Monorepo Application Structure
   * [Time-Tracker](./examples/time-tracker/README.md)
 
 ## Tools
