@@ -11,6 +11,7 @@
     * CloudFormation
     * Programmatically Deployments
     * Continuous-Delivery Pipeline
+  * [Prerequisites](prerequisites.md)
 * AWS Cloud-Service Fundamentals
   * [Simple Storage Service](s3.md)
   * [Lambda-Functions](lambda-functions.md)
@@ -61,3 +62,21 @@
 * [Docker](https://github.com/mikebild/introduction-docker)
 * [Kubernetes](https://github.com/mikebild/introduction-kubernetes)
 * [Python](https://github.com/mikebild/introduction-python)
+
+## Issue Reporting
+
+If you have found a bug or if you have a feature request, please report them at
+this repository issues section. Please do not report security vulnerabilities on
+the public [GitHub issue tracker](https://github.com/mikebild/introduction-aws/issues).
+
+## License
+
+This project is licensed under the MIT license. See the [LICENSE](LICENSE) file
+for more info.
+
+## Thanks
+
+You like this **AWS introduction** and you want to see what coming next?
+Follow me on Twitter [`@mikebild`](https://twitter.com/mikebild).
+
+Enjoy!
