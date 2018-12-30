@@ -24,6 +24,8 @@ cdk synth
 
 ## Pipeline
 
+Assets (i.e. lambda) aren't supported to be deployed via Cloudformation Build actions. So, we'll have to run cdk deploy manually. See https://github.com/awslabs/aws-cdk/issues/1312
+
 ```
 aws ssm put-parameter --name /CDK/GitHubToken --type String --overwrite --value GITHUB_TOKEN
 ```

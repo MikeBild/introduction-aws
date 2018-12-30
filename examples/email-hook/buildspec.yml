@@ -1,3 +1,5 @@
+# Assets (i.e. lambda) aren't supported to be deployed via Cloudformation Build actions. So, we'll have to run cdk deploy manually. See https://github.com/awslabs/aws-cdk/issues/1312
+
 version: 0.2
 
 phases:
@@ -10,9 +12,4 @@ phases:
   build:
     commands:
       - yarn run build
-      - yarn run synth-infra
-
-artifacts:
-  files:
-    - examples/email-hook/build/*
-  discard-paths: yes
+      - yarn run deploy-infra

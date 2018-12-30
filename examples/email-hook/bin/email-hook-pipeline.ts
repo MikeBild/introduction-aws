@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import codebuild = require("@aws-cdk/aws-codebuild");
 import codepipeline = require("@aws-cdk/aws-codepipeline");
+import cfn = require("@aws-cdk/aws-cloudformation");
 import cdk = require("@aws-cdk/cdk");
 
 class EmailHookPipeline extends cdk.Stack {
@@ -26,7 +27,7 @@ class EmailHookPipeline extends cdk.Stack {
 
     // Build
 
-    const buildStage = pipeline.addStage("Build");
+    const buildStage = pipeline.addStage("Deploy");
     const project = new codebuild.PipelineProject(this, "EmailHook", {
       buildSpec: "examples/email-hook/buildspec.yml",
       environment: {
@@ -34,7 +35,7 @@ class EmailHookPipeline extends cdk.Stack {
       }
     });
 
-    new codebuild.PipelineBuildAction(this, "EmailHookBuild", {
+    new codebuild.PipelineBuildAction(this, "EmailHookDeployment", {
       stage: buildStage,
       project,
       inputArtifact: source.outputArtifact
