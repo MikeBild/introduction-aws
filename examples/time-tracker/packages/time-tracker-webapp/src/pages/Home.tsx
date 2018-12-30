@@ -47,6 +47,11 @@ const Home: StatelessComponent<TProps> = ({ classes }) => {
   ] = useState('');
 
   const [
+    dateInput,
+    setDateInput,
+  ] = useState('');
+
+  const [
     hoursInput,
     setHoursInput,
   ] = useState('');
@@ -74,10 +79,10 @@ const Home: StatelessComponent<TProps> = ({ classes }) => {
             </Fab>
 
             <Dialog open={isHoursInputDialogVisible}>
-              <DialogTitle>Enter your daily working hours</DialogTitle>
+              <DialogTitle>Attendance</DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                  Enter your name and your daily working hours.
+                  Enter your name and daily working hours.
                 </DialogContentText>
                 <TextField
                   autoFocus
@@ -85,30 +90,54 @@ const Home: StatelessComponent<TProps> = ({ classes }) => {
                   label='Name'
                   type='name'
                   fullWidth
-                  value={nameInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   onChange={(e) => setNameInput(e.target.value)}
+                />
+                <TextField
+                  margin='dense'
+                  label='Day'
+                  type='date'
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={(e) => setDateInput(e.target.value)}
                 />
                 <TextField
                   margin='dense'
                   label='Hours'
                   type='text'
                   fullWidth
-                  value={hoursInput}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                   onChange={(e) => setHoursInput(e.target.value)}
                 />
               </DialogContent>
               <DialogActions>
+                <Button
+                  onClick={() => setIsHoursInputDialogVisible(false)}
+                  color='primary'>
+                  Cancel
+                </Button>
                 <Mutation mutation={RecordHoursMutation}>
                   {(recordHours) => {
                     return (
                       <Button
                         onClick={async () => {
+                          if (!nameInput) return;
+                          if (!hoursInput) return;
+                          if (!dateInput) return;
+
                           await recordHours({
                             variables:
                               {
                                 input:
                                   {
                                     name: nameInput,
+                                    date: new Date(dateInput),
                                     hours: parseFloat(hoursInput),
                                   },
                               },
@@ -157,16 +186,11 @@ const Home: StatelessComponent<TProps> = ({ classes }) => {
                           setIsHoursInputDialogVisible(false);
                         }}
                         color='primary'>
-                        Done
+                        Save
                       </Button>
                     );
                   }}
                 </Mutation>
-                <Button
-                  onClick={() => setIsHoursInputDialogVisible(false)}
-                  color='primary'>
-                  Cancel
-                </Button>
               </DialogActions>
             </Dialog>
 
