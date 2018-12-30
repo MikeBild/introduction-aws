@@ -5,6 +5,7 @@
 * [AWS-CDK Toolkit](#cdk)
 * [IDE for JavaScript/TypeScript](#ide)
 * [AWS Account and User](#aws-account-and-user)
+* [AWS-SDK Toolkit](#sdk)
 
 Ensure access to:
 
@@ -52,3 +53,20 @@ This Hands-On was tested using **v0.21.0** of the AWS-CDK.
 ## AWS Account and User
 
 Using the AWS-CLI: `aws configure`
+
+## SDK
+
+Open a terminal session in your project folder and run the following command:
+
+`npm install aws-sdk`
+
+Create a `credentials` file:
+
+* OSX/Linux `~/.aws/credentials`
+* Windows  `C:\Users\USERNAME\.aws\credentials``
+
+```ini
+[default]
+aws_access_key_id=your_access_key
+aws_secret_access_key=your_secret_key
+```
