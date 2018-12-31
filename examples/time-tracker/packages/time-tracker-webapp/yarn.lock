@@ -20,6 +20,14 @@
     "@aws-cdk/aws-iam" "^0.21.0"
     "@aws-cdk/cdk" "^0.21.0"
 
+"@aws-cdk/aws-certificatemanager@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-certificatemanager/-/aws-certificatemanager-0.21.0.tgz#ce3482551c6d7f47060a737d2db881874169e783"
+  integrity sha512-WvT2Lw5DC2th/2XEW7RUkkMSRSuxLr1HRovlybmJqpt25MJYh2Jzk0i2HJeprhQA5TluMAgDpXnKUyBAjt/jxw==
+  dependencies:
+    "@aws-cdk/aws-iam" "^0.21.0"
+    "@aws-cdk/cdk" "^0.21.0"
+
 "@aws-cdk/aws-cloudformation@^0.21.0":
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cloudformation/-/aws-cloudformation-0.21.0.tgz#99ee5860dceeef530ca7f33a4d22a03a9765505d"
@@ -29,6 +37,18 @@
     "@aws-cdk/aws-iam" "^0.21.0"
     "@aws-cdk/aws-lambda" "^0.21.0"
     "@aws-cdk/aws-sns" "^0.21.0"
+    "@aws-cdk/cdk" "^0.21.0"
+
+"@aws-cdk/aws-cloudfront@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cloudfront/-/aws-cloudfront-0.21.0.tgz#c4c05a8cbd5a0df41a14da9c6d9985665247ef95"
+  integrity sha512-2yQcFM18mjbHn8kyQGY+0qSo4WsqDYciahdnJDD2L5CErAWHIPBx5EIfWQ5xdiWAREJEDuM63jpwBLYAolDSJg==
+  dependencies:
+    "@aws-cdk/aws-certificatemanager" "^0.21.0"
+    "@aws-cdk/aws-iam" "^0.21.0"
+    "@aws-cdk/aws-kms" "^0.21.0"
+    "@aws-cdk/aws-route53" "^0.21.0"
+    "@aws-cdk/aws-s3" "^0.21.0"
     "@aws-cdk/cdk" "^0.21.0"
 
 "@aws-cdk/aws-cloudwatch@^0.21.0":
@@ -107,6 +127,16 @@
     "@aws-cdk/aws-cloudwatch" "^0.21.0"
     "@aws-cdk/aws-iam" "^0.21.0"
     "@aws-cdk/cdk" "^0.21.0"
+
+"@aws-cdk/aws-route53@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-route53/-/aws-route53-0.21.0.tgz#b39c2e2a154c96c3ac9c4041ddfb9fe04b7bae32"
+  integrity sha512-sf8LANDjyeAxtGOUTGL+3qX95Hj89AFIqNiqev3WK0YEL7v3qY4piv7GLJKjxpNU05LQgUtNdXgKRnvZ+2XeKw==
+  dependencies:
+    "@aws-cdk/aws-ec2" "^0.21.0"
+    "@aws-cdk/aws-logs" "^0.21.0"
+    "@aws-cdk/cdk" "^0.21.0"
+    "@aws-cdk/cx-api" "^0.21.0"
 
 "@aws-cdk/aws-s3-deployment@^0.21.0":
   version "0.21.0"
