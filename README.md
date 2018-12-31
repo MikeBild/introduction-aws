@@ -15,6 +15,7 @@
 * AWS Cloud-Service Fundamentals
   * [Simple Storage Service](s3.md)
   * [Lambda-Functions](lambda-functions.md)
+  * [CloudFront](cloudfront.md)
   * [DynamoDB](dynamo-db.md)
   * [API-Gateway](api-gateway.md)
   * [Step-Functions](step-functions.md)
@@ -26,6 +27,7 @@
   * [Fundamentals and Setup](cdk/README.md)
   * [CDK Projects](cdk/cdk-projects.md)
   * [Simple Storage Service](cdk/s3.md)
+  * [CloudFront](cdk/cloudfront.md)
   * [Lambda-Functions](cdk/lambda-functions.md)
   * [DynamoDB](cdk/dynamo-db.md)
   * [API-Gateway](cdk/api-gateway.md)
