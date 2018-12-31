@@ -27,7 +27,8 @@ module.exports = class WebApp extends Stack {
       this,
       'DistributionWebSite',
       {
-        originConfigs : [
+        viewerProtocolPolicy : 'allow-all',
+        originConfigs        : [
           {
             s3OriginSource : {
               s3BucketSource : websiteBucket,
