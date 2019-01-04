@@ -9,8 +9,8 @@ module.exports = class WebApp extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
 
-    const lambda = new Function(this, 'todo-app-function', {
-      functionName : 'todo-app-function',
+    const lambda = new Function(this, 'todo-api-function', {
+      functionName : 'todo-api',
       runtime      : Runtime.NodeJS810,
       handler      : 'server.handler',
       code         : Code.asset(join(__dirname, '../build')),
@@ -21,7 +21,7 @@ module.exports = class WebApp extends Stack {
       .addResource('*');
     lambda.role.addToPolicy(policy);
 
-    const api = new LambdaRestApi(this, 'todo-app-api', {
+    const api = new LambdaRestApi(this, 'todo-api', {
       handler : lambda,
       proxy   : true,
       options : {

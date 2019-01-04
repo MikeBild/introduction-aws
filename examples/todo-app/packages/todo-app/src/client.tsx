@@ -1,10 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import App from '../app/App';
+import './assets/favicon.ico';
+import 'typeface-roboto';
+import App from './App';
 
 render(
-  <BrowserRouter>
+  <BrowserRouter basename='/prod'>
     <App />
   </BrowserRouter>,
   document.getElementById('app')

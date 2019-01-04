@@ -9,15 +9,15 @@ import { StaticRouter } from 'react-router-dom';
 import { JssProvider, SheetsRegistry } from 'react-jss';
 import { createGenerateClassName } from '@material-ui/core/styles';
 import { createServer, proxy } from 'aws-serverless-express';
-import App from '../app/App';
+import App from './App';
+
 const sheets = new SheetsRegistry();
 const generateClassName = createGenerateClassName();
 
 const app = express();
 
 app.use(cors());
-app.get(/\/.*index.*/, express.static(`${__dirname}/../browser`));
-
+app.use(express.static(`${__dirname}/public`));
 app.get('*', (req, res) => {
   const markup = renderToString(
     <JssProvider registry={sheets} generateClassName={generateClassName}>
@@ -29,11 +29,15 @@ app.get('*', (req, res) => {
 
   res.send(`
       <!DOCTYPE html>
-      <html>
+      <html lang="en">
         <head>
-          <title>Todo</title>
-          <script src="/index.js" defer></script>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+          <meta name="theme-color" content="#000000">
+          <link rel="shortcut icon" href="favicon.3abb3c31.ico">
           <style type="text/css">${sheets.toString()}</style>
+          <script src="client.js" defer></script>
+          <title>Todo</title>
         </head>
         <body>
           <div id="app">${markup}</div>
