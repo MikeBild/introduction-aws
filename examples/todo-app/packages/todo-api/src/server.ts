@@ -15,7 +15,11 @@ app.use(express.json());
 app.use('/todos', todos);
 app.get('/', (_, res) => res.send(listRoutes(app)));
 
-IS_IN_LAMBDA
-  ? (module.exports.handler = (event: any, context: any) =>
-      proxy(createServer(app), event, context))
-  : app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+if (IS_IN_LAMBDA) {
+  module.exports.handler = (event: any, context: any) => {
+    console.log({ event, context });
+    proxy(createServer(app), event, context);
+  };
+} else {
+  app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+}

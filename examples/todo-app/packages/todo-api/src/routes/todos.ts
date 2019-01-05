@@ -23,7 +23,7 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-  const input = { ...req.body, id: v1() };
+  const input = { ...req.body.input, id: v1() };
 
   try {
     await s3
@@ -34,8 +34,8 @@ app.post('/', async (req, res) => {
       })
       .promise();
 
-    res.status(201).send(input);
+    res.status(201).send({ result: input, failure: null });
   } catch (e) {
-    res.status(500).send({ message: e.message });
+    res.status(500).send({ result: null, failure: { message: e.message } });
   }
 });
