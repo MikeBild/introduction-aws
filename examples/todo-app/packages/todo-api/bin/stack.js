@@ -16,18 +16,24 @@ module.exports = class WebApp extends Stack {
       handler      : 'server.handler',
       code         : Code.asset(join(__dirname, '../build')),
     });
+    lambda.role.attachManagedPolicy(
+      'arn:aws:iam::aws:policy/AmazonS3FullAccess'
+    );
+    lambda.role.attachManagedPolicy(
+      'arn:aws:iam::aws:policy/AmazonAthenaFullAccess'
+    );
 
     const todosBucket = new Bucket(this, 'todo-app-todos', {
       bucketName     : 'todo-app-todos',
-      removalPolicy  : RemovalPolicy.Destroy,
+      removalPolicy  : RemovalPolicy.Orphan,
       retainOnDelete : false,
     });
     todosBucket.grantReadWrite(lambda.role);
 
-    const policy = new PolicyStatement()
+    const lambdaPolicy = new PolicyStatement()
       .addAction('lambda:InvokeFunction')
       .addResource('*');
-    lambda.role.addToPolicy(policy);
+    lambda.role.addToPolicy(lambdaPolicy);
 
     const api = new LambdaRestApi(this, 'todo-api', {
       handler : lambda,
@@ -46,10 +52,9 @@ module.exports = class WebApp extends Stack {
         'arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole',
       ],
     });
-
     todosBucket.grantReadWrite(glueRole);
 
-    new CfnCrawler(this, 'TodosCrawler', {
+    const u = new CfnCrawler(this, 'TodosCrawler', {
       databaseName       : 'todo-app',
       name               : 'TodosCrawler',
       role               : glueRole.roleName,
