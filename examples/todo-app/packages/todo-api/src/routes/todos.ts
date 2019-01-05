@@ -1,30 +1,41 @@
 import express from 'express';
 import AthenaExpress from 'athena-express';
-import aws from 'aws-sdk';
+import aws, { S3 } from 'aws-sdk';
+import { v1 } from 'uuid';
 aws.config.update({ region: 'eu-central-1' });
-const athena = new AthenaExpress({ aws });
 
+const athena = new AthenaExpress({ aws });
+const s3 = new S3();
 const app = express.Router();
 
 export default app;
 
-const todos = [
-  { id: 1, description: 'todo1', done: false },
-  { id: 2, description: 'todo2', done: true },
-];
-
 app.get('/', async (req, res) => {
-  const { Items: result } = await athena.query(
-    'SELECT * FROM "todo-app"."todo_app_todos"'
-  );
+  try {
+    const { Items: result } = await athena.query(
+      'SELECT * FROM "todo-app"."todo_app_todos"'
+    );
 
-  res.send(result);
+    res.send(result);
+  } catch (e) {
+    res.status(500).send({ message: e.message });
+  }
 });
 
-app.post('/', (req, res) => {
-  const input = { ...req.body, id: todos.length };
+app.post('/', async (req, res) => {
+  const input = { ...req.body, id: v1() };
 
-  todos.push(input);
+  try {
+    await s3
+      .putObject({
+        Bucket: 'todo-app-todos',
+        Key: `${input.id}.json`,
+        Body: JSON.stringify(input),
+      })
+      .promise();
 
-  res.send(input);
+    res.status(201).send(input);
+  } catch (e) {
+    res.status(500).send({ message: e.message });
+  }
 });

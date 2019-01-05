@@ -6,7 +6,11 @@
 
 - [Todo-API](https://xrtbumqy1m.execute-api.eu-central-1.amazonaws.com/prod/)
 
-## Components
+## API
+
+```bash
+curl -XPOST http://localhost:8080/todos -H Content-Type:application/json -d '{"description":"todo 1", "name": "mike", "done": true }'
+```
 
 ## Development
 

@@ -60,7 +60,7 @@ module.exports = class WebApp extends Stack {
       role               : glueRole.roleName,
       targets            : {
         s3Targets : [
-          { path: todosBucket.path },
+          { path: `s3://${todosBucket.bucketName}/` },
         ],
       },
       schemaChangePolicy : {

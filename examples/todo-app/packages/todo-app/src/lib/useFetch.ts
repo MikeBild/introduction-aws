@@ -1,7 +1,12 @@
 import 'abortcontroller-polyfill';
 import { useState, useEffect } from 'react';
 
-export default (url: string) => {
+export type FetchProps = {
+  url: string;
+  headers?: any;
+};
+
+export default (props: FetchProps) => {
   const controller = new AbortController();
   const [
     data,
@@ -20,7 +25,10 @@ export default (url: string) => {
 
   useEffect(async () => {
     try {
-      const response = await fetch(url, { signal: controller.signal });
+      const response = await fetch(props.url, {
+        ...props,
+        signal: controller.signal,
+      });
       setData(await response.json());
       setLoading(false);
     } catch (e) {
