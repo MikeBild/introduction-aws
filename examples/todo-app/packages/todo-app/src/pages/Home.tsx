@@ -37,6 +37,10 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
             {
               method: 'POST',
               body: JSON.stringify(input),
+              headers:
+                {
+                  'Content-Type': 'application/json',
+                },
             }
           );
           setIsAddTodoVisible(false);
