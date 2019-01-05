@@ -6,6 +6,9 @@
 
 ## Live
 
+- [Todo-App](https://d9qu86m5rd.execute-api.eu-central-1.amazonaws.com/prod/)
+- [Todo-API](https://xrtbumqy1m.execute-api.eu-central-1.amazonaws.com/prod/)
+
 ## Development
 
 ```bash

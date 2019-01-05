@@ -1,6 +1,5 @@
 const { join } = require('path');
-const { Stack, Output } = require('@aws-cdk/cdk');
-const { Bucket } = require('@aws-cdk/aws-s3');
+const { Stack } = require('@aws-cdk/cdk');
 const { Function, Runtime, Code } = require('@aws-cdk/aws-lambda');
 const { LambdaRestApi, EndpointType } = require('@aws-cdk/aws-apigateway');
 const { PolicyStatement } = require('@aws-cdk/aws-iam');
