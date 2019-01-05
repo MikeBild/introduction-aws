@@ -54,7 +54,7 @@ module.exports = class WebApp extends Stack {
     });
     todosBucket.grantReadWrite(glueRole);
 
-    const u = new CfnCrawler(this, 'TodosCrawler', {
+    new CfnCrawler(this, 'TodosCrawler', {
       databaseName       : 'todo-app',
       name               : 'TodosCrawler',
       role               : glueRole.roleName,
