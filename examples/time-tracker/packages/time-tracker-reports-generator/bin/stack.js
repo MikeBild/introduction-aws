@@ -9,13 +9,13 @@ module.exports = class ReportsGenerator extends Stack {
     super(parent, id, props);
     const requestsBucket = new Bucket(this, 'time-tracker-requests', {
       bucketName     : 'time-tracker-requests',
-      removalPolicy  : RemovalPolicy.Destroy,
+      removalPolicy  : RemovalPolicy.Orphan,
       retainOnDelete : false,
     });
 
     const reportsBucket = new Bucket(this, 'time-tracker-reports', {
       bucketName     : 'time-tracker-reports',
-      removalPolicy  : RemovalPolicy.Destroy,
+      removalPolicy  : RemovalPolicy.Orphan,
       retainOnDelete : false,
     });
 

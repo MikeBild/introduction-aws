@@ -14,7 +14,7 @@ module.exports = class WebApp extends Stack {
       websiteIndexDocument : 'index.html',
       websiteErrorDocument : 'error.html',
       publicReadAccess     : true,
-      removalPolicy        : RemovalPolicy.Destroy,
+      removalPolicy        : RemovalPolicy.Orphan,
       retainOnDelete       : false,
     });
 
