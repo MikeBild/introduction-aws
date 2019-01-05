@@ -62,7 +62,7 @@ module.exports = class WebApp extends Stack {
         deleteBehavior : 'DEPRECATE_IN_DATABASE',
         updateBehavior : 'UPDATE_IN_DATABASE',
       },
-      schedule           : { scheduleExpression: 'cron(0/5 * * * ? *)' },
+      schedule           : { scheduleExpression: 'cron(00 0/1 * * ? *)' },
     });
   }
 };
