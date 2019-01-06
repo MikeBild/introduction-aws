@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "name": "cms-site-generator",
+  "version": "1.0.0",
+  "description": "CMS WebSite generation",
+  "main": "build/index.js",
+  "dependencies": {
+    "aws-sdk": "^2.384.0",
+    "ejs": "^2.6.1"
+  },
+  "devDependencies": {
+    "@aws-cdk/aws-iam": "^0.21.0",
+    "@aws-cdk/aws-lambda": "^0.21.0",
+    "@aws-cdk/aws-s3": "^0.21.0",
+    "@aws-cdk/cdk": "^0.21.0",
+    "@types/aws-lambda": "^8.10.17",
+    "@types/ejs": "^2.6.1",
+    "@types/node": "^10.12.18",
+    "aws-lambda-local": "^2.0.6",
+    "copyfiles": "^2.1.0",
+    "nodemon": "^1.18.9",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "build": "rimraf -r build && tsc && npm run build:templates",
+    "build:templates": "copyfiles -u 1 src/*.html build",
+    "deploy": "cdk deploy"
+  }
+}
