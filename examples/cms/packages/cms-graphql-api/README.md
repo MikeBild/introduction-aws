@@ -51,8 +51,8 @@ query GetArticle($id: ID!) {
 ### Mutations
 
 ```graphql
-mutation AddArticle($input: ArticleAddInput!) {
-  addArticle(input: $input) {
+mutation ArticleAdd($input: ArticleAddInput!) {
+  articleAdd(input: $input) {
     result {
       id
       name
@@ -64,12 +64,24 @@ mutation AddArticle($input: ArticleAddInput!) {
   }
 }
 
-mutation UpdateArticle($input: ArticleUpdateInput!) {
-  updateArticle(input: $input) {
+mutation ArticleUpdate($input: ArticleUpdateInput!) {
+  articleUpdate(input: $input) {
     result {
       id
       name
       content
+    }
+    failure {
+      message
+    }
+  }
+}
+
+mutation ArticlePreview($input: ArticlePreviewInput!) {
+  articlePreview(input: $input) {
+    result {
+      url
+      html
     }
     failure {
       message

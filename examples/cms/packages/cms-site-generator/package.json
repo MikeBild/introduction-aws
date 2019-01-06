@@ -23,8 +23,9 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
-    "build": "rimraf -r build && tsc && npm run build:templates",
+    "build": "rimraf -r build && tsc && npm run build:templates && npm run build:modules",
     "build:templates": "copyfiles -u 1 src/*.html build",
+    "build:modules": "cp -R node_modules build",
     "deploy": "cdk deploy"
   }
 }

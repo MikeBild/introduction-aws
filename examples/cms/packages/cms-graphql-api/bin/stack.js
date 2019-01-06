@@ -17,10 +17,12 @@ const ArticlesListResolver = require('./articles-list');
 const ArticlesGetResolver = require('./articles-get');
 const ArticlesAddResolver = require('./articles-add');
 const ArticlesUpdateResolver = require('./articles-update');
+const ArticlesPreviewResolver = require('./articles-preview');
 
 module.exports = class CMSGraphQLApi extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
+    const { siteGeneratorFunction } = props;
 
     const logsServiceRole = new Role(this, 'CMSGraphQLLogsRole', {
       assumedBy : new ServicePrincipal('logs.amazonaws.com'),
@@ -87,6 +89,12 @@ module.exports = class CMSGraphQLApi extends Stack {
       lambdaServiceRole,
       graphQlApi,
       cmsBucket,
+    });
+
+    new ArticlesPreviewResolver(this, 'ArticlesPreviewResolver', {
+      lambdaServiceRole,
+      graphQlApi,
+      siteGeneratorFunction,
     });
   }
 };

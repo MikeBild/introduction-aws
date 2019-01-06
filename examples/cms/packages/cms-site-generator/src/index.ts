@@ -5,33 +5,47 @@ import { renderFile } from 'ejs';
 const s3 = new S3();
 
 //npx tsc && AWS_REGION=eu-central-1 bucketName=cms-app-websites npx lambda-local -f build/index -e '{"id":"123", "content": "Hello World", "name":"mike"}'
-export const handler = async (event: any, context: Context) => {
+export const handler = async (
+  event: { input: { id: string; content: string; name: string } },
+  context: Context
+) => {
   console.log({ event, context, env: process.env });
 
   const region = process.env.AWS_REGION;
   const bucketName = process.env.bucketName;
-  const data = { title: 'Blank', ...event };
-  const html = await renderFile(
-    join(__dirname, 'article-site-template.html'),
-    data
-  );
+  const data = { title: 'Blank', author: event.input.name, ...event.input };
 
-  await s3
-    .putObject({
-      Bucket: bucketName,
-      Key: `${event.id}.html`,
-      Body: html,
-      ContentType: 'text/html',
-      ACL: 'public-read',
-      Metadata:
+  try {
+    const html = await renderFile(
+      join(__dirname, 'article-site-template.html'),
+      data
+    );
+
+    await s3
+      .putObject({
+        Bucket: bucketName,
+        Key: `${data.id}.html`,
+        Body: html,
+        ContentType: 'text/html',
+        ACL: 'public-read',
+        Metadata:
+          {
+            author: data.author,
+          },
+      })
+      .promise();
+
+    return {
+      failure: null,
+      result:
         {
-          author: event.name,
+          ...data,
+          html,
+          url:
+            `https://s3-${region}.amazonaws.com/${bucketName}/${data.id}.html`,
         },
-    })
-    .promise();
-
-  return {
-    html,
-    url: `https://s3-${region}.amazonaws.com/${bucketName}/${event.id}.html`,
-  };
+    };
+  } catch (e) {
+    return { result: null, failure: { message: e.message } };
+  }
 };

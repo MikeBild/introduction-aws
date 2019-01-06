@@ -29,7 +29,7 @@ module.exports = class ArticlesResolvers extends Stack {
     new CfnResolver(this, 'ArticlesAddResolver', {
       dataSourceName          : articlesAdd.dataSourceName,
       apiId                   : graphQlApi.graphQlApiApiId,
-      fieldName               : 'addArticle',
+      fieldName               : 'articleAdd',
       typeName                : 'Mutation',
       requestMappingTemplate  : `{
         "version" : "2017-02-28",

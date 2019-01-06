@@ -5,7 +5,9 @@ const CMSSiteGenerator = require('../packages/cms-site-generator/bin/stack');
 
 const app = new App();
 
-new CMSSiteGenerator(app, 'cms-site-generator');
-new CMSGraphQLApi(app, 'cms-graphql-api');
+const siteGenerator = new CMSSiteGenerator(app, 'cms-site-generator');
+new CMSGraphQLApi(app, 'cms-graphql-api', {
+  siteGeneratorFunction: siteGenerator.siteGeneratorFunction,
+});
 
 app.run();

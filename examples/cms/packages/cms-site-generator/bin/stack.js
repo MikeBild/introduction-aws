@@ -21,5 +21,7 @@ module.exports = class CMSWebSitesGenerator extends Stack {
       environment : { bucketName: websitesBucket.bucketName },
     });
     websitesBucket.grantReadWrite(lambda.role);
+
+    this.siteGeneratorFunction = lambda.export();
   }
 };

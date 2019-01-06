@@ -4,8 +4,9 @@ type Query {
 }
 
 type Mutation {
-  addArticle(input: ArticleAddInput!): ArticleAddResult!
-  updateArticle(input: ArticleUpdateInput!): ArticleUpdateResult!
+  articleAdd(input: ArticleAddInput!): ArticleAddResult!
+  articleUpdate(input: ArticleUpdateInput!): ArticleUpdateResult!
+  articlePreview(input: ArticlePreviewInput!): ArticlePreviewResult!
 }
 
 type Document {
@@ -33,7 +34,7 @@ type ArticleAddResult {
 }
 
 input ArticleUpdateInput {
-  id: String!
+  id: ID!
   name: String!
   content: String!
 }
@@ -41,6 +42,26 @@ input ArticleUpdateInput {
 type ArticleUpdateResult {
   result: Article
   failure: Failure
+}
+
+input ArticlePreviewInput {
+  id: ID!
+  name: String!
+  content: String
+  versionId: String
+}
+
+type ArticlePreviewResult {
+  result: Preview
+  failure: Failure
+}
+
+type Preview {
+  id: ID
+  content: String
+  author: String
+  url: String
+  html: String
 }
 
 type Failure {
