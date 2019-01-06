@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "cms-example",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@aws-cdk/aws-appsync": "^0.21.0",
+    "@aws-cdk/cdk": "^0.21.0",
+    "lerna": "^3.8.0"
+  },
+  "scripts": {
+    "bootstrap": "lerna clean && lerna bootstrap",
+    "build": "lerna run build --stream",
+    "dev": "lerna run dev",
+    "start": "lerna run start",
+    "deploy": "npm run build && cdk deploy",
+    "destroy": "cdk destroy"
+  }
+}

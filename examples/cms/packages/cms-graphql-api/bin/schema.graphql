@@ -1,0 +1,53 @@
+type Query {
+  articles: [Document]
+  article(id: ID!, versionId: ID): Article
+}
+
+type Mutation {
+  addArticle(input: ArticleAddInput!): ArticleAddResult!
+  updateArticle(input: ArticleUpdateInput!): ArticleUpdateResult!
+}
+
+type Document {
+  id: ID
+  versionId: String
+  modifiedAt: AWSDateTime
+  isLatest: Boolean
+  article: Article
+}
+
+type Article {
+  id: ID!
+  name: String
+  content: String
+}
+
+input ArticleAddInput {
+  name: String!
+  content: String!
+}
+
+type ArticleAddResult {
+  result: Article
+  failure: Failure
+}
+
+input ArticleUpdateInput {
+  id: String!
+  name: String!
+  content: String!
+}
+
+type ArticleUpdateResult {
+  result: Article
+  failure: Failure
+}
+
+type Failure {
+  message: String
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
