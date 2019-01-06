@@ -15,7 +15,7 @@
 * AWS Cloud-Service Fundamentals
   * [Simple Storage Service](s3.md)
   * [Lambda-Functions](lambda-functions.md)
-  * [CloudFront](cloudfront.md)
+  * [AppSync GraphQL](app-sync.md)
   * [DynamoDB](dynamo-db.md)
   * [API-Gateway](api-gateway.md)
   * [Step-Functions](step-functions.md)
@@ -27,8 +27,8 @@
   * [Fundamentals and Setup](cdk/README.md)
   * [CDK Projects](cdk/cdk-projects.md)
   * [Simple Storage Service](cdk/s3.md)
-  * [CloudFront](cdk/cloudfront.md)
   * [Lambda-Functions](cdk/lambda-functions.md)
+  * [AppSync GraphQL](cdk/app-sync.md)
   * [DynamoDB](cdk/dynamo-db.md)
   * [API-Gateway](cdk/api-gateway.md)
   * [Step-Functions](cdk/step-functions.md)
@@ -63,6 +63,8 @@
 * [AWS-Vault](https://github.com/99designs/aws-vault)
 
 ## More Resources
+
+* [List of AWS Service Principals](https://gist.github.com/shortjared/4c1e3fe52bdfa47522cfe5b41e5d6f22)
 
 ### Introductions
 
