@@ -6,15 +6,15 @@ const { CfnDataSource, CfnResolver } = require('@aws-cdk/aws-appsync');
 module.exports = class ArticlesResolvers extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
-    const { lambdaServiceRole, graphQlApi, cmsBucket } = props;
+    const { lambdaServiceRole, graphQlApi, catalogBucket } = props;
 
     const lambda = new Function(this, 'ArticlesList', {
       runtime     : Runtime.NodeJS810,
       handler     : 'articles.list',
       code        : Code.asset(join(__dirname, '../build')),
-      environment : { bucketName: cmsBucket.bucketName },
+      environment : { bucketName: catalogBucket.bucketName },
     });
-    cmsBucket.grantReadWrite(lambda.role);
+    catalogBucket.grantReadWrite(lambda.role);
 
     const articlesList = new CfnDataSource(this, 'ArticlesListDataSource', {
       name           : 'ArticlesList',

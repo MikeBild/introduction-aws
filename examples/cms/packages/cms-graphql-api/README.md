@@ -23,7 +23,7 @@ yarn deploy
 ### Queries
 
 ```graphql
-query AllArticles {
+query ArticleList {
   articles {
     id
     versionId
@@ -37,7 +37,7 @@ query AllArticles {
   }
 }
 
-query GetArticle($id: ID!) {
+query ArticleGet($id: ID!) {
   article(
     id: $id
   ) {

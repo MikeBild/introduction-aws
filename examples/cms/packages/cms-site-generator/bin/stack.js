@@ -7,21 +7,58 @@ module.exports = class CMSWebSitesGenerator extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
 
-    const websitesBucket = new Bucket(this, 'WebSitesBucket', {
-      bucketName       : 'cms-app-websites',
+    const catalogBucket = Bucket.import(this, 'CMSCatalogBucket', {
+      bucketName : props.catalogBucket.bucketName,
+    });
+
+    const previewWebsitesBucket = new Bucket(this, 'PreviewWebsitesBucket', {
+      bucketName       : 'cms-app-preview-websites',
       removalPolicy    : RemovalPolicy.Orphan,
       retainOnDelete   : false,
       publicReadAccess : true,
     });
 
-    const lambda = new Function(this, 'GenerateWebSite', {
-      runtime     : Runtime.NodeJS810,
-      handler     : 'index.handler',
-      code        : Code.asset(join(__dirname, '../build')),
-      environment : { bucketName: websitesBucket.bucketName },
-    });
-    websitesBucket.grantReadWrite(lambda.role);
+    const generatePreviewWebsite = new Function(
+      this,
+      'GeneratePreviewWebsite',
+      {
+        runtime     : Runtime.NodeJS810,
+        handler     : 'preview.handler',
+        code        : Code.asset(join(__dirname, '../build')),
+        environment : {
+          webSiteBucketName : previewWebsitesBucket.bucketName,
+          catalogBucketName : catalogBucket.bucketName,
+        },
+      }
+    );
 
-    this.siteGeneratorFunction = lambda.export();
+    previewWebsitesBucket.grantReadWrite(generatePreviewWebsite.role);
+    catalogBucket.grantReadWrite(generatePreviewWebsite.role);
+    this.generatePreviewWebsiteFunction = generatePreviewWebsite.export();
+
+    const releaseWebsitesBucket = new Bucket(this, 'ReleaseWebsitesBucket', {
+      bucketName       : 'cms-app-release-websites',
+      removalPolicy    : RemovalPolicy.Orphan,
+      retainOnDelete   : false,
+      publicReadAccess : true,
+    });
+
+    const generateReleaseWebsite = new Function(
+      this,
+      'GenerateReleaseWebsite',
+      {
+        runtime     : Runtime.NodeJS810,
+        handler     : 'release.handler',
+        code        : Code.asset(join(__dirname, '../build')),
+        environment : {
+          webSiteBucketName : releaseWebsitesBucket.bucketName,
+          catalogBucketName : catalogBucket.bucketName,
+        },
+      }
+    );
+
+    releaseWebsitesBucket.grantReadWrite(generateReleaseWebsite.role);
+    catalogBucket.grantReadWrite(generateReleaseWebsite.role);
+    this.generateReleaseWebsiteFunction = generateReleaseWebsite.export();
   }
 };

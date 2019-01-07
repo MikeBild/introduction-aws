@@ -22,7 +22,6 @@ const ArticlesPreviewResolver = require('./articles-preview');
 module.exports = class CMSGraphQLApi extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
-    const { siteGeneratorFunction } = props;
 
     const logsServiceRole = new Role(this, 'CMSGraphQLLogsRole', {
       assumedBy : new ServicePrincipal('logs.amazonaws.com'),
@@ -60,41 +59,39 @@ module.exports = class CMSGraphQLApi extends Stack {
         .addResource('*')
     );
 
-    const cmsBucket = new Bucket(this, 'CMSAppBucket', {
-      bucketName     : 'cms-app-data-bucket',
-      removalPolicy  : RemovalPolicy.Orphan,
-      retainOnDelete : false,
-      versioned      : true,
+    const catalogBucket = Bucket.import(this, 'CMSCatalogBucket', {
+      bucketName : props.catalogBucket.bucketName,
     });
 
     new ArticlesListResolver(this, 'ArticlesListResolver', {
       lambdaServiceRole,
       graphQlApi,
-      cmsBucket,
+      catalogBucket,
     });
 
     new ArticlesGetResolver(this, 'ArticlesGetResolver', {
       lambdaServiceRole,
       graphQlApi,
-      cmsBucket,
+      catalogBucket,
     });
 
     new ArticlesAddResolver(this, 'ArticlesAddResolver', {
       lambdaServiceRole,
       graphQlApi,
-      cmsBucket,
+      catalogBucket,
     });
 
     new ArticlesUpdateResolver(this, 'ArticlesUpdateResolver', {
       lambdaServiceRole,
       graphQlApi,
-      cmsBucket,
+      catalogBucket,
     });
 
     new ArticlesPreviewResolver(this, 'ArticlesPreviewResolver', {
       lambdaServiceRole,
       graphQlApi,
-      siteGeneratorFunction,
+      catalogBucket,
+      generatePreviewWebsiteFunction : props.generatePreviewWebsiteFunction,
     });
   }
 };

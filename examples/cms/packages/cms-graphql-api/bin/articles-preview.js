@@ -6,11 +6,17 @@ const { CfnDataSource, CfnResolver } = require('@aws-cdk/aws-appsync');
 module.exports = class ArticlesResolvers extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
-    const { lambdaServiceRole, graphQlApi, siteGeneratorFunction } = props;
+    const {
+      lambdaServiceRole,
+      graphQlApi,
+      catalogBucket,
+      generatePreviewWebsiteFunction,
+    } = props;
 
     const lambda = Function.import(this, 'ArticlesPreview', {
-      functionArn : siteGeneratorFunction.functionArn,
+      functionArn : generatePreviewWebsiteFunction.functionArn,
     });
+    catalogBucket.grantReadWrite(lambda.role);
 
     const articlesPreview = new CfnDataSource(
       this,
