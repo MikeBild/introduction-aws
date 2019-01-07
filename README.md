@@ -1,57 +1,94 @@
-# Introduction to AWS
+# Introduction to Serverless using AWS
 
-> Hands-On introduction to AWS-Cloud-Services using AWS-CDK, NodeJS, TypeScript, GraphQL, etc.
+> Hands-On introduction to Serverless using AWS-Cloud-Services via JavaScript/TypeScript.
 
-## Table of Contents
-
-* Introduction to Serverless-Computing
-  * Concepts and Architecte
+* Introduction
+  * Why Serverless-Computing
+  * Monolith vs. Microservices vs. Serverless
+  * Concepts and Architecture
   * Serverless vs. Container/Kubernetes
   * Serverless-Computing and DevOps
     * CloudFormation
     * Programmatically Deployments
     * Continuous-Delivery Pipeline
-* Deployments with AWS Cloud-Development-Kit (CDK) and JavaScript
-  * S3
-  * Lambda
-  * API-Gateway
-  * Step-Functions
-  * Route53
-  * Simple-EMail-Services
-  * Simple-Notification-Services
-  * Simple-Queue-Services
-* AWS Cloud-Services (AWS-SDK) with JavaScript/TypeScript
-  * S3
-  * Lambda
-  * API-Gateway
-  * Step-Functions
-  * Route53
-  * Simple-EMail-Services
-  * Simple-Notification-Services
-  * Simple-Queue-Services
+  * [Prerequisites](prerequisites.md)
+* AWS Cloud-Service Fundamentals
+  * [Simple Storage Service](s3.md)
+  * [Lambda-Functions](lambda-functions.md)
+  * [AppSync GraphQL](app-sync.md)
+  * [DynamoDB](dynamo-db.md)
+  * [API-Gateway](api-gateway.md)
+  * [Step-Functions](step-functions.md)
+  * [Route53](route53.md)
+  * [Simple Email Service](ses.md)
+  * [Identity and Access Management](iam.md)
+  * [CloudWatch](cloudwatch.md)
+* AWS Cloud-Development-Kit (CDK)
+  * [Fundamentals and Setup](cdk/README.md)
+  * [CDK Projects](cdk/cdk-projects.md)
+  * [Simple Storage Service](cdk/s3.md)
+  * [Lambda-Functions](cdk/lambda-functions.md)
+  * [AppSync GraphQL](cdk/app-sync.md)
+  * [DynamoDB](cdk/dynamo-db.md)
+  * [API-Gateway](cdk/api-gateway.md)
+  * [Step-Functions](cdk/step-functions.md)
+  * [Route53](cdk/route53.md)
+  * [Simple Email Service](cdk/ses.md)
+  * [Permissions](cdk/permissions.md)
+  * [CloudWatch](cdk/cloudwatch.md)
+* AWS Software-Development-Kit (AWS-SDK)
+  * [Fundamentals and Setup](sdk/README.md)
+  * [Simple Storage Service](sdk/s3.md)
+  * [Lambda-Functions](sdk/lambda-functions.md)
+  * [DynamoDB](sdk/dynamo-db.md)
+  * [Step-Functions](sdk/step-functions.md)
+  * [Athena](sdk/athena.md)
+  * [Simple Email Service](sdk/ses.md)
 * Use-Cases
   * Web-Applications using Lambda-Functions
   * Data-Processing using Lambda-Functions
   * Workflows/Process-Manager using Step-Functions
-  * RESTful-APIs using API-Gateway
-  * GraphQL using Lambda-Functions
-  * GraphQL using AppSync
+  * RESTful-APIs using ExpressJS and API-Gateway
+  * GraphQL-API-Server using Lambda-Functions
   * Auth and Security
   * DNS and Custom-Domains
-  * Multiple Environments and Experiments
+  * Multiple Environments
+  * Handle Features/Experiments
 * Hands-On
-  * Monorepo Applicaion Structure
   * [Time-Tracker](./examples/time-tracker/README.md)
 
 ## Tools
 
-* [CloudCraft - AWS Designer](https://cloudcraft.co)
+* [CloudCraft - AWS-Designer](https://cloudcraft.co)
+* [AWS-Vault](https://github.com/99designs/aws-vault)
 
 ## More Resources
 
-* [Introduction to NodeJS](https://github.com/mikebild/introduction-nodejs)
-* [Introduction to Python](https://github.com/mikebild/introduction-python)
-* [Introduction to React](https://github.com/mikebild/introduction-react)
-* [Introduction to GraphQL](https://github.com/mikebild/introduction-graphql)
-* [Introduction to Docker](https://github.com/mikebild/introduction-docker)
-* [Introduction to Kubernetes](https://github.com/mikebild/introduction-kubernetes)
+* [List of AWS Service Principals](https://gist.github.com/shortjared/4c1e3fe52bdfa47522cfe5b41e5d6f22)
+
+### Introductions
+
+* [NodeJS](https://github.com/mikebild/introduction-nodejs)
+* [ReactJS](https://github.com/mikebild/introduction-react)
+* [GraphQL](https://github.com/mikebild/introduction-graphql)
+* [Docker](https://github.com/mikebild/introduction-docker)
+* [Kubernetes](https://github.com/mikebild/introduction-kubernetes)
+* [Python](https://github.com/mikebild/introduction-python)
+
+## Issue Reporting
+
+If you have found a bug or if you have a feature request, please report them at
+this repository issues section. Please do not report security vulnerabilities on
+the public [GitHub issue tracker](https://github.com/mikebild/introduction-aws/issues).
+
+## License
+
+This project is licensed under the MIT license. See the [LICENSE](LICENSE) file
+for more info.
+
+## Thanks
+
+You like this **AWS Serverless Introduction** and you want to see what coming next?
+Follow me on Twitter [`@mikebild`](https://twitter.com/mikebild).
+
+Enjoy!

@@ -1,8 +1,8 @@
 {
   "private": true,
   "name": "time-tracker-reports-generator",
-  "version": "1.0.0",
-  "description": "Time Tracking Report Generator",
+  "version": "1.1.0",
+  "description": "Time Tracking Reports Generator",
   "main": "dist/index.js",
   "dependencies": {
     "aws-sdk": "^2.382.0",
@@ -12,6 +12,7 @@
     "@aws-cdk/aws-lambda": "^0.21.0",
     "@aws-cdk/aws-lambda-event-sources": "^0.21.0",
     "@aws-cdk/aws-s3": "^0.21.0",
+    "@aws-cdk/cdk": "^0.21.0",
     "@types/node": "^10.12.18",
     "aws-lambda-local": "^2.0.6",
     "nodemon": "^1.18.9",
@@ -19,11 +20,9 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
-    "clear": "rimraf -rf dist",
-    "build": "tsc",
     "dev": "dotenv -- nodemon -e ts,json --exec 'tsc && lambda-local -f dist/index -e src/event.json -t 20'",
-    "aws:bootstrap": "cdk bootstrap",
-    "aws:deploy": "cdk deploy",
-    "deploy": "npm run clear && npm run build && cp -R node_modules ./dist && npm run aws:bootstrap && npm run aws:deploy"
+    "clear": "rimraf -rf dist",
+    "build": "rimraf -rf dist && tsc && cp -R node_modules ./dist",
+    "deploy": "cdk deploy"
   }
 }

@@ -1,4 +1,4 @@
-import { S3 } from 'aws-sdk';
+import { S3, Lambda } from 'aws-sdk';
 
 export default {
   Me:
@@ -44,25 +44,18 @@ export default {
     },
   Mutation:
     {
-      async requestForRelease(
-        _: never,
-        { input }: { input: any },
-        { s3 }: { s3: S3 }
-      ) {
-        console.log({ input });
-      },
       async recordHours(
         _: never,
         { input }: { input: any },
         { s3 }: { s3: S3 }
       ) {
-        const request = { ...input, id: Date.now(), date: new Date() };
+        const request = { date: new Date(), ...input, id: Date.now() };
         try {
           await s3
             .putObject({
               Bucket: 'time-tracker-requests',
-              Key: `${request.name}/${request.id}`,
-              Body: JSON.stringify(request, null, 2),
+              Key: `${request.name}/${request.id}.json`,
+              Body: JSON.stringify(request),
             })
             .promise();
 
@@ -70,6 +63,20 @@ export default {
         } catch (e) {
           return { success: null, failure: { message: e.message } };
         }
+      },
+      async requestForRelease(
+        _: never,
+        { input }: { input: any },
+        { lambda }: { lambda: Lambda }
+      ) {
+        const { Payload } = await lambda
+          .invoke({
+            FunctionName: 'time-tracker-request',
+            Payload: JSON.stringify({ input }),
+          })
+          .promise();
+
+        return JSON.parse(Payload.toString());
       },
     },
 };

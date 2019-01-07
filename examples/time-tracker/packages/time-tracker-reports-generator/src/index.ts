@@ -22,7 +22,7 @@ module.exports.handler = async (event: any, context: any) => {
     .putObject({
       Bucket: 'time-tracker-reports',
       Key: 'summary.json',
-      Body: JSON.stringify(report, null, 2),
+      Body: JSON.stringify(report),
     })
     .promise();
 

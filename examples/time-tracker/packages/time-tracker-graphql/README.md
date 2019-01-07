@@ -10,8 +10,6 @@
 ```bash
 yarn
 yarn dev
-yarn build
-yarn start
 ```
 
 ## Production
@@ -22,8 +20,64 @@ yarn build
 yarn start
 ```
 
-## AWS Deploy
+## AWS-CDK Deploy
 
 ```bash
 yarn deploy
+```
+
+## GraphQL API
+
+### Queries
+
+```graphql
+query Summary {
+  summary {
+    id
+    count
+    hours
+  }
+}
+
+query Me {
+  me(name: "mike") {
+    summary {
+      id
+      count
+      hours
+    }
+  }
+}
+```
+
+### Mutations
+
+```graphql
+mutation RecordHours {
+  recordHours(input: { name: "heike", hours: 10 }) {
+    success {
+      id
+      name
+      hours
+      date
+    }
+    failure {
+      message
+    }
+  }
+}
+
+mutation RequestForRelease {
+  requestForRelease(input: { id: "mike" }) {
+    success {
+      id
+      taskToken
+      executionArn
+      startDate
+    }
+    failure {
+      message
+    }
+  }
+}
 ```

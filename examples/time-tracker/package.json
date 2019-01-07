@@ -1,16 +1,17 @@
 {
   "private": true,
-  "name": "aws-lambda",
+  "name": "time-tracker-example",
   "version": "1.0.0",
-  "dependencies": {
-    "lerna": "^3.7.1"
+  "devDependencies": {
+    "@aws-cdk/cdk": "^0.21.0",
+    "lerna": "^3.8.0"
   },
   "scripts": {
-    "bootstrap": "lerna clean && lerna run clear && lerna bootstrap",
-    "clear": "lerna run clear",
+    "bootstrap": "lerna clean && lerna bootstrap",
     "build": "lerna run build --stream",
-    "deploy": "lerna run deploy --stream",
     "dev": "lerna run dev",
-    "start": "lerna run start"
+    "start": "lerna run start",
+    "deploy": "npm run build && cdk deploy",
+    "destroy": "cdk destroy"
   }
 }

@@ -28,6 +28,9 @@ export default gql`
 
   type Release {
     id: ID
+    taskToken: ID
+    executionArn: ID
+    startDate: String
   }
 
   type ReleaseFailure {
@@ -59,11 +62,11 @@ export default gql`
   input HoursInput {
     name: String
     hours: Float
+    date: String
   }
 
   type Mutation {
     requestForRelease(input: ReleaseInput!): ReleaseResult
     recordHours(input: HoursInput!): HoursResult
   }
-
 `;

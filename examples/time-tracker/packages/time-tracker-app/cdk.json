@@ -1,4 +1,0 @@
-{
-  "app": "node bin/cdk.js",
-  "requireApproval": "never"
-}
