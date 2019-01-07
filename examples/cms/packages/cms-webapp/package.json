@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "name": "cms-webapp",
+  "version": "1.0.0",
+  "description": "CMS WebApp",
+  "main": "build/index.js",
+  "dependencies": {
+    "aws-serverless-express": "^3.3.5",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "@aws-cdk/aws-apigateway": "^0.21.0",
+    "@aws-cdk/aws-lambda": "^0.21.0",
+    "@aws-cdk/cdk": "^0.21.0",
+    "@types/aws-lambda": "^8.10.17",
+    "@types/aws-serverless-express": "^3.3.0",
+    "@types/express": "^4.16.0",
+    "@types/node": "^10.12.18",
+    "aws-lambda-local": "^2.0.6",
+    "copyfiles": "^2.1.0",
+    "nodemon": "^1.18.9",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "build": "rimraf -r build && tsc && cp -r node_modules build",
+    "start": "node build/server",
+    "deploy": "cdk deploy"
+  }
+}

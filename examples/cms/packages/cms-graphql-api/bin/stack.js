@@ -1,6 +1,6 @@
 const { join } = require('path');
 const { readFileSync } = require('fs');
-const { Stack, RemovalPolicy } = require('@aws-cdk/cdk');
+const { Stack, RemovalPolicy, Output } = require('@aws-cdk/cdk');
 const {
   CfnGraphQLApi,
   CfnApiKey,
@@ -40,10 +40,20 @@ module.exports = class CMSGraphQLApi extends Stack {
         fieldLogLevel         : 'ALL',
       },
     });
+    this.graphQlApiUrl = new Output(this, 'GraphQlApiUrl', {
+      value : graphQlApi.graphQlApiGraphQlUrl,
+    })
+      .makeImportValue()
+      .toString();
 
     const apiKey = new CfnApiKey(this, 'CMSApiKey', {
       apiId : graphQlApi.graphQlApiApiId,
     });
+    this.graphQlApiKey = new Output(this, 'GraphQlApiKey', {
+      value : apiKey.apiKey,
+    })
+      .makeImportValue()
+      .toString();
 
     new CfnGraphQLSchema(this, 'CMSGraphQLApiSchema', {
       apiId      : graphQlApi.graphQlApiApiId,
