@@ -11,7 +11,9 @@
   },
   "devDependencies": {
     "@aws-cdk/aws-apigateway": "^0.21.0",
+    "@aws-cdk/aws-certificatemanager": "^0.21.0",
     "@aws-cdk/aws-lambda": "^0.21.0",
+    "@aws-cdk/aws-route53": "^0.21.0",
     "@aws-cdk/cdk": "^0.21.0",
     "@types/aws-serverless-express": "^3.3.0",
     "@types/ejs": "^2.6.1",
