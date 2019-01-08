@@ -20,6 +20,7 @@
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "concurrently": "^4.1.0",
+    "dotenv-cli": "^1.4.0",
     "nodemon": "^1.18.9",
     "parcel": "^1.11.0",
     "react": "^16.7.0",
@@ -29,12 +30,12 @@
   },
   "scripts": {
     "build": "npm run build:server && npm run build:client",
-    "build:server": "rimraf -r build/server && tsc && yarn install --pure-lockfile --modules-folder build/server/node_modules --production && cp -r src/server/views build/server",
+    "build:server": "rimraf -r build/server && tsc && cp -r node_modules build/server && cp -r src/server/views build/server",
     "build:client": "rimraf -r build/client && parcel build src/client/index.tsx --public-url ./ -d build/client --no-cache",
     "start": "node build/server",
     "dev": "concurrently npm:watch:server npm:watch:client",
     "watch:client": "parcel watch src/client/index.tsx --public-url ./ -d build/client --no-cache",
-    "watch:server": "nodemon --ext ts,ejs --watch src/server --exec \"tsc && cp -r src/server/views build/server && node build/server\"",
+    "watch:server": "nodemon --ext ts,ejs --watch src/server --exec \"tsc && cp -r src/server/views build/server && dotenv -- node build/server\"",
     "deploy": "cdk deploy"
   }
 }

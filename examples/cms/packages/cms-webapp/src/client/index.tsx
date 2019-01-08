@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import { render } from 'react-dom';
 
-declare let global: { GQL_URL: string; GQL_APIKEY: string };
+declare let global: { GRAPHQL_URL: string; GRAPHQL_APIKEY: string };
 
 const App = () => (
   <Fragment>
     <h1>Hello World</h1>
-    {global.GQL_URL}
-    {global.GQL_APIKEY}
+    {global.GRAPHQL_URL}
+    {global.GRAPHQL_APIKEY}
   </Fragment>
 );
 
