@@ -2,6 +2,7 @@ const IS_IN_LAMBDA = !!process.env.LAMBDA_TASK_ROOT;
 const PORT = process.env.PORT || 8080;
 const GRAPHQL_URL = process.env.GRAPHQL_URL || '...';
 const GRAPHQL_APIKEY = process.env.GRAPHQL_APIKEY || '...';
+const AWS_REGION = process.env.AWS_REGION || '...';
 
 import express from 'express';
 import { createServer, proxy } from 'aws-serverless-express';
@@ -13,7 +14,7 @@ app.set('views', `${__dirname}/views`);
 app.use(express.static(`${__dirname}/../client`));
 
 app.use('*', (_, res) =>
-  res.render('index', { title: 'CMS', GRAPHQL_URL, GRAPHQL_APIKEY })
+  res.render('index', { title: 'CMS', GRAPHQL_URL, GRAPHQL_APIKEY, AWS_REGION })
 );
 
 IS_IN_LAMBDA
