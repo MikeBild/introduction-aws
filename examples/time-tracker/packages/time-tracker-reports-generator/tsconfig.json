@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+
+  },
+  "exclude": ["node_modules"]
+}
