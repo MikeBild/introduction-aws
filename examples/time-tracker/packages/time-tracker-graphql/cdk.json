@@ -1,4 +1,0 @@
-{
-  "app": "node bin/index.js",
-  "requireApproval": "never"
-}
