@@ -20,9 +20,9 @@ const zone = new HostedZoneProvider(this, {
 }).findAndImport(this, 'mikebild.com');
 
 new TXTRecord(zone, 'TXTRecord', {
-  recordName  : 'time-tracker-app',
+  recordName  : 'cms-webapp',
   recordValue :
-    'time-tracker-app.mikebild.com.s3-website.eu-central-1.amazonaws.com',
+    'cms-webapp.mikebild.com.s3-website.eu-central-1.amazonaws.com',
   ttl         : 90,
 });
 ```

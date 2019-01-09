@@ -55,7 +55,7 @@
   * Multiple Environments
   * Handle Features/Experiments
 * Hands-On
-  * [Time-Tracker](./examples/time-tracker/README.md)
+  * [CMS](./examples/cms/README.md)
 
 ## Tools
 
