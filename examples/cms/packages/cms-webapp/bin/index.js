@@ -12,7 +12,7 @@ const webapp = new CMSWebApp(app, 'cms-webapp', {
   stageName     : 'prod',
 });
 
-new CMSWebAlias(app, 'cms-webapp-alias', {
+new CMSWebAlias(app, 'cms-webapp-dns-alias', {
   domainNameRegionalHostedZoneId : webapp.domainNameRegionalHostedZoneId,
   domainNameRegionalDomainName   : webapp.domainNameRegionalDomainName,
   domainName                     : 'mikebild.com',
