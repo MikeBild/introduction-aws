@@ -18,13 +18,14 @@ const ArticlesGetResolver = require('./articles-get');
 const ArticlesAddResolver = require('./articles-add');
 const ArticlesUpdateResolver = require('./articles-update');
 const ArticlesPreviewResolver = require('./articles-preview');
+const UserProfileListResolver = require('./user-profile-list');
 
 module.exports = class CMSGraphQLApi extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
 
     const logsServiceRole = new Role(this, 'CMSGraphQLLogsRole', {
-      assumedBy : new ServicePrincipal('logs.amazonaws.com'),
+      assumedBy : new ServicePrincipal('appsync.amazonaws.com'),
     });
     logsServiceRole.addToPolicy(
       new PolicyStatement(PolicyStatementEffect.Allow)
@@ -102,6 +103,20 @@ module.exports = class CMSGraphQLApi extends Stack {
       graphQlApi,
       catalogBucket,
       generatePreviewWebsiteFunction : props.generatePreviewWebsiteFunction,
+    });
+
+    const dynamoDBServiceRole = new Role(this, 'CMSGraphQLDynamoDBRole', {
+      assumedBy : new ServicePrincipal('appsync.amazonaws.com'),
+    });
+    dynamoDBServiceRole.addToPolicy(
+      new PolicyStatement(PolicyStatementEffect.Allow)
+        .addAction('dynamodb:*')
+        .addResource('*')
+    );
+
+    new UserProfileListResolver(this, 'UserProfileListResolver', {
+      graphQlApi,
+      dynamoDBServiceRole,
     });
   }
 };

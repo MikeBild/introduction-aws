@@ -46,6 +46,14 @@ query ArticleGet($id: ID!) {
     content
   }
 }
+
+query UserProfileList {
+  userProfiles {
+    id
+    name
+    fullName
+  }
+}
 ```
 
 ### Mutations

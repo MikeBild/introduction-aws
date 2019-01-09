@@ -1,6 +1,7 @@
 type Query {
   articles: [Document]
   article(id: ID!, versionId: ID): Article
+  userProfiles: [UserProfile]
 }
 
 type Mutation {
@@ -21,6 +22,13 @@ type Article {
   id: ID!
   name: String
   content: String
+}
+
+type UserProfile {
+  id: ID!
+  fullName: String
+  name: String
+  email: AWSEmail
 }
 
 input ArticleAddInput {
@@ -59,7 +67,7 @@ type Preview {
   versionId: String
   content: String
   author: String
-  url: String
+  url: AWSURL
   html: String
 }
 
