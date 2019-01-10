@@ -3,7 +3,7 @@
 > Hands-On introduction to Serverless using AWS-Cloud-Services via JavaScript/TypeScript.
 
 * Introduction
-  * Why Serverless-Computing
+  * [Why Serverless-Computing](#why-serverless-computing-with-aws)
   * Monolith vs. Microservices vs. Serverless
   * Concepts and Architecture
   * Serverless vs. Container/Kubernetes
@@ -56,6 +56,19 @@
   * Handle Features/Experiments
 * Hands-On
   * [CMS](./examples/cms/README.md)
+
+## Why Serverless-Computing with AWS
+
+* For Businesses of all sizes
+* Business/Use-Case centric application development
+* Fully integrated Data- and Service-Development Experiences
+* Full managed data and services with 24/7 support
+* Highly flexible and well documented development platform
+* Enables UI-Driven and programmatically "Infrastructure as Code" deployments
+* Integrated Authentication and fine-granulary permission sets
+* Integrated Logging, Tracing and Alerting-System
+* On-Demand pricing model
+* Billing account assignment and cost control
 
 ## Tools
 

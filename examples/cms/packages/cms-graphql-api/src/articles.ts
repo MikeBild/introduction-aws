@@ -33,15 +33,7 @@ export const list = async ({ filter = {} }: Event = {}, context: Context) => {
       modifiedAt: document.LastModified,
       isLatest: document.IsLatest,
     }))
-    .filter(
-      (x) =>
-        (filter &&
-        filter.isLatest !== null &&
-        filter.isLatest !== undefined &&
-        filter.isLatest === true
-          ? x.isLatest === true
-          : true) || x.isLatest === true
-    );
+    .filter((x) => (filter.isLatest === false ? true : x.isLatest));
 };
 
 //npx tsc && bucketName=cms-app-catalog-bucket npx lambda-local -f build/articles -h get -e '{"id":"...", "versionId": null}'
