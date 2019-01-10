@@ -11,16 +11,14 @@ interface Event {
   filter?: Filter;
 }
 
-//npx tsc && bucketName=cms-app-data-bucket npx lambda-local -f build/articles -h list -e '{ filter: { isLatest: false } }'
-export const list = async (
-  { filter: { isLatest = true } = {} }: Event = {},
-  context: Context
-) => {
+//npx tsc && bucketName=cms-app-catalog-bucket npx lambda-local -f build/articles -h list -e '{ "filter": { "isLatest": false } }'
+export const list = async ({ filter = {} }: Event = {}, context: Context) => {
   console.log({
-    event: { filter: { isLatest } },
+    filter,
     context,
     env: process.env,
   });
+
   const documentList = await s3
     .listObjectVersions({
       Bucket: process.env.bucketName,
@@ -29,16 +27,24 @@ export const list = async (
     .promise();
 
   return documentList.Versions
-    .filter((document) => document.IsLatest === isLatest)
     .map((document) => ({
       id: document.Key.replace('articles/', '').replace('.json', ''),
       versionId: document.VersionId,
       modifiedAt: document.LastModified,
       isLatest: document.IsLatest,
-    }));
+    }))
+    .filter(
+      (x) =>
+        (filter &&
+        filter.isLatest !== null &&
+        filter.isLatest !== undefined &&
+        filter.isLatest === true
+          ? x.isLatest === true
+          : true) || x.isLatest === true
+    );
 };
 
-//npx tsc && bucketName=cms-app-data-bucket npx lambda-local -f build/articles -h get -e '{"id":"...", "versionId": null}'
+//npx tsc && bucketName=cms-app-catalog-bucket npx lambda-local -f build/articles -h get -e '{"id":"...", "versionId": null}'
 export const get = async (
   event: { id: string; versionId: string },
   context: Context
@@ -55,7 +61,7 @@ export const get = async (
   return JSON.parse(result.Body.toString());
 };
 
-//npx tsc && bucketName=cms-app-data-bucket npx lambda-local -f build/articles -h add -e '{"input": {"name":"a", "content":"a"}}'
+//npx tsc && bucketName=cms-app-catalog-bucket npx lambda-local -f build/articles -h add -e '{"input": {"name":"a", "content":"a"}}'
 export const add = async (
   event: { input: { id?: string; name: string; content: string } },
   context: Context
@@ -76,7 +82,7 @@ export const add = async (
   }
 };
 
-//npx tsc && bucketName=cms-app-data-bucket npx lambda-local -f build/articles -h update -e '{"input": {"id":"...", "name":"b", "content":"b"}}'
+//npx tsc && bucketName=cms-app-catalog-bucket npx lambda-local -f build/articles -h update -e '{"input": {"id":"...", "name":"b", "content":"b"}}'
 export const update = async (
   event: { input: { id: string; name: string; content: string } },
   context: Context
