@@ -13,7 +13,7 @@ interface Event {
 
 //npx tsc && bucketName=cms-app-data-bucket npx lambda-local -f build/articles -h list -e '{ filter: { isLatest: false } }'
 export const list = async (
-  { filter: { isLatest = true } }: Event = {},
+  { filter: { isLatest = true } = {} }: Event = {},
   context: Context
 ) => {
   console.log({
