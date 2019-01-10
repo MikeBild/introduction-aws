@@ -5,6 +5,7 @@ const {
   CfnGraphQLApi,
   CfnApiKey,
   CfnGraphQLSchema,
+  CfnDataSource,
 } = require('@aws-cdk/aws-appsync');
 const { Bucket } = require('@aws-cdk/aws-s3');
 const {
@@ -18,7 +19,8 @@ const ArticlesGetResolver = require('./articles-get');
 const ArticlesAddResolver = require('./articles-add');
 const ArticlesUpdateResolver = require('./articles-update');
 const ArticlesPreviewResolver = require('./articles-preview');
-const UserProfileListResolver = require('./user-profile-list');
+const UserProfileListResolver = require('./user-profile/user-profile-list');
+const UserProfileGetResolver = require('./user-profile/user-profile-get');
 
 module.exports = class CMSGraphQLApi extends Stack {
   constructor(parent, id, props) {
@@ -114,9 +116,29 @@ module.exports = class CMSGraphQLApi extends Stack {
         .addResource('*')
     );
 
+    const userProfilesDataSource = new CfnDataSource(
+      this,
+      'UserProfilesDataSource',
+      {
+        name           : 'UserProfiles',
+        type           : 'AMAZON_DYNAMODB',
+        apiId          : graphQlApi.graphQlApiApiId,
+        dynamoDbConfig : {
+          tableName : 'UserProfiles',
+          awsRegion : 'eu-central-1',
+        },
+        serviceRoleArn : dynamoDBServiceRole.roleArn,
+      }
+    );
+
     new UserProfileListResolver(this, 'UserProfileListResolver', {
       graphQlApi,
-      dynamoDBServiceRole,
+      userProfilesDataSource,
+    });
+
+    new UserProfileGetResolver(this, 'UserProfileGetResolver', {
+      graphQlApi,
+      userProfilesDataSource,
     });
   }
 };

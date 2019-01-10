@@ -20,8 +20,9 @@ type Document {
 
 type Article {
   id: ID!
-  name: String
+  name: String @deprecated(reason: "Use userProfile field.")
   content: String
+  userProfile: UserProfile
 }
 
 type UserProfile {
