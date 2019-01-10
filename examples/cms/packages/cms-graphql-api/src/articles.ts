@@ -3,22 +3,39 @@ import { Context } from 'aws-lambda';
 import { v1 } from 'uuid';
 const s3 = new S3();
 
-//npx tsc && bucketName=cms-app-data-bucket npx lambda-local -f build/articles -h list -e '{}'
-export const list = async (event: never, context: Context) => {
-  console.log({ event, context, env: process.env });
-  const versionList = await s3
+interface Filter {
+  isLatest?: boolean;
+}
+
+interface Event {
+  filter?: Filter;
+}
+
+//npx tsc && bucketName=cms-app-data-bucket npx lambda-local -f build/articles -h list -e '{ filter: { isLatest: false } }'
+export const list = async (
+  { filter: { isLatest = true } }: Event = {},
+  context: Context
+) => {
+  console.log({
+    event: { filter: { isLatest } },
+    context,
+    env: process.env,
+  });
+  const documentList = await s3
     .listObjectVersions({
       Bucket: process.env.bucketName,
       Prefix: 'articles',
     })
     .promise();
 
-  return versionList.Versions.map((x) => ({
-    id: x.Key.replace('articles/', '').replace('.json', ''),
-    versionId: x.VersionId,
-    modifiedAt: x.LastModified,
-    isLatest: x.IsLatest,
-  }));
+  return documentList.Versions
+    .filter((document) => document.IsLatest === isLatest)
+    .map((document) => ({
+      id: document.Key.replace('articles/', '').replace('.json', ''),
+      versionId: document.VersionId,
+      modifiedAt: document.LastModified,
+      isLatest: document.IsLatest,
+    }));
 };
 
 //npx tsc && bucketName=cms-app-data-bucket npx lambda-local -f build/articles -h get -e '{"id":"...", "versionId": null}'

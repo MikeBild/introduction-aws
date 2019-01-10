@@ -1,7 +1,13 @@
 type Query {
-  articles: [Document]
+  articles(filter: ArticlesFilter): [Document]
   article(id: ID!, versionId: ID): Article
   userProfiles: [UserProfile]
+}
+
+# Represents articles filter conditions.
+input ArticlesFilter {
+  # Filter by latest article version ID.
+  isLatest: Boolean
 }
 
 type Mutation {
@@ -10,10 +16,13 @@ type Mutation {
   articlePreview(input: ArticlePreviewInput!): ArticlePreviewResult!
 }
 
+# WIP! Represents variants of CMS documents.
 type Document {
   id: ID
+  # Contains the article version ID
   versionId: String
   modifiedAt: AWSDateTime
+  # Is that the latest version of an article?
   isLatest: Boolean
   article: Article
 }
@@ -21,6 +30,7 @@ type Document {
 type Article {
   id: ID!
   name: String @deprecated(reason: "Use userProfile field.")
+  # Raw content field
   content: String
   userProfile: UserProfile
 }
@@ -72,6 +82,7 @@ type Preview {
   html: String
 }
 
+# Contains the human readable failure/error message.
 type Failure {
   message: String
 }
