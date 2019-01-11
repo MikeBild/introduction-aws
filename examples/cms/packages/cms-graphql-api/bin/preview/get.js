@@ -11,7 +11,7 @@ module.exports = class PreviewResolvers extends Stack {
     const lambda = new Function(this, 'PreviewGet', {
       runtime     : Runtime.NodeJS810,
       handler     : 'previews.get',
-      code        : Code.asset(join(__dirname, '../build')),
+      code        : Code.asset(join(__dirname, '../../build')),
       environment : { bucketName: previewWebSitesBucket.bucketName },
     });
     previewWebSitesBucket.grantReadWrite(lambda.role);

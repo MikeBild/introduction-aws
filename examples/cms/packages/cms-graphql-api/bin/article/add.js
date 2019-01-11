@@ -11,7 +11,7 @@ module.exports = class ArticlesResolvers extends Stack {
     const lambda = new Function(this, 'ArticlesAdd', {
       runtime     : Runtime.NodeJS810,
       handler     : 'articles.add',
-      code        : Code.asset(join(__dirname, '../build')),
+      code        : Code.asset(join(__dirname, '../../build')),
       environment : { bucketName: catalogBucket.bucketName },
     });
     catalogBucket.grantReadWrite(lambda.role);
