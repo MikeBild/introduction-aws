@@ -6,6 +6,6 @@ module.exports = (baseConfig, env, defaultConfig) => {
     exclude : /node_modules/,
     loader  : 'graphql-tag/loader',
   });
-  // defaultConfig.resolve.extensions.push('.ts', '.tsx');
+
   return defaultConfig;
 };
