@@ -12,6 +12,7 @@ interface TProps {
   renderLoading?: () => JSX.Element;
   error?: Error;
   renderError?: (error: Error) => JSX.Element;
+  style: object;
 }
 
 export const List: React.StatelessComponent<TProps> = ({
@@ -22,16 +23,16 @@ export const List: React.StatelessComponent<TProps> = ({
   renderLoading,
   error,
   renderError,
-}) => {
-  if (isLoading && renderLoading) return renderLoading();
-  if (error && renderError) return renderError(error);
-
-  return (
-    <table>
-      <thead>{renderHeadRow()}</thead>
-      <tbody>{rows.map(renderRow)}</tbody>
-    </table>
-  );
-};
+  style,
+}) => (
+  <table style={style}>
+    <thead>{renderHeadRow()}</thead>
+    <tbody>
+      {error && renderError && renderError(error)}
+      {isLoading && !error && renderLoading && renderLoading()}
+      {!isLoading && !error && rows.map(renderRow)}
+    </tbody>
+  </table>
+);
 
 export default List;
