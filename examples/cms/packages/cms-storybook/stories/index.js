@@ -9,7 +9,9 @@ import mocks from '../graphql/mocks';
 
 import List from 'cms-webapp-component-list';
 
-storiesOf('CMS Components', module)
+storiesOf('Atomics', module).add('Empty', () => <div />);
+storiesOf('Molecules', module).add('Empty', () => <div />);
+storiesOf('Organisms', module)
   .addDecorator(
     apolloStorybookDecorator({
       typeDefs,
@@ -17,7 +19,7 @@ storiesOf('CMS Components', module)
     })
   )
   .addDecorator(withKnobs)
-  .add('Table', () => (
+  .add('Table with GraphQL', () => (
     <Query
       query={gql`
         query ItemList {
@@ -46,3 +48,5 @@ storiesOf('CMS Components', module)
       )}
     </Query>
   ));
+storiesOf('Templates', module).add('Empty', () => <div />);
+storiesOf('Pages', module).add('Empty', () => <div />);
