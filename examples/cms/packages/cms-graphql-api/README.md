@@ -23,35 +23,52 @@ yarn deploy
 ### Queries
 
 ```graphql
+query AuthorList {
+  authors {
+    id
+    fullName
+    email
+  }
+}
+
+query ArticleGet {
+  article(id: "e59b8460-1567-11e9-b706-392e0ec275e9", versionId: "YfApSL2K3ZY0etH1xa8YG2G_xVvk2RWN") {
+    ...FullArticle
+  }
+}
+
 query ArticleList {
-  articles {
+  articles(filter: { isLatest:false }) {
     id
     versionId
-    isLatest
     modifiedAt
+    isLatest
     article {
-      id
-      name
-      content
+      ...FullArticle
     }
   }
 }
 
-query ArticleGet($id: ID!) {
-  article(
-    id: $id
-  ) {
+fragment FullArticle on Article {
+  id
+  content
+  versionId
+  preview {
     id
-    name
+    versionId
     content
+    url
+    html
+    author {
+      id
+      fullName
+      email
+    }
   }
-}
-
-query UserProfileList {
-  userProfiles {
+  author {
     id
-    name
     fullName
+    email
   }
 }
 ```
@@ -59,12 +76,10 @@ query UserProfileList {
 ### Mutations
 
 ```graphql
-mutation ArticleAdd($input: ArticleAddInput!) {
+mutation ArticleAdd($input: ArticleAddInput!)
   articleAdd(input: $input) {
     result {
-      id
-      name
-      content
+     ...FullArticle
     }
     failure {
       message
@@ -75,9 +90,7 @@ mutation ArticleAdd($input: ArticleAddInput!) {
 mutation ArticleUpdate($input: ArticleUpdateInput!) {
   articleUpdate(input: $input) {
     result {
-      id
-      name
-      content
+     ...FullArticle
     }
     failure {
       message
@@ -88,8 +101,16 @@ mutation ArticleUpdate($input: ArticleUpdateInput!) {
 mutation ArticlePreview($input: ArticlePreviewInput!) {
   articlePreview(input: $input) {
     result {
+      id
+      versionId
+      content
       url
       html
+      author {
+        id
+        email
+        fullName
+      }
     }
     failure {
       message
