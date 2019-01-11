@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 export interface Row {
   id: string;
   value?: string;
@@ -8,6 +7,7 @@ export interface Row {
 interface TProps {
   rows: [Row];
   renderRow: (item: Row) => JSX.Element;
+  renderHeadRow?: () => JSX.Element;
   isLoading?: boolean;
   renderLoading?: () => JSX.Element;
   error?: Error;
@@ -17,6 +17,7 @@ interface TProps {
 export const List: React.StatelessComponent<TProps> = ({
   rows,
   renderRow,
+  renderHeadRow = () => <tr />,
   isLoading,
   renderLoading,
   error,
@@ -27,6 +28,7 @@ export const List: React.StatelessComponent<TProps> = ({
 
   return (
     <table>
+      <thead>{renderHeadRow()}</thead>
       <tbody>{rows.map(renderRow)}</tbody>
     </table>
   );

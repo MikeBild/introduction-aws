@@ -5,7 +5,8 @@
   "description": "A list component",
   "main": "build/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsc --watch"
   },
   "devDependencies": {
     "@types/react": "^16.7.18",
