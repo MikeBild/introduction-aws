@@ -40,9 +40,9 @@ module.exports = class ArticlesResolvers extends Stack {
       requestMappingTemplate  : `{
         "version" : "2017-02-28",
         "operation": "Invoke",
-        "payload": $util.toJson($context.arguments)
+        "payload": $util.toJson($ctx.arguments)
       }`,
-      responseMappingTemplate : `$util.toJson($context.result)`,
+      responseMappingTemplate : `$util.toJson($ctx.result)`,
     });
   }
 };

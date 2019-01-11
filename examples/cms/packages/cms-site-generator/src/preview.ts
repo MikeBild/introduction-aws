@@ -10,7 +10,7 @@ export const handler = async (
     input: {
       id: string;
       versionId: string;
-      author: string;
+      authorId: string;
       name: string;
     };
   },
@@ -32,7 +32,7 @@ export const handler = async (
       })
       .promise()).Body.toString();
     Object.assign(data, JSON.parse(articleData));
-    Object.assign(data, { author: data.name });
+    Object.assign(data, { authorId: data.authorId });
   } catch (e) {
     console.error(e);
     return { result: null, failure: { message: e.message } };
@@ -47,13 +47,13 @@ export const handler = async (
     await s3
       .putObject({
         Bucket: webSiteBucketName,
-        Key: `${data.id}.html`,
+        Key: `${data.id}-${data.versionId}.html`,
         Body: html,
         ContentType: 'text/html',
         ACL: 'public-read',
         Metadata:
           {
-            author: data.author,
+            authorId: data.authorId,
           },
       })
       .promise();
@@ -65,7 +65,7 @@ export const handler = async (
           ...data,
           html,
           url:
-            `https://s3-${region}.amazonaws.com/${webSiteBucketName}/${data.id}.html`,
+            `https://s3-${region}.amazonaws.com/${webSiteBucketName}/${data.id}-${data.versionId}.html`,
         },
     };
   } catch (e) {

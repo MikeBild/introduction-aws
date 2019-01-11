@@ -3,21 +3,21 @@ const { Stack } = require('@aws-cdk/cdk');
 const { Function, Runtime, Code } = require('@aws-cdk/aws-lambda');
 const { CfnDataSource, CfnResolver } = require('@aws-cdk/aws-appsync');
 
-module.exports = class ArticlesResolvers extends Stack {
+module.exports = class PreviewResolvers extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
-    const { lambdaServiceRole, graphQlApi, catalogBucket } = props;
+    const { lambdaServiceRole, graphQlApi, previewWebSitesBucket } = props;
 
-    const lambda = new Function(this, 'ArticlesList', {
+    const lambda = new Function(this, 'PreviewGet', {
       runtime     : Runtime.NodeJS810,
-      handler     : 'articles.list',
+      handler     : 'previews.get',
       code        : Code.asset(join(__dirname, '../build')),
-      environment : { bucketName: catalogBucket.bucketName },
+      environment : { bucketName: previewWebSitesBucket.bucketName },
     });
-    catalogBucket.grantReadWrite(lambda.role);
+    previewWebSitesBucket.grantReadWrite(lambda.role);
 
-    const articlesList = new CfnDataSource(this, 'ArticlesListDataSource', {
-      name           : 'ArticlesList',
+    const previewGet = new CfnDataSource(this, 'PreviewGetDataSource', {
+      name           : 'PreviewGet',
       type           : 'AWS_LAMBDA',
       apiId          : graphQlApi.graphQlApiApiId,
       lambdaConfig   : {
@@ -26,17 +26,17 @@ module.exports = class ArticlesResolvers extends Stack {
       serviceRoleArn : lambdaServiceRole.roleArn,
     });
 
-    new CfnResolver(this, 'QueryArticlesResolver', {
-      dataSourceName          : articlesList.dataSourceName,
+    new CfnResolver(this, 'ArticlePreviewResolver', {
+      dataSourceName          : previewGet.dataSourceName,
       apiId                   : graphQlApi.graphQlApiApiId,
-      fieldName               : 'articles',
-      typeName                : 'Query',
+      fieldName               : 'preview',
+      typeName                : 'Article',
       requestMappingTemplate  : `{
         "version" : "2017-02-28",
         "operation": "Invoke",
-        "payload": $util.toJson($context.arguments)
+        "payload": $util.toJson($ctx.source)
       }`,
-      responseMappingTemplate : `$util.toJson($context.result)`,
+      responseMappingTemplate : `$util.toJson($ctx.result)`,
     });
   }
 };

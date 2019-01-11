@@ -1,49 +1,15 @@
-type Query {
-  articles(filter: ArticlesFilter): [Document]
-  article(id: ID!, versionId: ID): Article
-  userProfiles: [UserProfile]
-}
-
-# Represents articles filter conditions.
-input ArticlesFilter {
-  # Filter by latest article version ID.
-  isLatest: Boolean
-}
-
-type Mutation {
-  articleAdd(input: ArticleAddInput!): ArticleAddResult!
-  articleUpdate(input: ArticleUpdateInput!): ArticleUpdateResult!
-  articlePreview(input: ArticlePreviewInput!): ArticlePreviewResult!
-}
-
-# WIP! Represents variants of CMS documents.
-type Document {
-  id: ID
-  # Contains the article version ID
-  versionId: String
-  modifiedAt: AWSDateTime
-  # Is that the latest version of an article?
-  isLatest: Boolean
-  article: Article
-}
-
-type Article {
+type Article implements Node {
   id: ID!
-  name: String @deprecated(reason: "Use userProfile field.")
+  versionId: ID
+  name: String @deprecated(reason: "Use author field please.")
   # Raw content field
   content: String
-  userProfile: UserProfile
-}
-
-type UserProfile {
-  id: ID!
-  fullName: String
-  name: String
-  email: AWSEmail
+  author: AuthorProfile
+  preview: Preview
 }
 
 input ArticleAddInput {
-  name: String!
+  authorId: ID!
   content: String!
 }
 
@@ -52,9 +18,25 @@ type ArticleAddResult {
   failure: Failure
 }
 
+# Represents articles filter conditions.
+input ArticleFilter {
+  # Filter by latest article version ID.
+  isLatest: Boolean
+}
+
+input ArticlePreviewInput {
+  id: ID!
+  versionId: ID!
+}
+
+type ArticlePreviewResult {
+  result: Preview
+  failure: Failure
+}
+
 input ArticleUpdateInput {
   id: ID!
-  name: String!
+  authorId: ID!
   content: String!
 }
 
@@ -63,28 +45,50 @@ type ArticleUpdateResult {
   failure: Failure
 }
 
-input ArticlePreviewInput {
+type ArticleVersion implements Node {
   id: ID!
-  versionId: String
-}
-
-type ArticlePreviewResult {
-  result: Preview
-  failure: Failure
-}
-
-type Preview {
-  id: ID
-  versionId: String
-  content: String
-  author: String
-  url: AWSURL
-  html: String
+  # Contains the article version ID
+  versionId: ID
+  modifiedAt: AWSDateTime
+  # Is that the latest version of an article?
+  isLatest: Boolean
+  article: Article
 }
 
 # Contains the human readable failure/error message.
 type Failure {
   message: String
+}
+
+type Mutation {
+  articleAdd(input: ArticleAddInput!): ArticleAddResult!
+  articleUpdate(input: ArticleUpdateInput!): ArticleUpdateResult!
+  articlePreview(input: ArticlePreviewInput!): ArticlePreviewResult!
+}
+
+interface Node {
+  id: ID!
+}
+
+type Preview implements Node {
+  id: ID!
+  versionId: ID
+  content: String
+  url: AWSURL
+  html: String
+  author: AuthorProfile
+}
+
+type Query {
+  articles(filter: ArticleFilter): [ArticleVersion]
+  article(id: ID!, versionId: ID): Article
+  authors: [AuthorProfile]
+}
+
+type AuthorProfile implements Node {
+  id: ID!
+  fullName: String
+  email: AWSEmail
 }
 
 schema {

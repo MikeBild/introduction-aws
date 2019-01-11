@@ -50,12 +50,12 @@ export const get = async (
     })
     .promise();
 
-  return JSON.parse(result.Body.toString());
+  return { ...JSON.parse(result.Body.toString()), versionId: result.VersionId };
 };
 
-//npx tsc && bucketName=cms-app-catalog-bucket npx lambda-local -f build/articles -h add -e '{"input": {"name":"a", "content":"a"}}'
+//npx tsc && bucketName=cms-app-catalog-bucket npx lambda-local -f build/articles -h add -e '{"input": {"authorId":"a", "content":"a"}}'
 export const add = async (
-  event: { input: { id?: string; name: string; content: string } },
+  event: { input: { id?: string; authorId: string; content: string } },
   context: Context
 ) => {
   console.log({ event, context, env: process.env });
@@ -74,9 +74,9 @@ export const add = async (
   }
 };
 
-//npx tsc && bucketName=cms-app-catalog-bucket npx lambda-local -f build/articles -h update -e '{"input": {"id":"...", "name":"b", "content":"b"}}'
+//npx tsc && bucketName=cms-app-catalog-bucket npx lambda-local -f build/articles -h update -e '{"input": {"id":"...", "authorId":"b", "content":"b"}}'
 export const update = async (
-  event: { input: { id: string; name: string; content: string } },
+  event: { input: { id: string; authorId: string; content: string } },
   context: Context
 ) => {
   console.log({ event, context, env: process.env });

@@ -17,6 +17,7 @@ module.exports = class CMSWebSitesGenerator extends Stack {
       retainOnDelete   : false,
       publicReadAccess : true,
     });
+    this.previewWebsitesBucket = previewWebsitesBucket.export();
 
     const generatePreviewWebsite = new Function(
       this,
@@ -42,6 +43,7 @@ module.exports = class CMSWebSitesGenerator extends Stack {
       retainOnDelete   : false,
       publicReadAccess : true,
     });
+    this.releaseWebsitesBucket = releaseWebsitesBucket.export();
 
     const generateReleaseWebsite = new Function(
       this,

@@ -8,16 +8,16 @@ module.exports = class ArticlesResolvers extends Stack {
     super(parent, id, props);
     const { lambdaServiceRole, graphQlApi, catalogBucket } = props;
 
-    const lambda = new Function(this, 'ArticlesGet', {
+    const lambda = new Function(this, 'ArticlesUpdate', {
       runtime     : Runtime.NodeJS810,
-      handler     : 'articles.get',
+      handler     : 'articles.update',
       code        : Code.asset(join(__dirname, '../build')),
       environment : { bucketName: catalogBucket.bucketName },
     });
     catalogBucket.grantReadWrite(lambda.role);
 
-    const articlesGet = new CfnDataSource(this, 'ArticlesGetDataSource', {
-      name           : 'ArticlesGet',
+    const articlesUpdate = new CfnDataSource(this, 'ArticlesUpdateDataSource', {
+      name           : 'ArticlesUpdate',
       type           : 'AWS_LAMBDA',
       apiId          : graphQlApi.graphQlApiApiId,
       lambdaConfig   : {
@@ -26,30 +26,17 @@ module.exports = class ArticlesResolvers extends Stack {
       serviceRoleArn : lambdaServiceRole.roleArn,
     });
 
-    new CfnResolver(this, 'QueryArticleResolver', {
-      dataSourceName          : articlesGet.dataSourceName,
+    new CfnResolver(this, 'ArticlesUpdateResolver', {
+      dataSourceName          : articlesUpdate.dataSourceName,
       apiId                   : graphQlApi.graphQlApiApiId,
-      fieldName               : 'article',
-      typeName                : 'Query',
+      fieldName               : 'articleUpdate',
+      typeName                : 'Mutation',
       requestMappingTemplate  : `{
         "version" : "2017-02-28",
         "operation": "Invoke",
-        "payload": $util.toJson($context.arguments)
+        "payload": $util.toJson($ctx.arguments)
       }`,
-      responseMappingTemplate : `$util.toJson($context.result)`,
-    });
-
-    new CfnResolver(this, 'DocumentArticleResolver', {
-      dataSourceName          : articlesGet.dataSourceName,
-      apiId                   : graphQlApi.graphQlApiApiId,
-      fieldName               : 'article',
-      typeName                : 'Document',
-      requestMappingTemplate  : `{
-        "version" : "2017-02-28",
-        "operation": "Invoke",
-        "payload": $util.toJson($context.source)
-      }`,
-      responseMappingTemplate : `$util.toJson($context.result)`,
+      responseMappingTemplate : `$util.toJson($ctx.result)`,
     });
   }
 };

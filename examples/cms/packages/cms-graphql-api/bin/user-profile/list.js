@@ -1,24 +1,21 @@
 const { Stack } = require('@aws-cdk/cdk');
 const { CfnDataSource, CfnResolver } = require('@aws-cdk/aws-appsync');
 
-module.exports = class UserProfileGetResolver extends Stack {
+module.exports = class UserProfileListResolver extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
     const { graphQlApi, userProfilesDataSource } = props;
 
-    new CfnResolver(this, 'UserProfileGetResolver', {
+    new CfnResolver(this, 'UserProfileListResolver', {
       dataSourceName          : userProfilesDataSource.dataSourceName,
       apiId                   : graphQlApi.graphQlApiApiId,
-      fieldName               : 'userProfile',
-      typeName                : 'Article',
+      fieldName               : 'authors',
+      typeName                : 'Query',
       requestMappingTemplate  : `{
-        "version": "2017-02-28",
-        "operation": "GetItem",
-        "key": {
-            "id": $util.dynamodb.toDynamoDBJson($ctx.source.name),
-        }
+        "version" : "2017-02-28",
+        "operation" : "Scan",
       }`,
-      responseMappingTemplate : `$util.toJson($ctx.result)`,
+      responseMappingTemplate : `$util.toJson($ctx.result.items)`,
     });
   }
 };

@@ -25,6 +25,7 @@ const graphQlApi = new CMSGraphQLApi(app, 'cms-graphql-api', {
   generatePreviewWebsiteFunction : siteGenerator.generatePreviewWebsiteFunction,
   generateReleaseWebsiteFunction : siteGenerator.generateReleaseWebsiteFunction,
   catalogBucket                  : catalog.catalogBucket,
+  previewWebsitesBucket          : siteGenerator.previewWebsitesBucket,
 });
 
 // CMS WebApp

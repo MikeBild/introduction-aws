@@ -10,7 +10,7 @@ export const handler = async (
     input: {
       id: string;
       versionId: string;
-      author: string;
+      authorId: string;
       name: string;
     };
   },
@@ -32,7 +32,7 @@ export const handler = async (
       })
       .promise()).Body.toString();
     Object.assign(data, JSON.parse(articleData));
-    Object.assign(data, { author: data.name });
+    Object.assign(data, { authorId: data.authorId });
   } catch (e) {
     console.error(e);
     return { result: null, failure: { message: e.message } };
@@ -53,7 +53,7 @@ export const handler = async (
         ACL: 'public-read',
         Metadata:
           {
-            author: data.author,
+            authorId: data.authorId,
           },
       })
       .promise();
