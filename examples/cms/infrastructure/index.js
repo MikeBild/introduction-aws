@@ -1,11 +1,11 @@
 const { App } = require('@aws-cdk/cdk');
 
-const CMSUserProfile = require('../packages/cms-user-profile/bin/stack');
-const CMSCatalog = require('../packages/cms-catalog/bin/stack');
-const CMSGraphQLApi = require('../packages/cms-graphql-api/bin/stack');
-const CMSSiteGenerator = require('../packages/cms-site-generator/bin/stack');
-const CMSWebApp = require('../packages/cms-webapp/bin/stack');
-const CMSWebAppDNSAlias = require('../packages/cms-webapp/bin/dns-alias');
+const CMSUserProfile = require('../packages/cms-user-profile/infrastructure/stack');
+const CMSCatalog = require('../packages/cms-catalog/infrastructure/stack');
+const CMSGraphQLApi = require('../packages/cms-graphql-api/infrastructure/stack');
+const CMSSiteGenerator = require('../packages/cms-site-generator/infrastructure/stack');
+const CMSWebApp = require('../packages/cms-webapp/infrastructure/stack');
+const CMSWebAppDNSAlias = require('../packages/cms-webapp/infrastructure/dns-alias');
 
 const app = new App();
 

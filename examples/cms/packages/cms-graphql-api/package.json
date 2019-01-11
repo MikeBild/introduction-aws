@@ -24,6 +24,6 @@
   },
   "scripts": {
     "build": "rimraf -r build && tsc",
-    "deploy": "cdk deploy"
+    "deploy": "cdk deploy --app infrastructure/index.js"
   }
 }

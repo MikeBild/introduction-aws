@@ -12,7 +12,7 @@
     "build": "lerna run build --stream",
     "dev": "lerna run dev",
     "start": "lerna run start",
-    "deploy": "npm run build && cdk deploy",
+    "deploy": "cdk deploy --app infrastructure/index.js",
     "destroy": "cdk destroy"
   }
 }

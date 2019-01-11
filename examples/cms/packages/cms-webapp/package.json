@@ -43,6 +43,6 @@
     "dev": "concurrently npm:watch:server npm:watch:client",
     "watch:client": "parcel watch src/client/index.tsx --public-url ./ -d build/client --no-cache",
     "watch:server": "nodemon --ext ts,ejs --watch src/server --exec \"tsc && cp -r src/server/views build/server && dotenv -- node build/server\"",
-    "deploy": "cdk deploy"
+    "deploy": "cdk deploy --app infrastructure/index.js"
   }
 }
