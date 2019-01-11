@@ -26,7 +26,11 @@ export const list = async ({ filter = {} }: Event = {}, context: Context) => {
     })
     .promise();
 
+  const filterDeletedObjects = (x) =>
+    !documentList.DeleteMarkers.find((y) => y.Key === x.Key);
+
   return documentList.Versions
+    .filter(filterDeletedObjects)
     .map((document) => ({
       id: document.Key.replace('articles/', '').replace('.json', ''),
       versionId: document.VersionId,
