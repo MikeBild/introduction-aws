@@ -5,24 +5,23 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import List from 'cms-webapp-component-list';
 
-const itemsListQuery = gql`
-  query ItemList {
-    items {
-      id
-      value
-    }
-  }
-`;
-
 storiesOf('CMS Components', module).addDecorator(withKnobs).add('Table', () => (
-  <Query query={itemsListQuery}>
+  <Query
+    query={gql`
+      query ItemList {
+        items {
+          id
+          value
+        }
+      }
+    `}>
     {({ data: { items = [] } }) => (
       <List
         rows={items}
         renderRow={({ id, value }) => (
           <tr key={id}>
-            <td>{id}</td>
-            <td>{value}</td>
+            <td>ID: {id}</td>
+            <td>Value: {value}</td>
           </tr>
         )}
       />
