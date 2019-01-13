@@ -1,12 +1,13 @@
 const { App } = require('@aws-cdk/cdk');
-
 const CMSUserProfile = require('../packages/cms-user-profile/infrastructure/stack');
 const CMSCatalog = require('../packages/cms-catalog/infrastructure/stack');
 const CMSGraphQLApi = require('../packages/cms-graphql-api/infrastructure/stack');
 const CMSSiteGenerator = require('../packages/cms-site-generator/infrastructure/stack');
 const CMSWebApp = require('../packages/cms-webapp/infrastructure/stack');
 const CMSWebAppDNSAlias = require('../packages/cms-webapp/infrastructure/dns-alias');
+const CMSStorybookWebite = require('../packages/cms-storybook/infrastructure/stack');
 
+// CMS App
 const app = new App();
 
 // Data Catalog (Articles, etc.)
@@ -43,6 +44,12 @@ new CMSWebAppDNSAlias(app, 'cms-webapp-dns-alias', {
   domainNameRegionalDomainName   : webapp.domainNameRegionalDomainName,
   domainName                     : 'mikebild.com',
   hostName                       : 'cms-webapp',
+});
+
+// CMS Storybook
+new CMSStorybookWebite(app, 'cms-storybook', {
+  domainName : 'mikebild.com',
+  hostName   : 'cms-storybook',
 });
 
 app.run();

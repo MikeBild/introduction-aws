@@ -5,7 +5,7 @@
   "description": "CMS WebSite generation",
   "main": "build/index.js",
   "dependencies": {
-    "aws-sdk": "^2.384.0",
+    "aws-sdk": "^2.387.0",
     "ejs": "^2.6.1"
   },
   "devDependencies": {
@@ -26,6 +26,6 @@
     "build": "rimraf -r build && tsc && npm run build:templates && npm run build:modules",
     "build:templates": "copyfiles -u 1 src/*.html build",
     "build:modules": "cp -R node_modules build",
-    "deploy": "cdk deploy --app infrastructure/index.js"
+    "deploy": "cdk deploy --app infrastructure/app.js"
   }
 }

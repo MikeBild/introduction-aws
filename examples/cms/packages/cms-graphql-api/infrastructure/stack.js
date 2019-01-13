@@ -14,11 +14,11 @@ const {
   PolicyStatementEffect,
   ServicePrincipal,
 } = require('@aws-cdk/aws-iam');
-const ArticlesListResolver = require('./article/list');
-const ArticlesGetResolver = require('./article/get');
-const ArticlesAddResolver = require('./article/add');
-const ArticlesUpdateResolver = require('./article/update');
-const ArticlesPreviewResolver = require('./article/preview');
+const ArticleListResolver = require('./article/list');
+const ArticleGetResolver = require('./article/get');
+const ArticleAddResolver = require('./article/add');
+const ArticleUpdateResolver = require('./article/update');
+const ArticlePreviewResolver = require('./article/preview');
 const UserProfileListResolver = require('./user-profile/list');
 const UserProfileGetResolver = require('./user-profile/get');
 const PreviewGetResolver = require('./preview/get');
@@ -81,31 +81,31 @@ module.exports = class CMSGraphQLApi extends Stack {
       bucketName : props.previewWebsitesBucket.bucketName,
     });
 
-    new ArticlesListResolver(this, 'ArticlesListResolver', {
+    new ArticleListResolver(this, 'ArticleListResolver', {
       lambdaServiceRole,
       graphQlApi,
       catalogBucket,
     });
 
-    new ArticlesGetResolver(this, 'ArticlesGetResolver', {
+    new ArticleGetResolver(this, 'ArticleGetResolver', {
       lambdaServiceRole,
       graphQlApi,
       catalogBucket,
     });
 
-    new ArticlesAddResolver(this, 'ArticlesAddResolver', {
+    new ArticleAddResolver(this, 'ArticleAddResolver', {
       lambdaServiceRole,
       graphQlApi,
       catalogBucket,
     });
 
-    new ArticlesUpdateResolver(this, 'ArticlesUpdateResolver', {
+    new ArticleUpdateResolver(this, 'ArticleUpdateResolver', {
       lambdaServiceRole,
       graphQlApi,
       catalogBucket,
     });
 
-    new ArticlesPreviewResolver(this, 'ArticlesPreviewResolver', {
+    new ArticlePreviewResolver(this, 'ArticlePreviewResolver', {
       lambdaServiceRole,
       graphQlApi,
       catalogBucket,

@@ -1,6 +1,6 @@
 # Introduction to Serverless using AWS
 
-> Hands-On introduction to Serverless using AWS-Cloud-Services via JavaScript/TypeScript.
+> Hands-On **WIP** introduction to Serverless using AWS-Cloud-Services via JavaScript/TypeScript.
 
 * Introduction
   * [Why Serverless-Computing](#why-serverless-computing-with-aws)

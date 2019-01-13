@@ -8,6 +8,6 @@
     "@aws-cdk/cdk": "^0.21.0"
   },
   "scripts": {
-    "deploy": "cdk deploy --app infrastructure/index.js"
+    "deploy": "cdk deploy --app infrastructure/app.js"
   }
 }

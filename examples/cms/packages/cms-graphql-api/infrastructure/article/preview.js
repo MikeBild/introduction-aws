@@ -3,7 +3,7 @@ const { Function } = require('@aws-cdk/aws-lambda');
 const { Stack } = require('@aws-cdk/cdk');
 const { CfnDataSource, CfnResolver } = require('@aws-cdk/aws-appsync');
 
-module.exports = class ArticlesResolvers extends Stack {
+module.exports = class ArticlePreviewResolver extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
     const {

@@ -4,7 +4,7 @@ const { Bucket } = require('@aws-cdk/aws-s3');
 const { BucketDeployment, Source } = require('@aws-cdk/aws-s3-deployment');
 const { HostedZoneProvider, AliasRecord } = require('@aws-cdk/aws-route53');
 
-module.exports = class WebApp extends Stack {
+module.exports = class CMSStorybook extends Stack {
   constructor(parent, id, props) {
     super(parent, id, props);
 
@@ -32,8 +32,7 @@ module.exports = class WebApp extends Stack {
       domainName,
     }).findAndImport(this, domainName);
 
-    new AliasRecord(this, 'StorybookAliasRecord', {
-      zone,
+    new AliasRecord(zone, 'StorybookAliasRecord', {
       recordName : `${hostName}.${domainName}`,
       target     : {
         asAliasRecordTarget() {

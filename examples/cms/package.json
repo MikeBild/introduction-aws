@@ -5,14 +5,15 @@
   "devDependencies": {
     "@aws-cdk/aws-appsync": "^0.21.0",
     "@aws-cdk/cdk": "^0.21.0",
-    "lerna": "^3.8.0"
+    "aws-cdk": "^0.21.0",
+    "lerna": "^3.10.5"
   },
   "scripts": {
     "bootstrap": "lerna clean && lerna bootstrap",
     "build": "lerna run build --stream",
     "dev": "lerna run dev",
     "start": "lerna run start",
-    "deploy": "cdk deploy --app infrastructure/index.js",
-    "destroy": "cdk destroy"
+    "deploy": "cdk deploy --require-approval never --app infrastructure/app.js",
+    "destroy": "cdk destroy --app infrastructure/app.js"
   }
 }

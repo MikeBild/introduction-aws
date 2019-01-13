@@ -6,13 +6,13 @@
     "dev": "start-storybook -p 9001 -c .storybook",
     "build": "build-storybook -c .storybook -o build",
     "start": "http-server build",
-    "deploy": "cdk deploy --app infrastructure/index.js"
+    "deploy": "cdk deploy --app infrastructure/app.js"
   },
   "devDependencies": {
-    "@aws-cdk/aws-route53": "^0.22.0",
-    "@aws-cdk/aws-s3": "^0.22.0",
-    "@aws-cdk/aws-s3-deployment": "^0.22.0",
-    "@aws-cdk/cdk": "^0.22.0",
+    "@aws-cdk/aws-route53": "^0.21.0",
+    "@aws-cdk/aws-s3": "^0.21.0",
+    "@aws-cdk/aws-s3-deployment": "^0.21.0",
+    "@aws-cdk/cdk": "^0.21.0",
     "@babel/core": "^7.2.2",
     "@storybook/addon-knobs": "^4.1.6",
     "@storybook/addon-options": "^4.1.6",

@@ -16,6 +16,12 @@ module.exports = class CMSWebSitesGenerator extends Stack {
       removalPolicy    : RemovalPolicy.Orphan,
       retainOnDelete   : false,
       publicReadAccess : true,
+      lifecycleRules   : [
+        {
+          expirationInDays : 30,
+          enabled          : true,
+        },
+      ],
     });
     this.previewWebsitesBucket = previewWebsitesBucket.export();
 

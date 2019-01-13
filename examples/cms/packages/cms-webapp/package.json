@@ -22,7 +22,7 @@
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "apollo-client": "^2.4.8",
-    "aws-appsync": "^1.7.0",
+    "aws-appsync": "^1.7.1",
     "concurrently": "^4.1.0",
     "dotenv-cli": "^1.4.0",
     "graphql": "^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0",
@@ -43,6 +43,6 @@
     "dev": "concurrently npm:watch:server npm:watch:client",
     "watch:client": "parcel watch src/client/index.tsx --public-url ./ -d build/client --no-cache",
     "watch:server": "nodemon --ext ts,ejs --watch src/server --exec \"tsc && cp -r src/server/views build/server && dotenv -- node build/server\"",
-    "deploy": "cdk deploy --app infrastructure/index.js"
+    "deploy": "cdk deploy --app infrastructure/app.js"
   }
 }
