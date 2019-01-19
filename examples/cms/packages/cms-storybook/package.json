@@ -3,9 +3,9 @@
   "name": "cms-storybook",
   "version": "1.0.0",
   "scripts": {
-    "dev": "start-storybook -p 9001 -c .storybook",
+    "dev": "start-storybook -p 9090 -c .storybook",
     "build": "build-storybook -c .storybook -o build",
-    "start": "http-server build",
+    "start": "http-server -p 9090 build",
     "deploy": "cdk deploy --app infrastructure/app.js"
   },
   "devDependencies": {
@@ -30,5 +30,8 @@
     "react-apollo": "^2.3.3",
     "react-dom": "^16.7.0",
     "storybook-readme": "^4.0.5"
+  },
+  "dependencies": {
+    "http-server": "^0.11.1"
   }
 }

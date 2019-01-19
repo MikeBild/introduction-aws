@@ -3,3 +3,4 @@ node_modules
 build
 .env
 cdk.json
+yarn-error.log
