@@ -11,8 +11,8 @@
   "scripts": {
     "bootstrap": "lerna clean && lerna bootstrap",
     "build": "lerna run build --stream",
-    "dev": "lerna run dev",
-    "start": "lerna run start",
+    "dev": "lerna run dev --parallel --stream",
+    "start": "lerna run start --parallel --stream",
     "deploy": "cdk deploy --require-approval never --app infrastructure/app.js",
     "destroy": "cdk destroy --app infrastructure/app.js"
   }

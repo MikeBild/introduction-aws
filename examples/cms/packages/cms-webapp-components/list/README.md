@@ -1,29 +1,22 @@
 # List
 
-> Renders a table as list.
+> Renders a list of rows as a table.
 
 ## Setup
 
 ```jsx
-import List from 'cms-webapp-component-list';
+import List from '@introduction-aws/list';
 ```
 
 ## Example
 
 ```jsx
 <List
+  style={{ width: '100%' }}
+  headerCells={['id', 'value']}
   rows={[{id: 1, value: 'Hello World'}]}
-  renderHeadRow={() => (
-    <tr>
-      <th>ID</th>
-      <th>Value</th>
-    </tr>
-  )}
-  renderRow={({ id, value }) => (
-    <tr key={id}>
-      <td>ID: {id}</td>
-      <td>Value: {value}</td>
-    </tr>
-  )}
+  renderTableCell={(field, row) => <span>{row[field]}</span>}
+  isLoading={loading}
+  error={error}
 />
 ```

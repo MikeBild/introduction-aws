@@ -1,38 +1,72 @@
 import * as React from 'react';
+import Table from '@material-ui/core/Table';
+import { TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+
 export interface Row {
   id: string;
-  value?: string;
 }
 
 interface TProps {
-  rows: [Row];
-  renderRow: (item: Row) => JSX.Element;
-  renderHeadRow?: () => JSX.Element;
   isLoading?: boolean;
-  renderLoading?: () => JSX.Element;
   error?: Error;
-  renderError?: (error: Error) => JSX.Element;
   style: object;
+  headerCells: Array<string>;
+  rows: Array<Row>;
+  renderTableCell?: (field: string, row: Row) => JSX.Element;
 }
 
 export const List: React.StatelessComponent<TProps> = ({
-  rows,
-  renderRow,
-  renderHeadRow = () => <tr />,
   isLoading,
-  renderLoading,
   error,
-  renderError,
   style,
+  headerCells = [],
+  rows = [],
+  renderTableCell = (field: string, row: Row) => (<span>{row[field]}</span>)
 }) => (
-  <table style={style}>
-    <thead>{renderHeadRow()}</thead>
-    <tbody>
-      {error && renderError && renderError(error)}
-      {isLoading && !error && renderLoading && renderLoading()}
-      {!isLoading && !error && rows.map(renderRow)}
-    </tbody>
-  </table>
-);
+    <Table style={style}>
+      <TableHead>
+        <TableRow>
+          {
+            headerCells.map((x, i) => {
+              return (
+                <TableCell key={i} style={{ textTransform: 'capitalize' }}>{x}</TableCell>
+              )
+            })
+          }
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {
+          isLoading &&
+          (
+            <TableRow>
+              <TableCell align={'center'} colSpan={headerCells.length}>Loading</TableCell>
+            </TableRow>
+          )
+        }
+        {
+          error &&
+          (
+            <TableRow>
+              <TableCell align={'center'} colSpan={headerCells.length}>{error.message}</TableCell>
+            </TableRow>
+          )
+        }
+        {!isLoading && !error && rows.map((row: Row) => {
+          return (
+            <TableRow key={row.id}>
+              {
+                headerCells.map((x, i) => {
+                  return (
+                    <TableCell key={i}>{renderTableCell(x, row)}</TableCell>
+                  )
+                })
+              }
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
+  );
 
 export default List;

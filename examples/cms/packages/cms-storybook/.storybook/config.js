@@ -3,13 +3,13 @@ import { withOptions } from '@storybook/addon-options';
 
 addDecorator(
   withOptions({
-    name : 'CMS-App Components',
-    url  : 'https://cms-webapp.mikebild.com',
+    name: 'CMS-App Components',
+    url: 'https://cms-webapp.mikebild.com',
   })
 );
 
 function loadStories() {
-  require('../stories/index.js');
+  require('../stories/list.js');
 }
 
 configure(loadStories, module);
