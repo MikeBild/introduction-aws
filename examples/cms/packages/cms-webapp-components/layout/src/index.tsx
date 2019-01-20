@@ -11,12 +11,14 @@ type TProps = {
   children: Array<JSX.Element> | JSX.Element;
   name?: string;
   version?: string;
+  renderNav: () => JSX.Element | null;
 };
 
 export const Layout: FunctionComponent<TProps> = ({
   children,
   name,
   version,
+  renderNav = () => null
 }) => {
   return (
     <Fragment>
@@ -27,6 +29,7 @@ export const Layout: FunctionComponent<TProps> = ({
             <Typography variant='h6' color='inherit'>
               {name}:{version}
             </Typography>
+            {renderNav()}
           </Toolbar>
         </AppBar>
       </header>

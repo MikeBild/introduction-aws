@@ -1,3 +1,4 @@
 import * as React from 'react';
+import { Typography } from '@material-ui/core';
 
-export default () => <h1>About</h1>;
+export default () => <Typography variant="h4" gutterBottom>About</Typography>;
