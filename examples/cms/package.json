@@ -15,5 +15,9 @@
     "start": "lerna run start --parallel --stream",
     "deploy": "cdk deploy --require-approval never --app infrastructure/app.js",
     "destroy": "cdk destroy --app infrastructure/app.js"
-  }
+  },
+  "workspaces": [
+    "packages/cms-webapp-components/*",
+    "packages/*"
+  ]
 }

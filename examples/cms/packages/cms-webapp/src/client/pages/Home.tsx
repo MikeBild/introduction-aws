@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Query } from 'react-apollo';
 import ArticleListQuery from './articleListQuery.gql';
 import ArticleFragement from './articleFragment.gql';

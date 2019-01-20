@@ -4,3 +4,12 @@
 
 * [CMS-WebApp](https://cms-webapp.mikebild.com)
 * [Web-Components Storybook](http://cms-storybook.mikebild.com)
+
+## Setup
+
+```bash
+yarn
+yarn bootstrap
+yarn build
+yarn deploy
+```
