@@ -42,7 +42,7 @@
   },
   "scripts": {
     "build": "npm run build:client && npm run build:server",
-    "build:server": "rimraf -r build/server && tsc && npm install --production --prefix build/server --config package.json && cp -r src/server/views build/server",
+    "build:server": "rimraf -r build/server && tsc && cp package.json build/server && npm install --production --prefix build/server && cp -r src/server/views build/server",
     "build:client": "rimraf -r build/client .cache && parcel build src/client/index.tsx --public-url ./ -d build/client --no-cache",
     "start": "dotenv -- node build/server",
     "dev": "concurrently npm:watch:server npm:watch:client",
