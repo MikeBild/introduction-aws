@@ -22,6 +22,8 @@
     "apollo-storybook-react": "^0.1.8",
     "babel-loader": "^8.0.5",
     "@introduction-aws/list": "^1.0.0",
+    "@introduction-aws/layout": "^1.0.0",
+    "@introduction-aws/form-dialog": "^1.0.0",
     "faker": "^4.1.0",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",

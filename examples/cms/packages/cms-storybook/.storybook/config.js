@@ -9,7 +9,9 @@ addDecorator(
 );
 
 function loadStories() {
-  require('../stories/list.js');
+  require('../stories/list');
+  require('../stories/layout');
+  require('../stories/form-dialog');
 }
 
 configure(loadStories, module);

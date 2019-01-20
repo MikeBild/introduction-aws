@@ -9,7 +9,7 @@
     "lerna": "^3.10.5"
   },
   "scripts": {
-    "bootstrap": "lerna clean && lerna bootstrap",
+    "bootstrap": "lerna clean --yes && lerna bootstrap",
     "build": "lerna run build --stream",
     "dev": "lerna run dev --parallel --stream",
     "start": "lerna run start --parallel --stream",

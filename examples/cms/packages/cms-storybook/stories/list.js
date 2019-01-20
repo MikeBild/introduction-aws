@@ -11,8 +11,6 @@ import mocks from '../graphql/mocks';
 import List from '@introduction-aws/list';
 import ListREADME from '../../cms-webapp-components/list/README.md';
 
-storiesOf('Atomics', module).add('Empty', () => <div />);
-storiesOf('Molecules', module).add('Empty', () => <div />);
 storiesOf('Organisms/List', module)
   .addDecorator(withKnobs)
   .addDecorator(withReadme(ListREADME))
@@ -64,5 +62,3 @@ storiesOf('Organisms/List', module)
       )}
     </Query>
   ));
-storiesOf('Templates', module).add('Empty', () => <div />);
-storiesOf('Pages', module).add('Empty', () => <div />);

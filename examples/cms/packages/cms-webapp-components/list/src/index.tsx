@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FunctionComponent } from 'react';
 import Table from '@material-ui/core/Table';
 import { TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 
@@ -15,7 +16,7 @@ interface TProps {
   renderTableCell?: (field: string, row: Row) => JSX.Element;
 }
 
-export const List: React.StatelessComponent<TProps> = ({
+export const List: FunctionComponent<TProps> = ({
   isLoading,
   error,
   style,
