@@ -23,7 +23,7 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-  const input = { ...req.body.input, id: v1() };
+  const input = { ...req.body, id: v1() };
 
   try {
     await s3

@@ -1,5 +1,5 @@
 const IS_IN_LAMBDA = !!process.env.LAMBDA_TASK_ROOT;
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 9090;
 
 import express from 'express';
 import cors from 'cors';

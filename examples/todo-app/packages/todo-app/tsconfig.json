@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
@@ -8,6 +8,11 @@
     "jsx": "react",
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "lib": [
+      "es2015",
+      "es2016",
+      "dom"
+    ]
   }
 }

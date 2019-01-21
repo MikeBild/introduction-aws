@@ -41,7 +41,7 @@ app.get('*', (req, res) => {
         </head>
         <body>
           <div id="app">${markup}</div>
-          <script>API_URL=${process.env.API_URL}</script>
+          <script>API_URL='${process.env.API_URL}'</script>
         </body>
       </html>
     `);

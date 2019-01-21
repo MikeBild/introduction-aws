@@ -1,3 +1,5 @@
+import 'isomorphic-fetch'
+import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Layout from './templates/Layout';

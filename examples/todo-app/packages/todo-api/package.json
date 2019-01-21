@@ -6,7 +6,7 @@
   "main": "build/server.js",
   "scripts": {
     "clear": "rimraf -r build .cache",
-    "build": "npm run clear && npm run build:server && cp -R node_modules ./build",
+    "build": "npm run clear && npm run build:server && cp package.json build && npm install --production --prefix build",
     "build:server": "parcel build src/server.ts --target node -d build --no-cache",
     "start": "node build/server",
     "dev": "npm run clear && npm run build:server && npm run dev:watch",

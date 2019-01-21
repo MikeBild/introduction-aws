@@ -7,6 +7,10 @@ import AddIcon from '@material-ui/icons/Add';
 import useFetch from '../lib/useFetch';
 import TodoInputDialog from '../organisms/TodoInputDialog';
 
+declare let global: {
+  API_URL: string;
+};
+
 type TProps = {} & WithStyles<typeof styles>;
 
 export const Home: StatelessComponent<TProps> = ({ classes }) => {
@@ -14,8 +18,9 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
     isAddTodoVisible,
     setIsAddTodoVisible,
   ] = useState(false);
+
   const { data = [], loading = false, error } = useFetch({
-    url: `${process.env.API_URL}/todos`,
+    url: `${global.API_URL || ''}/todos`,
   });
 
   return (
@@ -32,7 +37,7 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
         onCancel={() => setIsAddTodoVisible(false)}
         onDone={async (input) => {
           await fetch(
-            `${process.env.API_URL}/todos`,
+            `${global.API_URL}/todos`,
             {
               method: 'POST',
               body: JSON.stringify(input),
