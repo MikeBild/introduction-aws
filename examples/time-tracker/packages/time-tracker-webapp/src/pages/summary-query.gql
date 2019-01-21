@@ -1,7 +1,0 @@
-query Summary {
-  summary {
-    id
-    count
-    hours
-  }
-}
