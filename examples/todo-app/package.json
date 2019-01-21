@@ -3,7 +3,7 @@
   "name": "todo-app-example",
   "version": "1.0.0",
   "devDependencies": {
-    "@aws-cdk/cdk": "^0.21.0",
+    "@aws-cdk/cdk": "^0.22.0",
     "lerna": "^3.8.0"
   },
   "scripts": {
@@ -11,7 +11,9 @@
     "build": "lerna run build --stream",
     "dev": "lerna run dev",
     "start": "lerna run start",
-    "deploy": "npm run build && cdk deploy",
-    "destroy": "cdk destroy"
+    "deploy": "cdk deploy --app infrastructure/app.js"
+  },
+  "dependencies": {
+    "aws-cdk": "^0.22.0"
   }
 }

@@ -15,7 +15,7 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
     setIsAddTodoVisible,
   ] = useState(false);
   const { data = [], loading = false, error } = useFetch({
-    url: `https://xrtbumqy1m.execute-api.eu-central-1.amazonaws.com/prod/todos`,
+    url: `${process.env.API_URL}/todos`,
   });
 
   return (
@@ -31,16 +31,15 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
         isVisible={isAddTodoVisible}
         onCancel={() => setIsAddTodoVisible(false)}
         onDone={async (input) => {
-          console.log({ input });
           await fetch(
-            `https://xrtbumqy1m.execute-api.eu-central-1.amazonaws.com/prod/todos`,
+            `${process.env.API_URL}/todos`,
             {
               method: 'POST',
               body: JSON.stringify(input),
               headers:
-                {
-                  'Content-Type': 'application/json',
-                },
+              {
+                'Content-Type': 'application/json',
+              },
             }
           );
           setIsAddTodoVisible(false);
@@ -56,11 +55,11 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
 
 const styles = createStyles({
   fab:
-    {
-      position: 'absolute',
-      top: 50,
-      right: 40,
-    },
+  {
+    position: 'absolute',
+    top: 50,
+    right: 40,
+  },
 });
 
 export default withStyles(styles)(Home);

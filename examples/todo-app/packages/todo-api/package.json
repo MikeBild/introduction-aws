@@ -13,11 +13,11 @@
     "dev:watch": "concurrently npm:watch:server npm:watch:build",
     "watch:server": "parcel watch src/server.ts --target node -d build",
     "watch:build": "nodemon --watch build build/server",
-    "deploy": "cdk deploy"
+    "deploy": "cdk deploy --app infrastructure/app.js"
   },
   "dependencies": {
     "athena-express": "^2.0.6",
-    "aws-sdk": "^2.382.0",
+    "aws-sdk": "^2.391.0",
     "aws-serverless-express": "^3.3.5",
     "cors": "^2.8.5",
     "express": "^4.16.4",
@@ -25,12 +25,12 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@aws-cdk/aws-apigateway": "^0.21.0",
-    "@aws-cdk/aws-glue": "^0.21.0",
-    "@aws-cdk/aws-iam": "^0.21.0",
-    "@aws-cdk/aws-lambda": "^0.21.0",
-    "@aws-cdk/aws-s3": "^0.21.0",
-    "@aws-cdk/cdk": "^0.21.0",
+    "@aws-cdk/aws-apigateway": "^0.22.0",
+    "@aws-cdk/aws-glue": "^0.22.0",
+    "@aws-cdk/aws-iam": "^0.22.0",
+    "@aws-cdk/aws-lambda": "^0.22.0",
+    "@aws-cdk/aws-s3": "^0.22.0",
+    "@aws-cdk/cdk": "^0.22.0",
     "@types/aws-serverless-express": "^3.3.0",
     "@types/cors": "^2.8.4",
     "@types/express": "^4.16.0",
@@ -40,6 +40,6 @@
     "nodemon": "^1.18.9",
     "parcel": "^1.11.0",
     "rimraf": "^2.6.2",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.4"
   }
 }

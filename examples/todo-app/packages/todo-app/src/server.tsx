@@ -41,6 +41,7 @@ app.get('*', (req, res) => {
         </head>
         <body>
           <div id="app">${markup}</div>
+          <script>API_URL=${process.env.API_URL}</script>
         </body>
       </html>
     `);
@@ -48,5 +49,5 @@ app.get('*', (req, res) => {
 
 IS_IN_LAMBDA
   ? (module.exports.handler = (event: any, context: any) =>
-      proxy(createServer(app), event, context))
+    proxy(createServer(app), event, context))
   : app.listen(PORT, () => console.log(`Listening on ${PORT}`));
