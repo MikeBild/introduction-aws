@@ -9,8 +9,8 @@
   "scripts": {
     "bootstrap": "lerna clean && lerna bootstrap",
     "build": "lerna run build --stream",
-    "dev": "lerna run dev",
-    "start": "lerna run start",
+    "dev": "lerna run dev --stream --parallel",
+    "start": "lerna run start --stream --parallel",
     "deploy": "cdk deploy --app infrastructure/app.js"
   },
   "dependencies": {

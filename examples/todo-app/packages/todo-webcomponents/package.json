@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "@introduction-aws/todo-webcomponents",
+  "version": "1.0.0",
+  "description": "Todo-App Web-Components",
+  "main": "build/index.js",
+  "scripts": {
+    "clean": "rimraf -rf build",
+    "build": "npm run clean && tsc",
+    "dev": "tsc --watch"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "react": "^16.7.0",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.2.4"
+  }
+}
