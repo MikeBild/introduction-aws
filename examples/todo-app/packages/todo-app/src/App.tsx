@@ -3,7 +3,7 @@ import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Layout from './templates/Layout';
-import Home from './pages/Home';
+import Home from './pages/Todos';
 import About from './pages/About';
 import { name, version } from '../package.json';
 

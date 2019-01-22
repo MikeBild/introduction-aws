@@ -13,7 +13,7 @@ export default app;
 app.get('/', async (_, res) => {
   try {
     const { Items: result } = await athena.query(
-      'SELECT * FROM "todo-app"."todo_app_todos"'
+      'SELECT * FROM "todo-app"."todo_app_todos" order by done, name'
     );
 
     res.send(result);

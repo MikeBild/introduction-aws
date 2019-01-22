@@ -28,7 +28,7 @@ export const Layout: StatelessComponent<TProps> = ({
               {name.toUpperCase()} {version}
             </Typography>
             <Button href='home' color='inherit'>
-              Home
+              Todos
             </Button>
             <Button href='about' color='inherit'>
               About
@@ -47,19 +47,18 @@ export const Layout: StatelessComponent<TProps> = ({
 
 const styles = createStyles({
   root:
-    {
-      flexGrow: 1,
-    },
+  {
+    flexGrow: 1,
+  },
   grow:
-    {
-      flexGrow: 1,
-    },
+  {
+    flexGrow: 1,
+  },
   main:
-    {
-      width: '100vw',
-      height: '100vh',
-      padding: 20,
-    },
+  {
+    width: '100vw',
+    height: '100vh',
+  },
 });
 
 export default withStyles(styles)(Layout);

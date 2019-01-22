@@ -1,6 +1,6 @@
 import React, { Fragment, StatelessComponent, useState } from 'react';
 import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles';
-import { LinearProgress, Typography, Fab, Button } from '@material-ui/core';
+import { LinearProgress, Fab, Button, Grid } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import CachedIcon from '@material-ui/icons/Cached';
 import useFetch from '../lib/useFetch';
@@ -44,25 +44,25 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
           setIsAddTodoVisible(false);
         }}
       />
-      <Typography variant='h6' color='inherit'>
-        Todos
-      </Typography>
-      <List
-        headerCells={['name', 'description', 'done', 'actions']}
-        rows={data || []}
-        error={error}
-        renderTableCell={(field: string, row: any) => {
-          switch (field) {
-            case 'actions':
-              return (<Fragment>
-                <Button color="primary" onClick={async () => { await toggleDone(row); await refetch(); }}>Done</Button>
-                <Button color="secondary" onClick={async () => { await remove(row); await refetch(); }}>Remove</Button>
-              </Fragment>)
-            default:
-              return <span>{(row as any)[field]}</span>
-          }
-        }}
-      />
+      <Grid item xs={12}>
+        <List
+          style={{width: '100vw'}}
+          headerCells={['done', 'description', 'actions', 'name']}
+          rows = { data || []}
+          error={error}
+          renderTableCell={(field: string, row: any) => {
+            switch (field) {
+              case 'actions':
+                return (<Fragment>
+                  <Button color="primary" onClick={async () => { await toggleDone(row); await refetch(); }}>Done</Button>
+                  <Button color="secondary" onClick={async () => { await remove(row); await refetch(); }}>Remove</Button>
+                </Fragment>)
+              default:
+                return <span>{(row as any)[field]}</span>
+            }
+          }}
+        />
+      </Grid>
     </Fragment>
   );
 };
