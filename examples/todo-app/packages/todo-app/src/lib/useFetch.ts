@@ -23,8 +23,10 @@ export default (props: FetchProps) => {
     setError,
   ] = useState(undefined);
 
-  useEffect(async () => {
+  const refetch = async () => {
     try {
+      setLoading(true);
+      setError(undefined);
       const response = await fetch(props.url, {
         ...props,
         signal: controller.signal,
@@ -34,8 +36,12 @@ export default (props: FetchProps) => {
     } catch (e) {
       setError(e);
     }
+  }
+
+  useEffect(() => {
+    refetch()
     return () => controller.abort();
   }, []);
 
-  return { data, loading, error };
+  return { data, loading, error, refetch };
 };

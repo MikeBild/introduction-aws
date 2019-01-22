@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-type Input = {
+export interface Input {
   name: string;
   description: string;
 };

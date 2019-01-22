@@ -1,16 +1,12 @@
 import React, { Fragment, StatelessComponent, useState } from 'react';
 import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Typography from '@material-ui/core/Typography';
-import Fab from '@material-ui/core/Fab';
+import { LinearProgress, Typography, Fab, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import CachedIcon from '@material-ui/icons/Cached';
 import useFetch from '../lib/useFetch';
 import TodoInputDialog from '../organisms/TodoInputDialog';
 import { List } from '@introduction-aws/todo-webcomponents';
-
-declare let global: {
-  API_URL: string;
-};
+import { add, remove, toggleDone, Todo } from '../lib/api-todos'
 
 type TProps = {} & WithStyles<typeof styles>;
 
@@ -20,7 +16,7 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
     setIsAddTodoVisible,
   ] = useState(false);
 
-  const { data = [], loading = false, error } = useFetch({
+  const { data = [], loading = false, error, refetch } = useFetch({
     url: `${global.API_URL || ''}/todos`,
   });
 
@@ -28,53 +24,40 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
     <Fragment>
       {loading && <LinearProgress />}
       <Fab
-        className={classes.fab}
-        color='secondary'
+        className={classes.fabAdd}
+        color='primary'
         onClick={() => setIsAddTodoVisible(true)}>
         <AddIcon />
+      </Fab>
+      <Fab
+        className={classes.fabRefetch}
+        color='secondary'
+        onClick={async () => await refetch()}>
+        <CachedIcon />
       </Fab>
       <TodoInputDialog
         isVisible={isAddTodoVisible}
         onCancel={() => setIsAddTodoVisible(false)}
         onDone={async (input) => {
-          await fetch(
-            `${global.API_URL}/todos`,
-            {
-              method: 'POST',
-              body: JSON.stringify(input),
-              headers:
-              {
-                'Content-Type': 'application/json',
-              },
-            }
-          );
+          await add(input as Todo);
+          await refetch();
           setIsAddTodoVisible(false);
         }}
       />
       <Typography variant='h6' color='inherit'>
-        Home
+        Todos
       </Typography>
       <List
         headerCells={['name', 'description', 'done', 'actions']}
         rows={data || []}
-        isLoading={loading}
         error={error}
         renderTableCell={(field: string, row: any) => {
           switch (field) {
             case 'actions':
-              return <button onClick={async () => {
-                await fetch(
-                  `${global.API_URL}/todos/done`,
-                  {
-                    method: 'PUT',
-                    body: JSON.stringify({ id: row.id }),
-                    headers:
-                    {
-                      'Content-Type': 'application/json',
-                    },
-                  }
-                );
-              }}>Done</button>
+              return (<Fragment>
+                <Button color="primary" onClick={async () => { await toggleDone(row); await refetch(); }}>Done</Button>
+                <Button color="secondary" onClick={async () => { await remove(row); await refetch(); }}>Remove</Button>
+              </Fragment>)
             default:
               return <span>{(row as any)[field]}</span>
           }
@@ -85,12 +68,19 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
 };
 
 const styles = createStyles({
-  fab:
+  fabAdd:
+  {
+    position: 'absolute',
+    top: 50,
+    right: 80,
+  },
+  fabRefetch:
   {
     position: 'absolute',
     top: 50,
     right: 40,
   },
+
 });
 
 export default withStyles(styles)(Home);
