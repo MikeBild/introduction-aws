@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "todo-api",
+  "name": "@introduction-aws/todo-api",
   "version": "1.0.0",
   "description": "Todo API",
   "main": "build/server.js",

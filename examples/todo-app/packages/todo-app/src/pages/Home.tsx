@@ -6,6 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import useFetch from '../lib/useFetch';
 import TodoInputDialog from '../organisms/TodoInputDialog';
+import { List } from '@introduction-aws/todo-webcomponents';
 
 declare let global: {
   API_URL: string;
@@ -53,7 +54,8 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
       <Typography variant='h6' color='inherit'>
         Home
       </Typography>
-      <pre>{JSON.stringify({ data, loading, error }, null, 4)}</pre>
+
+      <List headerCells={['id', 'name', 'description']} rows={data || []} isLoading={loading} error={error} />
     </Fragment>
   );
 };

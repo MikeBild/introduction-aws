@@ -21,7 +21,7 @@ export default (props: FetchProps) => {
   const [
     error,
     setError,
-  ] = useState(null);
+  ] = useState(undefined);
 
   useEffect(async () => {
     try {

@@ -1,5 +1,6 @@
 const IS_IN_LAMBDA = !!process.env.LAMBDA_TASK_ROOT;
 const PORT = process.env.PORT || 8080;
+const API_URL = process.env.API_URL || 'http://localhost:9090'
 
 import React from 'react';
 import express from 'express';
@@ -41,7 +42,7 @@ app.get('*', (req, res) => {
         </head>
         <body>
           <div id="app">${markup}</div>
-          <script>API_URL='${process.env.API_URL}'</script>
+          <script>API_URL='${API_URL}'</script>
         </body>
       </html>
     `);
