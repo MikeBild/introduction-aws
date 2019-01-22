@@ -39,3 +39,30 @@ app.post('/', async (req, res) => {
     res.status(500).send({ result: null, failure: { message: e.message } });
   }
 });
+
+app.put('/done', async (req, res) => {
+  const input = { ...req.body };
+
+  try {
+    const existingObject = await s3.getObject({
+      Bucket: 'todo-app-todos',
+      Key: `${input.id}.json`,
+    }).promise()
+
+    const existingObjectContent = JSON.parse(((existingObject || {}).Body || {}).toString())
+
+    existingObjectContent.done = !existingObjectContent.done
+
+    await s3
+      .putObject({
+        Bucket: 'todo-app-todos',
+        Key: `${input.id}.json`,
+        Body: JSON.stringify(existingObjectContent),
+      })
+      .promise();
+
+    res.status(200).send({ result: existingObjectContent, failure: null });
+  } catch (e) {
+    res.status(500).send({ result: null, failure: { message: e.message } });
+  }
+});

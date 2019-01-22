@@ -54,8 +54,32 @@ export const Home: StatelessComponent<TProps> = ({ classes }) => {
       <Typography variant='h6' color='inherit'>
         Home
       </Typography>
-
-      <List headerCells={['id', 'name', 'description']} rows={data || []} isLoading={loading} error={error} />
+      <List
+        headerCells={['name', 'description', 'done', 'actions']}
+        rows={data || []}
+        isLoading={loading}
+        error={error}
+        renderTableCell={(field: string, row: any) => {
+          switch (field) {
+            case 'actions':
+              return <button onClick={async () => {
+                await fetch(
+                  `${global.API_URL}/todos/done`,
+                  {
+                    method: 'PUT',
+                    body: JSON.stringify({ id: row.id }),
+                    headers:
+                    {
+                      'Content-Type': 'application/json',
+                    },
+                  }
+                );
+              }}>Done</button>
+            default:
+              return <span>{(row as any)[field]}</span>
+          }
+        }}
+      />
     </Fragment>
   );
 };
