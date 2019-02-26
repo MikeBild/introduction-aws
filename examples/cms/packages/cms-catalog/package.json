@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "cms-catalog",
+  "version": "1.0.0",
+  "description": "CMS Catalog",
+  "devDependencies": {
+    "@aws-cdk/aws-s3": "^0.21.0",
+    "@aws-cdk/cdk": "^0.21.0"
+  },
+  "scripts": {
+    "deploy": "cdk deploy --app infrastructure/app.js"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "activate-rule-set",
+  "version": "1.0.0",
+  "description": "",
+  "main": "activate-rule-set.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cfn-custom-resource": "^4.0.9"
+  }
+}

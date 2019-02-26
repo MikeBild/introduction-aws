@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "cms-graphql-api",
+  "version": "1.0.0",
+  "description": "CMS GraphQL-API using AWS-AppSYnc",
+  "main": "build/articles.js",
+  "dependencies": {
+    "aws-sdk": "^2.387.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@aws-cdk/aws-appsync": "^0.21.0",
+    "@aws-cdk/aws-iam": "^0.21.0",
+    "@aws-cdk/aws-lambda": "^0.21.0",
+    "@aws-cdk/aws-s3": "^0.21.0",
+    "@aws-cdk/cdk": "^0.21.0",
+    "@types/aws-lambda": "^8.10.17",
+    "@types/node": "^10.12.18",
+    "@types/uuid": "^3.4.4",
+    "aws-lambda-local": "^2.0.6",
+    "nodemon": "^1.18.9",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "build": "rimraf -r build && tsc",
+    "deploy": "cdk deploy --app infrastructure/app.js"
+  }
+}

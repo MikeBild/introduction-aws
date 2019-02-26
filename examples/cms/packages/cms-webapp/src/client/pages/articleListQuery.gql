@@ -1,0 +1,34 @@
+query ArticleList {
+  articles(filter: { isLatest:false }) {
+    id
+    versionId
+    modifiedAt
+    isLatest
+    article {
+      ...FullArticle
+    }
+  }
+}
+
+fragment FullArticle on Article {
+  id
+  content
+  versionId
+  preview {
+    id
+    versionId
+    content
+    url
+    html
+    author {
+      id
+      fullName
+      email
+    }
+  }
+  author {
+    id
+    fullName
+    email
+  }
+}

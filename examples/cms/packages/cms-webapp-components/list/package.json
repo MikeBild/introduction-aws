@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "@introduction-aws/list",
+  "version": "1.0.0",
+  "description": "A list component",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "@material-ui/core": "^3.7.1",
+    "@types/react": "^16.7.18",
+    "react": "^16.7.0",
+    "typescript": "^3.2.2"
+  }
+}

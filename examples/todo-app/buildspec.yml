@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install -g yarn
+      - cd examples/todo-app
+      - yarn
+  pre_build:
+    commands:
+      - yarn bootstrap
+  build:
+    commands:
+      - yarn build
+  post_build:
+    commands:
+      - yarn deploy

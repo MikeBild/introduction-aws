@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "name": "@introduction-aws/todo-storybook",
+  "version": "1.0.0",
+  "description": "Todo-App Storybook",
+  "main": "build/index.js",
+  "scripts": {
+    "dev": "start-storybook -p 7070 -c .storybook",
+    "build": "build-storybook -c .storybook -o build",
+    "start": "http-server -p 7070 build",
+    "deploy": "cdk deploy --require-approval never --app infrastructure/app.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@aws-cdk/aws-route53": "^0.24.1",
+    "@aws-cdk/aws-s3": "^0.24.1",
+    "@aws-cdk/aws-s3-deployment": "^0.24.1",
+    "@aws-cdk/cdk": "^0.24.1",
+    "@babel/core": "^7.3.4",
+    "@introduction-aws/todo-webcomponents": "^2.0.0",
+    "@storybook/addon-knobs": "^4.1.13",
+    "@storybook/addon-options": "^4.1.13",
+    "@storybook/react": "^4.1.13",
+    "aws-cdk": "^0.24.1",
+    "babel-loader": "^8.0.5",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "storybook-readme": "^4.0.5"
+  },
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}

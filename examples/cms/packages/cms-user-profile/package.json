@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "cms-user-profile",
+  "version": "1.0.0",
+  "description": "CMS User Profile",
+  "devDependencies": {
+    "@aws-cdk/aws-dynamodb": "^0.21.0",
+    "@aws-cdk/cdk": "^0.21.0"
+  },
+  "scripts": {
+    "deploy": "cdk deploy --app infrastructure/app.js"
+  }
+}

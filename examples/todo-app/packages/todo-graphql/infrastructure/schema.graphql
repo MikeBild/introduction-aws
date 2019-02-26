@@ -1,0 +1,17 @@
+type Query {
+  todos(filter: TodosFilter): [Todo] @aws_auth(cognito_groups: ["Users"])
+}
+
+input TodosFilter {
+  done: Boolean
+  description: String
+}
+
+type Todo {
+  id: ID!
+  username: ID
+  description: String
+  done: Boolean
+  modifiedAt: AWSDateTime
+  createdAt: AWSDateTime
+}

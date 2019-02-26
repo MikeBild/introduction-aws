@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "@introduction-aws/todo-graphql",
+  "version": "1.0.0",
+  "description": "Todo GraphQL API",
+  "main": "build/server.js",
+  "scripts": {
+    "deploy": "cdk deploy --require-approval never --app infrastructure/app.js"
+  },
+  "devDependencies": {
+    "@aws-cdk/aws-appsync": "^0.24.1",
+    "@aws-cdk/aws-iam": "^0.24.1",
+    "@aws-cdk/cdk": "^0.24.1",
+    "aws-cdk": "^0.24.1"
+  }
+}

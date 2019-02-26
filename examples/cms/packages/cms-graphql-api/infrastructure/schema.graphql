@@ -1,0 +1,97 @@
+type Article implements Node {
+  id: ID!
+  versionId: ID
+  name: String @deprecated(reason: "Use author field please.")
+  # Raw content field
+  content: String
+  author: AuthorProfile
+  preview: Preview
+}
+
+input ArticleAddInput {
+  authorId: ID!
+  content: String!
+}
+
+type ArticleAddResult {
+  result: Article
+  failure: Failure
+}
+
+# Represents articles filter conditions.
+input ArticleFilter {
+  # Filter by latest article version ID.
+  isLatest: Boolean
+}
+
+input ArticlePreviewInput {
+  id: ID!
+  versionId: ID!
+}
+
+type ArticlePreviewResult {
+  result: Preview
+  failure: Failure
+}
+
+input ArticleUpdateInput {
+  id: ID!
+  authorId: ID!
+  content: String!
+}
+
+type ArticleUpdateResult {
+  result: Article
+  failure: Failure
+}
+
+type ArticleVersion implements Node {
+  id: ID!
+  # Contains the article version ID
+  versionId: ID
+  modifiedAt: AWSDateTime
+  # Is that the latest version of an article?
+  isLatest: Boolean
+  article: Article
+}
+
+# Contains the human readable failure/error message.
+type Failure {
+  message: String
+}
+
+type Mutation {
+  articleAdd(input: ArticleAddInput!): ArticleAddResult!
+  articleUpdate(input: ArticleUpdateInput!): ArticleUpdateResult!
+  articlePreview(input: ArticlePreviewInput!): ArticlePreviewResult!
+}
+
+interface Node {
+  id: ID!
+}
+
+type Preview implements Node {
+  id: ID!
+  versionId: ID
+  content: String
+  url: AWSURL
+  html: String
+  author: AuthorProfile
+}
+
+type Query {
+  articles(filter: ArticleFilter): [ArticleVersion]
+  article(id: ID!, versionId: ID): Article
+  authors: [AuthorProfile]
+}
+
+type AuthorProfile implements Node {
+  id: ID!
+  fullName: String
+  email: AWSEmail
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

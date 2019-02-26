@@ -1,0 +1,24 @@
+{
+  "name": "@introduction-aws/todo-webcomponents",
+  "version": "2.1.0",
+  "description": "Todo-App Web-Components",
+  "main": "build/index.js",
+  "scripts": {
+    "clean": "rimraf -rf build",
+    "build": "npm run clean && tsc",
+    "dev": "tsc --watch"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "react": "16.8.3",
+    "react-dom": "16.8.3"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.5",
+    "@types/react-dom": "^16.8.2",
+    "@types/react-jss": "^8.6.3",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.3.3333"
+  }
+}

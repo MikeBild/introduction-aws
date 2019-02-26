@@ -1,0 +1,7 @@
+node_modules
+.cache
+build
+dist
+.env
+cdk.json
+yarn-error.log
