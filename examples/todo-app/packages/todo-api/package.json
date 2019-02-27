@@ -18,7 +18,7 @@
   "dependencies": {
     "amazon-cognito-identity-js": "^3.0.7",
     "athena-express": "^4.0.2",
-    "aws-sdk": "^2.410.0",
+    "aws-sdk": "^2.411.0",
     "aws-serverless-express": "^3.3.5",
     "cors": "^2.8.5",
     "express": "^4.16.4",

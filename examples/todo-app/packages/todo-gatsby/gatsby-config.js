@@ -17,10 +17,11 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-graphql-modules',
       options: {
+        path: './graphql',
         schemaModules:
           process.env.NODE_ENV === 'remote'
-            ? ['./graphql/aws', './graphql/todo-api-remote']
-            : ['./graphql/aws', './graphql/todo-api'],
+            ? ['aws', 'todo-api-remote']
+            : ['aws', 'todo-api'],
       },
     },
     {

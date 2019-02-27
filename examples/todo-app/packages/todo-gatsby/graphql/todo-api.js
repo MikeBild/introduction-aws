@@ -1,3 +1,5 @@
+const todos = require('./todos.json');
+
 module.exports = {
   typeDefs: `
   type Query {
@@ -19,13 +21,12 @@ module.exports = {
   }
   `,
   resolvers: {
+    Todo: {
+      modifiedAt: () => Date.now(),
+    },
     Query: {
       todos: () => {
-        return [
-          { id: 1, description: 'A', done: false, modifiedAt: Date.now() },
-          { id: 2, description: 'B', done: false, modifiedAt: Date.now() },
-          { id: 3, description: 'C', done: false, modifiedAt: Date.now() },
-        ];
+        return todos;
       },
     },
   },
