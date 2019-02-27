@@ -22,12 +22,19 @@ module.exports = {
   `,
   resolvers: {
     Todo: {
-      modifiedAt: () => Date.now(),
+      modifiedAt: (parent, args, context) => {
+        return Date.now();
+      },
     },
     Query: {
-      todos: () => {
-        return todos;
+      todos: (parent, args, { context: { todos } }) => {
+        return todos.todosAll();
       },
+    },
+  },
+  context: {
+    todos: {
+      todosAll: async () => todos,
     },
   },
 };
