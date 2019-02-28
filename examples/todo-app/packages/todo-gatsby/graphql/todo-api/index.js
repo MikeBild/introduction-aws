@@ -27,7 +27,7 @@ module.exports = {
       },
     },
     Query: {
-      todos: (parent, args, { context: { todos } }) => {
+      todos: (parent, args, { todos }) => {
         return todos.todosAll();
       },
     },

@@ -15,13 +15,20 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-graphql-modules',
+      resolve: 'gatsby-source-modular-graphql',
       options: {
         path: './graphql',
         schemaModules:
           process.env.NODE_ENV === 'remote'
             ? ['aws', 'todo-api-remote']
-            : ['aws', 'todo-api'],
+            : ['aws', 'todo-api', 'auth'],
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: `images`,
+        path: `${__dirname}/graphql`,
       },
     },
     {
