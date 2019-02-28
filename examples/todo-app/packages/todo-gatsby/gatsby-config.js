@@ -21,7 +21,7 @@ module.exports = {
         schemaModules:
           process.env.NODE_ENV === 'remote'
             ? ['aws', 'todo-api-remote']
-            : ['aws', 'todo-api', 'auth'],
+            : ['aws', 'todo-api', '@introduction-aws/todo-auth-module'],
       },
     },
     {

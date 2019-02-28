@@ -46,6 +46,6 @@ module.exports = {
     },
   },
   context: {
-    authApi: new AuthApi({ url: process.env.AUTH_API_UTL }),
+    authApi: new AuthApi({ url: process.env.AUTH_API_URL }),
   },
 };
