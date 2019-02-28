@@ -21,7 +21,7 @@ module.exports = {
         schemaModules:
           process.env.NODE_ENV === 'remote'
             ? ['aws', 'todo-api-remote']
-            : ['aws', 'todo-api', '@introduction-aws/todo-auth-module'],
+            : ['aws', 'todo-api', '@introduction-aws/todo-gatsby-graphql-auth'],
       },
     },
     {

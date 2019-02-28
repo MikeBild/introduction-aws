@@ -19,7 +19,7 @@
     "@aws-cdk/aws-s3": "^0.25.0",
     "@aws-cdk/aws-s3-deployment": "^0.25.0",
     "@aws-cdk/cdk": "^0.25.0",
-    "@introduction-aws/todo-auth-module": "^1.0.0",
+    "@introduction-aws/todo-gatsby-graphql-auth": "^1.0.0",
     "apollo-client": "^2.5.1",
     "aws-cdk": "^0.25.0",
     "gatsby": "^2.1.19",
