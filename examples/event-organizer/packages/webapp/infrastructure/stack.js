@@ -50,7 +50,7 @@ module.exports = class EventOrganizerWebApp extends Stack {
       },
     });
 
-    new Output(this, 'Url', {
+    new Output(this, 'EventOrganizerWebAppUrl', {
       value: `http://${hostName}.${domainName}`,
     })
       .makeImportValue()

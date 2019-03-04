@@ -7,17 +7,17 @@ const { Pipeline, GitHubSourceAction } = require('@aws-cdk/aws-codepipeline');
 const { PolicyStatement } = require('@aws-cdk/aws-iam');
 const { Stack, SecretParameter } = require('@aws-cdk/cdk');
 
-module.exports = class EventOranizerAppCiPipeline extends Stack {
+module.exports = class EventOrganizerAppCiPipeline extends Stack {
   constructor(parent, name, props) {
     super(parent, name, props);
 
-    const pipeline = new Pipeline(this, 'EventOranizerAppCiPipeline', {
-      pipelineName: 'event-oranizer-app-ci-pipeline',
+    const pipeline = new Pipeline(this, 'EventOrganizerAppCiPipeline', {
+      pipelineName: 'event-organizer-app-ci-pipeline',
     });
 
     const githubAccessToken = new SecretParameter(
       this,
-      'EventOranizerAppGitHubToken',
+      'EventOrganizerAppGitHubToken',
       {
         ssmParameter: 'GitHubCodePipelineAccessToken',
       }
@@ -25,7 +25,7 @@ module.exports = class EventOranizerAppCiPipeline extends Stack {
 
     const source = new GitHubSourceAction(
       this,
-      'EventOranizerAppCiGitHubSource',
+      'EventOrganizerAppCiGitHubSource',
       {
         stage: pipeline.addStage('Source'),
         owner: 'MikeBild',
@@ -36,14 +36,14 @@ module.exports = class EventOranizerAppCiPipeline extends Stack {
     );
 
     const buildStage = pipeline.addStage('Deploy');
-    const project = new PipelineProject(this, 'EventOranizerAppCiBuild', {
-      buildSpec: 'examples/event-oranizer/buildspec.yml',
+    const project = new PipelineProject(this, 'EventOrganizerAppCiBuild', {
+      buildSpec: 'examples/event-organizer/buildspec.yml',
       environment: {
         buildImage: LinuxBuildImage.UBUNTU_14_04_NODEJS_10_1_0,
       },
     });
 
-    new PipelineBuildAction(this, 'EventOranizerAppCiDeployment', {
+    new PipelineBuildAction(this, 'EventOrganizerAppCiDeployment', {
       stage: buildStage,
       project,
       inputArtifact: source.outputArtifact,
