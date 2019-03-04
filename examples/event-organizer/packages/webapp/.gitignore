@@ -1,0 +1,8 @@
+node_modules
+demo
+.cache
+public
+.env
+cdk.json
+yarn-error.log
+.env*

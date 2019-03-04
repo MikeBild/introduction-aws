@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Online: AWS-CDK mit Sebastian Korfmann",
+    "start": "2019-03-01T22:00:00.000Z",
+    "end": "2019-03-02T22:00:00.000Z",
+    "allDay": true
+  },
+  {
+    "id": 2,
+    "title": "Düsseldorf: NodeJS mit Mike Bild",
+    "start": "2019-03-04T22:00:00.000Z",
+    "end": "2019-03-05T22:00:00.000Z",
+    "allDay": true
+  }
+]
