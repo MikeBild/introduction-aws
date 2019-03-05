@@ -5,6 +5,14 @@ module.exports = {
     author: 'Mike Bild',
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-aws-parameter-store-environment',
+      options: {
+        aws: {
+          region: 'eu-central-1',
+        },
+      },
+    },
     'gatsby-plugin-typescript',
     'gatsby-plugin-react-helmet',
     {

@@ -10,7 +10,6 @@
     "start": "gatsby serve",
     "deploy": "cdk deploy --require-approval never --app infrastructure/app.js"
   },
-  "dependencies": {},
   "devDependencies": {
     "@aws-cdk/aws-codebuild": "^0.25.0",
     "@aws-cdk/aws-codepipeline": "^0.25.0",
@@ -26,6 +25,7 @@
     "aws-cdk": "^0.25.0",
     "gatsby": "^2.1.19",
     "gatsby-image": "^2.0.30",
+    "gatsby-plugin-aws-parameter-store-environment": "^1.0.2",
     "gatsby-plugin-manifest": "^2.0.20",
     "gatsby-plugin-material-ui": "^1.2.4",
     "gatsby-plugin-offline": "^2.0.24",
