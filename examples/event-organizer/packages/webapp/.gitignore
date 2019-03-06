@@ -4,5 +4,6 @@ demo
 public
 .env
 cdk.json
+cdk.context.json
 yarn-error.log
 .env*
