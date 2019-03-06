@@ -11,7 +11,7 @@ export default app;
 
 app.get('/', async (req, res, next) => {
   try {
-    const query = `SELECT * FROM "event-api"."event-api-data" ORDER BY createdAt`;
+    const query = `SELECT * FROM "event-api"."event_api_data" ORDER BY createdAt`;
 
     const { Items: result } = await athena.query(query);
 
@@ -23,7 +23,7 @@ app.get('/', async (req, res, next) => {
 });
 
 app.post('/', async (req, res, next) => {
-  const username = req.user.username;
+  const username = (req.user || {}).username;
   const input = {
     ...req.body,
     id: v1(),
@@ -66,7 +66,7 @@ app.delete('/:id', async (req, res, next) => {
 });
 
 app.put('/', async (req, res, next) => {
-  const username = req.user.username;
+  const username = (req.user || {}).username;
   const input = { ...req.body, modifiedAt: Date.now(), username };
   if (!input) return next(new Error('Missing request body'));
   if (!input.id) return next(new Error(`Missing 'id' in request body.`));

@@ -6,6 +6,17 @@ const USER_POOL_ID = process.env.USER_POOL_ID || '';
 const USER_POOL_CLIENT_ID = process.env.USER_POOL_CLIENT_ID || '';
 const AWS_REGION = process.env.AWS_REGION || '';
 
+declare namespace Express {
+  export interface Request {
+    user?: string;
+  }
+}
+
+export interface User {
+  email?: string;
+  sub?: string;
+}
+
 export default () => async (req, res, next) => {
   const token = (req.headers.authorization || '').replace('Bearer ', '');
   try {
@@ -34,7 +45,7 @@ export async function validateToken({
   token: string;
   region: string;
   userPoolId: string;
-}) {
+}): Promise<User> {
   const response = await fetch(
     `https://cognito-idp.${region}.amazonaws.com/${userPoolId}/.well-known/jwks.json`
   );
