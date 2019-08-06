@@ -1,7 +1,0 @@
-{
-  "name": "@introduction-aws/todo-gatsby-graphql-auth",
-  "version": "1.0.0",
-  "description": "A GraphQL AWS Cognito Auth Module",
-  "main": "index.js",
-  "license": "MIT"
-}

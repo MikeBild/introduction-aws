@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "userpool-example",
+  "description": "Web API AWS Congnito UserPool",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@aws-cdk/aws-codebuild": "^0.25.1",
+    "@aws-cdk/aws-codepipeline": "^0.25.1",
+    "@aws-cdk/aws-iam": "^0.25.1",
+    "@aws-cdk/cdk": "^0.25.1",
+    "aws-cdk": "^0.25.1",
+    "lerna": "^3.13.1"
+  },
+  "scripts": {
+    "bootstrap": "lerna clean --yes && lerna bootstrap",
+    "link": "lerna clean --yes && lerna link",
+    "build": "lerna run build --stream",
+    "dev": "lerna run dev --stream --parallel",
+    "test": "lerna run test --stream --parallel",
+    "start": "lerna run start --stream --parallel",
+    "ci": "cdk deploy --require-approval never --app infrastructure/ci.js",
+    "deploy": "cdk deploy --require-approval never --app infrastructure/deploy.js"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

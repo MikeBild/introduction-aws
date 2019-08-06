@@ -1,0 +1,7 @@
+{
+  "name": "@introduction-aws/graphql-module-auth-userpool",
+  "version": "1.0.0",
+  "description": "A GraphQL User/Auth Module via AWS Cognito.",
+  "main": "index.js",
+  "license": "MIT"
+}
