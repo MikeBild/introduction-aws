@@ -4,3 +4,5 @@ build
 .env
 cdk.json
 yarn-error.log
+cdk.out
+build
