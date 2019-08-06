@@ -26,7 +26,7 @@ module.exports = {
       resolve: 'gatsby-source-modular-graphql',
       options: {
         path: './graphql',
-        schemaModules: ['aws', 'events'],
+        schemaModules: ['aws', 'events', '@introduction-aws/todo-gatsby-graphql-auth'],
       },
     },
     {

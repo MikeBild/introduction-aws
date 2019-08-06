@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "e2e",
+  "version": "1.0.0",
+  "scripts": {
+    "test:bieter": "dotenv jest ./tests/bieter.test.js --runInBand",
+    "test:gast": "dotenv jest ./tests/gast.test.js --runInBand",
+    "test:auktionator": "dotenv jest ./tests/auktionator.test.js --runInBand",
+    "build": "rimraf build && mkdir build && cp -R package.json build && npm install --production --prefix build && cp -R tests build && cp -R jest.config.js build && cp runner.js build",
+    "deploy": "dotenv -- cdk deploy --require-approval never --app infrastructure/app.js",
+    "test": "dotenv jest ./tests --runInBand",
+    "run": "dotenv node invoke.js"
+  },
+  "dependencies": {
+    "chrome-aws-lambda": "^1.19.0",
+    "jest": "^24.8.0",
+    "jest-puppeteer": "^4.3.0",
+    "puppeteer-core": "^1.19.0"
+  },
+  "devDependencies": {
+    "@aws-cdk/aws-lambda": "^1.1.0",
+    "@aws-cdk/core": "^1.1.0",
+    "aws-cdk": "^1.1.0",
+    "aws-sdk": "^2.498.0",
+    "dotenv-cli": "^2.0.1",
+    "puppeteer": "^1.19.0",
+    "rimraf": "^2.6.3"
+  }
+}
