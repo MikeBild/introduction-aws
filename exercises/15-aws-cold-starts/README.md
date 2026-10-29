@@ -4,7 +4,7 @@
 
 ## Aufgabe
 
-Miss die Init Duration deiner Function, verkleinere das Bundle und vergleich 512, 1024 und 1769 MB Memory mit AWS Lambda Power Tuning.
+Miss die Init Duration deiner Funktion, verkleinere das Bundle und vergleich 512, 1024 und 1769 MB Memory mit AWS Lambda Power Tuning.
 
 ## Ablauf
 
@@ -16,9 +16,9 @@ Miss die Init Duration deiner Function, verkleinere das Bundle und vergleich 512
    ```
 
 2. Schreib [`start/src/lean.ts`](start/src/lean.ts): nur ein SDK-Client, gezielte Imports, keine Bibliothek für eine Prüfung, die drei Zeilen braucht.
-3. Ergänze die Function `Lean` in [`start/lib/cold-starts-stack.ts`](start/lib/cold-starts-stack.ts) – SDK als external, minifiziert. Miss erneut mit `node src/bundle-size.ts`.
+3. Ergänze die Funktion `Lean` in [`start/lib/cold-starts-stack.ts`](start/lib/cold-starts-stack.ts) – SDK als external, minifiziert. Miss erneut mit `node src/bundle-size.ts`.
 4. Implementier `parseReport` und `summarize` in [`start/src/report.ts`](start/src/report.ts) und entferne das `.skip` in den Tests.
-5. Deploy, ruf beide Functions einige Male auf und werte die Logs aus. Jede neue Konfiguration erzwingt einen Cold Start:
+5. Deploy, ruf beide Funktionen einige Male auf und werte die Logs aus. Jede neue Konfiguration erzwingt einen Cold Start:
 
    ```bash
    npx cdk deploy
@@ -43,7 +43,7 @@ Miss die Init Duration deiner Function, verkleinere das Bundle und vergleich 512
 
 - Das schlanke Bundle ist mindestens zehnmal kleiner. Lokal prüft das der Test `bundle-size.test.ts`.
 - Die Init Duration von `Lean` liegt deutlich unter der von `Heavy`.
-- Ab 1769 MB hat die Function eine volle vCPU. Darüber sinkt die Laufzeit nur noch, wenn dein Code mehrere Threads nutzt.
+- Ab 1769 MB hat die Funktion eine volle vCPU. Darüber sinkt die Laufzeit nur noch, wenn dein Code mehrere Threads nutzt.
 
 ## Zum Weiterdenken
 

@@ -10,6 +10,6 @@ export class OrdersStack extends Stack {
     // TODO: NodejsFunction 'PlaceOrder' für src/place-order.ts,
     //       Runtime.NODEJS_24_X, Architecture.ARM_64, ESM-Bundle,
     //       Umgebungsvariable TABLE_NAME
-    // TODO: Der Function Lese- und Schreibrechte auf die Table geben
+    // TODO: Der Funktion Lese- und Schreibrechte auf die Table geben
   }
 }

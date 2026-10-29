@@ -10,7 +10,7 @@ Schreib fünf Zugriffsmuster für Bestellungen bei deinem Unternehmen auf und le
 
 1. Füll [`start/ZUGRIFFSMUSTER.md`](start/ZUGRIFFSMUSTER.md) aus: erst die Fragen, dann Keys und Indexe.
 2. Vergleich mit dem Beispiel in [`solution/ZUGRIFFSMUSTER.md`](solution/ZUGRIFFSMUSTER.md).
-3. In [`start/src/orders-repository.ts`](start/src/orders-repository.ts) beantwortet jede Function ihre Frage per `Scan`. Ersetze jeden Scan durch `GetItem` oder `Query`.
+3. In [`start/src/orders-repository.ts`](start/src/orders-repository.ts) beantwortet jede Funktion ihre Frage per `Scan`. Ersetze jeden Scan durch `GetItem` oder `Query`.
 4. Ergänze die GSIs in [`start/lib/orders-table-stack.ts`](start/lib/orders-table-stack.ts).
 5. Entferne das `.skip` in den Tests. Sie schlagen fehl, sobald irgendwo ein `Scan` läuft.
 6. Optional gegen AWS:

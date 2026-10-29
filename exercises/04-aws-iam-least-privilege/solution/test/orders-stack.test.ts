@@ -8,7 +8,7 @@ const template = Template.fromStack(new OrdersStack(new App({ context: { 'aws:cd
 type Statement = { Action: string | string[]; Resource: unknown }
 type Policy = { Properties: { PolicyDocument: { Statement: Statement[] }; Roles: { Ref: string }[] } }
 
-// Sammelt pro Function (über deren Role) alle erlaubten Aktionen.
+// Sammelt pro Funktion (über deren Role) alle erlaubten Aktionen.
 const actionsOf = (functionId: string) => {
   const policies = Object.values(template.findResources('AWS::IAM::Policy')) as Policy[]
   return policies

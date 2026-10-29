@@ -36,7 +36,7 @@ export class OrdersStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // Übung 04: jede Function nur mit den Rechten, die sie braucht.
+    // Übung 04: jede Funktion nur mit den Rechten, die sie braucht.
     const placeOrder = fn('PlaceOrder', 'place-order.ts', { API_KEY_PARAMETER: apiKeyName })
     table.grantWriteData(placeOrder)
     apiKey.grantRead(placeOrder)
@@ -44,7 +44,7 @@ export class OrdersStack extends Stack {
     const listOrders = fn('ListOrders', 'list-orders.ts')
     table.grantReadData(listOrders)
 
-    // Übung 05: HTTP API mit zwei Routen.
+    // Übung 05: HTTP-API mit zwei Routen.
     const api = new HttpApi(this, 'OrdersApi')
     api.addRoutes({
       path: '/orders',

@@ -31,7 +31,7 @@ export class OrderEventsStack extends Stack {
     // Konsument: Lager, entkoppelt über eine Queue mit Dead Letter Queue
     const deadLetterQueue = new Queue(this, 'StockDlq', { retentionPeriod: Duration.days(14) })
     const stockQueue = new Queue(this, 'StockQueue', {
-      // Mindestens sechsmal so lang wie der Timeout der Function.
+      // Mindestens sechsmal so lang wie der Timeout der Funktion.
       visibilityTimeout: Duration.seconds(60),
       deadLetterQueue: { queue: deadLetterQueue, maxReceiveCount: 3 },
     })

@@ -75,7 +75,7 @@ export class OrdersStack extends Stack {
     // Lager: Queue mit Dead Letter Queue, idempotent per Conditional Write.
     const stockDlq = new Queue(this, 'StockDlq', { retentionPeriod: Duration.days(14) })
     const stockQueue = new Queue(this, 'StockQueue', {
-      // Mindestens sechsmal so lang wie der Timeout der Function.
+      // Mindestens sechsmal so lang wie der Timeout der Funktion.
       visibilityTimeout: Duration.seconds(60),
       deadLetterQueue: { queue: stockDlq, maxReceiveCount: 3 },
     })

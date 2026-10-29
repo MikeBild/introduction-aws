@@ -70,7 +70,7 @@ Die Tests brauchen kein AWS-Konto. SDK-Aufrufe ersetzt [`aws-sdk-client-mock`](h
 | Tag 1 | 02 | Lambda-Handler in TypeScript | `aws-lambda-handler` | [exercises/02-aws-lambda-handler](exercises/02-aws-lambda-handler) |
 | Tag 1 | 03 | CDK-Grundlagen | `aws-cdk-basics` | [exercises/03-aws-cdk-basics](exercises/03-aws-cdk-basics) |
 | Tag 1 | 04 | IAM mit Least Privilege | `aws-iam-least-privilege` | [exercises/04-aws-iam-least-privilege](exercises/04-aws-iam-least-privilege) |
-| Tag 1 | 05 | HTTP API mit API Gateway | `aws-api-gateway-http` | [exercises/05-aws-api-gateway-http](exercises/05-aws-api-gateway-http) |
+| Tag 1 | 05 | HTTP-API mit API Gateway | `aws-api-gateway-http` | [exercises/05-aws-api-gateway-http](exercises/05-aws-api-gateway-http) |
 | Tag 1 | 06 | DynamoDB modellieren | `aws-dynamodb-modeling` | [exercises/06-aws-dynamodb-modeling](exercises/06-aws-dynamodb-modeling) |
 | Tag 1 | 07 | Single-Table-Design | `aws-dynamodb-single-table` | [exercises/07-aws-dynamodb-single-table](exercises/07-aws-dynamodb-single-table) |
 | Tag 1 | 08 | Konfiguration und Secrets | `aws-config-secrets` | [exercises/08-aws-config-secrets](exercises/08-aws-config-secrets) |

@@ -8,7 +8,7 @@ Führ die Lösungen aus den Übungen 02 bis 08 in einem Stack zusammen: `POST /o
 
 ```mermaid
 flowchart LR
-  c["curl"] --> api["HTTP API"]
+  c["curl"] --> api["HTTP-API"]
   api -- "POST /orders" --> place["PlaceOrder"]
   api -- "GET /orders" --> list["ListOrders"]
   place --> t[("Orders-Table")]
@@ -21,7 +21,7 @@ flowchart LR
 | `parseOrder`, `totalCents` | [02](../02-aws-lambda-handler/solution/src/order.ts) | `src/order.ts` |
 | Stack, `NodejsFunction` | [03](../03-aws-cdk-basics/solution/lib/orders-stack.ts) | `lib/orders-stack.ts` |
 | Rechte per `grant…` | [04](../04-aws-iam-least-privilege/solution/lib/orders-stack.ts) | `lib/orders-stack.ts` |
-| HTTP API, Handler | [05](../05-aws-api-gateway-http/solution/) | `lib/orders-stack.ts`, `src/place-order.ts`, `src/list-orders.ts` |
+| HTTP-API, Handler | [05](../05-aws-api-gateway-http/solution/) | `lib/orders-stack.ts`, `src/place-order.ts`, `src/list-orders.ts` |
 | Keys `CUSTOMER#…` / `ORDER#…` | [06](../06-aws-dynamodb-modeling/solution/src/keys.ts), [07](../07-aws-dynamodb-single-table/) | `src/orders.ts` |
 | API Key aus Parameter Store | [08](../08-aws-config-secrets/solution/src/charge-payment.ts) | `src/place-order.ts` |
 

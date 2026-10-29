@@ -18,7 +18,7 @@ Leg mit `cdk init` ein TypeScript-Projekt an, ergänze eine `NodejsFunction` und
    Danach arbeitest du hier weiter: [`start/`](start/) enthält denselben leeren Stack, schon auf ESM, Node.js 26 und dieses Repo eingestellt.
 2. Ergänze in [`start/lib/orders-stack.ts`](start/lib/orders-stack.ts) eine `TableV2` mit Partition Key `pk`.
 3. Ergänze eine `NodejsFunction` für [`start/src/place-order.ts`](start/src/place-order.ts) mit `Runtime.NODEJS_24_X` und `Architecture.ARM_64`.
-4. Gib der Function mit `table.grantReadWriteData(placeOrder)` Zugriff.
+4. Gib der Funktion mit `table.grantReadWriteData(placeOrder)` Zugriff.
 5. Prüf das Template lokal und dann gegen dein Konto:
 
    ```bash
@@ -33,7 +33,7 @@ Leg mit `cdk init` ein TypeScript-Projekt an, ergänze eine `NodejsFunction` und
 
 ## Prüfen
 
-- `cdk diff` zeigt Table, Function, Role und Policy – und sonst nichts.
+- `cdk diff` zeigt Table, Funktion, Role und Policy – und sonst nichts.
 - Im IAM-Teil des Diffs stehen nur DynamoDB-Aktionen auf genau diese Table.
 
 ## Lösung

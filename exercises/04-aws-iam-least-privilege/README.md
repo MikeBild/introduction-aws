@@ -4,11 +4,11 @@
 
 ## Aufgabe
 
-Gib einer Function nur Lesezugriff auf die Orders-Table und einer zweiten nur Schreibzugriff. Prüf beide Roles in `cdk diff`.
+Gib einer Funktion nur Lesezugriff auf die Orders-Table und einer zweiten nur Schreibzugriff. Prüf beide Roles in `cdk diff`.
 
 ## Ablauf
 
-1. Lies [`start/lib/orders-stack.ts`](start/lib/orders-stack.ts). Beide Functions bekommen `dynamodb:*` auf `*` – das klassische „erst mal alles erlauben“.
+1. Lies [`start/lib/orders-stack.ts`](start/lib/orders-stack.ts). Beide Funktionen bekommen `dynamodb:*` auf `*` – das klassische „erst mal alles erlauben“.
 2. Deploy den Ausgangszustand einmal, damit `cdk diff` später etwas zu vergleichen hat:
 
    ```bash

@@ -1,10 +1,10 @@
-# 05 · HTTP API mit API Gateway
+# 05 · HTTP-API mit API Gateway
 
 **ID:** `aws-api-gateway-http`
 
 ## Aufgabe
 
-Leg eine HTTP API mit den Routes `GET /orders` und `POST /orders` an, je mit eigener Function, und ruf beide per curl auf.
+Leg eine HTTP-API mit den Routes `GET /orders` und `POST /orders` an, je mit eigener Funktion, und ruf beide per curl auf.
 
 ## Ablauf
 
@@ -32,12 +32,12 @@ Leg eine HTTP API mit den Routes `GET /orders` und `POST /orders` an, je mit eig
 ## Prüfen
 
 - `POST` liefert `201` mit `orderId`, `GET` liefert die Bestellung als Liste.
-- Ein ungültiger Body liefert `400`, ohne dass die Function in DynamoDB schreibt.
+- Ein ungültiger Body liefert `400`, ohne dass die Funktion in DynamoDB schreibt.
 
 ## Zum Weiterdenken
 
-- Function URL statt HTTP API: `placeOrder.addFunctionUrl()` – ein Endpoint, kein Routing, keine JWT-Prüfung.
-- REST API: nur, wenn du API Keys, Usage Plans oder Request-Validierung am Gateway brauchst.
+- Function URL statt HTTP-API: `placeOrder.addFunctionUrl()` – ein Endpoint, kein Routing, keine JWT-Prüfung.
+- REST-API: nur, wenn du API Keys, Usage Plans oder Request-Validierung am Gateway brauchst.
 
 ## Lösung
 

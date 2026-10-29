@@ -35,7 +35,7 @@ export const placeOrder = async (event: PlaceOrderEvent) =>
 
 export const handler = async (event: PlaceOrderEvent, context: Context) => {
   logger.addContext(context)
-  // Eine ID für alle Logs dieser Bestellung – auch in nachgelagerten Functions.
+  // Eine ID für alle Logs dieser Bestellung – auch in nachgelagerten Funktionen.
   logger.appendKeys({ orderId: event.orderId, correlationId: event.correlationId ?? context.awsRequestId })
   metrics.captureColdStartMetric(context.functionName)
   try {

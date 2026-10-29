@@ -49,7 +49,7 @@ flowchart LR
 ## Zum Weiterdenken
 
 - Brauchst du mehr als „schon gesehen“, etwa das gespeicherte Ergebnis des ersten Aufrufs oder einen Ablauf per TTL, nimm das Idempotency-Modul von Powertools for AWS Lambda.
-- Der Visibility Timeout der Queue ist mindestens sechsmal so lang wie der Timeout der Function. Sonst sieht ein zweiter Consumer die Nachricht, während der erste noch arbeitet.
+- Der Visibility Timeout der Queue ist mindestens sechsmal so lang wie der Timeout der Funktion. Sonst sieht ein zweiter Consumer die Nachricht, während der erste noch arbeitet.
 
 ## Lösung
 

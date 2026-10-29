@@ -34,7 +34,7 @@ export class OrderEventsStack extends Stack {
 
     // TODO: Rule auf dem Bus: source 'orders', detailType 'OrderPlaced' -> SqsQueue(stockQueue)
 
-    // TODO: Table Reservations (Partition Key orderId), RESERVATIONS_TABLE_NAME an die Function,
+    // TODO: Table Reservations (Partition Key orderId), RESERVATIONS_TABLE_NAME an die Funktion,
     //       Schreibrechte per grantWriteData
     const reserveStock = fn('ReserveStock', 'reserve-stock.ts', {})
     reserveStock.addEventSource(new SqsEventSource(stockQueue, {
