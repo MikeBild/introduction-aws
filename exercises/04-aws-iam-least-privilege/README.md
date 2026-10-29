@@ -1,10 +1,10 @@
 # 04 · IAM mit Least Privilege
 
-**Unit:** `aws-iam-least-privilege`
+**ID:** `aws-iam-least-privilege`
 
 ## Aufgabe
 
-Gib einer Function nur Lesezugriff auf die Orders Table und einer zweiten nur Schreibzugriff. Prüf beide Roles in `cdk diff`.
+Gib einer Function nur Lesezugriff auf die Orders-Table und einer zweiten nur Schreibzugriff. Prüf beide Roles in `cdk diff`.
 
 ## Ablauf
 

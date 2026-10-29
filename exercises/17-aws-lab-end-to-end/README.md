@@ -1,6 +1,6 @@
 # 17 · Praxis Teil eins: die Bestellung bis in die Tabelle
 
-**Unit:** `aws-lab-end-to-end`
+**ID:** `aws-lab-end-to-end`
 
 ## Aufgabe
 
@@ -11,12 +11,12 @@ flowchart LR
   c["curl"] --> api["HTTP API"]
   api -- "POST /orders" --> place["PlaceOrder"]
   api -- "GET /orders" --> list["ListOrders"]
-  place --> t[("Orders Table")]
+  place --> t[("Orders-Table")]
   list --> t
   place -. "API Key" .-> s["Parameter Store"]
 ```
 
-| Baustein | kommt aus | Datei in `start/` |
+| Bestandteil | kommt aus | Datei in `start/` |
 | --- | --- | --- |
 | `parseOrder`, `totalCents` | [02](../02-aws-lambda-handler/solution/src/order.ts) | `src/order.ts` |
 | Stack, `NodejsFunction` | [03](../03-aws-cdk-basics/solution/lib/orders-stack.ts) | `lib/orders-stack.ts` |

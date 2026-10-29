@@ -36,6 +36,6 @@ export const totalCents = (order: OrderInput): number =>
 // Reine Fachlogik: ID und Zeit kommen von außen, damit Tests sie festlegen können.
 // Der API Key steht für den Zahlungsanbieter. Fehlt er, ist die Konfiguration kaputt.
 export const placeOrder = (input: OrderInput, { orderId, now, apiKey }: { orderId: string; now: Date; apiKey: string }): Order => {
-  if (!apiKey) throw new Error('API Key für den Zahlungsanbieter fehlt')
+  if (!apiKey) throw new Error('API Key für den Zahlungsanbieter fehlt. Leg den SecureString /werkstatt/payments/api-key per CLI an.')
   return { ...input, orderId, status: 'placed', totalCents: totalCents(input), createdAt: now.toISOString() }
 }

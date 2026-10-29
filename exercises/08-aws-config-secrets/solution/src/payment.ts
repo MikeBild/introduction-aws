@@ -3,7 +3,7 @@ export type PaymentResult = { orderId: string; status: 'CHARGED' | 'REJECTED'; r
 
 // Reine Fachlogik. Der API Key kommt als Argument, nicht aus process.env.
 export const chargePayment = ({ apiKey, limit, event }: { apiKey: string; limit: number; event: PaymentEvent }): PaymentResult => {
-  if (!apiKey) throw new Error('API Key fehlt')
+  if (!apiKey) throw new Error('API Key fehlt. Leg den SecureString /orders/payments/api-key per CLI an.')
   if (event.items > limit) return { orderId: event.orderId, status: 'REJECTED', reason: `mehr als ${limit} Artikel` }
   // Hier würde der Zahlungsanbieter mit apiKey aufgerufen.
   return { orderId: event.orderId, status: 'CHARGED' }

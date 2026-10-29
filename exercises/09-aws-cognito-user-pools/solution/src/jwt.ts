@@ -1,7 +1,7 @@
 export type JwtParts = { header: Record<string, unknown>; payload: Record<string, unknown> }
 
 const decodePart = (part: string | undefined) => {
-  if (!part) throw new Error('Kein JWT: erwartet header.payload.signature')
+  if (!part) throw new Error('Kein JWT: Übergib ein Token im Format header.payload.signature.')
   return JSON.parse(Buffer.from(part, 'base64url').toString('utf8')) as Record<string, unknown>
 }
 

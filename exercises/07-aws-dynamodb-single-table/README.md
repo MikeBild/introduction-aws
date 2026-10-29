@@ -1,6 +1,6 @@
 # 07 · Single-Table-Design
 
-**Unit:** `aws-dynamodb-single-table` · **Format:** Breakout oder Whiteboard, danach Code
+**ID:** `aws-dynamodb-single-table` · **Format:** Breakout oder Whiteboard, danach Code
 
 ## Aufgabe
 

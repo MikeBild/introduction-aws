@@ -1,6 +1,6 @@
 # 11 · GraphQL mit AppSync
 
-**Unit:** `aws-appsync-graphql` · Zusatzkapitel
+**ID:** `aws-appsync-graphql` · Zusatzkapitel
 
 ## Aufgabe
 
@@ -10,7 +10,7 @@ Bau eine AppSync API mit Query `order`, Mutation `createOrder` und Subscription 
 flowchart LR
   c["Console oder curl mit x-api-key"] --> a["AppSync"]
   b["Backend mit IAM-Signatur"] --> a
-  a --> r["JavaScript Resolver"] --> d[("DynamoDB: Orders")]
+  a --> r["JavaScript-Resolver"] --> d[("DynamoDB: Orders")]
   a -. "Subscription per WebSocket" .-> c
 ```
 

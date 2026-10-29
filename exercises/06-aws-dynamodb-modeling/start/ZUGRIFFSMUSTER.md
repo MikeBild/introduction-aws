@@ -1,6 +1,6 @@
 # Zugriffsmuster: Bestellungen
 
-Schreib fünf Fragen auf, die eure Anwendung an Bestellungen stellt. Leite erst danach Keys und Indexe ab.
+Schreib fünf Fragen auf, die deine Anwendung an Bestellungen stellt. Leite erst danach Keys und Indexe ab.
 
 | # | Frage | Eingabe | Ergebnis | Wie oft? | Key / Index | Operation |
 | --- | --- | --- | --- | --- | --- | --- |

@@ -1,4 +1,4 @@
-# Arbeitsblatt: Was betreibt ihr selbst?
+# Arbeitsblatt: Was betreibt dein Team selbst?
 
 Anwendung: _______________________
 
@@ -29,6 +29,6 @@ flowchart LR
 
 ## Fragen für die Diskussion
 
-- Welcher Baustein kostet euch heute am meisten Betriebszeit?
-- Wo braucht ihr Kontrolle, die ein Managed Service nicht bietet?
-- Wofür zahlt ihr heute, auch wenn niemand die Anwendung nutzt?
+- Welcher Baustein kostet dein Team heute am meisten Betriebszeit?
+- Wo braucht dein Team Kontrolle, die ein Managed Service nicht bietet?
+- Wofür zahlt dein Team heute, auch wenn niemand die Anwendung nutzt?

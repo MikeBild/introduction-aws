@@ -5,7 +5,7 @@ import { listOrders } from './orders.ts'
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const customerId = event.queryStringParameters?.customerId
   if (!customerId)
-    return { statusCode: 400, body: JSON.stringify({ message: 'customerId fehlt' }) }
+    return { statusCode: 400, body: JSON.stringify({ message: 'customerId fehlt. Ruf GET /orders?customerId=<id> auf.' }) }
   const limit = Math.min(Number(event.queryStringParameters?.limit ?? 20), 100)
   return { statusCode: 200, body: JSON.stringify(await listOrders(customerId, limit)) }
 }
