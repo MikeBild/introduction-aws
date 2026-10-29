@@ -1,0 +1,9 @@
+node_modules/
+cdk.out/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+cdk.context.json
+coverage/
+outputs.json

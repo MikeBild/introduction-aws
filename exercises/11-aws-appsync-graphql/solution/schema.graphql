@@ -1,0 +1,39 @@
+# Default-Auth ist der API Key. Sobald IAM als zweiter Modus dazukommt, gilt:
+# Ein Typ ohne Direktive ist nur mit dem Default erreichbar. Mit einer Direktive
+# zählen nur noch die genannten Modi – deshalb stehen hier beide.
+
+type OrderItem @aws_api_key @aws_iam {
+  productId: String!
+  quantity: Int!
+  priceCents: Int!
+}
+
+type Order @aws_api_key @aws_iam {
+  id: ID!
+  customerId: ID!
+  items: [OrderItem!]!
+  createdAt: AWSDateTime!
+}
+
+input OrderItemInput {
+  productId: String!
+  quantity: Int!
+  priceCents: Int!
+}
+
+input CreateOrderInput {
+  customerId: ID!
+  items: [OrderItemInput!]!
+}
+
+type Query @aws_api_key @aws_iam {
+  order(id: ID!): Order
+}
+
+type Mutation @aws_api_key @aws_iam {
+  createOrder(input: CreateOrderInput!): Order!
+}
+
+type Subscription @aws_api_key @aws_iam {
+  onOrderCreated: Order @aws_subscribe(mutations: ["createOrder"])
+}
