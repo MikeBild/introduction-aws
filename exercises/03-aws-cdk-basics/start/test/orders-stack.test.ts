@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald Table und Function im Stack stehen.
+// TODO: Entferne .skip, sobald Table und Funktion im Stack stehen.
 import { App } from 'aws-cdk-lib'
 import { Match, Template } from 'aws-cdk-lib/assertions'
 import { describe, expect, it } from 'vitest'
@@ -19,7 +19,7 @@ describe.skip('OrdersStack', () => {
       Environment: { Variables: { TABLE_NAME: Match.anyValue() } },
     })
   })
-  it('gibt der Function Lese- und Schreibrechte auf die Table', () => {
+  it('gibt der Funktion Lese- und Schreibrechte auf die Table', () => {
     const policies = template.findResources('AWS::IAM::Policy')
     expect(JSON.stringify(policies)).toContain('dynamodb:PutItem')
   })

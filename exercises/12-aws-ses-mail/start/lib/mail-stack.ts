@@ -43,7 +43,7 @@ export class MailStack extends Stack {
     sender.grantSendEmail(sendConfirmation)
     // TODO: ses:SendEmail auch auf das Template erlauben (this.formatArn mit resource 'template')
 
-    // TODO: Eingehend – Bucket für Rohmails, Function InboundMail (src/inbound-mail.ts)
+    // TODO: Eingehend – Bucket für Rohmails, Funktion InboundMail (src/inbound-mail.ts)
     //       mit BUCKET_NAME und OBJECT_PREFIX, grantRead auf den Bucket,
     //       ReceiptRuleSet mit einer Rule für replyAddress: erst S3Action, dann LambdaAction.
 

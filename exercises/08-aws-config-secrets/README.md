@@ -4,7 +4,7 @@
 
 ## Aufgabe
 
-Leg einen API Key als SecureString an, gib einer Function Leserechte und lade ihn mit Powertools Parameters und fünf Minuten Cache.
+Leg einen API Key als SecureString an, gib einer Funktion Leserechte und lade ihn mit Powertools Parameters und fünf Minuten Cache.
 
 ## Ablauf
 
@@ -17,9 +17,9 @@ Leg einen API Key als SecureString an, gib einer Function Leserechte und lade ih
    ```
 
 3. Referenzier den Parameter im Stack mit `StringParameter.fromSecureStringParameterAttributes` und vergib `grantRead`. Leg `/orders/max-items` als normalen `StringParameter` an.
-4. Übergib der Function nur die Namen der Parameter.
+4. Übergib der Funktion nur die Namen der Parameter.
 5. Lade beide Werte in [`start/src/charge-payment.ts`](start/src/charge-payment.ts) mit `getParameter` aus `@aws-lambda-powertools/parameters/ssm`: `decrypt: true` für den Key, `maxAge: 300` für beide.
-6. Entferne das `.skip` in den Tests, dann deploy und ruf die Function auf:
+6. Entferne das `.skip` in den Tests, dann deploy und ruf die Funktion auf:
 
    ```bash
    cd exercises/08-aws-config-secrets/start

@@ -18,7 +18,7 @@ export const totalCents = (_order: OrderInput): number => {
   throw new Error('TODO: totalCents aus Übung 02 übernehmen')
 }
 
-// TODO: Reine Function. Wirft ohne apiKey, sonst Bestellung im Status 'placed' mit
+// TODO: Reine Funktion. Wirft ohne apiKey, sonst Bestellung im Status 'placed' mit
 //       totalCents und createdAt als ISO-String aus now.
 export const placeOrder = (_input: OrderInput, _deps: { orderId: string; now: Date; apiKey: string }): Order => {
   throw new Error('TODO: placeOrder implementieren')

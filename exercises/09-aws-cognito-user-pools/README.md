@@ -25,7 +25,7 @@ Leg einen User Pool mit E-Mail-Login und einen App Client ohne Secret an, regist
      --username du@example.com --confirmation-code 123456
    ```
 
-   Ohne Postfach bestätigst du den Nutzer als Admin: `aws cognito-idp admin-confirm-sign-up --user-pool-id $POOL --username du@example.com`.
+   Ohne Postfach bestätigst du das Konto als Admin: `aws cognito-idp admin-confirm-sign-up --user-pool-id $POOL --username du@example.com`.
 3. Meld dich an und hol die Tokens:
 
    ```bash
@@ -45,7 +45,7 @@ Leg einen User Pool mit E-Mail-Login und einen App Client ohne Secret an, regist
 
 ## Prüfen
 
-- Das ID Token hat `token_use: id`, `aud` und `email` – es beschreibt den Nutzer für dein Frontend.
+- Das ID Token hat `token_use: id`, `aud` und `email` – es beschreibt die angemeldete Person für dein Frontend.
 - Das Access Token hat `token_use: access`, `client_id` und `scope` – es geht an deine API.
 
 Im Browser nutzt du statt `USER_PASSWORD_AUTH` den SRP-Flow, etwa mit `aws-amplify/auth`. Dann schaltest du `userPassword` im Client wieder ab.

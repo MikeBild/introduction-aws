@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald die HTTP API und beide Routes stehen.
+// TODO: Entferne .skip, sobald die HTTP-API und beide Routes stehen.
 import { App } from 'aws-cdk-lib'
 import { Template } from 'aws-cdk-lib/assertions'
 import { describe, it } from 'vitest'
@@ -7,7 +7,7 @@ import { OrdersApiStack } from '../lib/orders-api-stack.ts'
 const template = Template.fromStack(new OrdersApiStack(new App({ context: { 'aws:cdk:bundling-stacks': [] } }), 'Test'))
 
 describe.skip('OrdersApiStack', () => {
-  it('legt eine HTTP API an', () => {
+  it('legt eine HTTP-API an', () => {
     template.resourceCountIs('AWS::ApiGatewayV2::Api', 1)
     template.hasResourceProperties('AWS::ApiGatewayV2::Api', { ProtocolType: 'HTTP' })
   })

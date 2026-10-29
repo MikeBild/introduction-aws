@@ -36,7 +36,7 @@ export class OrdersStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // Übung 04: jede Function nur mit den Rechten, die sie braucht.
+    // Übung 04: jede Funktion nur mit den Rechten, die sie braucht.
     const placeOrder = fn('PlaceOrder', 'place-order.ts', { API_KEY_PARAMETER: apiKeyName })
     table.grantWriteData(placeOrder)
     apiKey.grantRead(placeOrder)
@@ -44,7 +44,7 @@ export class OrdersStack extends Stack {
     const listOrders = fn('ListOrders', 'list-orders.ts')
     table.grantReadData(listOrders)
 
-    // Übung 05: HTTP API mit zwei Routen.
+    // Übung 05: HTTP-API mit zwei Routen.
     const api = new HttpApi(this, 'OrdersApi')
     api.addRoutes({
       path: '/orders',
@@ -62,7 +62,7 @@ export class OrdersStack extends Stack {
     //        und bus.grantPutEventsTo(placeOrder).
     // TODO 2 (Übung 14): StockDlq und StockQueue (visibilityTimeout 60 s, maxReceiveCount 3),
     //        Rule für source 'werkstatt.orders' / detailType 'OrderPlaced' -> SqsQueue.
-    // TODO 3 (Übung 14): Function ReserveStock (reserve-stock.ts) mit grantWriteData und
+    // TODO 3 (Übung 14): Funktion ReserveStock (reserve-stock.ts) mit grantWriteData und
     //        SqsEventSource mit reportBatchItemFailures.
     // TODO 4 (Übung 13): State Machine mit JSONata: Bezahlen (steps-charge.ts) mit Retry auf
     //        PaymentProviderTimeout und Catch PaymentDeclined -> Stornieren (steps-cancel.ts,

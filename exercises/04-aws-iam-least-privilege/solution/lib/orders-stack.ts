@@ -24,7 +24,7 @@ export class OrdersStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // Jede Function bekommt eine eigene Role (Standard bei NodejsFunction)
+    // Jede Funktion bekommt eine eigene Role (Standard bei NodejsFunction)
     // und nur die Rechte, die sie wirklich braucht.
     const listOrders = fn('ListOrders', 'list-orders.ts')
     table.grantReadData(listOrders)

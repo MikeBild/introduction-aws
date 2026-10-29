@@ -7,8 +7,8 @@ Anwendung: Online-Shop mit Bestellungen, Lager und Versand
 | Baustein | Heute betrieben als | Wer betreibt ihn? | Was geht nachts schief? | Managed Service | Entscheidung |
 | --- | --- | --- | --- | --- | --- |
 | Auth / Login | Keycloak auf einer VM | Plattform-Team | Zertifikat läuft ab, VM voll | Cognito User Pool | Wechseln (Lektion 09, 10) |
-| API | Express-Server hinter nginx | Team Shop | Prozess hängt, Speicher voll | API Gateway HTTP API | Wechseln (Lektion 05) |
-| Fachlogik | Im Express-Server | Team Shop | Deploy bricht ab | Lambda Functions | Wechseln (Lektion 02, 03) |
+| API | Express-Server hinter nginx | Team Shop | Prozess hängt, Speicher voll | API Gateway HTTP-API | Wechseln (Lektion 05) |
+| Fachlogik | Im Express-Server | Team Shop | Deploy bricht ab | Lambda-Funktionen | Wechseln (Lektion 02, 03) |
 | Datenbank | PostgreSQL-Cluster | DBA | Replikation hängt, Disk voll | DynamoDB | Für Bestellungen wechseln (Lektion 06, 07), Reporting bleibt in SQL |
 | GraphQL für die App | Apollo Server | Team App | Subscriptions verlieren Verbindungen | AppSync | Wechseln (Lektion 11) |
 | Hintergrund-Jobs, Cron | Cron auf der VM | Team Shop | Job läuft doppelt oder gar nicht | EventBridge Scheduler, SQS | Wechseln (Lektion 14) |
@@ -23,7 +23,7 @@ Anwendung: Online-Shop mit Bestellungen, Lager und Versand
 ```mermaid
 flowchart LR
   client["Web-App"] --> auth["Cognito User Pool"]
-  client --> api["HTTP API"]
+  client --> api["HTTP-API"]
   client --> gql["AppSync"]
   api --> fn["Lambda: placeOrder"]
   gql --> db

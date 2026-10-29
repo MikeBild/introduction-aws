@@ -37,7 +37,7 @@ export class ColdStartsStack extends Stack {
       },
     })
 
-    // TODO: Function 'Lean' für src/lean.ts mit gleichem Memory:
+    // TODO: Funktion 'Lean' für src/lean.ts mit gleichem Memory:
     //       externalModules ['@aws-sdk/*'] (SDK aus der Runtime), minify: true, sourceMap: false
     // TODO: Leserechte auf die Table und CfnOutput 'LeanArn'
 

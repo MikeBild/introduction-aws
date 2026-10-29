@@ -5,7 +5,7 @@ import { parseMail } from './parse-mail.ts'
 const s3 = new S3Client({})
 
 // Die Receipt Rule legt die Rohmail zuerst in S3 ab (Key: Prefix + Message-ID)
-// und ruft danach diese Function auf. Das Event enthält nur Metadaten, keinen Body.
+// und ruft danach diese Funktion auf. Das Event enthält nur Metadaten, keinen Body.
 export const handler: SESHandler = async (event) => {
   for (const record of event.Records) {
     const { messageId } = record.ses.mail

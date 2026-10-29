@@ -18,7 +18,7 @@ describe('OrdersStack', () => {
       Environment: { Variables: { TABLE_NAME: Match.anyValue() } },
     })
   })
-  it('gibt der Function Lese- und Schreibrechte auf die Table', () => {
+  it('gibt der Funktion Lese- und Schreibrechte auf die Table', () => {
     const policies = template.findResources('AWS::IAM::Policy')
     expect(JSON.stringify(policies)).toContain('dynamodb:PutItem')
   })

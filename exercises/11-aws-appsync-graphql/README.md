@@ -4,7 +4,7 @@
 
 ## Aufgabe
 
-Bau eine AppSync API mit Query `order`, Mutation `createOrder` und Subscription `onOrderCreated` und schreib beide Resolver in JavaScript. Die API ist per API Key und IAM abgesichert. Wie Nutzer sich per Cognito anmelden, zeigen die Übungen [09](../09-aws-cognito-user-pools) und [10](../10-aws-cognito-authorizer).
+Bau eine AppSync API mit Query `order`, Mutation `createOrder` und Subscription `onOrderCreated` und schreib beide Resolver in JavaScript. Die API ist per API Key und IAM abgesichert. Die Anmeldung per Cognito zeigen die Übungen [09](../09-aws-cognito-user-pools) und [10](../10-aws-cognito-authorizer).
 
 ```mermaid
 flowchart LR
@@ -50,7 +50,7 @@ flowchart LR
 
 - Ein Backend ruft die API mit IAM auf. Dafür gibst du seiner Role das Recht per `api.grantMutation(fn, 'createOrder')` und signierst den Request mit SigV4.
 - Schreibt ein anderer Service direkt in die Table, merkt die Subscription nichts. Solche Änderungen schickst du über eine eigene Mutation mit IAM.
-- Muss ein Resolver drei Services aufrufen und Ergebnisse zusammenführen, gehört die Logik in eine Lambda Function als Data Source: `api.addLambdaDataSource(...)`.
+- Muss ein Resolver drei Services aufrufen und Ergebnisse zusammenführen, gehört die Logik in eine Lambda-Funktion als Data Source: `api.addLambdaDataSource(...)`.
 
 ## Lösung
 

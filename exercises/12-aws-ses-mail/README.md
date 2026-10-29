@@ -17,7 +17,7 @@ Verschick nach einer Bestellung eine Bestätigung per SES-Template und leg für 
 1. Stell in [`start/src/send-confirmation.ts`](start/src/send-confirmation.ts) von `Content.Simple` auf `Content.Template` um.
 2. Leg in [`start/lib/mail-stack.ts`](start/lib/mail-stack.ts) das `CfnTemplate` `order-confirmed` an und erlaub `ses:SendEmail` auf das Template.
 3. Implementier `parseMail` in [`start/src/parse-mail.ts`](start/src/parse-mail.ts) und lade die Rohmail in [`start/src/inbound-mail.ts`](start/src/inbound-mail.ts) aus S3.
-4. Ergänze Bucket, Function `InboundMail` und Receipt Rule mit `S3Action`, dann `LambdaAction`.
+4. Ergänze Bucket, Funktion `InboundMail` und Receipt Rule mit `S3Action`, dann `LambdaAction`.
 5. Entferne das `.skip` in den Tests.
 6. Deploy mit deiner Domain und Absenderadresse:
 

@@ -12,7 +12,7 @@ Instrumentiere `placeOrder` mit Logger und Metrics, aktiviere Tracing per OpenTe
 2. Schreib fachliche Metriken mit Powertools Metrics: `OrderPlaced`, `ItemsOrdered`, `OrderFailed`. Vergiss `publishStoredMetrics()` nicht.
 3. Leg einen Span `placeOrder` mit `@opentelemetry/api` an. Ohne Layer ist er ein No-op, im Test also unschädlich.
 4. Aktiviere in [`start/lib/observability-stack.ts`](start/lib/observability-stack.ts) Tracing und den OpenTelemetry-Layer per `adotInstrumentation`.
-5. Leg ein SNS Topic und zwei Alarme an: Errors der Function und Nachrichten in der Dead Letter Queue.
+5. Leg ein SNS Topic und zwei Alarme an: Errors der Funktion und Nachrichten in der Dead Letter Queue.
 6. Entferne das `.skip` in den Tests.
 7. Deploy und erzeug Fehler:
 
@@ -48,7 +48,7 @@ CDK bringt den ADOT-Layer für JavaScript mit (`AdotLambdaLayerJavaScriptSdkVers
 npx cdk deploy -c otelLayerArn=arn:aws:lambda:<region>:<konto-aus-der-doku>:layer:<name>:<version>
 ```
 
-Das X-Ray SDK ist seit Februar 2026 in Maintenance. Für neue Functions nimmst du OpenTelemetry.
+Das X-Ray SDK ist seit Februar 2026 in Maintenance. Für neue Funktionen nimmst du OpenTelemetry.
 
 ## Lösung
 

@@ -1,4 +1,4 @@
-// Die Schritte des Workflows als kleine Functions. Jede Datei unten ist ein Lambda-Entry.
+// Die Schritte des Workflows als kleine Funktionen. Jede Datei unten ist ein Lambda-Entry.
 export type OrderInput = {
   orderId: string
   amount: number
