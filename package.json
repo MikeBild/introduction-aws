@@ -1,0 +1,50 @@
+{
+  "name": "introduction-aws",
+  "version": "2026.10.0",
+  "private": true,
+  "description": "Übungen zum Workshop AWS Serverless: Lambda, CDK v2, DynamoDB, Cognito, AppSync, Step Functions, EventBridge, SQS, SES",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --project solution",
+    "test:start": "vitest run --project start",
+    "synth": "node scripts/synth-all.ts",
+    "check": "npm run typecheck && npm test && npm run synth"
+  },
+  "dependencies": {
+    "@aws-lambda-powertools/batch": "2.36.0",
+    "@aws-lambda-powertools/commons": "2.36.0",
+    "@aws-lambda-powertools/idempotency": "2.36.0",
+    "@aws-lambda-powertools/logger": "2.36.0",
+    "@aws-lambda-powertools/metrics": "2.36.0",
+    "@aws-lambda-powertools/parameters": "2.36.0",
+    "@aws-sdk/client-dynamodb": "3.1159.0",
+    "@aws-sdk/client-eventbridge": "3.1159.0",
+    "@aws-sdk/client-s3": "3.1159.0",
+    "@aws-sdk/client-sesv2": "3.1159.0",
+    "@aws-sdk/client-ssm": "3.1159.0",
+    "@aws-sdk/lib-dynamodb": "3.1159.0",
+    "@opentelemetry/api": "1.10.0",
+    "aws-cdk-lib": "2.275.0",
+    "constructs": "10.8.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@aws-appsync/utils": "2.1.1",
+    "@types/aws-lambda": "8.10.164",
+    "@types/node": "24.19.2",
+    "aws-cdk": "2.1146.1",
+    "aws-sdk-client-mock": "4.1.0",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "fsevents": false
+  }
+}

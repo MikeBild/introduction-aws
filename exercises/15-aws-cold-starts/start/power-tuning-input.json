@@ -1,0 +1,8 @@
+{
+  "lambdaARN": "<LeanArn oder HeavyArn aus dem Stack-Output>",
+  "powerValues": [512, 1024, 1769],
+  "num": 20,
+  "payload": { "orderId": "A7" },
+  "parallelInvocation": false,
+  "strategy": "balanced"
+}
