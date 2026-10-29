@@ -9,7 +9,7 @@ Verschick nach einer Bestellung eine Bestätigung per SES-Template und leg für 
 ## Vorher wissen
 
 - **Sandbox:** Neue SES-Konten sind in der Sandbox. Du kannst nur an verifizierte Adressen schicken. Verifizier deshalb auch deine Empfangsadresse oder beantrage Production Access.
-- **Empfang:** Eingehende Mails gehen nur in Regionen mit SES Email Receiving, etwa `eu-west-1` oder `us-east-1`. Prüf die aktuelle Liste in der SES-Doku. Du brauchst eine Domain mit MX-Eintrag auf `inbound-smtp.<region>.amazonaws.com`.
+- **Empfang:** Eingehende Mails gehen nur in Regionen mit SES Email Receiving, etwa `eu-west-1` oder `us-east-1`. Prüf die aktuelle Liste in der SES-Doku. Du brauchst eine eigene Domain: Der Stack legt sie als Identity an, die DKIM-Einträge aus der SES Console trägst du in dein DNS ein, dazu einen MX-Eintrag auf `inbound-smtp.<region>.amazonaws.com`.
 - **Rule Set aktivieren:** CloudFormation aktiviert kein Receipt Rule Set. Das machst du nach dem Deploy per CLI.
 
 ## Ablauf

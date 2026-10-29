@@ -23,6 +23,10 @@ export class MailStack extends Stack {
     // Absender verifizieren: SES schickt einen Bestätigungslink an diese Adresse.
     const sender = new EmailIdentity(this, 'Sender', { identity: Identity.email(fromAddress) })
 
+    // Empfang setzt eine verifizierte Domain voraus. SES erzeugt dafür DKIM-Einträge,
+    // die du in deinem DNS anlegst (Console: SES -> Identities -> deine Domain).
+    new EmailIdentity(this, 'Domain', { identity: Identity.domain(domain) })
+
     new CfnTemplate(this, 'OrderConfirmed', {
       template: {
         templateName: TEMPLATE_NAME,
