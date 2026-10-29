@@ -1,0 +1,1 @@
+{"data":{"todos":[{"id":"1","description":"A","modifiedAt":1551367352923},{"id":"2","description":"B","modifiedAt":1551367352923},{"id":"3","description":"C","modifiedAt":1551367352923}]},"pageContext":{"todos":{},"authApi":{"url":"https://krdi0w2e8i.execute-api.eu-central-1.amazonaws.com/prod"}}}

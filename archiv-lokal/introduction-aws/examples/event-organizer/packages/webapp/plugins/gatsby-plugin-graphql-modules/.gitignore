@@ -1,0 +1,7 @@
+node_modules
+.cache
+.env
+yarn-error.log
+/gatsby-browser.js
+/gatsby-node.js
+/gatsby-ssr.js

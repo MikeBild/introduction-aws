@@ -1,0 +1,50 @@
+{
+  "name": "gatsby-source-modular-graphql",
+  "version": "1.1.0",
+  "license": "MIT",
+  "description": "Gatsby source plugin which adds modularized third-party GraphQL schemas to Gatsby GraphQL with Apollo-Client side execution support.",
+  "author": "Mike Bild <mike.bild@gmail.com>",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir .",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-client": "^2.5.1",
+    "apollo-link-context": "^1.0.14",
+    "apollo-link-http": "^1.5.11",
+    "apollo-link-schema": "^1.1.6",
+    "babel-cli": "^6.26.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.4",
+    "isomorphic-unfetch": "^3.0.0",
+    "localStorage": "^1.0.4",
+    "react-apollo": "^2.5.1",
+    "recursive-copy": "^2.0.10",
+    "sessionstorage": "^0.1.0"
+  },
+  "peerDependencies": {
+    "apollo-client": "^2.4.13",
+    "gatsby": ">2.0.0-alpha",
+    "graphql-tag": "^2.10.1"
+  },
+  "repository": "https://github.com/mikebild/gatsby-source-modular-graphql",
+  "bugs": {
+    "url": "https://github.com/mikebild/gatsby-source-modular-graphql/issues"
+  },
+  "homepage": "https://github.com/mikebild/gatsby-source-modular-graphql/#readme",
+  "keywords": [
+    "gatsby-plugin",
+    "gatsby-source-plugin",
+    "graphql",
+    "modular",
+    "universal",
+    "apollo",
+    "schema",
+    "stitching",
+    "client"
+  ]
+}
