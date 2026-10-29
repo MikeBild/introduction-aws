@@ -1,0 +1,6 @@
+{
+  "hosted-zone:account=123456789012:domainName=mikebild.com:region=eu-central-1": {
+    "Id": "/hostedzone/ZEXAMPLEHOSTEDZONE",
+    "Name": "mikebild.com."
+  }
+}

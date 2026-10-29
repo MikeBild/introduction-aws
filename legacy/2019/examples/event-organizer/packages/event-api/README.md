@@ -4,7 +4,7 @@
 
 ## Live
 
-- [Event-API](https://xrtbumqy1m.execute-api.eu-central-1.amazonaws.com/prod/)
+- [Event-API](https://abcdef1234.execute-api.eu-central-1.amazonaws.com/prod/)
 
 ## API
 
