@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es2024",
+    "lib": ["es2024"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "types": ["node"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    // AppSync-Resolver importieren den Subpath ohne Endung, wie in der AWS-Doku.
+    "paths": {
+      "@aws-appsync/utils/dynamodb": ["./node_modules/@aws-appsync/utils/dynamodb.d.ts"]
+    }
+  },
+  "include": ["exercises/**/*.ts", "exercises/**/*.js", "scripts/**/*.ts", "vitest.config.ts"],
+  "exclude": ["node_modules", "legacy", "**/cdk.out"]
+}

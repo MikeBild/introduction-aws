@@ -1,3 +1,7 @@
+> **Archiv (Stand 2019, AWS CDK 0.21).** Dieses Material ist veraltet und wird nicht mehr gepflegt.
+> Die aktuellen Übungen zum Workshop „AWS Serverless“ liegen unter [`exercises/`](../../exercises/) – siehe [README](../../README.md).
+> Account-IDs, Hosted-Zone-, User-Pool- und Endpoint-IDs sind durch Platzhalter ersetzt.
+
 # Introduction to Serverless using AWS
 
 > Hands-On **WIP** introduction to Serverless using AWS-Cloud-Services via JavaScript/TypeScript.

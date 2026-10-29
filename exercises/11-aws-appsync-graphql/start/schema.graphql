@@ -1,0 +1,20 @@
+type OrderItem {
+  sku: String!
+  quantity: Int!
+}
+
+type Order {
+  id: ID!
+  ownerId: ID!
+  items: [OrderItem!]!
+  createdAt: AWSDateTime!
+}
+
+type Query {
+  order(id: ID!): Order
+}
+
+
+# TODO: input CreateOrderInput mit items
+# TODO: type Mutation mit createOrder(input: CreateOrderInput!): Order!
+# TODO: type Subscription mit onOrderCreated, verbunden per @aws_subscribe(mutations: ["createOrder"])
