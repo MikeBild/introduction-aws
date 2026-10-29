@@ -34,7 +34,8 @@ export class OrderEventsStack extends Stack {
 
     // TODO: Rule auf dem Bus: source 'orders', detailType 'OrderPlaced' -> SqsQueue(stockQueue)
 
-    // TODO: Idempotency Table (Partition Key id, TTL-Attribut expiration)
+    // TODO: Table Reservations (Partition Key orderId), RESERVATIONS_TABLE_NAME an die Function,
+    //       Schreibrechte per grantWriteData
     const reserveStock = fn('ReserveStock', 'reserve-stock.ts', {})
     reserveStock.addEventSource(new SqsEventSource(stockQueue, {
       batchSize: 10,

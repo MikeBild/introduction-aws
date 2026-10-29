@@ -6,3 +6,4 @@ cdk.out/
 !.env.example
 cdk.context.json
 coverage/
+outputs.json

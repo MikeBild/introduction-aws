@@ -4,7 +4,11 @@ import type { Order, OrderPlaced } from './order.ts'
 const events = new EventBridgeClient({})
 
 export const publishOrderPlaced = async (order: Order) => {
-  const detail: OrderPlaced = { orderId: order.id, total: order.total, items: order.items }
+  const detail: OrderPlaced = {
+    orderId: order.id,
+    customerId: order.customerId,
+    items: order.items.map(({ productId, quantity }) => ({ productId, quantity })),
+  }
   const result = await events.send(new PutEventsCommand({
     Entries: [{
       EventBusName: process.env.EVENT_BUS_NAME,

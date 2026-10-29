@@ -1,17 +1,17 @@
-import { z } from 'zod'
+// Werkstatt-Shop: Geld immer als ganze Cent, nie als Kommazahl.
+export type OrderItem = { productId: string; quantity: number; priceCents: number }
+export type Order = { customerId: string; items: OrderItem[] }
 
-export type Order = {
-  customerId: string
-  items: { sku: string; price: number; quantity: number }[]
+// TODO: Body prüfen und eine Bestellung oder undefined liefern.
+//       - kaputtes JSON -> undefined (nicht werfen)
+//       - customerId: nicht leerer String
+//       - items: mindestens eine Position
+//       - productId nicht leer, quantity ganzzahlig >= 1, priceCents ganzzahlig >= 0
+export const parseOrder = (_body: string | undefined): Order | undefined => {
+  throw new Error('TODO: parseOrder implementieren')
 }
 
-// TODO: Ersetze z.any() durch ein echtes Schema: customerId (nicht leer) und
-// items (mindestens ein Eintrag, price >= 0, quantity ganzzahlig und > 0).
-export const Order: z.ZodType<Order> = z.any()
-
-export type OrderTotal = { customerId: string; items: number; total: number }
-
-// TODO: Reine Function ohne Event und ohne AWS: Anzahl Artikel und Summe.
-export const calculateTotal = (_order: Order): OrderTotal => {
-  throw new Error('TODO: calculateTotal implementieren')
+// TODO: Reine Function ohne Event und ohne AWS: Σ quantity × priceCents.
+export const totalCents = (_order: Order): number => {
+  throw new Error('TODO: totalCents implementieren')
 }

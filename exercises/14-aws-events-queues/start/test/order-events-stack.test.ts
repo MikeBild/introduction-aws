@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald Rule, DLQ, Partial Batch Response und Idempotency stehen.
+// TODO: Entferne .skip, sobald Rule, DLQ, Partial Batch Response und Conditional Write stehen.
 import { App } from 'aws-cdk-lib'
 import { Match, Template } from 'aws-cdk-lib/assertions'
 import { describe, it } from 'vitest'
@@ -17,6 +17,12 @@ describe.skip('OrderEventsStack', () => {
   it('hat eine Dead Letter Queue nach drei Fehlversuchen', () => {
     template.hasResourceProperties('AWS::SQS::Queue', {
       RedrivePolicy: { deadLetterTargetArn: Match.anyValue(), maxReceiveCount: 3 },
+    })
+  })
+
+  it('hat eine Table für Reservierungen mit orderId als Key', () => {
+    template.hasResourceProperties('AWS::DynamoDB::GlobalTable', {
+      KeySchema: [{ AttributeName: 'orderId', KeyType: 'HASH' }],
     })
   })
 

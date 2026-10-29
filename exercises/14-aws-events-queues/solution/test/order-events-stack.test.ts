@@ -19,6 +19,12 @@ describe('OrderEventsStack', () => {
     })
   })
 
+  it('hat eine Table für Reservierungen mit orderId als Key', () => {
+    template.hasResourceProperties('AWS::DynamoDB::GlobalTable', {
+      KeySchema: [{ AttributeName: 'orderId', KeyType: 'HASH' }],
+    })
+  })
+
   it('nutzt Partial Batch Response', () => {
     template.hasResourceProperties('AWS::Lambda::EventSourceMapping', {
       FunctionResponseTypes: ['ReportBatchItemFailures'],

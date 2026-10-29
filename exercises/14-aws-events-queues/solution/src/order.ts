@@ -1,9 +1,19 @@
-export type Order = { id: string; total: number; items: { sku: string; quantity: number }[] }
-export type OrderPlaced = { orderId: string; total: number; items: Order['items'] }
+// Werkstatt-Shop: Geld in ganzen Cent.
+export type OrderItem = { productId: string; quantity: number; priceCents: number }
+export type Order = { id: string; customerId: string; items: OrderItem[] }
 
-// Fachlogik des Lagers. Wirft bei Artikeln, die es nicht gibt.
-export const reserveStock = async (event: OrderPlaced) => {
-  const unknown = event.items.filter((item) => item.sku.startsWith('UNKNOWN'))
-  if (unknown.length) throw new Error(`Unbekannte Artikel: ${unknown.map((i) => i.sku).join(', ')}`)
-  return { orderId: event.orderId, reserved: event.items.length }
+// Das Event beschreibt ein Fakt in der Vergangenheitsform. Preise braucht das Lager nicht.
+export type OrderPlaced = {
+  orderId: string
+  customerId: string
+  items: { productId: string; quantity: number }[]
+}
+
+export type Reservation = { orderId: string; items: OrderPlaced['items'] }
+
+// Reine Fachlogik des Lagers. Wirft bei Produkten, die es nicht gibt.
+export const reserveStock = (event: OrderPlaced): Reservation => {
+  const unknown = event.items.filter((item) => item.productId.startsWith('UNKNOWN'))
+  if (unknown.length) throw new Error(`Unbekannte Produkte: ${unknown.map((i) => i.productId).join(', ')}`)
+  return { orderId: event.orderId, items: event.items }
 }
