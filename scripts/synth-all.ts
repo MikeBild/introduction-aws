@@ -13,12 +13,22 @@ const apps = readdirSync(root)
   .flatMap((lesson) => ['start', 'solution'].map((variant) => join(root, lesson, variant)))
   .filter((dir) => existsSync(join(dir, 'cdk.json')))
 
+// Keine Credentials, kein Profil, kein Instance Metadata Service: synth muss offline gehen.
+const { AWS_PROFILE, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN, ...env } = process.env
+const offlineEnv = {
+  ...env,
+  AWS_CONFIG_FILE: '/dev/null',
+  AWS_SHARED_CREDENTIALS_FILE: '/dev/null',
+  AWS_EC2_METADATA_DISABLED: 'true',
+  CDK_DISABLE_CLI_TELEMETRY: 'true',
+}
+
 let failed = 0
 for (const dir of apps) {
   const result = spawnSync(
     'npx',
     ['cdk', 'synth', '--quiet', '--no-notices', '-c', 'account=123456789012', '-c', 'region=eu-central-1'],
-    { cwd: dir, encoding: 'utf8', env: { ...process.env, CDK_DISABLE_CLI_TELEMETRY: 'true' } },
+    { cwd: dir, encoding: 'utf8', env: offlineEnv },
   )
   const ok = result.status === 0
   if (!ok) failed++

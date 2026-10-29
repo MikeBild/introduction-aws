@@ -30,6 +30,8 @@ export class ColdStartsStack extends Stack {
       bundling: {
         format: OutputFormat.ESM,
         externalModules: [],
+        // Das gebündelte SDK enthält CommonJS mit require(). Im ESM-Bundle braucht es dafür diesen Shim.
+        banner: "import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);",
         sourceMap: true,
         sourcesContent: true,
       },
