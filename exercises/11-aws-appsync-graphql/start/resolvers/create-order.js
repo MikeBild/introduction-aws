@@ -2,7 +2,7 @@ import { util } from '@aws-appsync/utils'
 
 /**
  * TODO: Mutation.createOrder – schreib die Bestellung per ddb.put aus '@aws-appsync/utils/dynamodb':
- *       key.id aus util.autoId(), ownerId aus ctx.identity.sub, createdAt aus util.time.nowISO8601().
+ *       key.id aus util.autoId(), die Felder aus ctx.args.input, createdAt aus util.time.nowISO8601().
  * @param {import('@aws-appsync/utils').Context} _ctx
  * @returns {any}
  */

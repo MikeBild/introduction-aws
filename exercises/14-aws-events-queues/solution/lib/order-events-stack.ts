@@ -42,13 +42,13 @@ export class OrderEventsStack extends Stack {
       targets: [new SqsQueue(stockQueue)],
     })
 
-    const idempotency = new TableV2(this, 'Idempotency', {
-      partitionKey: { name: 'id', type: AttributeType.STRING },
-      timeToLiveAttribute: 'expiration',
+    // Eine Reservierung pro Bestellnummer. Der Conditional Write verhindert doppelte Wirkung.
+    const reservations = new TableV2(this, 'Reservations', {
+      partitionKey: { name: 'orderId', type: AttributeType.STRING },
       removalPolicy: RemovalPolicy.DESTROY,
     })
-    const reserveStock = fn('ReserveStock', 'reserve-stock.ts', { IDEMPOTENCY_TABLE_NAME: idempotency.tableName })
-    idempotency.grantReadWriteData(reserveStock)
+    const reserveStock = fn('ReserveStock', 'reserve-stock.ts', { RESERVATIONS_TABLE_NAME: reservations.tableName })
+    reservations.grantWriteData(reserveStock)
     reserveStock.addEventSource(new SqsEventSource(stockQueue, {
       batchSize: 10,
       reportBatchItemFailures: true,

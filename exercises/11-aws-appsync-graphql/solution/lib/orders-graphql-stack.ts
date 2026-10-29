@@ -1,7 +1,6 @@
 import { fileURLToPath } from 'node:url'
-import { CfnOutput, RemovalPolicy, Stack, type StackProps } from 'aws-cdk-lib'
+import { CfnOutput, Duration, Expiration, RemovalPolicy, Stack, type StackProps } from 'aws-cdk-lib'
 import { AuthorizationType, Code, Definition, FunctionRuntime, GraphqlApi } from 'aws-cdk-lib/aws-appsync'
-import { UserPool } from 'aws-cdk-lib/aws-cognito'
 import { AttributeType, TableV2 } from 'aws-cdk-lib/aws-dynamodb'
 import type { Construct } from 'constructs'
 
@@ -10,17 +9,6 @@ const file = (path: string) => fileURLToPath(new URL(`../${path}`, import.meta.u
 export class OrdersGraphqlStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
-
-    const userPool = new UserPool(this, 'Users', {
-      selfSignUpEnabled: true,
-      signInAliases: { email: true },
-      autoVerify: { email: true },
-      removalPolicy: RemovalPolicy.DESTROY,
-    })
-    const webClient = userPool.addClient('Web', {
-      authFlows: { userSrp: true, userPassword: true },
-      generateSecret: false,
-    })
 
     const table = new TableV2(this, 'Orders', {
       partitionKey: { name: 'id', type: AttributeType.STRING },
@@ -31,10 +19,13 @@ export class OrdersGraphqlStack extends Stack {
       name: 'orders',
       definition: Definition.fromFile(file('schema.graphql')),
       authorizationConfig: {
+        // Zum Entwickeln: ein API Key, der nach sieben Tagen abläuft.
         defaultAuthorization: {
-          authorizationType: AuthorizationType.USER_POOL,
-          userPoolConfig: { userPool },
+          authorizationType: AuthorizationType.API_KEY,
+          apiKeyConfig: { expires: Expiration.after(Duration.days(7)) },
         },
+        // Für Backends: Aufrufe mit IAM-Signatur, erlaubt per api.grantMutation(...).
+        additionalAuthorizationModes: [{ authorizationType: AuthorizationType.IAM }],
       },
     })
 
@@ -56,7 +47,7 @@ export class OrdersGraphqlStack extends Stack {
     // Subscription.onOrderCreated braucht keinen Resolver: @aws_subscribe verbindet sie mit createOrder.
 
     new CfnOutput(this, 'GraphqlUrl', { value: api.graphqlUrl })
-    new CfnOutput(this, 'UserPoolId', { value: userPool.userPoolId })
-    new CfnOutput(this, 'ClientId', { value: webClient.userPoolClientId })
+    // Nur für Übungen: Der Key steht damit im Klartext in den Stack Outputs.
+    new CfnOutput(this, 'ApiKey', { value: api.apiKey ?? '' })
   }
 }

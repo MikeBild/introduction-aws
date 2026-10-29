@@ -1,6 +1,6 @@
 # Übungen: AWS Serverless
 
-Übungs-Repo zum Workshop **„AWS Serverless in zwei Tagen“**. Zu jeder der 16 Lektionen findest du hier eine Aufgabe mit Startpunkt und Lösung. Alle Übungen drehen sich um dieselbe Domäne: einen Shop mit Bestellungen.
+Übungs-Repo zum Workshop **„AWS Serverless in zwei Tagen“**. Zu jeder der 18 Lektionen findest du hier eine Aufgabe mit Startpunkt und Lösung. Alle Übungen drehen sich um dieselbe Domäne, den Werkstatt-Shop: Produkte, Bestellungen mit Positionen aus `productId`, `quantity` und `priceCents`, Geld immer in ganzen Cent.
 
 **Stack (Oktober 2026):** Node.js 26 lokal · Lambda-Runtime `nodejs24.x` auf ARM · AWS CDK v2 (`aws-cdk-lib` 2.275) · AWS SDK for JavaScript v3 · TypeScript strict als ESM · Vitest · Powertools for AWS Lambda (TypeScript) · AppSync mit JavaScript-Resolvern · Step Functions mit JSONata · EventBridge und SQS · Cognito · SES · OpenTelemetry
 
@@ -71,24 +71,28 @@ Die Tests brauchen kein AWS-Konto. SDK-Aufrufe ersetzt [`aws-sdk-client-mock`](h
 
 ## Lektionen
 
-| Tag | # | Lektion | Unit | Übung |
+| Block | # | Lektion | Unit | Übung |
 | --- | --- | --- | --- | --- |
-| 1 | 01 | Serverless-Grundhaltung | `aws-serverless-mindset` | [exercises/01-aws-serverless-mindset](exercises/01-aws-serverless-mindset) |
-| 1 | 02 | Lambda Handler in TypeScript | `aws-lambda-handler` | [exercises/02-aws-lambda-handler](exercises/02-aws-lambda-handler) |
-| 1 | 03 | CDK-Grundlagen | `aws-cdk-basics` | [exercises/03-aws-cdk-basics](exercises/03-aws-cdk-basics) |
-| 1 | 04 | IAM mit Least Privilege | `aws-iam-least-privilege` | [exercises/04-aws-iam-least-privilege](exercises/04-aws-iam-least-privilege) |
-| 1 | 05 | HTTP API mit API Gateway | `aws-api-gateway-http` | [exercises/05-aws-api-gateway-http](exercises/05-aws-api-gateway-http) |
-| 1 | 06 | DynamoDB modellieren | `aws-dynamodb-modeling` | [exercises/06-aws-dynamodb-modeling](exercises/06-aws-dynamodb-modeling) |
-| 1 | 07 | Single-Table-Design | `aws-dynamodb-single-table` | [exercises/07-aws-dynamodb-single-table](exercises/07-aws-dynamodb-single-table) |
-| 1 | 08 | Konfiguration und Secrets | `aws-config-secrets` | [exercises/08-aws-config-secrets](exercises/08-aws-config-secrets) |
-| 2 | 09 | Cognito User Pools | `aws-cognito-user-pools` | [exercises/09-aws-cognito-user-pools](exercises/09-aws-cognito-user-pools) |
-| 2 | 10 | API mit Cognito absichern | `aws-cognito-authorizer` | [exercises/10-aws-cognito-authorizer](exercises/10-aws-cognito-authorizer) |
-| 2 | 11 | GraphQL mit AppSync | `aws-appsync-graphql` | [exercises/11-aws-appsync-graphql](exercises/11-aws-appsync-graphql) |
-| 2 | 12 | Mails mit SES | `aws-ses-mail` | [exercises/12-aws-ses-mail](exercises/12-aws-ses-mail) |
-| 2 | 13 | Abläufe mit Step Functions | `aws-step-functions` | [exercises/13-aws-step-functions](exercises/13-aws-step-functions) |
-| 2 | 14 | Events und Queues | `aws-events-queues` | [exercises/14-aws-events-queues](exercises/14-aws-events-queues) |
-| 2 | 15 | Cold Starts messen und senken | `aws-cold-starts` | [exercises/15-aws-cold-starts](exercises/15-aws-cold-starts) |
-| 2 | 16 | Observability | `aws-observability` | [exercises/16-aws-observability](exercises/16-aws-observability) |
+| Tag 1 | 01 | Serverless-Grundhaltung | `aws-serverless-mindset` | [exercises/01-aws-serverless-mindset](exercises/01-aws-serverless-mindset) |
+| Tag 1 | 02 | Lambda Handler in TypeScript | `aws-lambda-handler` | [exercises/02-aws-lambda-handler](exercises/02-aws-lambda-handler) |
+| Tag 1 | 03 | CDK-Grundlagen | `aws-cdk-basics` | [exercises/03-aws-cdk-basics](exercises/03-aws-cdk-basics) |
+| Tag 1 | 04 | IAM mit Least Privilege | `aws-iam-least-privilege` | [exercises/04-aws-iam-least-privilege](exercises/04-aws-iam-least-privilege) |
+| Tag 1 | 05 | HTTP API mit API Gateway | `aws-api-gateway-http` | [exercises/05-aws-api-gateway-http](exercises/05-aws-api-gateway-http) |
+| Tag 1 | 06 | DynamoDB modellieren | `aws-dynamodb-modeling` | [exercises/06-aws-dynamodb-modeling](exercises/06-aws-dynamodb-modeling) |
+| Tag 1 | 07 | Single-Table-Design | `aws-dynamodb-single-table` | [exercises/07-aws-dynamodb-single-table](exercises/07-aws-dynamodb-single-table) |
+| Tag 1 | 08 | Konfiguration und Secrets | `aws-config-secrets` | [exercises/08-aws-config-secrets](exercises/08-aws-config-secrets) |
+| Tag 2 | 14 | Events und Queues | `aws-events-queues` | [exercises/14-aws-events-queues](exercises/14-aws-events-queues) |
+| Tag 2 | 12 | Mails mit SES | `aws-ses-mail` | [exercises/12-aws-ses-mail](exercises/12-aws-ses-mail) |
+| Tag 2 | 13 | Abläufe mit Step Functions | `aws-step-functions` | [exercises/13-aws-step-functions](exercises/13-aws-step-functions) |
+| Tag 2 | 15 | Cold Starts messen und senken | `aws-cold-starts` | [exercises/15-aws-cold-starts](exercises/15-aws-cold-starts) |
+| Tag 2 | 17 | Praxis Teil eins: Bestellung bis in die Tabelle | `aws-lab-end-to-end` | [exercises/17-aws-lab-end-to-end](exercises/17-aws-lab-end-to-end) |
+| Tag 2 | 18 | Praxis Teil zwei: vom Event bis zum Versand | `aws-lab-fulfillment` | [exercises/18-aws-lab-fulfillment](exercises/18-aws-lab-fulfillment) |
+| Zusatz | 09 | Cognito User Pools | `aws-cognito-user-pools` | [exercises/09-aws-cognito-user-pools](exercises/09-aws-cognito-user-pools) |
+| Zusatz | 10 | API mit Cognito absichern | `aws-cognito-authorizer` | [exercises/10-aws-cognito-authorizer](exercises/10-aws-cognito-authorizer) |
+| Zusatz | 11 | GraphQL mit AppSync | `aws-appsync-graphql` | [exercises/11-aws-appsync-graphql](exercises/11-aws-appsync-graphql) |
+| Zusatz | 16 | Observability | `aws-observability` | [exercises/16-aws-observability](exercises/16-aws-observability) |
+
+Die Nummern bleiben stabil, die Reihenfolge folgt der Agenda. Die Praxis-Lektionen 17 und 18 führen die Übungen 02 bis 08 und 12 bis 15 zu einem Stack `OrdersStack` zusammen. Die Zusatzkapitel kannst du einzeln nachholen.
 
 01 und 06 beginnen mit einem Arbeitsblatt statt mit Code.
 
@@ -98,6 +102,7 @@ Alle Übungen bleiben bei normaler Nutzung im Free Tier oder bei wenigen Cent. T
 
 - **SES (12):** Verifizierte Identitäten und das aktive Receipt Rule Set deaktivierst du vor dem Destroy: `aws ses set-active-receipt-rule-set` ohne Namen.
 - **Secrets (08):** Den SecureString legst du per CLI an, also löschst du ihn auch per CLI: `aws ssm delete-parameter --name /orders/payments/api-key`.
+- **Praxis (17, 18):** Ebenso `aws ssm delete-parameter --name /werkstatt/payments/api-key`.
 - **Power Tuning (15):** Den Stack aus dem Serverless Application Repository löschst du in CloudFormation.
 
 ## Altes Material von 2019

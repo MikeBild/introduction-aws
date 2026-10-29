@@ -1,18 +1,19 @@
 import * as ddb from '@aws-appsync/utils/dynamodb'
 import { util } from '@aws-appsync/utils'
 
-/** @typedef {{ id: string, ownerId: string, items: { sku: string, quantity: number }[], createdAt: string }} Order */
+/** @typedef {{ productId: string, quantity: number, priceCents: number }} OrderItem */
+/** @typedef {{ customerId: string, items: OrderItem[] }} CreateOrderInput */
+/** @typedef {CreateOrderInput & { id: string, createdAt: string }} Order */
 
 /**
- * Mutation.createOrder: schreibt die Bestellung mit der sub des Aufrufers als ownerId.
- * @param {import('@aws-appsync/utils').Context<{ input: { items: { sku: string, quantity: number }[] } }>} ctx
+ * Mutation.createOrder: ID und Zeitstempel erzeugt der Resolver, nie der Client.
+ * @param {import('@aws-appsync/utils').Context<{ input: CreateOrderInput }>} ctx
  */
 export const request = (ctx) => {
-  const identity = /** @type {import('@aws-appsync/utils').AppSyncIdentityCognito} */ (ctx.identity)
   /** @type {ddb.PutInput<Order>} */
   const put = {
     key: { id: util.autoId() },
-    item: { ...ctx.args.input, ownerId: identity.sub, createdAt: util.time.nowISO8601() },
+    item: { ...ctx.args.input, createdAt: util.time.nowISO8601() },
   }
   return ddb.put(put)
 }

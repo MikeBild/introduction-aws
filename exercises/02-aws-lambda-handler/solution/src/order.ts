@@ -1,23 +1,29 @@
-import { z } from 'zod'
+// Werkstatt-Shop: Geld immer als ganze Cent, nie als Kommazahl.
+export type OrderItem = { productId: string; quantity: number; priceCents: number }
+export type Order = { customerId: string; items: OrderItem[] }
 
-export const OrderItem = z.object({
-  sku: z.string().min(1),
-  price: z.number().nonnegative(),
-  quantity: z.number().int().positive(),
-})
+const isText = (value: unknown): value is string => typeof value === 'string' && value.length > 0
+const isWhole = (value: unknown, min: number): value is number => Number.isInteger(value) && (value as number) >= min
 
-export const Order = z.object({
-  customerId: z.string().min(1),
-  items: z.array(OrderItem).min(1),
-})
+const isItem = (value: unknown): value is OrderItem => {
+  const item = value as Partial<OrderItem> | null
+  return isText(item?.productId) && isWhole(item?.quantity, 1) && isWhole(item?.priceCents, 0)
+}
 
-export type Order = z.infer<typeof Order>
-
-export type OrderTotal = { customerId: string; items: number; total: number }
+// Prüft den Body und liefert eine Bestellung oder undefined – auch bei kaputtem JSON.
+export const parseOrder = (body: string | undefined): Order | undefined => {
+  let data: unknown
+  try {
+    data = JSON.parse(body ?? '')
+  } catch {
+    return undefined
+  }
+  const order = data as Partial<Order> | null
+  if (!isText(order?.customerId)) return undefined
+  if (!Array.isArray(order.items) || order.items.length === 0 || !order.items.every(isItem)) return undefined
+  return { customerId: order.customerId, items: order.items.map(({ productId, quantity, priceCents }) => ({ productId, quantity, priceCents })) }
+}
 
 // Reine Fachlogik: kein Event, kein AWS, leicht zu testen.
-export const calculateTotal = (order: Order): OrderTotal => ({
-  customerId: order.customerId,
-  items: order.items.reduce((sum, item) => sum + item.quantity, 0),
-  total: Math.round(order.items.reduce((sum, item) => sum + item.price * item.quantity, 0) * 100) / 100,
-})
+export const totalCents = (order: Order): number =>
+  order.items.reduce((sum, item) => sum + item.quantity * item.priceCents, 0)
