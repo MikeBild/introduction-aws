@@ -23,7 +23,7 @@ async function executeConfirmationStateMachine(
     stepFunctions.getActivityTask(
       {
         activityArn:
-          'arn:aws:states:eu-central-1:044086961882:activity:WaitForConfirmation',
+          'arn:aws:states:eu-central-1:123456789012:activity:WaitForConfirmation',
       },
       (err, data) => {
         if (err) return reject(err);
@@ -35,7 +35,7 @@ async function executeConfirmationStateMachine(
   const stateMachine = stepFunctions
     .startExecution({
       stateMachineArn:
-        'arn:aws:states:eu-central-1:044086961882:stateMachine:Time-Tracker-Request-Confirmation',
+        'arn:aws:states:eu-central-1:123456789012:stateMachine:Time-Tracker-Request-Confirmation',
       input: JSON.stringify(input),
     })
     .promise();

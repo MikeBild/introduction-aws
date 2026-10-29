@@ -15,7 +15,7 @@
 ## Live
 
 * [Web-App](https://s3.eu-central-1.amazonaws.com/time-tracker-webapp.mikebild.com/index.html)
-* [GraphQL-API](https://eriuqjklw1.execute-api.eu-central-1.amazonaws.com/prod)
+* [GraphQL-API](https://abcdef1234.execute-api.eu-central-1.amazonaws.com/prod)
 
 ## Technologies
 
