@@ -7,7 +7,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   try {
     body = JSON.parse(event.body ?? '{}')
   } catch {
-    return { statusCode: 400, body: JSON.stringify({ message: 'kein gültiges JSON' }) }
+    return { statusCode: 400, body: JSON.stringify({ message: 'Der Body ist kein gültiges JSON. Schick die Bestellung als JSON-Objekt.' }) }
   }
   const parsed = PlaceOrderInput.safeParse(body)
   if (!parsed.success)

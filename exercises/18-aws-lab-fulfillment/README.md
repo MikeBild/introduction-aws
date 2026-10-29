@@ -1,6 +1,6 @@
 # 18 · Praxis Teil zwei: vom Event bis zum Versand
 
-**Unit:** `aws-lab-fulfillment`
+**ID:** `aws-lab-fulfillment`
 
 ## Aufgabe
 
@@ -12,13 +12,13 @@ flowchart LR
   eb --> q["SQS: StockQueue"] --> stock["ReserveStock"]
   q -. "nach drei Versuchen" .-> dlq[("StockDlq")]
   eb --> sfn["State Machine"]
-  sfn --> pay["Bezahlen"] --> ship["Versenden"] --> mail["Bestaetigen per SES"]
+  sfn --> pay["Bezahlen"] --> ship["Versenden"] --> mail["Bestätigen per SES"]
   pay -. "Catch PaymentDeclined" .-> cancel["Stornieren"]
 ```
 
 [`start/`](start/) ist die Lösung von [Teil eins](../17-aws-lab-end-to-end) plus Platzhalter für die neuen Dateien. Der Stack heißt weiter `OrdersStack`: Ein Deploy aktualisiert den Stack aus Teil eins, statt einen zweiten anzulegen.
 
-| Baustein | kommt aus | Datei in `start/` |
+| Bestandteil | kommt aus | Datei in `start/` |
 | --- | --- | --- |
 | `OrderPlaced` veröffentlichen | [14](../14-aws-events-queues/solution/src/publish.ts) | `src/events.ts`, `src/place-order.ts` |
 | Queue, DLQ, Partial Batch Response, Conditional Write | [14](../14-aws-events-queues/solution/) | `src/reserve-stock.ts`, `lib/orders-stack.ts` |
@@ -26,7 +26,7 @@ flowchart LR
 | Mail per SES | [12](../12-aws-ses-mail/solution/src/send-confirmation.ts) | `src/send-confirmation.ts` |
 | REPORT-Zeilen auswerten | [15](../15-aws-cold-starts/solution/src/analyze-logs.ts) | – |
 
-## Vorher
+## Vorher wissen
 
 - Teil eins ist deployt, der Parameter `/werkstatt/payments/api-key` existiert.
 - **SES-Sandbox:** Absender und Empfänger müssen verifiziert sein. Hast du Übung 12 gemacht, ist der Absender es schon. Sonst:
@@ -64,7 +64,7 @@ flowchart LR
    # normal: bezahlt, versendet, Mail kommt an
    curl -X POST "$API/orders" -H 'content-type: application/json' \
      -d '{"customerId":"c-1","items":[{"productId":"p-1","quantity":2,"priceCents":1299}]}'
-   # über 1000 Euro: Zahlung abgelehnt, Bestellung storniert
+   # über 1.000 Euro: Zahlung abgelehnt, Bestellung storniert
    curl -X POST "$API/orders" -H 'content-type: application/json' \
      -d '{"customerId":"c-1","items":[{"productId":"p-1","quantity":100,"priceCents":1299}]}'
    # unbekanntes Produkt: Reservierung scheitert, Nachricht landet in der DLQ
@@ -91,7 +91,7 @@ flowchart LR
 
 - `npx cdk synth` läuft ohne Fehler, alle Tests sind grün.
 - Die erste Bestellung endet in der State Machine über `Fertig`, die Mail „Bestellung … bestätigt“ kommt an.
-- Die Bestellung über 1000 Euro endet über `Stornieren` und steht per `GET /orders` mit `"status": "cancelled"` da.
+- Die Bestellung über 1.000 Euro endet über `Stornieren` und steht per `GET /orders` mit `"status": "cancelled"` da.
 - Die Bestellung mit `UNKNOWN-1` liegt nach drei Versuchen in der DLQ. Die anderen Nachrichten im selben Batch laufen trotzdem durch.
 - Stellt SQS `OrderPlaced` zweimal zu, loggt `ReserveStock` beim zweiten Mal `"result":"duplicate"`. Die Reservierung gibt es nur einmal.
 - Du kennst die durchschnittliche Init Duration von `PlaceOrder`.

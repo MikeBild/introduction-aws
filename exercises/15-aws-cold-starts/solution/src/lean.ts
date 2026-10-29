@@ -6,7 +6,7 @@ const db = new DynamoDBClient({})
 
 const parseInput = (event: unknown) => {
   const orderId = (event as { orderId?: unknown } | null)?.orderId
-  if (typeof orderId !== 'string') throw new Error('orderId fehlt')
+  if (typeof orderId !== 'string') throw new Error('orderId fehlt. Ruf die Function mit {"orderId":"A7"} auf.')
   return { orderId }
 }
 

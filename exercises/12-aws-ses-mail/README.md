@@ -1,6 +1,6 @@
 # 12 · Mails mit SES
 
-**Unit:** `aws-ses-mail`
+**ID:** `aws-ses-mail`
 
 ## Aufgabe
 

@@ -1,6 +1,6 @@
 # 06 · DynamoDB modellieren
 
-**Unit:** `aws-dynamodb-modeling` · **Format:** Breakout oder Whiteboard, danach Code
+**ID:** `aws-dynamodb-modeling` · **Format:** Breakout oder Whiteboard, danach Code
 
 ## Aufgabe
 

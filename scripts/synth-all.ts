@@ -1,7 +1,7 @@
 // Führt `cdk synth` für jede CDK App unter exercises/ aus – ohne AWS-Konto.
 // Account und Region sind Platzhalter und kommen per Context.
 // Aufruf: npm run synth            (alle Apps)
-//         npm run synth -- 05      (nur Lektion 05)
+//         npm run synth -- 05      (nur Übung 05)
 import { spawnSync } from 'node:child_process'
 import { existsSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
@@ -35,5 +35,5 @@ for (const dir of apps) {
   console.log(`${ok ? 'ok  ' : 'FAIL'} ${dir.slice(root.length + 1)}`)
   if (!ok) console.log(result.stdout, result.stderr)
 }
-console.log(`\n${apps.length - failed}/${apps.length} CDK Apps synthetisiert`)
+console.log(`\n${apps.length - failed}/${apps.length} CDK-Apps synthetisiert`)
 process.exit(failed ? 1 : 0)
