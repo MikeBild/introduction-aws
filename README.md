@@ -66,29 +66,29 @@ Die Tests brauchen kein AWS-Konto. SDK-Aufrufe ersetzt [`aws-sdk-client-mock`](h
 
 | Block | # | Lektion | ID | Übung |
 | --- | --- | --- | --- | --- |
-| Tag 1 | 01 | Serverless-Grundhaltung | `aws-serverless-mindset` | [exercises/01-aws-serverless-mindset](exercises/01-aws-serverless-mindset) |
-| Tag 1 | 02 | Lambda-Handler in TypeScript | `aws-lambda-handler` | [exercises/02-aws-lambda-handler](exercises/02-aws-lambda-handler) |
-| Tag 1 | 03 | CDK-Grundlagen | `aws-cdk-basics` | [exercises/03-aws-cdk-basics](exercises/03-aws-cdk-basics) |
-| Tag 1 | 04 | IAM mit Least Privilege | `aws-iam-least-privilege` | [exercises/04-aws-iam-least-privilege](exercises/04-aws-iam-least-privilege) |
-| Tag 1 | 05 | HTTP-API mit API Gateway | `aws-api-gateway-http` | [exercises/05-aws-api-gateway-http](exercises/05-aws-api-gateway-http) |
-| Tag 1 | 06 | DynamoDB modellieren | `aws-dynamodb-modeling` | [exercises/06-aws-dynamodb-modeling](exercises/06-aws-dynamodb-modeling) |
-| Tag 1 | 07 | Single-Table-Design | `aws-dynamodb-single-table` | [exercises/07-aws-dynamodb-single-table](exercises/07-aws-dynamodb-single-table) |
-| Tag 1 | 08 | Konfiguration und Secrets | `aws-config-secrets` | [exercises/08-aws-config-secrets](exercises/08-aws-config-secrets) |
-| Tag 2 | 14 | Events und Queues | `aws-events-queues` | [exercises/14-aws-events-queues](exercises/14-aws-events-queues) |
-| Tag 2 | 12 | Mails mit SES | `aws-ses-mail` | [exercises/12-aws-ses-mail](exercises/12-aws-ses-mail) |
-| Tag 2 | 13 | Abläufe mit Step Functions | `aws-step-functions` | [exercises/13-aws-step-functions](exercises/13-aws-step-functions) |
-| Tag 2 | 15 | Cold Starts messen und senken | `aws-cold-starts` | [exercises/15-aws-cold-starts](exercises/15-aws-cold-starts) |
-| Tag 2 | 17 | Praxis Teil eins: die Bestellung bis in die Tabelle | `aws-lab-end-to-end` | [exercises/17-aws-lab-end-to-end](exercises/17-aws-lab-end-to-end) |
-| Tag 2 | 18 | Praxis Teil zwei: vom Event bis zum Versand | `aws-lab-fulfillment` | [exercises/18-aws-lab-fulfillment](exercises/18-aws-lab-fulfillment) |
+| Tag 1 | 01 | Was nimmt dir Serverless wirklich ab? | `aws-serverless-mindset` | [exercises/01-aws-serverless-mindset](exercises/01-aws-serverless-mindset) |
+| Tag 1 | 02 | Eine Lambda-Funktion ist nur ein Handler | `aws-lambda-handler` | [exercises/02-aws-lambda-handler](exercises/02-aws-lambda-handler) |
+| Tag 1 | 03 | Infrastruktur gehört als TypeScript ins Repo | `aws-cdk-basics` | [exercises/03-aws-cdk-basics](exercises/03-aws-cdk-basics) |
+| Tag 1 | 04 | Jede Funktion bekommt nur ihre eigenen Rechte | `aws-iam-least-privilege` | [exercises/04-aws-iam-least-privilege](exercises/04-aws-iam-least-privilege) |
+| Tag 1 | 05 | Wie kommt ein HTTP Request zur Funktion? | `aws-api-gateway-http` | [exercises/05-aws-api-gateway-http](exercises/05-aws-api-gateway-http) |
+| Tag 1 | 06 | Erst Zugriffsmuster, dann Tabelle | `aws-dynamodb-modeling` | [exercises/06-aws-dynamodb-modeling](exercises/06-aws-dynamodb-modeling) |
+| Tag 1 | 07 | Wann lohnt sich Single-Table-Design? | `aws-dynamodb-single-table` | [exercises/07-aws-dynamodb-single-table](exercises/07-aws-dynamodb-single-table) |
+| Tag 1 | 08 | Wohin mit Konfiguration und Secrets? | `aws-config-secrets` | [exercises/08-aws-config-secrets](exercises/08-aws-config-secrets) |
+| Tag 2 | 14 | Jede Nachricht kann zweimal ankommen | `aws-events-queues` | [exercises/14-aws-events-queues](exercises/14-aws-events-queues) |
+| Tag 2 | 12 | Bei SES steckt der Aufwand im DNS, nicht im Code | `aws-ses-mail` | [exercises/12-aws-ses-mail](exercises/12-aws-ses-mail) |
+| Tag 2 | 13 | Abläufe als State Machine statt Aufrufketten | `aws-step-functions` | [exercises/13-aws-step-functions](exercises/13-aws-step-functions) |
+| Tag 2 | 15 | Cold Starts messen statt fürchten | `aws-cold-starts` | [exercises/15-aws-cold-starts](exercises/15-aws-cold-starts) |
+| Tag 2 | 17 | Praxis Teil eins, die Bestellung bis in die Tabelle | `aws-lab-end-to-end` | [exercises/17-aws-lab-end-to-end](exercises/17-aws-lab-end-to-end) |
+| Tag 2 | 18 | Praxis Teil zwei, vom Event bis zum Versand | `aws-lab-fulfillment` | [exercises/18-aws-lab-fulfillment](exercises/18-aws-lab-fulfillment) |
 
 ### Zusatzkapitel
 
 | # | Lektion | ID | Übung |
 | --- | --- | --- | --- |
-| 09 | Cognito User Pools | `aws-cognito-user-pools` | [exercises/09-aws-cognito-user-pools](exercises/09-aws-cognito-user-pools) |
-| 10 | API mit Cognito absichern | `aws-cognito-authorizer` | [exercises/10-aws-cognito-authorizer](exercises/10-aws-cognito-authorizer) |
-| 11 | GraphQL mit AppSync | `aws-appsync-graphql` | [exercises/11-aws-appsync-graphql](exercises/11-aws-appsync-graphql) |
-| 16 | Observability | `aws-observability` | [exercises/16-aws-observability](exercises/16-aws-observability) |
+| 09 | Brauchst du noch einen eigenen Auth-Server? | `aws-cognito-user-pools` | [exercises/09-aws-cognito-user-pools](exercises/09-aws-cognito-user-pools) |
+| 10 | Wer prüft das Token und wer die Rechte? | `aws-cognito-authorizer` | [exercises/10-aws-cognito-authorizer](exercises/10-aws-cognito-authorizer) |
+| 11 | Braucht GraphQL noch einen eigenen Server? | `aws-appsync-graphql` | [exercises/11-aws-appsync-graphql](exercises/11-aws-appsync-graphql) |
+| 16 | Ohne Server zum Einloggen bleiben nur Signale | `aws-observability` | [exercises/16-aws-observability](exercises/16-aws-observability) |
 
 Die Nummern bleiben stabil, die Reihenfolge folgt der Agenda. Die Praxis-Lektionen 17 und 18 führen die Übungen 02 bis 08 und 12 bis 15 zu einem Stack `OrdersStack` zusammen. Die Zusatzkapitel kannst du einzeln nachholen.
 
