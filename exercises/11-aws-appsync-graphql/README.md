@@ -50,7 +50,7 @@ flowchart LR
 
 - Ein Backend ruft die API mit IAM auf. Dafür gibst du seiner Role das Recht per `api.grantMutation(fn, 'createOrder')` und signierst den Request mit SigV4.
 - Schreibt ein anderer Service direkt in die Table, merkt die Subscription nichts. Solche Änderungen schickst du über eine eigene Mutation mit IAM.
-- Muss ein Resolver drei Services aufrufen und Ergebnisse zusammenführen, gehört die Logik in eine Lambda-Funktion als Data Source: `api.addLambdaDataSource(...)`.
+- Muss ein Resolver drei Services aufrufen und Ergebnisse zusammenführen, gehört die Logik in eine Lambda-Function als Data Source: `api.addLambdaDataSource(...)`.
 
 ## Lösung
 

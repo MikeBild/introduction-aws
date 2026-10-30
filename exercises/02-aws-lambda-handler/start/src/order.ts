@@ -11,7 +11,7 @@ export const parseOrder = (_body: string | undefined): Order | undefined => {
   throw new Error('TODO: parseOrder implementieren')
 }
 
-// TODO: Reine Funktion ohne Event und ohne AWS: Σ quantity × priceCents.
+// TODO: Pure Function ohne Event und ohne AWS: Σ quantity × priceCents.
 export const totalCents = (_order: Order): number => {
   throw new Error('TODO: totalCents implementieren')
 }

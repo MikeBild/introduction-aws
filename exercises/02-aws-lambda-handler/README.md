@@ -4,7 +4,7 @@
 
 ## Aufgabe
 
-Schreib einen async Handler für `placeOrder`: Body prüfen, die Summe in einer reinen Funktion berechnen, mit `400` oder `200` antworten und lokal ohne AWS testen. Du brauchst dafür keine Bibliothek, eine kleine Funktion reicht.
+Schreib einen async Handler für `placeOrder`: Body prüfen, die Summe in einer Pure Function berechnen, mit `400` oder `200` antworten und lokal ohne AWS testen. Du brauchst dafür keine Bibliothek, eine kleine Funktion reicht.
 
 ## Ablauf
 
@@ -13,7 +13,7 @@ Schreib einen async Handler für `placeOrder`: Body prüfen, die Summe in einer 
    - kaputtes JSON → `undefined`, keine Exception
    - `customerId` ist ein nicht leerer String
    - `items` hat mindestens eine Position aus `productId`, `quantity` (ganzzahlig, mindestens 1) und `priceCents` (ganzzahlig, mindestens 0)
-3. Schreib die reine Funktion `totalCents(order)`: Summe aus Menge mal Preis in Cent. Sie kennt weder Event noch AWS.
+3. Schreib die Pure Function `totalCents(order)`: Summe aus Menge mal Preis in Cent. Sie kennt weder Event noch AWS.
 4. Lass den Handler nur noch parsen, prüfen und antworten: `400` mit `{ "message": "invalid order" }`, sonst `200` mit `{ "totalCents": … }`.
 5. Entferne in `start/test/*.test.ts` das `.skip` und lass die Tests laufen:
 

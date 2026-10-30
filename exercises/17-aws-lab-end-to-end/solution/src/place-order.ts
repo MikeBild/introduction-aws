@@ -6,7 +6,7 @@ import { saveOrder } from './orders.ts'
 
 const FIVE_MINUTES = 300
 
-// POST /orders – dünner Handler über reinen Funktionen.
+// POST /orders – dünner Handler über Pure Functions.
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const input = parseOrder(event.body)
   if (!input)
