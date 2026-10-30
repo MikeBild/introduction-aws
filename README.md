@@ -71,10 +71,10 @@ Die Tests brauchen kein AWS-Konto. SDK-Aufrufe ersetzt [`aws-sdk-client-mock`](h
 | Tag 1 | 03 | Infrastruktur gehört als TypeScript ins Repo | `aws-cdk-basics` | [exercises/03-aws-cdk-basics](exercises/03-aws-cdk-basics) |
 | Tag 1 | 04 | Jede Funktion bekommt nur ihre eigenen Rechte | `aws-iam-least-privilege` | [exercises/04-aws-iam-least-privilege](exercises/04-aws-iam-least-privilege) |
 | Tag 1 | 05 | Wie kommt ein HTTP Request zur Funktion? | `aws-api-gateway-http` | [exercises/05-aws-api-gateway-http](exercises/05-aws-api-gateway-http) |
-| Tag 1 | 06 | Erst Zugriffsmuster, dann Tabelle | `aws-dynamodb-modeling` | [exercises/06-aws-dynamodb-modeling](exercises/06-aws-dynamodb-modeling) |
+| Tag 1 | 06 | Erst Access Patterns, dann Tabelle | `aws-dynamodb-modeling` | [exercises/06-aws-dynamodb-modeling](exercises/06-aws-dynamodb-modeling) |
 | Tag 1 | 07 | Wann lohnt sich Single-Table-Design? | `aws-dynamodb-single-table` | [exercises/07-aws-dynamodb-single-table](exercises/07-aws-dynamodb-single-table) |
 | Tag 1 | 08 | Wohin mit Konfiguration und Secrets? | `aws-config-secrets` | [exercises/08-aws-config-secrets](exercises/08-aws-config-secrets) |
-| Tag 2 | 14 | Jede Nachricht kann zweimal ankommen | `aws-events-queues` | [exercises/14-aws-events-queues](exercises/14-aws-events-queues) |
+| Tag 2 | 14 | Jede Message kann zweimal ankommen | `aws-events-queues` | [exercises/14-aws-events-queues](exercises/14-aws-events-queues) |
 | Tag 2 | 12 | Bei SES steckt der Aufwand im DNS, nicht im Code | `aws-ses-mail` | [exercises/12-aws-ses-mail](exercises/12-aws-ses-mail) |
 | Tag 2 | 13 | Abläufe als State Machine statt Aufrufketten | `aws-step-functions` | [exercises/13-aws-step-functions](exercises/13-aws-step-functions) |
 | Tag 2 | 15 | Cold Starts messen statt fürchten | `aws-cold-starts` | [exercises/15-aws-cold-starts](exercises/15-aws-cold-starts) |
