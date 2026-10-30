@@ -67,7 +67,7 @@ Die Tests brauchen kein AWS-Konto. SDK-Aufrufe ersetzt [`aws-sdk-client-mock`](h
 | Block | # | Lektion | ID | Übung |
 | --- | --- | --- | --- | --- |
 | Tag 1 | 01 | Was nimmt dir Serverless wirklich ab? | `aws-serverless-mindset` | [exercises/01-aws-serverless-mindset](exercises/01-aws-serverless-mindset) |
-| Tag 1 | 02 | Eine Lambda-Funktion ist nur ein Handler | `aws-lambda-handler` | [exercises/02-aws-lambda-handler](exercises/02-aws-lambda-handler) |
+| Tag 1 | 02 | Eine Lambda-Function ist nur ein Handler | `aws-lambda-handler` | [exercises/02-aws-lambda-handler](exercises/02-aws-lambda-handler) |
 | Tag 1 | 03 | Infrastruktur gehört als TypeScript ins Repo | `aws-cdk-basics` | [exercises/03-aws-cdk-basics](exercises/03-aws-cdk-basics) |
 | Tag 1 | 04 | Jede Funktion bekommt nur ihre eigenen Rechte | `aws-iam-least-privilege` | [exercises/04-aws-iam-least-privilege](exercises/04-aws-iam-least-privilege) |
 | Tag 1 | 05 | Wie kommt ein HTTP Request zur Funktion? | `aws-api-gateway-http` | [exercises/05-aws-api-gateway-http](exercises/05-aws-api-gateway-http) |
