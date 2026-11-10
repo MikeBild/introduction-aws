@@ -2,7 +2,7 @@
   "name": "introduction-aws",
   "version": "2026.10.0",
   "private": true,
-  "description": "Übungen zum Workshop AWS Serverless: Lambda, CDK v2, DynamoDB, Cognito, AppSync, Step Functions, EventBridge, SQS, SES",
+  "description": "Exercises for the AWS Serverless workshop: Lambda, CDK v2, DynamoDB, Cognito, AppSync, Step Functions, EventBridge, SQS, SES",
   "license": "MIT",
   "type": "module",
   "engines": {
