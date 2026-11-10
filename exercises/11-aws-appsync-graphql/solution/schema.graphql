@@ -1,6 +1,6 @@
-# Default-Auth ist der API Key. Sobald IAM als zweiter Modus dazukommt, gilt:
-# Ein Typ ohne Direktive ist nur mit dem Default erreichbar. Mit einer Direktive
-# zählen nur noch die genannten Modi – deshalb stehen hier beide.
+# The default auth mode is the API key. Once IAM is added as a second mode:
+# A type without a directive is reachable with the default mode only. With a directive,
+# only the listed modes count – which is why both are listed here.
 
 type OrderItem @aws_api_key @aws_iam {
   productId: String!

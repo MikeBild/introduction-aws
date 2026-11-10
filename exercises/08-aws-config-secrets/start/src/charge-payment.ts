@@ -1,9 +1,9 @@
 import { chargePayment, type PaymentEvent } from './payment.ts'
 
-// Ausgangslage: API Key und Limit stehen im Klartext in Umgebungsvariablen.
-// TODO: Beide mit getParameter aus '@aws-lambda-powertools/parameters/ssm' laden,
-//       den API Key mit decrypt: true, beide mit maxAge: 300.
-//       Die Namen stehen in API_KEY_PARAMETER und MAX_ITEMS_PARAMETER.
+// Starting point: API key and limit are in plain text in environment variables.
+// TODO: Load both with getParameter from '@aws-lambda-powertools/parameters/ssm',
+//       the API key with decrypt: true, both with maxAge: 300.
+//       The names are in API_KEY_PARAMETER and MAX_ITEMS_PARAMETER.
 export const handler = async (event: PaymentEvent) =>
   chargePayment({
     apiKey: process.env.PAYMENT_API_KEY ?? '',

@@ -1,29 +1,31 @@
-# 07 · Single-Table-Design
+*English · [Deutsch](README.de.md)*
 
-**ID:** `aws-dynamodb-single-table` · **Format:** Breakout oder Whiteboard, danach Code
+# 07 · Single-table design
 
-## Aufgabe
+**ID:** `aws-dynamodb-single-table` · **Format:** breakout or whiteboard, then code
 
-Leg Kunden, Bestellungen und Produkte in eine Table und beantworte „Bestellungen eines Produkts“ über einen Inverted Index als GSI.
+## Task
 
-## Datenmodell
+Put customers, orders and products into one table and answer “orders of a product” through an inverted index as a GSI.
+
+## Data model
 
 | Entity | pk | sk |
 | --- | --- | --- |
-| Kunde | `CUSTOMER#42` | `PROFILE` |
-| Bestellung | `CUSTOMER#42` | `ORDER#2026-10-17#A7` |
-| Position | `ORDER#A7` | `PRODUCT#9` |
-| Produkt | `PRODUCT#9` | `PRODUCT#9` |
+| Customer | `CUSTOMER#42` | `PROFILE` |
+| Order | `CUSTOMER#42` | `ORDER#2026-10-17#A7` |
+| Line item | `ORDER#A7` | `PRODUCT#9` |
+| Product | `PRODUCT#9` | `PRODUCT#9` |
 
-Der Inverted Index `GSI1` dreht die Keys um: `sk` wird Partition Key, `pk` Sort Key. Aus „Positionen einer Bestellung“ wird so „Bestellungen eines Produkts“.
+The inverted index `GSI1` swaps the keys: `sk` becomes the partition key, `pk` the sort key. “Line items of an order” thus becomes “orders of a product”.
 
-## Ablauf
+## Steps
 
-1. Lies [`start/src/items.ts`](start/src/items.ts) mit Entities und Testdaten.
-2. Ergänze `GSI1` in [`start/lib/shop-table-stack.ts`](start/lib/shop-table-stack.ts).
-3. Implementiere `getOrderLines` und ersetze den Scan in `getOrdersOfProduct` in [`start/src/shop-repository.ts`](start/src/shop-repository.ts) durch eine Query auf `GSI1`.
-4. Entferne das `.skip` in den Tests.
-5. Optional gegen AWS:
+1. Read [`start/src/items.ts`](start/src/items.ts) with entities and test data.
+2. Add `GSI1` in [`start/lib/shop-table-stack.ts`](start/lib/shop-table-stack.ts).
+3. Implement `getOrderLines` and replace the Scan in `getOrdersOfProduct` in [`start/src/shop-repository.ts`](start/src/shop-repository.ts) with a Query on `GSI1`.
+4. Remove the `.skip` in the tests.
+5. Optionally against AWS:
 
    ```bash
    cd exercises/07-aws-dynamodb-single-table/start
@@ -34,11 +36,11 @@ Der Inverted Index `GSI1` dreht die Keys um: `sk` wird Partition Key, `pk` Sort 
      --expression-attribute-values '{":p":{"S":"PRODUCT#9"},":o":{"S":"ORDER#"}}'
    ```
 
-## Prüfen
+## Check
 
-- „Bestellungen eines Produkts“ liefert A7, A3 und B2 – per Query, ohne Scan und ohne FilterExpression.
-- Kunde und Bestellungen kommen mit einer einzigen Query.
+- “Orders of a product” returns A7, A3 and B2 – via Query, without Scan and without FilterExpression.
+- Customer and orders come back with a single Query.
 
-## Lösung
+## Solution
 
 [`solution/`](solution/)

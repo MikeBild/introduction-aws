@@ -4,7 +4,7 @@ import { describe, it } from 'vitest'
 import { ShopTableStack } from '../lib/shop-table-stack.ts'
 
 describe('ShopTableStack', () => {
-  it('hat einen Inverted Index mit sk als Partition Key und pk als Sort Key', () => {
+  it('has an inverted index with sk as partition key and pk as sort key', () => {
     Template.fromStack(new ShopTableStack(new App(), 'Test')).hasResourceProperties('AWS::DynamoDB::GlobalTable', {
       GlobalSecondaryIndexes: Match.arrayWith([
         Match.objectLike({

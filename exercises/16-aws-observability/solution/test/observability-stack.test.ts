@@ -6,7 +6,7 @@ import { ObservabilityStack } from '../lib/observability-stack.ts'
 const template = Template.fromStack(new ObservabilityStack(new App({ context: { 'aws:cdk:bundling-stacks': [] } }), 'Test'))
 
 describe('ObservabilityStack', () => {
-  it('aktiviert Tracing mit OpenTelemetry-Layer', () => {
+  it('enables tracing with the OpenTelemetry layer', () => {
     template.hasResourceProperties('AWS::Lambda::Function', {
       TracingConfig: { Mode: 'Active' },
       Layers: Match.anyValue(),
@@ -14,11 +14,11 @@ describe('ObservabilityStack', () => {
     })
   })
 
-  it('alarmiert bei Errors', () => {
+  it('alarms on errors', () => {
     template.hasResourceProperties('AWS::CloudWatch::Alarm', { MetricName: 'Errors', Threshold: 5 })
   })
 
-  it('alarmiert bei Nachrichten in der Dead Letter Queue', () => {
+  it('alarms on messages in the dead letter queue', () => {
     template.hasResourceProperties('AWS::CloudWatch::Alarm', {
       MetricName: 'ApproximateNumberOfMessagesVisible',
       Threshold: 1,

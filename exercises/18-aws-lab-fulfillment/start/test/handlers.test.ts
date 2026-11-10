@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald der jeweilige Teil steht.
+// TODO: Remove .skip once the respective part is in place.
 import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge'
 import { GetParameterCommand, SSMClient } from '@aws-sdk/client-ssm'
 import { DynamoDBDocumentClient, PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb'
@@ -31,7 +31,7 @@ const call = async (h: typeof listOrders, event: Partial<APIGatewayProxyEventV2>
 const body = JSON.stringify({ customerId: 'c-1', items: [{ productId: 'p-1', quantity: 2, priceCents: 1299 }] })
 
 describe.skip('POST /orders', () => {
-  it('speichert die Bestellung unter dem Kunden und antwortet mit 201', async () => {
+  it('saves the order under the customer and responds with 201', async () => {
     db.on(PutCommand).resolves({})
     const response = await call(placeOrder, { body })
     expect(response.statusCode).toBe(201)
@@ -41,7 +41,7 @@ describe.skip('POST /orders', () => {
     expect(input?.Item).toMatchObject({ pk: 'CUSTOMER#c-1', sk: expect.stringMatching(/^ORDER#/) })
   })
 
-  it('veröffentlicht OrderPlaced nach dem Speichern', async () => {
+  it('publishes OrderPlaced after saving', async () => {
     db.on(PutCommand).resolves({})
     await call(placeOrder, { body })
     const entry = events.commandCalls(PutEventsCommand)[0]?.args[0].input.Entries?.[0]
@@ -49,13 +49,13 @@ describe.skip('POST /orders', () => {
     expect(JSON.parse(entry?.Detail ?? '')).toMatchObject({ customerId: 'c-1', totalCents: 2598 })
   })
 
-  it('veröffentlicht nichts, wenn das Speichern scheitert', async () => {
+  it('publishes nothing when saving fails', async () => {
     db.on(PutCommand).rejects(new Error('Throttling'))
     await expect(call(placeOrder, { body })).rejects.toThrow('Throttling')
     expect(events.commandCalls(PutEventsCommand)).toHaveLength(0)
   })
 
-  it('lädt den API Key entschlüsselt und nur einmal', async () => {
+  it('loads the API key decrypted and only once', async () => {
     db.on(PutCommand).resolves({})
     await call(placeOrder, { body })
     await call(placeOrder, { body })
@@ -65,7 +65,7 @@ describe.skip('POST /orders', () => {
     })
   })
 
-  it('lehnt eine ungültige Bestellung mit 400 ab, ohne zu schreiben', async () => {
+  it('rejects an invalid order with 400 without writing', async () => {
     const response = await call(placeOrder, { body: JSON.stringify({ customerId: 'c-1', items: [] }) })
     expect(response.statusCode).toBe(400)
     expect(db.commandCalls(PutCommand)).toHaveLength(0)
@@ -73,7 +73,7 @@ describe.skip('POST /orders', () => {
 })
 
 describe.skip('GET /orders', () => {
-  it('liefert die Bestellungen eines Kunden ohne Keys', async () => {
+  it('returns the orders of a customer without keys', async () => {
     db.on(QueryCommand).resolves({ Items: [{ pk: 'CUSTOMER#c-1', sk: 'ORDER#x', orderId: 'A7' }] })
     const response = await call(listOrders, { queryStringParameters: { customerId: 'c-1' } })
     expect(response.statusCode).toBe(200)
@@ -84,7 +84,7 @@ describe.skip('GET /orders', () => {
     })
   })
 
-  it('verlangt eine customerId', async () => {
+  it('requires a customerId', async () => {
     expect((await call(listOrders, {})).statusCode).toBe(400)
   })
 })

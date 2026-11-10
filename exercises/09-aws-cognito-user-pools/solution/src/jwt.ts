@@ -5,13 +5,13 @@ const decodePart = (part: string | undefined) => {
   return JSON.parse(Buffer.from(part, 'base64url').toString('utf8')) as Record<string, unknown>
 }
 
-// Dekodiert ein JWT, ohne die Signatur zu prüfen. Prüfen übernimmt der Authorizer (Lektion 10).
+// Decodes a JWT without verifying the signature. Verification is the job of the authorizer (lesson 10).
 export const decodeJwt = (token: string): JwtParts => {
   const [header, payload] = token.split('.')
   return { header: decodePart(header), payload: decodePart(payload) }
 }
 
-// Fasst die Claims zusammen, die den Unterschied zwischen ID und Access Token zeigen.
+// Summarizes the claims that show the difference between ID and access token.
 export const describeToken = (token: string) => {
   const { payload } = decodeJwt(token)
   return {

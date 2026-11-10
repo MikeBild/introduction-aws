@@ -1,13 +1,13 @@
-// Die Schritte des Workflows als kleine Funktionen. Jede Datei unten ist ein Lambda-Entry.
+// The steps of the workflow as small functions. Each file below is a Lambda entry.
 export type OrderInput = {
   orderId: string
   amount: number
   items: { sku: string; quantity: number }[]
-  // Nur für die Übung: erzwingt einen Fehler beim Zahlungsanbieter.
+  // For the exercise only: forces an error at the payment provider.
   simulate?: 'timeout' | 'declined'
 }
 
-// Step Functions erkennt Fehler am Namen (errorType). Retry und Catch greifen darauf zu.
+// Step Functions recognizes errors by name (errorType). Retry and Catch rely on it.
 export class PaymentProviderTimeout extends Error {
   override name = 'PaymentProviderTimeout'
 }

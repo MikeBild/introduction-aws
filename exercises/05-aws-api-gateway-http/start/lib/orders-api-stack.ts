@@ -29,9 +29,9 @@ export class OrdersApiStack extends Stack {
     const placeOrder = fn('PlaceOrder', 'place-order.ts')
     table.grantWriteData(placeOrder)
 
-    // TODO: HttpApi 'OrdersApi' mit CORS für https://app.example.com (GET, POST)
-    // TODO: Route GET /orders  -> HttpLambdaIntegration mit listOrders
-    // TODO: Route POST /orders -> HttpLambdaIntegration mit placeOrder
-    // TODO: CfnOutput 'ApiUrl' mit api.apiEndpoint
+    // TODO: HttpApi 'OrdersApi' with CORS for https://app.example.com (GET, POST)
+    // TODO: Route GET /orders  -> HttpLambdaIntegration with listOrders
+    // TODO: Route POST /orders -> HttpLambdaIntegration with placeOrder
+    // TODO: CfnOutput 'ApiUrl' with api.apiEndpoint
   }
 }

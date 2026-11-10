@@ -1,4 +1,4 @@
-// Werkstatt-Shop: Geld immer als ganze Cent. Aus Übung 02, ergänzt um placeOrder.
+// Workshop shop: money always as whole cents. From exercise 02, extended with placeOrder.
 export type OrderItem = { productId: string; quantity: number; priceCents: number }
 export type OrderInput = { customerId: string; items: OrderItem[] }
 export type Order = OrderInput & {
@@ -16,7 +16,7 @@ const isItem = (value: unknown): value is OrderItem => {
   return isText(item?.productId) && isWhole(item?.quantity, 1) && isWhole(item?.priceCents, 0)
 }
 
-// Prüft den Body und liefert eine Bestellung oder undefined – auch bei kaputtem JSON.
+// Validates the body and returns an order or undefined – also for broken JSON.
 export const parseOrder = (body: string | undefined): OrderInput | undefined => {
   let data: unknown
   try {
@@ -33,8 +33,8 @@ export const parseOrder = (body: string | undefined): OrderInput | undefined => 
 export const totalCents = (order: OrderInput): number =>
   order.items.reduce((sum, item) => sum + item.quantity * item.priceCents, 0)
 
-// Reine Fachlogik: ID und Zeit kommen von außen, damit Tests sie festlegen können.
-// Der API Key steht für den Zahlungsanbieter. Fehlt er, ist die Konfiguration kaputt.
+// Pure business logic: ID and time come from outside so tests can pin them.
+// The API key stands for the payment provider. If it is missing, the configuration is broken.
 export const placeOrder = (input: OrderInput, { orderId, now, apiKey }: { orderId: string; now: Date; apiKey: string }): Order => {
   if (!apiKey) throw new Error('API Key für den Zahlungsanbieter fehlt. Leg den SecureString /werkstatt/payments/api-key per CLI an.')
   return { ...input, orderId, status: 'placed', totalCents: totalCents(input), createdAt: now.toISOString() }

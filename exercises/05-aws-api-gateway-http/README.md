@@ -1,23 +1,25 @@
-# 05 · HTTP-API mit API Gateway
+*English · [Deutsch](README.de.md)*
+
+# 05 · HTTP API with API Gateway
 
 **ID:** `aws-api-gateway-http`
 
-## Aufgabe
+## Task
 
-Leg eine HTTP-API mit den Routes `GET /orders` und `POST /orders` an, je mit eigener Funktion, und ruf beide per curl auf.
+Create an HTTP API with the routes `GET /orders` and `POST /orders`, each with its own function, and call both with curl.
 
-## Ablauf
+## Steps
 
-1. Die Handler in [`start/src/`](start/src/) sind fertig und getestet (`handlers.test.ts`). Dein Teil ist die API im Stack.
-2. Ergänze in [`start/lib/orders-api-stack.ts`](start/lib/orders-api-stack.ts) eine `HttpApi` mit CORS und zwei Routes mit `HttpLambdaIntegration`.
-3. Gib die URL als `CfnOutput` aus und deploy:
+1. The handlers in [`start/src/`](start/src/) are done and tested (`handlers.test.ts`). Your part is the API in the stack.
+2. In [`start/lib/orders-api-stack.ts`](start/lib/orders-api-stack.ts), add an `HttpApi` with CORS and two routes with `HttpLambdaIntegration`.
+3. Output the URL as a `CfnOutput` and deploy:
 
    ```bash
    cd exercises/05-aws-api-gateway-http/start
    npx cdk deploy
    ```
 
-4. Ruf beide Routes auf. `API` ist der Wert aus `ApiUrl`:
+4. Call both routes. `API` is the value from `ApiUrl`:
 
    ```bash
    API=https://abc123.execute-api.eu-central-1.amazonaws.com
@@ -27,18 +29,18 @@ Leg eine HTTP-API mit den Routes `GET /orders` und `POST /orders` an, je mit eig
    curl -s -X POST "$API/orders" -d '{}' -w '\n%{http_code}\n'   # 400
    ```
 
-5. Entferne das `.skip` in [`start/test/orders-api-stack.test.ts`](start/test/orders-api-stack.test.ts).
+5. Remove the `.skip` in [`start/test/orders-api-stack.test.ts`](start/test/orders-api-stack.test.ts).
 
-## Prüfen
+## Check
 
-- `POST` liefert `201` mit `orderId`, `GET` liefert die Bestellung als Liste.
-- Ein ungültiger Body liefert `400`, ohne dass die Funktion in DynamoDB schreibt.
+- `POST` returns `201` with an `orderId`, `GET` returns the order as a list.
+- An invalid body returns `400` without the function writing to DynamoDB.
 
-## Zum Weiterdenken
+## Going further
 
-- Function URL statt HTTP-API: `placeOrder.addFunctionUrl()` – ein Endpoint, kein Routing, keine JWT-Prüfung.
-- REST-API: nur, wenn du API Keys, Usage Plans oder Request-Validierung am Gateway brauchst.
+- Function URL instead of HTTP API: `placeOrder.addFunctionUrl()` – one endpoint, no routing, no JWT check.
+- REST API: only if you need API keys, usage plans or request validation at the gateway.
 
-## Lösung
+## Solution
 
 [`solution/`](solution/)

@@ -1,7 +1,7 @@
-// Nur was der Handler braucht: ein Client, gezielte Imports, Prüfung ohne Bibliothek.
+// Only what the handler needs: one client, targeted imports, validation without a library.
 import { DynamoDBClient, GetItemCommand } from '@aws-sdk/client-dynamodb'
 
-// Auf Modulebene: einmal pro Execution Environment, nicht pro Request.
+// At module level: once per execution environment, not per request.
 const db = new DynamoDBClient({})
 
 const parseInput = (event: unknown) => {

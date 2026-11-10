@@ -1,20 +1,22 @@
+*English · [Deutsch](README.de.md)*
+
 # 16 · Observability
 
-**ID:** `aws-observability` · Zusatzkapitel
+**ID:** `aws-observability` · additional chapter
 
-## Aufgabe
+## Task
 
-Instrumentiere `placeOrder` mit Logger und Metrics, aktiviere Tracing per OpenTelemetry und leg Alarme auf Errors und Dead-Letter-Nachrichten an.
+Instrument `placeOrder` with Logger and Metrics, enable tracing via OpenTelemetry and create alarms on errors and dead letter messages.
 
-## Ablauf
+## Steps
 
-1. [`start/src/place-order.ts`](start/src/place-order.ts) loggt Text ohne Kontext. Stell auf den Powertools Logger um: `addContext`, `appendKeys` mit `orderId` und `correlationId`, `info` und `error`.
-2. Schreib fachliche Metriken mit Powertools Metrics: `OrderPlaced`, `ItemsOrdered`, `OrderFailed`. Vergiss `publishStoredMetrics()` nicht.
-3. Leg einen Span `placeOrder` mit `@opentelemetry/api` an. Ohne Layer ist er ein No-op, im Test also unschädlich.
-4. Aktiviere in [`start/lib/observability-stack.ts`](start/lib/observability-stack.ts) Tracing und den OpenTelemetry-Layer per `adotInstrumentation`.
-5. Leg ein SNS Topic und zwei Alarme an: Errors der Funktion und Nachrichten in der Dead Letter Queue.
-6. Entferne das `.skip` in den Tests.
-7. Deploy und erzeug Fehler:
+1. [`start/src/place-order.ts`](start/src/place-order.ts) logs text without context. Switch to the Powertools Logger: `addContext`, `appendKeys` with `orderId` and `correlationId`, `info` and `error`.
+2. Write business metrics with Powertools Metrics: `OrderPlaced`, `ItemsOrdered`, `OrderFailed`. Do not forget `publishStoredMetrics()`.
+3. Create a span `placeOrder` with `@opentelemetry/api`. Without a layer it is a no-op, so it is harmless in the tests.
+4. In [`start/lib/observability-stack.ts`](start/lib/observability-stack.ts), enable tracing and the OpenTelemetry layer via `adotInstrumentation`.
+5. Create an SNS topic and two alarms: errors of the function and messages in the dead letter queue.
+6. Remove the `.skip` in the tests.
+7. Deploy and produce errors:
 
    ```bash
    cd exercises/16-aws-observability/start
@@ -25,7 +27,7 @@ Instrumentiere `placeOrder` mit Logger und Metrics, aktiviere Tracing per OpenTe
    done
    ```
 
-8. Such in CloudWatch Logs Insights alle Logs einer Bestellung:
+8. In CloudWatch Logs Insights, find all logs of one order:
 
    ```sql
    fields @timestamp, level, message, orderId, correlationId
@@ -33,23 +35,23 @@ Instrumentiere `placeOrder` mit Logger und Metrics, aktiviere Tracing per OpenTe
    | sort @timestamp asc
    ```
 
-## Prüfen
+## Check
 
-- Jede Log-Zeile ist JSON mit `orderId` und `correlationId`.
-- Unter CloudWatch → Metrics → `Shop` stehen `OrderPlaced`, `ItemsOrdered` und `OrderFailed`.
-- Der Errors-Alarm geht nach sechs Fehlern auf `ALARM`. Nach den Retries landen die asynchronen Aufrufe in der DLQ, und der zweite Alarm folgt.
-- In X-Ray bzw. CloudWatch Traces siehst du den Span `placeOrder` mit dem DynamoDB-Aufruf darunter.
+- Every log line is JSON with `orderId` and `correlationId`.
+- Under CloudWatch → Metrics → `Shop` you find `OrderPlaced`, `ItemsOrdered` and `OrderFailed`.
+- The errors alarm goes to `ALARM` after six errors. After the retries, the asynchronous invocations end up in the DLQ, and the second alarm follows.
+- In X-Ray or CloudWatch Traces you see the span `placeOrder` with the DynamoDB call below it.
 
-## OpenTelemetry-Layer
+## OpenTelemetry layer
 
-CDK bringt den ADOT-Layer für JavaScript mit (`AdotLambdaLayerJavaScriptSdkVersion.LATEST`). AWS bietet daneben einen neueren OpenTelemetry-Layer für CloudWatch Application Signals an. Seine ARN hängt von Region und Version ab und steht in der AWS-Doku. So nutzt du ihn:
+CDK ships the ADOT layer for JavaScript (`AdotLambdaLayerJavaScriptSdkVersion.LATEST`). AWS also offers a newer OpenTelemetry layer for CloudWatch Application Signals. Its ARN depends on region and version and is listed in the AWS docs. This is how you use it:
 
 ```bash
-npx cdk deploy -c otelLayerArn=arn:aws:lambda:<region>:<konto-aus-der-doku>:layer:<name>:<version>
+npx cdk deploy -c otelLayerArn=arn:aws:lambda:<region>:<account-from-the-docs>:layer:<name>:<version>
 ```
 
-Das X-Ray SDK ist seit Februar 2026 in Maintenance. Für neue Funktionen nimmst du OpenTelemetry.
+The X-Ray SDK has been in maintenance since February 2026. For new functions you use OpenTelemetry.
 
-## Lösung
+## Solution
 
 [`solution/`](solution/)

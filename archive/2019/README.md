@@ -1,6 +1,6 @@
-> **Archiv (Stand 2019, AWS CDK 0.21).** Dieses Material ist veraltet und wird nicht mehr gepflegt.
-> Die aktuellen Übungen zum Workshop „AWS Serverless“ liegen unter [`exercises/`](../../exercises/) – siehe [README](../../README.md).
-> Account-IDs, Hosted-Zone-, User-Pool- und Endpoint-IDs sind durch Platzhalter ersetzt.
+> **Archive (as of 2019, AWS CDK 0.21).** This material is outdated and no longer maintained.
+> The current exercises for the workshop “AWS Serverless” live under [`exercises/`](../../exercises/) – see the [README](../../README.md).
+> Account IDs, hosted zone, user pool and endpoint IDs have been replaced with placeholders.
 
 # Introduction to Serverless using AWS
 

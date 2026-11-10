@@ -11,7 +11,7 @@ const number = (line: string, label: string) => {
   return match ? Number(match[1]) : undefined
 }
 
-// Liest eine REPORT-Zeile aus CloudWatch Logs. Init Duration steht nur bei Cold Starts drin.
+// Reads a REPORT line from CloudWatch Logs. Init Duration is only present for cold starts.
 export const parseReport = (line: string): Report | undefined => {
   if (!line.includes('REPORT RequestId')) return undefined
   return {

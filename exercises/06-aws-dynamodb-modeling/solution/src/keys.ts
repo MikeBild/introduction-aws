@@ -1,4 +1,4 @@
-// Ein Ort für alle Key-Formate. Tippfehler in Präfixen fallen so im Test auf.
+// One place for all key formats. Typos in prefixes show up in the tests this way.
 export const customerPk = (customerId: string) => `CUSTOMER#${customerId}`
 export const PROFILE_SK = 'PROFILE'
 export const orderSk = (createdAt: string, orderId: string) => `ORDER#${createdAt}#${orderId}`

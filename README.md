@@ -1,135 +1,137 @@
-# Übungen: AWS Serverless
+*English · [Deutsch](README.de.md)*
 
-Übungs-Repo zum Workshop „AWS Serverless mit Lambda, CDK und DynamoDB“. Zu jeder der 18 Lektionen findest du hier eine Übung mit Startpunkt, Tests und Lösung. Alle Übungen drehen sich um dieselbe Domäne, den Werkstatt-Shop: Produkte, Bestellungen mit Positionen aus `productId`, `quantity` und `priceCents`, Geld immer in ganzen Cent.
+# Exercises: AWS Serverless
 
-## Was du lernst
+Exercise repository for the workshop “AWS serverless with Lambda, CDK, and DynamoDB”. For each of the 18 lessons you find an exercise here with a starting point, tests and a reference solution. All exercises revolve around the same domain, the workshop shop: products, orders with line items made of `productId`, `quantity` and `priceCents`, money always in whole cents.
 
-- Lambda-Handler, CDK-Stacks und IAM-Rechte in TypeScript bauen und testen
-- DynamoDB nach Zugriffsmustern modellieren, bis zum Single-Table-Design
-- Abläufe mit EventBridge, SQS, Step Functions und SES entkoppeln
+## What you learn
 
-## Voraussetzungen
+- Build and test Lambda handlers, CDK stacks and IAM permissions in TypeScript
+- Model DynamoDB by access patterns, up to single-table design
+- Decouple workflows with EventBridge, SQS, Step Functions and SES
 
-- **Node.js 26** – `nvm use` liest die Version aus [`.nvmrc`](.nvmrc).
-- **AWS CLI v2** und ein eigenes Sandbox-Konto mit Admin-Rechten. Prüf die Anmeldung:
+## Prerequisites
+
+- **Node.js 26** – `nvm use` reads the version from [`.nvmrc`](.nvmrc).
+- **AWS CLI v2** and your own sandbox account with admin permissions. Check that you are signed in:
 
   ```bash
   aws sts get-caller-identity
   ```
 
-Für die Tests brauchst du kein AWS-Konto, erst für `cdk diff` und `cdk deploy`.
+You do not need an AWS account for the tests, only for `cdk diff` and `cdk deploy`.
 
-## Einrichten
+## Setup
 
-1. Repo klonen, Abhängigkeiten installieren, alles prüfen:
+1. Clone the repo, install the dependencies, check everything:
 
    ```bash
    git clone https://github.com/MikeBild/introduction-aws.git
    cd introduction-aws
    npm ci
-   npm run check        # tsc, Vitest und cdk synth – ganz ohne AWS-Konto
+   npm run check        # tsc, Vitest and cdk synth – without an AWS account
    ```
 
-2. CDK einmal pro Konto und Region einrichten:
+2. Bootstrap CDK once per account and region:
 
    ```bash
    npx cdk bootstrap
    ```
 
-## So arbeitest du mit einer Übung
+## How to work on an exercise
 
-Du arbeitest im Startpunkt `start/`: Arbeite die TODO-Kommentare ab, entferne in den Tests das `.skip` und vergleich am Ende mit der Lösung in `solution/`. Wie eine Übung aufgebaut ist, steht unter [Aufbau](#aufbau).
+You work in the starting point `start/`: work through the TODO comments, remove the `.skip` in the tests and compare with the reference solution in `solution/` at the end. The section [Layout](#layout) shows how an exercise is structured.
 
 ```bash
 cd exercises/05-aws-api-gateway-http/start
-npx vitest                    # Tests im Watch-Modus, ohne AWS
-npx cdk synth                 # Template lokal erzeugen
-npx cdk diff                  # Änderungen gegen dein Konto ansehen
-npx cdk deploy                # deployen
-npx cdk destroy               # aufräumen, wenn du fertig bist
+npx vitest                    # tests in watch mode, without AWS
+npx cdk synth                 # generate the template locally
+npx cdk diff                  # review the changes against your account
+npx cdk deploy                # deploy
+npx cdk destroy               # clean up when you are done
 ```
 
-Vom Root aus:
+From the root:
 
-| Befehl | Was es tut |
+| Command | What it does |
 | --- | --- |
-| `npm run typecheck` | `tsc --noEmit` über alle Übungen |
-| `npm test` | Vitest für alle Lösungen |
-| `npm run test:start` | Vitest für alle Startpunkte (übersprungene Tests zählen als skipped) |
-| `npm run synth` | `cdk synth` für alle CDK-Apps mit Platzhalter-Account `123456789012` |
-| `npm run synth -- 05` | `cdk synth` nur für Übung 05 |
-| `npm run check` | alles zusammen |
+| `npm run typecheck` | `tsc --noEmit` across all exercises |
+| `npm test` | Vitest for all reference solutions |
+| `npm run test:start` | Vitest for all starting points (skipped tests count as skipped) |
+| `npm run synth` | `cdk synth` for all CDK apps with the placeholder account `123456789012` |
+| `npm run synth -- 05` | `cdk synth` for exercise 05 only |
+| `npm run check` | all of the above |
 
-Die Tests brauchen kein AWS-Konto. SDK-Aufrufe ersetzt [`aws-sdk-client-mock`](https://github.com/m-radzikowski/aws-sdk-client-mock), Stacks prüfst du mit `aws-cdk-lib/assertions`.
+The tests need no AWS account. [`aws-sdk-client-mock`](https://github.com/m-radzikowski/aws-sdk-client-mock) replaces SDK calls, and you check stacks with `aws-cdk-lib/assertions`.
 
-## Übungen
+## Exercises
 
-| Block | # | Lektion | ID | Übung |
+| Block | # | Lesson | ID | Exercise |
 | --- | --- | --- | --- | --- |
-| Tag 1 | 01 | Was nimmt dir Serverless wirklich ab? | `aws-serverless-mindset` | [exercises/01-aws-serverless-mindset](exercises/01-aws-serverless-mindset) |
-| Tag 1 | 02 | Eine Lambda-Function ist nur ein Handler | `aws-lambda-handler` | [exercises/02-aws-lambda-handler](exercises/02-aws-lambda-handler) |
-| Tag 1 | 03 | Infrastruktur gehört als TypeScript ins Repo | `aws-cdk-basics` | [exercises/03-aws-cdk-basics](exercises/03-aws-cdk-basics) |
-| Tag 1 | 04 | Jede Funktion bekommt nur ihre eigenen Rechte | `aws-iam-least-privilege` | [exercises/04-aws-iam-least-privilege](exercises/04-aws-iam-least-privilege) |
-| Tag 1 | 05 | Wie kommt ein HTTP Request zur Funktion? | `aws-api-gateway-http` | [exercises/05-aws-api-gateway-http](exercises/05-aws-api-gateway-http) |
-| Tag 1 | 06 | Erst Access Patterns, dann Tabelle | `aws-dynamodb-modeling` | [exercises/06-aws-dynamodb-modeling](exercises/06-aws-dynamodb-modeling) |
-| Tag 1 | 07 | Wann lohnt sich Single-Table-Design? | `aws-dynamodb-single-table` | [exercises/07-aws-dynamodb-single-table](exercises/07-aws-dynamodb-single-table) |
-| Tag 1 | 08 | Wohin mit Konfiguration und Secrets? | `aws-config-secrets` | [exercises/08-aws-config-secrets](exercises/08-aws-config-secrets) |
-| Tag 2 | 14 | Jede Message kann zweimal ankommen | `aws-events-queues` | [exercises/14-aws-events-queues](exercises/14-aws-events-queues) |
-| Tag 2 | 12 | Bei SES steckt der Aufwand im DNS, nicht im Code | `aws-ses-mail` | [exercises/12-aws-ses-mail](exercises/12-aws-ses-mail) |
-| Tag 2 | 13 | Abläufe als State Machine statt Aufrufketten | `aws-step-functions` | [exercises/13-aws-step-functions](exercises/13-aws-step-functions) |
-| Tag 2 | 15 | Cold Starts messen statt fürchten | `aws-cold-starts` | [exercises/15-aws-cold-starts](exercises/15-aws-cold-starts) |
-| Tag 2 | 17 | Praxis Teil eins, die Bestellung bis in die Tabelle | `aws-lab-end-to-end` | [exercises/17-aws-lab-end-to-end](exercises/17-aws-lab-end-to-end) |
-| Tag 2 | 18 | Praxis Teil zwei, vom Event bis zum Versand | `aws-lab-fulfillment` | [exercises/18-aws-lab-fulfillment](exercises/18-aws-lab-fulfillment) |
+| Day 1 | 01 | What does serverless really take off your plate? | `aws-serverless-mindset` | [exercises/01-aws-serverless-mindset](exercises/01-aws-serverless-mindset) |
+| Day 1 | 02 | A Lambda function is just a handler | `aws-lambda-handler` | [exercises/02-aws-lambda-handler](exercises/02-aws-lambda-handler) |
+| Day 1 | 03 | Infrastructure belongs as TypeScript in the repo | `aws-cdk-basics` | [exercises/03-aws-cdk-basics](exercises/03-aws-cdk-basics) |
+| Day 1 | 04 | Each function gets only its own permissions | `aws-iam-least-privilege` | [exercises/04-aws-iam-least-privilege](exercises/04-aws-iam-least-privilege) |
+| Day 1 | 05 | How does an HTTP request reach a function? | `aws-api-gateway-http` | [exercises/05-aws-api-gateway-http](exercises/05-aws-api-gateway-http) |
+| Day 1 | 06 | Access patterns first, then the table | `aws-dynamodb-modeling` | [exercises/06-aws-dynamodb-modeling](exercises/06-aws-dynamodb-modeling) |
+| Day 1 | 07 | When is single-table design worth it? | `aws-dynamodb-single-table` | [exercises/07-aws-dynamodb-single-table](exercises/07-aws-dynamodb-single-table) |
+| Day 1 | 08 | Where should configuration and secrets go? | `aws-config-secrets` | [exercises/08-aws-config-secrets](exercises/08-aws-config-secrets) |
+| Day 2 | 14 | Every message can arrive twice | `aws-events-queues` | [exercises/14-aws-events-queues](exercises/14-aws-events-queues) |
+| Day 2 | 12 | With SES, the effort is in DNS, not code | `aws-ses-mail` | [exercises/12-aws-ses-mail](exercises/12-aws-ses-mail) |
+| Day 2 | 13 | Workflows as state machines, not call chains | `aws-step-functions` | [exercises/13-aws-step-functions](exercises/13-aws-step-functions) |
+| Day 2 | 15 | Measure cold starts instead of fearing them | `aws-cold-starts` | [exercises/15-aws-cold-starts](exercises/15-aws-cold-starts) |
+| Day 2 | 17 | Practice part one, the order reaches the table | `aws-lab-end-to-end` | [exercises/17-aws-lab-end-to-end](exercises/17-aws-lab-end-to-end) |
+| Day 2 | 18 | Hands-on part two, from event to shipping | `aws-lab-fulfillment` | [exercises/18-aws-lab-fulfillment](exercises/18-aws-lab-fulfillment) |
 
-### Zusatzkapitel
+### Additional chapters
 
-| # | Lektion | ID | Übung |
+| # | Lesson | ID | Exercise |
 | --- | --- | --- | --- |
-| 09 | Brauchst du noch einen eigenen Auth-Server? | `aws-cognito-user-pools` | [exercises/09-aws-cognito-user-pools](exercises/09-aws-cognito-user-pools) |
-| 10 | Wer prüft das Token und wer die Rechte? | `aws-cognito-authorizer` | [exercises/10-aws-cognito-authorizer](exercises/10-aws-cognito-authorizer) |
-| 11 | Braucht GraphQL noch einen eigenen Server? | `aws-appsync-graphql` | [exercises/11-aws-appsync-graphql](exercises/11-aws-appsync-graphql) |
-| 16 | Ohne Server zum Einloggen bleiben nur Signale | `aws-observability` | [exercises/16-aws-observability](exercises/16-aws-observability) |
+| 09 | Do you still need your own auth server? | `aws-cognito-user-pools` | [exercises/09-aws-cognito-user-pools](exercises/09-aws-cognito-user-pools) |
+| 10 | Who checks the token and who checks permissions? | `aws-cognito-authorizer` | [exercises/10-aws-cognito-authorizer](exercises/10-aws-cognito-authorizer) |
+| 11 | Does GraphQL still need its own server? | `aws-appsync-graphql` | [exercises/11-aws-appsync-graphql](exercises/11-aws-appsync-graphql) |
+| 16 | Without servers, only signals remain | `aws-observability` | [exercises/16-aws-observability](exercises/16-aws-observability) |
 
-Die Nummern bleiben stabil, die Reihenfolge folgt der Agenda. Die Praxis-Lektionen 17 und 18 führen die Übungen 02 bis 08 und 12 bis 15 zu einem Stack `OrdersStack` zusammen. Die Zusatzkapitel kannst du einzeln nachholen.
+The numbers stay stable, the order follows the agenda. The practice lessons 17 and 18 combine exercises 02 to 08 and 12 to 15 into one stack `OrdersStack`. You can catch up on the additional chapters one by one.
 
-Die Übungen 01 und 06 beginnen mit einem Arbeitsblatt statt mit Code.
+Exercises 01 and 06 start with a worksheet instead of code.
 
-## Aufbau
+## Layout
 
 ```text
 exercises/
   03-aws-cdk-basics/
-    README.md            Aufgabe, Ablauf, Prüfkriterien
-    start/               dein Startpunkt mit TODO-Kommentaren
-      cdk.json           CDK-App: node bin/app.ts (Node 26 führt TypeScript direkt aus)
+    README.md            task, steps, checks
+    start/               your starting point with TODO comments
+      cdk.json           CDK app: node bin/app.ts (Node 26 runs TypeScript directly)
       bin/app.ts
-      lib/*-stack.ts     Infrastruktur
-      src/*.ts           Lambda-Code
-      test/*.test.ts     Tests mit describe.skip – entferne .skip, wenn du anfängst
-    solution/            eine mögliche Lösung, gleiche Struktur
+      lib/*-stack.ts     infrastructure
+      src/*.ts           Lambda code
+      test/*.test.ts     tests with describe.skip – remove .skip when you start
+    solution/            one possible solution, same structure
 ```
 
-Alle Übungen teilen sich ein `package.json` und ein `node_modules` im Root. Jede Übung ist trotzdem eigenständig: Du kannst mit jeder einsteigen.
+All exercises share one `package.json` and one `node_modules` in the root. Each exercise is still self-contained: you can start with any of them.
 
 ## Stack
 
-Stand Oktober 2026: Node.js 26 lokal · Lambda-Runtime `nodejs24.x` auf ARM · AWS CDK v2 (`aws-cdk-lib` 2.275) · AWS SDK for JavaScript v3 · TypeScript strict als ESM · Vitest · Powertools for AWS Lambda (TypeScript) · AppSync mit JavaScript-Resolvern · Step Functions mit JSONata · EventBridge und SQS · Cognito · SES · OpenTelemetry
+As of October 2026: Node.js 26 locally · Lambda runtime `nodejs24.x` on ARM · AWS CDK v2 (`aws-cdk-lib` 2.275) · AWS SDK for JavaScript v3 · TypeScript strict as ESM · Vitest · Powertools for AWS Lambda (TypeScript) · AppSync with JavaScript resolvers · Step Functions with JSONata · EventBridge and SQS · Cognito · SES · OpenTelemetry
 
-## Kosten und Aufräumen
+## Costs and cleanup
 
-Alle Übungen bleiben bei normaler Nutzung im Free Tier oder bei wenigen Cent. Tables, Buckets und User Pools haben `RemovalPolicy.DESTROY`. Nach `npx cdk destroy` bleibt nichts übrig. Ausnahmen:
+With normal use, all exercises stay within the Free Tier or cost a few cents. Tables, buckets and user pools have `RemovalPolicy.DESTROY`. Nothing is left after `npx cdk destroy`. Exceptions:
 
-- **SES (12):** Verifizierte Identitäten und das aktive Receipt Rule Set deaktivierst du vor dem Destroy: `aws ses set-active-receipt-rule-set` ohne Namen.
-- **Secrets (08):** Den SecureString legst du per CLI an, also löschst du ihn auch per CLI: `aws ssm delete-parameter --name /orders/payments/api-key`.
-- **Praxis (17, 18):** Ebenso `aws ssm delete-parameter --name /werkstatt/payments/api-key`.
-- **Power Tuning (15):** Den Stack aus dem Serverless Application Repository löschst du in CloudFormation.
+- **SES (12):** Deactivate verified identities and the active receipt rule set before the destroy: `aws ses set-active-receipt-rule-set` without a name.
+- **Secrets (08):** You create the SecureString via the CLI, so you also delete it via the CLI: `aws ssm delete-parameter --name /orders/payments/api-key`.
+- **Practice (17, 18):** Likewise `aws ssm delete-parameter --name /werkstatt/payments/api-key`.
+- **Power Tuning (15):** Delete the stack from the Serverless Application Repository in CloudFormation.
 
-## Workshop und Folien
+## Workshop and slides
 
-- Workshop: [„AWS Serverless mit Lambda, CDK und DynamoDB“](https://workshops.mikebild.dev/w/aws-serverless/remote/)
-- Folien: [slides.mikebild.dev/introduction-aws-serverless](https://slides.mikebild.dev/introduction-aws-serverless.html)
+- Workshop: [“AWS serverless with Lambda, CDK, and DynamoDB”](https://workshops.mikebild.dev/w/aws-serverless/remote/)
+- Slides: [slides.mikebild.dev/introduction-aws-serverless](https://slides.mikebild.dev/introduction-aws-serverless.html)
 - PDF: [slides.mikebild.dev/introduction-aws-serverless.pdf](https://slides.mikebild.dev/introduction-aws-serverless.pdf)
-- Beiträge auf mikebild.dev:
+- Articles on mikebild.dev (in German):
   - [Serverless-Auth mit Cognito User Pools](https://www.mikebild.dev/de/blog/cognito-userpool-auth-serverless/)
   - [Serverless-Workflows mit AWS Step Functions](https://www.mikebild.dev/de/blog/step-functions-serverless-workflows/)
   - [GraphQL-APIs mit AppSync und DynamoDB](https://www.mikebild.dev/de/blog/appsync-dynamodb-graphql-api/)
@@ -137,10 +139,10 @@ Alle Übungen bleiben bei normaler Nutzung im Free Tier oder bei wenigen Cent. T
   - [Transaktionale E-Mails serverless: SES und Lambda](https://www.mikebild.dev/de/blog/ses-email-hook-serverless/)
   - [Lambda-Performance und Cold Starts verstehen](https://www.mikebild.dev/de/blog/lambda-performance-und-cold-starts/)
 
-## Archiv
+## Archive
 
-Die erste Fassung von 2019 (CDK 0.21, JavaScript, Lerna, Yarn) liegt als Archiv unter [`legacy/2019/`](legacy/2019/), wird weder gebaut noch getestet und enthält statt echter Account- und Ressourcen-IDs nur Platzhalter.
+The first version from 2019 (CDK 0.21, JavaScript, Lerna, Yarn) is kept as an archive under [`archive/2019/`](archive/2019/). It is neither built nor tested and contains placeholders instead of real account and resource IDs.
 
-## Lizenz
+## License
 
 [MIT](LICENSE)

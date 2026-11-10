@@ -11,19 +11,19 @@ export class MailStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    // Per Context überschreiben: -c fromAddress=shop@deine-domain.de -c domain=deine-domain.de
+    // Override via context: -c fromAddress=shop@deine-domain.de -c domain=deine-domain.de
     const domain: string = this.node.tryGetContext('domain') ?? 'example.com'
     const fromAddress: string = this.node.tryGetContext('fromAddress') ?? `shop@${domain}`
     const replyAddress = `reply@${domain}`
 
-    // Absender verifizieren: SES schickt einen Bestätigungslink an diese Adresse.
+    // Verify the sender: SES sends a confirmation link to this address.
     const sender = new EmailIdentity(this, 'Sender', { identity: Identity.email(fromAddress) })
 
-    // Empfang setzt eine verifizierte Domain voraus. SES erzeugt dafür DKIM-Einträge,
-    // die du in deinem DNS anlegst (Console: SES -> Identities -> deine Domain).
+    // Receiving requires a verified domain. SES generates DKIM records for it,
+    // which you add to your DNS (console: SES -> Identities -> your domain).
     new EmailIdentity(this, 'Domain', { identity: Identity.domain(domain) })
 
-    // TODO: CfnTemplate 'order-confirmed' mit Betreff, Text und HTML, Platzhalter {{orderId}} und {{total}}
+    // TODO: CfnTemplate 'order-confirmed' with subject, text and HTML, placeholders {{orderId}} and {{total}}
 
     const fn = (id: string, file: string, environment: Record<string, string>) =>
       new NodejsFunction(this, id, {
@@ -34,18 +34,18 @@ export class MailStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // Ausgehend: Bestätigung per Template
+    // Outbound: confirmation via template
     const sendConfirmation = fn('SendConfirmation', 'send-confirmation.ts', {
       FROM_ADDRESS: fromAddress,
       REPLY_TO_ADDRESS: replyAddress,
       TEMPLATE_NAME,
     })
     sender.grantSendEmail(sendConfirmation)
-    // TODO: ses:SendEmail auch auf das Template erlauben (this.formatArn mit resource 'template')
+    // TODO: Allow ses:SendEmail on the template as well (this.formatArn with resource 'template')
 
-    // TODO: Eingehend – Bucket für Rohmails, Funktion InboundMail (src/inbound-mail.ts)
-    //       mit BUCKET_NAME und OBJECT_PREFIX, grantRead auf den Bucket,
-    //       ReceiptRuleSet mit einer Rule für replyAddress: erst S3Action, dann LambdaAction.
+    // TODO: Inbound – bucket for raw mails, function InboundMail (src/inbound-mail.ts)
+    //       with BUCKET_NAME and OBJECT_PREFIX, grantRead on the bucket,
+    //       ReceiptRuleSet with one rule for replyAddress: S3Action first, then LambdaAction.
 
     new CfnOutput(this, 'SendConfirmationName', { value: sendConfirmation.functionName })
   }

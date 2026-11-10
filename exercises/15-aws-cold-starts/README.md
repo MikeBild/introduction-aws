@@ -1,24 +1,26 @@
-# 15 · Cold Starts messen und senken
+*English · [Deutsch](README.de.md)*
+
+# 15 · Measuring and reducing cold starts
 
 **ID:** `aws-cold-starts`
 
-## Aufgabe
+## Task
 
-Miss die Init Duration deiner Funktion, verkleinere das Bundle und vergleich 512, 1024 und 1769 MB Memory mit AWS Lambda Power Tuning.
+Measure the Init Duration of your function, shrink the bundle and compare 512, 1024 and 1769 MB of memory with AWS Lambda Power Tuning.
 
-## Ablauf
+## Steps
 
-1. Miss lokal, wie groß das Bundle von [`start/src/heavy.ts`](start/src/heavy.ts) ist:
+1. Measure locally how large the bundle of [`start/src/heavy.ts`](start/src/heavy.ts) is:
 
    ```bash
    cd exercises/15-aws-cold-starts/start
    node src/bundle-size.ts
    ```
 
-2. Schreib [`start/src/lean.ts`](start/src/lean.ts): nur ein SDK-Client, gezielte Imports, keine Bibliothek für eine Prüfung, die drei Zeilen braucht.
-3. Ergänze die Funktion `Lean` in [`start/lib/cold-starts-stack.ts`](start/lib/cold-starts-stack.ts) – SDK als external, minifiziert. Miss erneut mit `node src/bundle-size.ts`.
-4. Implementier `parseReport` und `summarize` in [`start/src/report.ts`](start/src/report.ts) und entferne das `.skip` in den Tests.
-5. Deploy, ruf beide Funktionen einige Male auf und werte die Logs aus. Jede neue Konfiguration erzwingt einen Cold Start:
+2. Write [`start/src/lean.ts`](start/src/lean.ts): only one SDK client, targeted imports, no library for a check that takes three lines.
+3. Add the function `Lean` in [`start/lib/cold-starts-stack.ts`](start/lib/cold-starts-stack.ts) – SDK as external, minified. Measure again with `node src/bundle-size.ts`.
+4. Implement `parseReport` and `summarize` in [`start/src/report.ts`](start/src/report.ts) and remove the `.skip` in the tests.
+5. Deploy, invoke both functions a few times and evaluate the logs. Every new configuration forces a cold start:
 
    ```bash
    npx cdk deploy
@@ -30,26 +32,26 @@ Miss die Init Duration deiner Funktion, verkleinere das Bundle und vergleich 512
      --query 'events[].message' --output text | node src/analyze-logs.ts
    ```
 
-6. Memory vergleichen mit [AWS Lambda Power Tuning](https://github.com/alexcasalboni/aws-lambda-power-tuning): Deploy es einmal aus dem Serverless Application Repository (Console → „Serverless Application Repository“ → `aws-lambda-power-tuning`). Trag in [`start/power-tuning-input.json`](start/power-tuning-input.json) die ARN ein und starte die State Machine:
+6. Compare memory with [AWS Lambda Power Tuning](https://github.com/alexcasalboni/aws-lambda-power-tuning): deploy it once from the Serverless Application Repository (console → “Serverless Application Repository” → `aws-lambda-power-tuning`). Enter the ARN in [`start/power-tuning-input.json`](start/power-tuning-input.json) and start the state machine:
 
    ```bash
    aws stepfunctions start-execution --state-machine-arn <powerTuningStateMachine> \
      --input file://power-tuning-input.json
    ```
 
-   Das Ergebnis enthält einen Link auf ein Diagramm mit Kosten und Laufzeit pro Memory-Stufe.
+   The result contains a link to a chart with cost and duration per memory level.
 
-## Prüfen
+## Check
 
-- Das schlanke Bundle ist mindestens zehnmal kleiner. Lokal prüft das der Test `bundle-size.test.ts`.
-- Die Init Duration von `Lean` liegt deutlich unter der von `Heavy`.
-- Ab 1769 MB hat die Funktion eine volle vCPU. Darüber sinkt die Laufzeit nur noch, wenn dein Code mehrere Threads nutzt.
+- The lean bundle is at least ten times smaller. Locally, the test `bundle-size.test.ts` checks this.
+- The Init Duration of `Lean` is well below that of `Heavy`.
+- From 1769 MB on, the function has a full vCPU. Above that, the duration only drops if your code uses multiple threads.
 
-## Zum Weiterdenken
+## Going further
 
-- Provisioned Concurrency hält Environments warm – gegen Geld, auch ohne Requests.
-- `cdk deploy -c memorySize=1769` ändert Memory ohne Codeänderung.
+- Provisioned concurrency keeps environments warm – for a price, even without requests.
+- `cdk deploy -c memorySize=1769` changes the memory without a code change.
 
-## Lösung
+## Solution
 
 [`solution/`](solution/)

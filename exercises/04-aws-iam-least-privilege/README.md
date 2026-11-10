@@ -1,31 +1,33 @@
-# 04 · IAM mit Least Privilege
+*English · [Deutsch](README.de.md)*
+
+# 04 · IAM with least privilege
 
 **ID:** `aws-iam-least-privilege`
 
-## Aufgabe
+## Task
 
-Gib einer Funktion nur Lesezugriff auf die Orders-Table und einer zweiten nur Schreibzugriff. Prüf beide Roles in `cdk diff`.
+Give one function read access only to the orders table and a second one write access only. Check both roles in `cdk diff`.
 
-## Ablauf
+## Steps
 
-1. Lies [`start/lib/orders-stack.ts`](start/lib/orders-stack.ts). Beide Funktionen bekommen `dynamodb:*` auf `*` – das klassische „erst mal alles erlauben“.
-2. Deploy den Ausgangszustand einmal, damit `cdk diff` später etwas zu vergleichen hat:
+1. Read [`start/lib/orders-stack.ts`](start/lib/orders-stack.ts). Both functions get `dynamodb:*` on `*` – the classic “allow everything for now”.
+2. Deploy the starting state once so that `cdk diff` has something to compare against later:
 
    ```bash
    cd exercises/04-aws-iam-least-privilege/start
    npx cdk deploy
    ```
 
-3. Ersetze die breiten Statements: `table.grantReadData(listOrders)` und `table.grantWriteData(placeOrder)`.
-4. Lies `npx cdk diff`. Im Abschnitt „IAM Statement Changes“ verschwinden die Wildcards, dafür erscheinen einzelne Aktionen auf genau eine Table.
-5. Entferne das `.skip` in [`start/test/orders-stack.test.ts`](start/test/orders-stack.test.ts). Der Test prüft die Rechte pro Role.
+3. Replace the broad statements: `table.grantReadData(listOrders)` and `table.grantWriteData(placeOrder)`.
+4. Read `npx cdk diff`. In the section “IAM Statement Changes” the wildcards disappear, and individual actions on exactly one table appear instead.
+5. Remove the `.skip` in [`start/test/orders-stack.test.ts`](start/test/orders-stack.test.ts). The test checks the permissions per role.
 
-## Prüfen
+## Check
 
-- Die Role von `ListOrders` enthält `dynamodb:Query`, aber kein `PutItem`.
-- Die Role von `PlaceOrder` enthält `dynamodb:PutItem`, aber kein `Query` oder `GetItem`.
-- Kein Statement enthält `*` als Action oder Resource.
+- The role of `ListOrders` contains `dynamodb:Query`, but no `PutItem`.
+- The role of `PlaceOrder` contains `dynamodb:PutItem`, but no `Query` or `GetItem`.
+- No statement contains `*` as action or resource.
 
-## Lösung
+## Solution
 
 [`solution/`](solution/)

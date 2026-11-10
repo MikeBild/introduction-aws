@@ -1,17 +1,17 @@
-// Werkstatt-Shop: Geld immer als ganze Cent, nie als Kommazahl.
+// Workshop shop: money always as whole cents, never as a decimal.
 export type OrderItem = { productId: string; quantity: number; priceCents: number }
 export type Order = { customerId: string; items: OrderItem[] }
 
-// TODO: Body prüfen und eine Bestellung oder undefined liefern.
-//       - kaputtes JSON -> undefined (nicht werfen)
-//       - customerId: nicht leerer String
-//       - items: mindestens eine Position
-//       - productId nicht leer, quantity ganzzahlig >= 1, priceCents ganzzahlig >= 0
+// TODO: Validate the body and return an order or undefined.
+//       - broken JSON -> undefined (do not throw)
+//       - customerId: non-empty string
+//       - items: at least one line item
+//       - productId not empty, quantity integer >= 1, priceCents integer >= 0
 export const parseOrder = (_body: string | undefined): Order | undefined => {
   throw new Error('TODO: parseOrder implementieren')
 }
 
-// TODO: Pure Function ohne Event und ohne AWS: Σ quantity × priceCents.
+// TODO: Pure Function without event and without AWS: Σ quantity × priceCents.
 export const totalCents = (_order: Order): number => {
   throw new Error('TODO: totalCents implementieren')
 }

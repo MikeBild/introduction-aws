@@ -1,9 +1,9 @@
 import type { APIGatewayProxyHandlerV2WithJWTAuthorizer } from 'aws-lambda'
 import { findOrder } from './orders.ts'
 
-// Ausgangslage: jeder, der eine orderId kennt, sieht die Bestellung.
-// TODO: sub aus event.requestContext.authorizer.jwt.claims lesen und
-//       404 zurückgeben, wenn die Bestellung fehlt oder order.ownerId nicht passt.
+// Starting point: anyone who knows an orderId can see the order.
+// TODO: Read sub from event.requestContext.authorizer.jwt.claims and
+//       return 404 if the order is missing or order.ownerId does not match.
 export const handler: APIGatewayProxyHandlerV2WithJWTAuthorizer = async (event) => {
   const order = await findOrder(event.pathParameters!.orderId!)
   return { statusCode: 200, body: JSON.stringify(order) }

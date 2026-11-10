@@ -7,16 +7,16 @@ import { saveOrder } from './orders.ts'
 
 const FIVE_MINUTES = 300
 
-// POST /orders – dünner Handler über Pure Functions.
+// POST /orders – thin handler on top of Pure Functions.
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const input = parseOrder(event.body)
   if (!input)
     return { statusCode: 400, body: JSON.stringify({ message: 'invalid order' }) }
-  // SecureString entschlüsselt laden und im Execution Environment cachen (Übung 08).
+  // Load the SecureString decrypted and cache it in the execution environment (exercise 08).
   const apiKey = await getParameter(process.env.API_KEY_PARAMETER!, { decrypt: true, maxAge: FIVE_MINUTES })
   const order = placeOrder(input, { orderId: randomUUID(), now: new Date(), apiKey: apiKey ?? '' })
   await saveOrder(order)
-  // Erst speichern, dann veröffentlichen: Das Event beschreibt, was schon passiert ist.
+  // Save first, then publish: the event describes what has already happened.
   await publishOrderPlaced(order)
   return { statusCode: 201, body: JSON.stringify(order) }
 }

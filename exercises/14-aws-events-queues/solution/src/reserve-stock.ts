@@ -5,8 +5,8 @@ import { type OrderPlaced, reserveStock } from './order.ts'
 
 const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 
-// SQS stellt mindestens einmal zu. Die Bestellnummer wird nur geschrieben, wenn es
-// sie noch nicht gibt. Kommt dieselbe Bestellung zweimal, überspringen wir sie.
+// SQS delivers at least once. The order number is only written if it
+// does not exist yet. If the same order arrives twice, we skip it.
 export const reserveOnce = async (event: OrderPlaced) => {
   const reservation = reserveStock(event)
   try {
@@ -17,18 +17,18 @@ export const reserveOnce = async (event: OrderPlaced) => {
     }))
     return 'reserved' as const
   } catch (error) {
-    // Kein Fehler, sondern eine Wiederholung: nicht zurück in die Queue.
+    // Not an error but a repeat: do not send it back to the queue.
     if ((error as Error).name === 'ConditionalCheckFailedException') return 'duplicate' as const
     throw error
   }
 }
 
-// Partial Batch Response: Nur fehlgeschlagene Nachrichten kommen zurück in die Queue.
+// Partial batch response: only failed messages go back to the queue.
 export const handler: SQSHandler = async (event) => {
   const batchItemFailures: SQSBatchItemFailure[] = []
   for (const record of event.Records) {
     try {
-      // Die Rule leitet das ganze EventBridge-Event weiter. Die Bestellung steckt in detail.
+      // The rule forwards the whole EventBridge event. The order is in detail.
       const message = JSON.parse(record.body) as EventBridgeEvent<'OrderPlaced', OrderPlaced>
       const result = await reserveOnce(message.detail)
       console.log(JSON.stringify({ orderId: message.detail.orderId, result }))

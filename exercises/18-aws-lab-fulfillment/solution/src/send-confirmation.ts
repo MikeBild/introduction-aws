@@ -3,12 +3,12 @@ import type { OrderPlaced } from './events.ts'
 
 const ses = new SESv2Client({})
 
-// Cent nur für die Anzeige in Euro umrechnen.
+// Convert cents to euros for display only.
 export const formatEuro = (cents: number) =>
   new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(cents / 100)
 
-// In der SES-Sandbox geht Mail nur an verifizierte Adressen. Darum steht der
-// Empfänger in der Konfiguration, nicht in der Bestellung.
+// In the SES sandbox, mail only goes to verified addresses. That is why the
+// recipient is in the configuration, not in the order.
 export const handler = async (order: OrderPlaced & { trackingId?: string }) => {
   const { MessageId } = await ses.send(new SendEmailCommand({
     FromEmailAddress: process.env.FROM_ADDRESS,

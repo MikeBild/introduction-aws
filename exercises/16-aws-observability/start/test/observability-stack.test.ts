@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald Logger, Metrics, Tracing und Alarme stehen.
+// TODO: Remove .skip once logger, metrics, tracing and alarms are in place.
 import { App } from 'aws-cdk-lib'
 import { Match, Template } from 'aws-cdk-lib/assertions'
 import { describe, it } from 'vitest'
@@ -7,7 +7,7 @@ import { ObservabilityStack } from '../lib/observability-stack.ts'
 const template = Template.fromStack(new ObservabilityStack(new App({ context: { 'aws:cdk:bundling-stacks': [] } }), 'Test'))
 
 describe.skip('ObservabilityStack', () => {
-  it('aktiviert Tracing mit OpenTelemetry-Layer', () => {
+  it('enables tracing with the OpenTelemetry layer', () => {
     template.hasResourceProperties('AWS::Lambda::Function', {
       TracingConfig: { Mode: 'Active' },
       Layers: Match.anyValue(),
@@ -15,11 +15,11 @@ describe.skip('ObservabilityStack', () => {
     })
   })
 
-  it('alarmiert bei Errors', () => {
+  it('alarms on errors', () => {
     template.hasResourceProperties('AWS::CloudWatch::Alarm', { MetricName: 'Errors', Threshold: 5 })
   })
 
-  it('alarmiert bei Nachrichten in der Dead Letter Queue', () => {
+  it('alarms on messages in the dead letter queue', () => {
     template.hasResourceProperties('AWS::CloudWatch::Alarm', {
       MetricName: 'ApproximateNumberOfMessagesVisible',
       Threshold: 1,

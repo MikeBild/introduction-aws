@@ -1,9 +1,9 @@
 import type { SESHandler } from 'aws-lambda'
 import { parseMail } from './parse-mail.ts'
 
-// TODO: Für jeden Record die Rohmail aus S3 laden:
-//       Bucket aus BUCKET_NAME, Key = OBJECT_PREFIX + record.ses.mail.messageId.
-//       Das SES-Event selbst enthält keinen Mail-Body.
+// TODO: Load the raw mail from S3 for each record:
+//       bucket from BUCKET_NAME, key = OBJECT_PREFIX + record.ses.mail.messageId.
+//       The SES event itself contains no mail body.
 export const handler: SESHandler = async (event) => {
   for (const record of event.Records) {
     const mail = parseMail('')

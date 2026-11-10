@@ -9,14 +9,14 @@ export class PaymentsStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    // CloudFormation kann keine SecureStrings anlegen. Du legst den Wert per CLI an
-    // (siehe README), der Stack referenziert ihn nur über den Namen.
+    // CloudFormation cannot create SecureStrings. You create the value via the CLI
+    // (see README), the stack only references it by name.
     const apiKeyName = this.node.tryGetContext('apiKeyParameter') ?? '/orders/payments/api-key'
     const apiKey = StringParameter.fromSecureStringParameterAttributes(this, 'PaymentApiKey', {
       parameterName: apiKeyName,
     })
 
-    // Unkritische Konfiguration darf der Stack selbst anlegen.
+    // Non-sensitive configuration may be created by the stack itself.
     const maxItems = new StringParameter(this, 'MaxItems', {
       parameterName: '/orders/max-items',
       stringValue: '20',
@@ -27,15 +27,15 @@ export class PaymentsStack extends Stack {
       runtime: Runtime.NODEJS_24_X,
       architecture: Architecture.ARM_64,
       environment: {
-        // Nur Namen, keine Werte: im Template und in der Console steht kein Secret.
+        // Names only, no values: no secret in the template or in the console.
         API_KEY_PARAMETER: apiKeyName,
         MAX_ITEMS_PARAMETER: maxItems.parameterName,
       },
       bundling: { format: OutputFormat.ESM, minify: true },
     })
 
-    // ssm:GetParameter auf genau diese Parameter. SecureStrings mit dem
-    // AWS-verwalteten Key aws/ssm brauchen keine eigene KMS-Berechtigung.
+    // ssm:GetParameter on exactly these parameters. SecureStrings with the
+    // AWS-managed key aws/ssm need no separate KMS permission.
     apiKey.grantRead(chargePayment)
     maxItems.grantRead(chargePayment)
   }

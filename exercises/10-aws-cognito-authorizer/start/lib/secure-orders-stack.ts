@@ -43,8 +43,8 @@ export class SecureOrdersStack extends Stack {
     table.grantWriteData(placeOrder)
 
 
-    // TODO: HttpUserPoolAuthorizer für userPool und webClient anlegen
-    // TODO: Authorizer an beide Routes hängen (oder als defaultAuthorizer der API)
+    // TODO: Create an HttpUserPoolAuthorizer for userPool and webClient
+    // TODO: Attach the authorizer to both routes (or as defaultAuthorizer of the API)
     const api = new HttpApi(this, 'OrdersApi')
     api.addRoutes({
       path: '/orders/{orderId}',

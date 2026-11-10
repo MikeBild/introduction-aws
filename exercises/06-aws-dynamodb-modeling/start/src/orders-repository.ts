@@ -4,8 +4,8 @@ import { DynamoDBDocumentClient, ScanCommand } from '@aws-sdk/lib-dynamodb'
 const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 const tableName = () => process.env.TABLE_NAME
 
-// Ausgangslage: jede Frage liest die ganze Table und filtert danach.
-// TODO: Ersetze jeden Scan durch GetItem oder Query auf Table, GSI1 oder GSI2.
+// Starting point: every question reads the whole table and filters afterwards.
+// TODO: Replace every Scan with GetItem or Query on the table, GSI1 or GSI2.
 const scanAll = async () => (await db.send(new ScanCommand({ TableName: tableName() }))).Items ?? []
 
 export const getCustomerProfile = async (customerId: string) =>

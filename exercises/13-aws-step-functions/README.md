@@ -1,10 +1,12 @@
-# 13 · Abläufe mit Step Functions
+*English · [Deutsch](README.de.md)*
+
+# 13 · Workflows with Step Functions
 
 **ID:** `aws-step-functions`
 
-## Aufgabe
+## Task
 
-Modelliere Bezahlen, Lager prüfen und Versand als Standard Workflow mit Retry für die Zahlung und einem Catch, der die Bestellung storniert.
+Model charging, checking stock and shipping as a Standard Workflow with a retry for the payment and a catch that cancels the order.
 
 ```mermaid
 stateDiagram-v2
@@ -19,13 +21,15 @@ stateDiagram-v2
   Stornieren --> [*]
 ```
 
-## Ablauf
+The state names are German and come from the code: `Bezahlen` (charge), `LagerPruefen` (check stock), `Verfuegbar` (available), `Versenden` (ship), `Nachbestellen` (reorder), `Stornieren` (cancel).
 
-1. Die Schritte liegen fertig in [`start/src/steps.ts`](start/src/steps.ts) – inklusive der Fehler `PaymentProviderTimeout` und `PaymentDeclined`.
-2. [`start/lib/order-workflow-stack.ts`](start/lib/order-workflow-stack.ts) verbindet nur Bezahlen und Versenden. Der Workflow nutzt schon JSONata als Query Language.
-3. Ergänze die fehlenden Schritte, den Retry, den Catch und die Choice.
-4. Entferne das `.skip` in [`start/test/order-workflow-stack.test.ts`](start/test/order-workflow-stack.test.ts).
-5. Deploy und starte vier Ausführungen:
+## Steps
+
+1. The steps are ready in [`start/src/steps.ts`](start/src/steps.ts) – including the errors `PaymentProviderTimeout` and `PaymentDeclined`.
+2. [`start/lib/order-workflow-stack.ts`](start/lib/order-workflow-stack.ts) connects only charging and shipping. The workflow already uses JSONata as its query language.
+3. Add the missing steps, the retry, the catch and the choice.
+4. Remove the `.skip` in [`start/test/order-workflow-stack.test.ts`](start/test/order-workflow-stack.test.ts).
+5. Deploy and start four executions:
 
    ```bash
    cd exercises/13-aws-step-functions/start
@@ -41,18 +45,18 @@ stateDiagram-v2
      --input '{"orderId":"A10","amount":5000,"items":[]}'
    ```
 
-6. Sieh dir jede Ausführung in der Console als Graph an.
+6. Look at each execution as a graph in the console.
 
-## Prüfen
+## Check
 
-- A7 endet über Versenden, A8 über Nachbestellen.
-- A9 zeigt vier Versuche für Bezahlen und endet dann als Fehler. Ein Timeout ist kein fachlicher Fehler, deshalb storniert der Workflow nicht.
-- A10 läuft ohne Retry direkt nach Stornieren.
+- A7 ends via `Versenden`, A8 via `Nachbestellen`.
+- A9 shows four attempts for `Bezahlen` and then ends as a failure. A timeout is not a business error, so the workflow does not cancel.
+- A10 goes straight to `Stornieren` without a retry.
 
-## Zum Weiterdenken
+## Going further
 
-Wartet ein Ablauf auf eine Person, etwa eine Freigabe, nimmst du `IntegrationPattern.WAIT_FOR_TASK_TOKEN`. Ein Standard Workflow darf bis zu einem Jahr laufen.
+If a workflow waits for a person, for example an approval, you use `IntegrationPattern.WAIT_FOR_TASK_TOKEN`. A Standard Workflow may run for up to a year.
 
-## Lösung
+## Solution
 
 [`solution/`](solution/)

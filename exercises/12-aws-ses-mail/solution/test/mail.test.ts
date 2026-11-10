@@ -27,7 +27,7 @@ const raw = [
 ].join('\r\n')
 
 describe('sendConfirmation', () => {
-  it('verschickt die Bestätigung per Template', async () => {
+  it('sends the confirmation via template', async () => {
     ses.on(SendEmailCommand).resolves({ MessageId: 'm-1' })
     expect(await sendConfirmation({ id: 'A7', email: 'ada@example.com', total: 42 })).toEqual({ orderId: 'A7', messageId: 'm-1' })
     expect(ses.commandCalls(SendEmailCommand)[0]?.args[0].input).toMatchObject({
@@ -39,7 +39,7 @@ describe('sendConfirmation', () => {
 })
 
 describe('parseMail', () => {
-  it('liest Absender, Betreff, Bestellnummer und Text', () => {
+  it('reads sender, subject, order number and text', () => {
     expect(parseMail(raw)).toEqual({
       from: 'Ada <ada@example.com>',
       subject: 'Re: Bestellung A7 bestätigt',
@@ -50,7 +50,7 @@ describe('parseMail', () => {
 })
 
 describe('inboundMail', () => {
-  it('lädt die Rohmail per Message-ID aus S3', async () => {
+  it('loads the raw mail from S3 by message ID', async () => {
     s3.on(GetObjectCommand).resolves({ Body: { transformToString: async () => raw } } as never)
     const log = vi.spyOn(console, 'log').mockImplementation(() => {})
     const event = { Records: [{ ses: { mail: { messageId: 'msg-1' } } }] } as unknown as SESEvent

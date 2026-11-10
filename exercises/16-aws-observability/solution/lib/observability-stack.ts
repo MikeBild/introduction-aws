@@ -22,11 +22,11 @@ export class ObservabilityStack extends Stack {
       removalPolicy: RemovalPolicy.DESTROY,
     })
 
-    // Fehlgeschlagene asynchrone Aufrufe landen nach zwei Retries hier.
+    // Failed asynchronous invocations end up here after two retries.
     const deadLetterQueue = new Queue(this, 'PlaceOrderDlq', { retentionPeriod: Duration.days(14) })
 
-    // OpenTelemetry: Standard ist der ADOT-Layer, den CDK kennt. Mit
-    // -c otelLayerArn=<ARN> nimmst du stattdessen den aktuellen Layer aus der AWS-Doku.
+    // OpenTelemetry: the default is the ADOT layer that CDK knows. With
+    // -c otelLayerArn=<ARN> you use the current layer from the AWS docs instead.
     const otelLayerArn: string | undefined = this.node.tryGetContext('otelLayerArn')
     const otel: Partial<NodejsFunctionProps> = otelLayerArn
       ? {
@@ -59,7 +59,7 @@ export class ObservabilityStack extends Stack {
     })
     table.grantWriteData(placeOrder)
 
-    // Alarme gehen an ein SNS Topic. Mit -c alarmEmail=du@example.com kommt eine Mail.
+    // Alarms go to an SNS topic. With -c alarmEmail=du@example.com you get an email.
     const alarms = new Topic(this, 'Alarms')
     const alarmEmail: string | undefined = this.node.tryGetContext('alarmEmail')
     if (alarmEmail) alarms.addSubscription(new EmailSubscription(alarmEmail))

@@ -4,7 +4,7 @@ export type Order = { id: string; email: string; total: number }
 
 const ses = new SESv2Client({})
 
-// Text und Layout liegen im SES-Template, der Code liefert nur die Daten.
+// Text and layout live in the SES template, the code only supplies the data.
 export const sendConfirmation = (order: Order) =>
   ses.send(new SendEmailCommand({
     FromEmailAddress: process.env.FROM_ADDRESS,

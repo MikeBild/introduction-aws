@@ -6,7 +6,7 @@ import { util } from '@aws-appsync/utils'
 /** @typedef {CreateOrderInput & { id: string, createdAt: string }} Order */
 
 /**
- * Mutation.createOrder: ID und Zeitstempel erzeugt der Resolver, nie der Client.
+ * Mutation.createOrder: the resolver generates ID and timestamp, never the client.
  * @param {import('@aws-appsync/utils').Context<{ input: CreateOrderInput }>} ctx
  */
 export const request = (ctx) => {
@@ -19,7 +19,7 @@ export const request = (ctx) => {
 }
 
 /**
- * Das Ergebnis der Mutation löst auch onOrderCreated aus.
+ * The result of the mutation also triggers onOrderCreated.
  * @param {import('@aws-appsync/utils').Context} ctx
  */
 export const response = (ctx) => {

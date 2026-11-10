@@ -5,7 +5,7 @@ import type { Customer, Order, OrderLine, ShopItem } from './items.ts'
 const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 const tableName = () => process.env.TABLE_NAME
 
-// Kunde und seine Bestellungen in einer Query: eine Item Collection unter CUSTOMER#id.
+// Customer and their orders in one query: an item collection under CUSTOMER#id.
 export const getCustomerWithOrders = async (customerId: string) => {
   const { Items = [] } = await db.send(new QueryCommand({
     TableName: tableName(),
@@ -20,7 +20,7 @@ export const getCustomerWithOrders = async (customerId: string) => {
   }
 }
 
-// Positionen einer Bestellung: pk ORDER#id / sk PRODUCT#id
+// Line items of an order: pk ORDER#id / sk PRODUCT#id
 export const getOrderLines = async (orderId: string) => {
   const { Items = [] } = await db.send(new QueryCommand({
     TableName: tableName(),
@@ -30,7 +30,7 @@ export const getOrderLines = async (orderId: string) => {
   return Items as OrderLine[]
 }
 
-// Bestellungen eines Produkts: Inverted Index GSI1 dreht pk und sk um.
+// Orders of a product: the inverted index GSI1 swaps pk and sk.
 export const getOrdersOfProduct = async (productId: string) => {
   const { Items = [] } = await db.send(new QueryCommand({
     TableName: tableName(),

@@ -25,7 +25,7 @@ const call = async (h: typeof listOrders, event: Partial<APIGatewayProxyEventV2>
 const body = JSON.stringify({ customerId: 'c-1', items: [{ productId: 'p-1', quantity: 2, priceCents: 1299 }] })
 
 describe('POST /orders', () => {
-  it('speichert die Bestellung unter dem Kunden und antwortet mit 201', async () => {
+  it('saves the order under the customer and responds with 201', async () => {
     db.on(PutCommand).resolves({})
     const response = await call(placeOrder, { body })
     expect(response.statusCode).toBe(201)
@@ -35,7 +35,7 @@ describe('POST /orders', () => {
     expect(input?.Item).toMatchObject({ pk: 'CUSTOMER#c-1', sk: expect.stringMatching(/^ORDER#/) })
   })
 
-  it('lädt den API Key entschlüsselt und nur einmal', async () => {
+  it('loads the API key decrypted and only once', async () => {
     db.on(PutCommand).resolves({})
     await call(placeOrder, { body })
     await call(placeOrder, { body })
@@ -45,7 +45,7 @@ describe('POST /orders', () => {
     })
   })
 
-  it('lehnt eine ungültige Bestellung mit 400 ab, ohne zu schreiben', async () => {
+  it('rejects an invalid order with 400 without writing', async () => {
     const response = await call(placeOrder, { body: JSON.stringify({ customerId: 'c-1', items: [] }) })
     expect(response.statusCode).toBe(400)
     expect(db.commandCalls(PutCommand)).toHaveLength(0)
@@ -53,7 +53,7 @@ describe('POST /orders', () => {
 })
 
 describe('GET /orders', () => {
-  it('liefert die Bestellungen eines Kunden ohne Keys', async () => {
+  it('returns the orders of a customer without keys', async () => {
     db.on(QueryCommand).resolves({ Items: [{ pk: 'CUSTOMER#c-1', sk: 'ORDER#x', orderId: 'A7' }] })
     const response = await call(listOrders, { queryStringParameters: { customerId: 'c-1' } })
     expect(response.statusCode).toBe(200)
@@ -64,7 +64,7 @@ describe('GET /orders', () => {
     })
   })
 
-  it('verlangt eine customerId', async () => {
+  it('requires a customerId', async () => {
     expect((await call(listOrders, {})).statusCode).toBe(400)
   })
 })

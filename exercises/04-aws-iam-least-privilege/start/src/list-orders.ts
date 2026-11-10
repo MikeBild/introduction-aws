@@ -4,7 +4,7 @@ import type { APIGatewayProxyHandlerV2 } from 'aws-lambda'
 
 const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 
-// Braucht nur Leserechte: Query auf die Orders Table.
+// Needs read access only: Query on the Orders table.
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const customerId = event.queryStringParameters?.customerId ?? 'unknown'
   const { Items = [] } = await db.send(new QueryCommand({

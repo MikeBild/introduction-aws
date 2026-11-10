@@ -5,7 +5,7 @@ import type { Order } from './order.ts'
 // Auf Modulebene: einmal pro Execution Environment.
 export const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 
-// Ein Ort für die Key-Formate (Übung 06): Bestellungen eines Kunden, neueste zuerst.
+// One place for the key formats (exercise 06): orders of a customer, newest first.
 export const customerPk = (customerId: string) => `CUSTOMER#${customerId}`
 export const orderSk = (createdAt: string, orderId: string) => `ORDER#${createdAt}#${orderId}`
 
@@ -13,7 +13,7 @@ export const saveOrder = async (order: Order) => {
   await db.send(new PutCommand({
     TableName: process.env.TABLE_NAME,
     Item: { pk: customerPk(order.customerId), sk: orderSk(order.createdAt, order.orderId), ...order },
-    // Eine neue ID darf nie eine bestehende Bestellung überschreiben.
+    // A new ID must never overwrite an existing order.
     ConditionExpression: 'attribute_not_exists(pk)',
   }))
   return order

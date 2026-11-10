@@ -1,4 +1,4 @@
-// Alle Entities liegen in einer Table. `type` macht Items unterscheidbar.
+// All entities live in one table. `type` tells items apart.
 export type Customer = { type: 'Customer'; pk: `CUSTOMER#${string}`; sk: 'PROFILE'; name: string }
 export type Order = { type: 'Order'; pk: `CUSTOMER#${string}`; sk: `ORDER#${string}`; orderId: string; status: string }
 export type OrderLine = { type: 'OrderLine'; pk: `ORDER#${string}`; sk: `PRODUCT#${string}`; quantity: number; price: number }

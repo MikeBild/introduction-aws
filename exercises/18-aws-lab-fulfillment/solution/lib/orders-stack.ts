@@ -19,7 +19,7 @@ export class OrdersStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    // ---------- Teil eins: unverändert aus Übung 17 ----------
+    // ---------- Part one: unchanged from exercise 17 ----------
 
     const table = new TableV2(this, 'Orders', {
       partitionKey: { name: 'pk', type: AttributeType.STRING },
@@ -42,9 +42,9 @@ export class OrdersStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // ---------- Teil zwei: OrderPlaced auf einem eigenen Event Bus (Übung 14) ----------
+    // ---------- Part two: OrderPlaced on its own event bus (exercise 14) ----------
 
-    // Ohne festen Namen: kollidiert nicht mit dem Bus aus Übung 14.
+    // Without a fixed name: does not collide with the bus from exercise 14.
     const bus = new EventBus(this, 'Events')
 
     const placeOrder = fn('PlaceOrder', 'place-order.ts', {
@@ -72,10 +72,10 @@ export class OrdersStack extends Stack {
 
     const orderPlaced = { source: ['werkstatt.orders'], detailType: ['OrderPlaced'] }
 
-    // Lager: Queue mit Dead Letter Queue, idempotent per Conditional Write.
+    // Stock: queue with dead letter queue, idempotent via conditional write.
     const stockDlq = new Queue(this, 'StockDlq', { retentionPeriod: Duration.days(14) })
     const stockQueue = new Queue(this, 'StockQueue', {
-      // Mindestens sechsmal so lang wie der Timeout der Funktion.
+      // At least six times the timeout of the function.
       visibilityTimeout: Duration.seconds(60),
       deadLetterQueue: { queue: stockDlq, maxReceiveCount: 3 },
     })
@@ -88,7 +88,7 @@ export class OrdersStack extends Stack {
     table.grantWriteData(reserveStock)
     reserveStock.addEventSource(new SqsEventSource(stockQueue, { batchSize: 10, reportBatchItemFailures: true }))
 
-    // ---------- Bezahlen, Versand, Bestätigung als State Machine (Übungen 13 und 12) ----------
+    // ---------- Payment, shipping, confirmation as a state machine (exercises 13 and 12) ----------
 
     const fromAddress: string = this.node.tryGetContext('fromAddress') ?? 'shop@example.com'
     const toAddress: string = this.node.tryGetContext('toAddress') ?? fromAddress
@@ -108,14 +108,14 @@ export class OrdersStack extends Stack {
     table.grantWriteData(cancel.lambdaFunction)
 
     const confirm = step('Bestaetigen', 'send-confirmation.ts', { FROM_ADDRESS: fromAddress, TO_ADDRESS: toAddress })
-    // Die Adressen verifizierst du vorher in SES (Übung 12 oder per CLI). Der Stack legt keine Identity an.
+    // You verify the addresses in SES beforehand (exercise 12 or via the CLI). The stack creates no identity.
     confirm.lambdaFunction.addToRolePolicy(new PolicyStatement({
       actions: ['ses:SendEmail'],
       resources: [...new Set([fromAddress, toAddress])].map((address) =>
         this.formatArn({ service: 'ses', resource: 'identity', resourceName: address })),
     }))
 
-    // Vorübergehende Fehler: Retry mit Backoff. Fachlicher Fehler: Kompensation.
+    // Transient errors: retry with backoff. Business error: compensation.
     charge.task.addRetry({ errors: ['PaymentProviderTimeout'], interval: Duration.seconds(2), backoffRate: 2, maxAttempts: 3 })
     charge.task.addCatch(cancel.task, {
       errors: ['PaymentDeclined'],
@@ -132,7 +132,7 @@ export class OrdersStack extends Stack {
       timeout: Duration.minutes(5),
     })
 
-    // Pro Bestellung eine Ausführung. Die State Machine bekommt nur detail, nicht das ganze Event.
+    // One execution per order. The state machine receives only detail, not the whole event.
     new Rule(this, 'OrderPlacedToFulfillment', {
       eventBus: bus,
       eventPattern: orderPlaced,

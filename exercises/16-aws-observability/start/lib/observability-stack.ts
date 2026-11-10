@@ -15,11 +15,11 @@ export class ObservabilityStack extends Stack {
       removalPolicy: RemovalPolicy.DESTROY,
     })
 
-    // Fehlgeschlagene asynchrone Aufrufe landen nach zwei Retries hier.
+    // Failed asynchronous invocations end up here after two retries.
     const deadLetterQueue = new Queue(this, 'PlaceOrderDlq', { retentionPeriod: Duration.days(14) })
 
-    // TODO: OpenTelemetry – adotInstrumentation mit AdotLayerVersion.fromJavaScriptSdkLayerVersion(...LATEST)
-    //       und AdotLambdaExecWrapper.REGULAR_HANDLER, dazu tracing: Tracing.ACTIVE
+    // TODO: OpenTelemetry – adotInstrumentation with AdotLayerVersion.fromJavaScriptSdkLayerVersion(...LATEST)
+    //       and AdotLambdaExecWrapper.REGULAR_HANDLER, plus tracing: Tracing.ACTIVE
 
     const placeOrder = new NodejsFunction(this, 'PlaceOrder', {
       entry: fileURLToPath(new URL('../src/place-order.ts', import.meta.url)),
@@ -38,8 +38,8 @@ export class ObservabilityStack extends Stack {
     table.grantWriteData(placeOrder)
 
     // TODO: SNS Topic 'Alarms' (optional E-Mail per -c alarmEmail=...)
-    // TODO: Alarm auf placeOrder.metricErrors (5 Minuten, Schwelle 5)
-    // TODO: Alarm auf deadLetterQueue.metricApproximateNumberOfMessagesVisible (Schwelle 1)
+    // TODO: Alarm on placeOrder.metricErrors (5 minutes, threshold 5)
+    // TODO: Alarm on deadLetterQueue.metricApproximateNumberOfMessagesVisible (threshold 1)
 
     new CfnOutput(this, 'PlaceOrderName', { value: placeOrder.functionName })
   }

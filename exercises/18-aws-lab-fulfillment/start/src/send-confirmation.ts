@@ -1,12 +1,12 @@
 import type { OrderPlaced } from './events.ts'
 
-// Cent nur für die Anzeige in Euro umrechnen.
+// Convert cents to euros for display only.
 export const formatEuro = (cents: number) =>
   new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(cents / 100)
 
-// TODO (Übung 12): SendEmailCommand aus '@aws-sdk/client-sesv2' von FROM_ADDRESS an TO_ADDRESS,
-//      Betreff 'Bestellung <orderId> bestätigt', Text mit formatEuro(totalCents) und trackingId.
-//      In der SES-Sandbox geht Mail nur an verifizierte Adressen.
+// TODO (exercise 12): SendEmailCommand from '@aws-sdk/client-sesv2' from FROM_ADDRESS to TO_ADDRESS,
+//      subject 'Bestellung <orderId> bestätigt', text with formatEuro(totalCents) and trackingId.
+//      In the SES sandbox, mail only goes to verified addresses.
 export const handler = async (_order: OrderPlaced & { trackingId?: string }): Promise<{ messageId?: string }> => {
   throw new Error('TODO: Bestätigung per SES schicken')
 }

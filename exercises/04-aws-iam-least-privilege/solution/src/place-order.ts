@@ -5,7 +5,7 @@ import type { APIGatewayProxyHandlerV2 } from 'aws-lambda'
 
 const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 
-// Braucht nur Schreibrechte: PutItem auf die Orders Table.
+// Needs write access only: PutItem on the Orders table.
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const { customerId = 'unknown', ...order } = JSON.parse(event.body ?? '{}')
   const item = { pk: `CUSTOMER#${customerId}`, sk: `ORDER#${randomUUID()}`, ...order }

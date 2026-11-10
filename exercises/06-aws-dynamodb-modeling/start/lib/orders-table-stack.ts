@@ -10,7 +10,7 @@ export class OrdersTableStack extends Stack {
       partitionKey: { name: 'pk', type: AttributeType.STRING },
       sortKey: { name: 'sk', type: AttributeType.STRING },
       removalPolicy: RemovalPolicy.DESTROY,
-      // TODO: globalSecondaryIndexes für die Muster, die pk/sk nicht abdecken
+      // TODO: globalSecondaryIndexes for the patterns that pk/sk do not cover
     })
 
     new CfnOutput(this, 'TableName', { value: table.tableName })

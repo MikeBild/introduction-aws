@@ -1,8 +1,8 @@
 import type { APIGatewayProxyHandlerV2 } from 'aws-lambda'
 
 // POST /orders
-// TODO: parseOrder (400 mit { message: 'invalid order' }), API Key per getParameter aus
-//       '@aws-lambda-powertools/parameters/ssm' mit decrypt und maxAge laden (Übung 08),
-//       placeOrder mit randomUUID() und new Date(), saveOrder, 201 mit der Bestellung.
+// TODO: parseOrder (400 with { message: 'invalid order' }), load the API key with getParameter from
+//       '@aws-lambda-powertools/parameters/ssm' with decrypt and maxAge (exercise 08),
+//       placeOrder with randomUUID() and new Date(), saveOrder, 201 with the order.
 export const handler: APIGatewayProxyHandlerV2 = async () =>
   ({ statusCode: 501, body: JSON.stringify({ message: 'TODO: POST /orders' }) })

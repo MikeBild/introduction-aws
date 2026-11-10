@@ -1,7 +1,7 @@
-// Führt `cdk synth` für jede CDK App unter exercises/ aus – ohne AWS-Konto.
-// Account und Region sind Platzhalter und kommen per Context.
-// Aufruf: npm run synth            (alle Apps)
-//         npm run synth -- 05      (nur Übung 05)
+// Runs `cdk synth` for every CDK app under exercises/ – without an AWS account.
+// Account and region are placeholders and come in via context.
+// Usage:  npm run synth            (all apps)
+//         npm run synth -- 05      (exercise 05 only)
 import { spawnSync } from 'node:child_process'
 import { existsSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
@@ -13,7 +13,7 @@ const apps = readdirSync(root)
   .flatMap((lesson) => ['start', 'solution'].map((variant) => join(root, lesson, variant)))
   .filter((dir) => existsSync(join(dir, 'cdk.json')))
 
-// Keine Credentials, kein Profil, kein Instance Metadata Service: synth muss offline gehen.
+// No credentials, no profile, no Instance Metadata Service: synth must work offline.
 const { AWS_PROFILE, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN, ...env } = process.env
 const offlineEnv = {
   ...env,

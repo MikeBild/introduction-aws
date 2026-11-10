@@ -1,7 +1,7 @@
 import { App } from 'aws-cdk-lib'
 import { OrdersStack } from '../lib/orders-stack.ts'
 
-// Teil eins und Teil zwei deployen denselben Stack: Teil zwei erweitert ihn.
+// Part one and part two deploy the same stack: part two extends it.
 const app = new App()
 new OrdersStack(app, 'OrdersStack', {
   env: {

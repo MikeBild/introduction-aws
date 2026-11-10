@@ -8,7 +8,7 @@ import { type PlaceOrderEvent, validate } from './order.ts'
 
 export const logger = new Logger({ serviceName: 'orders' })
 export const metrics = new Metrics({ namespace: 'Shop', serviceName: 'orders' })
-// Ohne OpenTelemetry-Layer ist der Tracer ein No-op. Mit Layer landen die Spans in X-Ray.
+// Without the OpenTelemetry layer the tracer is a no-op. With the layer the spans end up in X-Ray.
 const tracer = trace.getTracer('orders')
 const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 
@@ -35,7 +35,7 @@ export const placeOrder = async (event: PlaceOrderEvent) =>
 
 export const handler = async (event: PlaceOrderEvent, context: Context) => {
   logger.addContext(context)
-  // Eine ID für alle Logs dieser Bestellung – auch in nachgelagerten Funktionen.
+  // One ID for all logs of this order – also in downstream functions.
   logger.appendKeys({ orderId: event.orderId, correlationId: event.correlationId ?? context.awsRequestId })
   metrics.captureColdStartMetric(context.functionName)
   try {

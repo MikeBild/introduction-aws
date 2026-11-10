@@ -5,13 +5,13 @@ import { Metrics } from '@aws-lambda-powertools/metrics'
 import type { Context } from 'aws-lambda'
 import { type PlaceOrderEvent, validate } from './order.ts'
 
-// TODO: Logger mit serviceName 'orders' nutzen statt console.log
+// TODO: Use the Logger with serviceName 'orders' instead of console.log
 export const logger = new Logger({ serviceName: 'orders' })
-// TODO: Metriken OrderPlaced, ItemsOrdered und OrderFailed schreiben
+// TODO: Write the metrics OrderPlaced, ItemsOrdered and OrderFailed
 export const metrics = new Metrics({ namespace: 'Shop', serviceName: 'orders' })
 const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 
-// TODO: Span 'placeOrder' mit trace.getTracer('orders') aus '@opentelemetry/api'
+// TODO: Span 'placeOrder' with trace.getTracer('orders') from '@opentelemetry/api'
 export const placeOrder = async (event: PlaceOrderEvent) => {
   validate(event)
   await db.send(new PutCommand({
@@ -21,9 +21,9 @@ export const placeOrder = async (event: PlaceOrderEvent) => {
   return { orderId: event.orderId, status: 'PLACED' }
 }
 
-// Ausgangslage: Textlogs ohne Kontext. Welche Zeile gehört zu welcher Bestellung?
-// TODO: logger.addContext, appendKeys mit orderId und correlationId, logger.info/error,
-//       metrics.publishStoredMetrics() im finally
+// Starting point: text logs without context. Which line belongs to which order?
+// TODO: logger.addContext, appendKeys with orderId and correlationId, logger.info/error,
+//       metrics.publishStoredMetrics() in finally
 export const handler = async (event: PlaceOrderEvent, _context: Context) => {
   console.log('placing order')
   try {

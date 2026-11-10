@@ -14,7 +14,7 @@ export class ColdStartsStack extends Stack {
       removalPolicy: RemovalPolicy.DESTROY,
     })
 
-    // Startwert für den Vergleich. Power Tuning probiert danach 512, 1024 und 1769 MB.
+    // Starting value for the comparison. Power Tuning then tries 512, 1024 and 1769 MB.
     const memorySize = Number(this.node.tryGetContext('memorySize') ?? 1024)
     const common = {
       runtime: Runtime.NODEJS_24_X,
@@ -23,21 +23,21 @@ export class ColdStartsStack extends Stack {
       environment: { TABLE_NAME: table.tableName },
     }
 
-    // Vorher: alle SDK-Clients und zod im Bundle, nicht minifiziert, mit Inline-Sourcemap.
+    // Before: all SDK clients and zod in the bundle, not minified, with an inline source map.
     const heavy = new NodejsFunction(this, 'Heavy', {
       ...common,
       entry: fileURLToPath(new URL('../src/heavy.ts', import.meta.url)),
       bundling: {
         format: OutputFormat.ESM,
         externalModules: [],
-        // Das gebündelte SDK enthält CommonJS mit require(). Im ESM-Bundle braucht es dafür diesen Shim.
+        // The bundled SDK contains CommonJS with require(). The ESM bundle needs this shim for it.
         banner: "import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);",
         sourceMap: true,
         sourcesContent: true,
       },
     })
 
-    // Nachher: SDK aus der Runtime (external), minifiziert, nur ein Client.
+    // After: SDK from the runtime (external), minified, only one client.
     const lean = new NodejsFunction(this, 'Lean', {
       ...common,
       entry: fileURLToPath(new URL('../src/lean.ts', import.meta.url)),

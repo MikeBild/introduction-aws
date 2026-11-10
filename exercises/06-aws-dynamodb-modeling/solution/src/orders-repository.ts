@@ -5,7 +5,7 @@ import { customerPk, orderGsi1pk, PROFILE_SK, statusGsi2pk } from './keys.ts'
 const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 const tableName = () => process.env.TABLE_NAME
 
-// 1: Profil eines Kunden
+// 1: profile of a customer
 export const getCustomerProfile = async (customerId: string) => {
   const { Item } = await db.send(new GetCommand({
     TableName: tableName(),
@@ -14,7 +14,7 @@ export const getCustomerProfile = async (customerId: string) => {
   return Item
 }
 
-// 2: Bestellungen eines Kunden, neueste zuerst
+// 2: orders of a customer, newest first
 export const listOrdersOfCustomer = async (customerId: string, limit = 20) => {
   const { Items = [] } = await db.send(new QueryCommand({
     TableName: tableName(),
@@ -26,18 +26,18 @@ export const listOrdersOfCustomer = async (customerId: string, limit = 20) => {
   return Items
 }
 
-// 3: Bestellungen eines Kunden im Zeitraum (Datum im Format YYYY-MM-DD)
+// 3: orders of a customer in a date range (date in the format YYYY-MM-DD)
 export const listOrdersInRange = async (customerId: string, from: string, to: string) => {
   const { Items = [] } = await db.send(new QueryCommand({
     TableName: tableName(),
     KeyConditionExpression: 'pk = :pk AND sk BETWEEN :from AND :to',
-    // "~" sortiert hinter allen Ziffern und "#": so zählt der ganze letzte Tag mit.
+    // "~" sorts after all digits and "#": this way the whole last day is included.
     ExpressionAttributeValues: { ':pk': customerPk(customerId), ':from': `ORDER#${from}`, ':to': `ORDER#${to}~` },
   }))
   return Items
 }
 
-// 4: Eine Bestellung per orderId
+// 4: one order by orderId
 export const getOrder = async (orderId: string) => {
   const { Items = [] } = await db.send(new QueryCommand({
     TableName: tableName(),
@@ -49,7 +49,7 @@ export const getOrder = async (orderId: string) => {
   return Items[0]
 }
 
-// 5: Offene Bestellungen, älteste zuerst
+// 5: open orders, oldest first
 export const listOpenOrders = async (limit = 50) => {
   const { Items = [] } = await db.send(new QueryCommand({
     TableName: tableName(),

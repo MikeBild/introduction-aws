@@ -1,4 +1,4 @@
-// Ausgangslage: lädt beim Init alles, was irgendwann gebraucht werden könnte.
+// Starting point: loads everything on init that might be needed at some point.
 import * as dynamodb from '@aws-sdk/client-dynamodb'
 import * as s3 from '@aws-sdk/client-s3'
 import * as ses from '@aws-sdk/client-sesv2'

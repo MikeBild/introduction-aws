@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald lean.ts und report.ts fertig sind.
+// TODO: Remove .skip once lean.ts and report.ts are done.
 import { describe, expect, it } from 'vitest'
 import { parseReport, summarize } from '../src/report.ts'
 
@@ -6,13 +6,13 @@ const cold = 'REPORT RequestId: 3f1c  Duration: 41.20 ms  Billed Duration: 354 m
 const warm = 'REPORT RequestId: 9a2b  Duration: 8.80 ms  Billed Duration: 9 ms  Memory Size: 1024 MB  Max Memory Used: 99 MB'
 
 describe.skip('parseReport', () => {
-  it('liest die Init Duration eines Cold Starts', () => {
+  it('reads the Init Duration of a cold start', () => {
     expect(parseReport(cold)).toEqual({
       durationMs: 41.2, billedDurationMs: 354, memorySizeMb: 1024, maxMemoryUsedMb: 98, initDurationMs: 312.45,
     })
   })
 
-  it('erkennt warme Aufrufe an der fehlenden Init Duration', () => {
+  it('recognizes warm invocations by the missing Init Duration', () => {
     expect(parseReport(warm)?.initDurationMs).toBeUndefined()
   })
 
@@ -22,7 +22,7 @@ describe.skip('parseReport', () => {
 })
 
 describe.skip('summarize', () => {
-  it('zählt Cold Starts und mittelt die Init Duration', () => {
+  it('counts cold starts and averages the Init Duration', () => {
     expect(summarize([cold, warm, warm, 'irgendwas'])).toEqual({
       invocations: 3, coldStarts: 1, avgInitDurationMs: 312.45, avgDurationMs: 19.6,
     })

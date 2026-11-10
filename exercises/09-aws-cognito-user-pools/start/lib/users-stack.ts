@@ -5,9 +5,9 @@ export class UsersStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    // TODO: UserPool 'Users' mit Self Sign-up, Login per E-Mail, automatischer
-    //       Verifizierung der E-Mail und Passwörtern ab 12 Zeichen
-    // TODO: App Client 'Web' ohne Secret, mit userSrp und (nur für die CLI-Übung) userPassword
-    // TODO: CfnOutputs 'UserPoolId' und 'ClientId'
+    // TODO: UserPool 'Users' with self sign-up, login by email, automatic
+    //       email verification and passwords of at least 12 characters
+    // TODO: App client 'Web' without secret, with userSrp and (for the CLI exercise only) userPassword
+    // TODO: CfnOutputs 'UserPoolId' and 'ClientId'
   }
 }

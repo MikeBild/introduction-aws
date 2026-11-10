@@ -3,14 +3,14 @@ import type { EventBridgeEvent, SQSBatchItemFailure, SQSHandler } from 'aws-lamb
 import type { OrderPlaced } from './events.ts'
 import { db } from './orders.ts'
 
-// Reine Fachlogik des Lagers (Übung 14). Wirft bei Produkten, die es nicht gibt.
+// Pure business logic of the stock (exercise 14). Throws for products that do not exist.
 export const reserveStock = (event: OrderPlaced) => {
   const unknown = event.items.filter((item) => item.productId.startsWith('UNKNOWN'))
   if (unknown.length) throw new Error(`Unbekannte Produkte: ${unknown.map((i) => i.productId).join(', ')}`)
   return { orderId: event.orderId, items: event.items.map(({ productId, quantity }) => ({ productId, quantity })) }
 }
 
-// Mindestens einmal zugestellt: Die Reservierung wird nur geschrieben, wenn es sie noch nicht gibt.
+// Delivered at least once: the reservation is only written if it does not exist yet.
 export const reserveOnce = async (event: OrderPlaced) => {
   const reservation = reserveStock(event)
   try {
@@ -26,7 +26,7 @@ export const reserveOnce = async (event: OrderPlaced) => {
   }
 }
 
-// Partial Batch Response: Nur fehlgeschlagene Nachrichten kommen zurück in die Queue.
+// Partial batch response: only failed messages go back to the queue.
 export const handler: SQSHandler = async (event) => {
   const batchItemFailures: SQSBatchItemFailure[] = []
   for (const record of event.Records) {

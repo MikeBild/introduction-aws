@@ -1,8 +1,10 @@
-# Zugriffsmuster: Bestellungen
+*English · [Deutsch](ZUGRIFFSMUSTER.de.md)*
 
-Schreib fünf Fragen auf, die deine Anwendung an Bestellungen stellt. Leite erst danach Keys und Indexe ab.
+# Access patterns: orders
 
-| # | Frage | Eingabe | Ergebnis | Wie oft? | Key / Index | Operation |
+Write down five questions your application asks about orders. Only then derive keys and indexes.
+
+| # | Question | Input | Result | How often? | Key / index | Operation |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | | | | | | |
 | 2 | | | | | | |
@@ -12,13 +14,13 @@ Schreib fünf Fragen auf, die deine Anwendung an Bestellungen stellt. Leite erst
 
 ## Items
 
-| Entity | pk | sk | weitere Key-Attribute |
+| Entity | pk | sk | further key attributes |
 | --- | --- | --- | --- |
-| Kunde | | | |
-| Bestellung | | | |
+| Customer | | | |
+| Order | | | |
 
-## Prüffragen
+## Check questions
 
-- Lässt sich jede Frage mit `GetItem` oder `Query` beantworten?
-- Welche Frage braucht einen GSI, und welche Attribute projiziert er?
-- Welcher Partition Key könnte heiß werden?
+- Can every question be answered with `GetItem` or `Query`?
+- Which question needs a GSI, and which attributes does it project?
+- Which partition key could become hot?

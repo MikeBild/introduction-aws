@@ -4,7 +4,7 @@ import { describe, it } from 'vitest'
 import { ColdStartsStack } from '../lib/cold-starts-stack.ts'
 
 describe('ColdStartsStack', () => {
-  it('übernimmt memorySize aus dem Context', () => {
+  it('takes memorySize from the context', () => {
     const app = new App({ context: { 'aws:cdk:bundling-stacks': [], memorySize: 1769 } })
     Template.fromStack(new ColdStartsStack(app, 'Test')).hasResourceProperties('AWS::Lambda::Function', {
       MemorySize: 1769,

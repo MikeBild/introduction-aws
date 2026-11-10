@@ -1,19 +1,19 @@
 import type { SQSHandler } from 'aws-lambda'
 import type { OrderPlaced } from './events.ts'
 
-// TODO (Übung 14): Wirft bei Produkten, deren ID mit UNKNOWN beginnt.
+// TODO (exercise 14): Throws for products whose ID starts with UNKNOWN.
 export const reserveStock = (_event: OrderPlaced): { orderId: string; items: { productId: string; quantity: number }[] } => {
   throw new Error('TODO: reserveStock implementieren')
 }
 
-// TODO (Übung 14): PutCommand in die Orders Table mit pk 'ORDER#<orderId>', sk 'RESERVATION'
-//      und ConditionExpression 'attribute_not_exists(pk)'. ConditionalCheckFailedException
-//      (error.name) heißt: schon reserviert -> 'duplicate'.
+// TODO (exercise 14): PutCommand into the Orders table with pk 'ORDER#<orderId>', sk 'RESERVATION'
+//      and ConditionExpression 'attribute_not_exists(pk)'. ConditionalCheckFailedException
+//      (error.name) means: already reserved -> 'duplicate'.
 export const reserveOnce = async (_event: OrderPlaced): Promise<'reserved' | 'duplicate'> => {
   throw new Error('TODO: reserveOnce implementieren')
 }
 
-// TODO (Übung 14): Schleife mit try/catch, fehlgeschlagene Nachrichten in batchItemFailures.
+// TODO (exercise 14): Loop with try/catch, failed messages into batchItemFailures.
 export const handler: SQSHandler = async () => {
   throw new Error('TODO: ReserveStock implementieren')
 }

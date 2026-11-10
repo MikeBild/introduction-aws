@@ -6,12 +6,12 @@ import { OrdersApiStack } from '../lib/orders-api-stack.ts'
 const template = Template.fromStack(new OrdersApiStack(new App({ context: { 'aws:cdk:bundling-stacks': [] } }), 'Test'))
 
 describe('OrdersApiStack', () => {
-  it('legt eine HTTP-API an', () => {
+  it('creates an HTTP API', () => {
     template.resourceCountIs('AWS::ApiGatewayV2::Api', 1)
     template.hasResourceProperties('AWS::ApiGatewayV2::Api', { ProtocolType: 'HTTP' })
   })
 
-  it('hat die Routes GET /orders und POST /orders', () => {
+  it('has the routes GET /orders and POST /orders', () => {
     template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /orders' })
     template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'POST /orders' })
   })

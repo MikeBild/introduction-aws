@@ -11,9 +11,9 @@ export class OrdersTableStack extends Stack {
       sortKey: { name: 'sk', type: AttributeType.STRING },
       removalPolicy: RemovalPolicy.DESTROY,
       globalSecondaryIndexes: [
-        // Muster 4: Bestellung per orderId
+        // Pattern 4: order by orderId
         { indexName: 'GSI1', partitionKey: { name: 'gsi1pk', type: AttributeType.STRING } },
-        // Muster 5: offene Bestellungen (Sparse Index)
+        // Pattern 5: open orders (sparse index)
         {
           indexName: 'GSI2',
           partitionKey: { name: 'gsi2pk', type: AttributeType.STRING },

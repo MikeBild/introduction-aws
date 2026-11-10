@@ -15,11 +15,11 @@ export class UsersStack extends Stack {
       removalPolicy: RemovalPolicy.DESTROY,
     })
 
-    // Öffentlicher Client für Browser und CLI: ohne Secret.
+    // Public client for browser and CLI: without secret.
     const webClient = userPool.addClient('Web', {
       authFlows: {
         userSrp: true,
-        // Nur für die Übung: erlaubt Login per CLI ohne SRP-Bibliothek.
+        // For the exercise only: allows login via the CLI without an SRP library.
         userPassword: true,
       },
       generateSecret: false,

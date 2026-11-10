@@ -12,20 +12,20 @@ export class OrdersStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    // Übung 06/07: Bestellungen eines Kunden unter CUSTOMER#id, sortiert nach Datum.
+    // Exercise 06/07: orders of a customer under CUSTOMER#id, sorted by date.
     const table = new TableV2(this, 'Orders', {
       partitionKey: { name: 'pk', type: AttributeType.STRING },
       sortKey: { name: 'sk', type: AttributeType.STRING },
       removalPolicy: RemovalPolicy.DESTROY,
     })
 
-    // Übung 08: Den SecureString legst du per CLI an, der Stack kennt nur den Namen.
+    // Exercise 08: you create the SecureString via the CLI, the stack only knows the name.
     const apiKeyName: string = this.node.tryGetContext('apiKeyParameter') ?? '/werkstatt/payments/api-key'
     const apiKey = StringParameter.fromSecureStringParameterAttributes(this, 'PaymentApiKey', {
       parameterName: apiKeyName,
     })
 
-    // Übung 02/03: Node.js 24 auf ARM, ESM, minifiziert.
+    // Exercise 02/03: Node.js 24 on ARM, ESM, minified.
     const fn = (id: string, file: string, environment: Record<string, string> = {}) =>
       new NodejsFunction(this, id, {
         entry: fileURLToPath(new URL(`../src/${file}`, import.meta.url)),
@@ -36,7 +36,7 @@ export class OrdersStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // Übung 04: jede Funktion nur mit den Rechten, die sie braucht.
+    // Exercise 04: each function only with the permissions it needs.
     const placeOrder = fn('PlaceOrder', 'place-order.ts', { API_KEY_PARAMETER: apiKeyName })
     table.grantWriteData(placeOrder)
     apiKey.grantRead(placeOrder)
@@ -44,7 +44,7 @@ export class OrdersStack extends Stack {
     const listOrders = fn('ListOrders', 'list-orders.ts')
     table.grantReadData(listOrders)
 
-    // Übung 05: HTTP-API mit zwei Routen.
+    // Exercise 05: HTTP API with two routes.
     const api = new HttpApi(this, 'OrdersApi')
     api.addRoutes({
       path: '/orders',

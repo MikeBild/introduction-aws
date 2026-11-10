@@ -1,32 +1,34 @@
-# 02 · Lambda-Handler in TypeScript
+*English · [Deutsch](README.de.md)*
+
+# 02 · Lambda handler in TypeScript
 
 **ID:** `aws-lambda-handler`
 
-## Aufgabe
+## Task
 
-Schreib einen async Handler für `placeOrder`: Body prüfen, die Summe in einer Pure Function berechnen, mit `400` oder `200` antworten und lokal ohne AWS testen. Du brauchst dafür keine Bibliothek, eine kleine Funktion reicht.
+Write an async handler for `placeOrder`: validate the body, calculate the total in a Pure Function, respond with `400` or `200` and test it locally without AWS. You need no library for this, a small function is enough.
 
-## Ablauf
+## Steps
 
-1. Lies [`start/src/handler.ts`](start/src/handler.ts). Die Fachlogik steckt direkt im Handler und vertraut dem Body blind.
-2. Schreib in [`start/src/order.ts`](start/src/order.ts) die Funktion `parseOrder(body)`. Sie liefert eine `Order` oder `undefined`:
-   - kaputtes JSON → `undefined`, keine Exception
-   - `customerId` ist ein nicht leerer String
-   - `items` hat mindestens eine Position aus `productId`, `quantity` (ganzzahlig, mindestens 1) und `priceCents` (ganzzahlig, mindestens 0)
-3. Schreib die Pure Function `totalCents(order)`: Summe aus Menge mal Preis in Cent. Sie kennt weder Event noch AWS.
-4. Lass den Handler nur noch parsen, prüfen und antworten: `400` mit `{ "message": "invalid order" }`, sonst `200` mit `{ "totalCents": … }`.
-5. Entferne in `start/test/*.test.ts` das `.skip` und lass die Tests laufen:
+1. Read [`start/src/handler.ts`](start/src/handler.ts). The business logic sits directly in the handler and trusts the body blindly.
+2. In [`start/src/order.ts`](start/src/order.ts), write the function `parseOrder(body)`. It returns an `Order` or `undefined`:
+   - broken JSON → `undefined`, no exception
+   - `customerId` is a non-empty string
+   - `items` has at least one line item made of `productId`, `quantity` (integer, at least 1) and `priceCents` (integer, at least 0)
+3. Write the Pure Function `totalCents(order)`: the sum of quantity times price in cents. It knows neither the event nor AWS.
+4. Let the handler only parse, validate and respond: `400` with `{ "message": "invalid order" }`, otherwise `200` with `{ "totalCents": … }`.
+5. Remove the `.skip` in `start/test/*.test.ts` and run the tests:
 
    ```bash
    npx vitest --project start exercises/02-aws-lambda-handler
    ```
 
-## Prüfen
+## Check
 
-- Alle Tests grün, ohne AWS-Konto und ohne Netzwerk.
-- `totalCents` lässt sich ohne Event aufrufen.
-- Geld bleibt in ganzen Cent: `12.99` als Preis lehnt `parseOrder` ab.
+- All tests green, without an AWS account and without a network.
+- `totalCents` can be called without an event.
+- Money stays in whole cents: `parseOrder` rejects `12.99` as a price.
 
-## Lösung
+## Solution
 
 [`solution/`](solution/) – `npx vitest run --project solution exercises/02-aws-lambda-handler`

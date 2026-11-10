@@ -21,20 +21,20 @@ export class OrderEventsStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // Produzent: Orders Service veröffentlicht OrderPlaced
+    // Producer: the orders service publishes OrderPlaced
     const bus = new EventBus(this, 'Orders', { eventBusName: 'orders' })
     const placeOrder = fn('PlaceOrder', 'publish.ts', { EVENT_BUS_NAME: bus.eventBusName })
     bus.grantPutEventsTo(placeOrder)
 
-    // Konsument: Lager
+    // Consumer: stock
     const stockQueue = new Queue(this, 'StockQueue', {
       visibilityTimeout: Duration.seconds(60),
-      // TODO: Dead Letter Queue nach drei Fehlversuchen
+      // TODO: Dead letter queue after three failed attempts
     })
 
-    // TODO: Rule auf dem Bus: source 'orders', detailType 'OrderPlaced' -> SqsQueue(stockQueue)
+    // TODO: Rule on the bus: source 'orders', detailType 'OrderPlaced' -> SqsQueue(stockQueue)
 
-    // TODO: Table Reservations (Partition Key orderId), RESERVATIONS_TABLE_NAME an die Funktion,
+    // TODO: Table Reservations (partition key orderId), RESERVATIONS_TABLE_NAME to the function,
     //       Schreibrechte per grantWriteData
     const reserveStock = fn('ReserveStock', 'reserve-stock.ts', {})
     reserveStock.addEventSource(new SqsEventSource(stockQueue, {

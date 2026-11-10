@@ -10,7 +10,7 @@ export class ShopTableStack extends Stack {
       partitionKey: { name: 'pk', type: AttributeType.STRING },
       sortKey: { name: 'sk', type: AttributeType.STRING },
       removalPolicy: RemovalPolicy.DESTROY,
-      // TODO: GSI1 als Inverted Index (partitionKey: sk, sortKey: pk)
+      // TODO: GSI1 as inverted index (partitionKey: sk, sortKey: pk)
     })
 
     new CfnOutput(this, 'TableName', { value: table.tableName })

@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald der jeweilige Teil steht.
+// TODO: Remove .skip once the respective part is in place.
 import { App } from 'aws-cdk-lib'
 import { Match, Template } from 'aws-cdk-lib/assertions'
 import { describe, expect, it } from 'vitest'
@@ -7,20 +7,20 @@ import { OrdersStack } from '../lib/orders-stack.ts'
 const template = Template.fromStack(new OrdersStack(new App({ context: { 'aws:cdk:bundling-stacks': [] } }), 'Test'))
 const orderPlaced = { source: ['werkstatt.orders'], 'detail-type': ['OrderPlaced'] }
 
-describe.skip('OrdersStack, Teil eins', () => {
-  it('hat POST und GET auf /orders', () => {
+describe.skip('OrdersStack, part one', () => {
+  it('has POST and GET on /orders', () => {
     template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'POST /orders' })
     template.hasResourceProperties('AWS::ApiGatewayV2::Route', { RouteKey: 'GET /orders' })
     template.hasOutput('ApiUrl', {})
   })
 })
 
-describe.skip('OrdersStack, Teil zwei', () => {
-  it('hat einen eigenen Event Bus ohne festen Namen', () => {
+describe.skip('OrdersStack, part two', () => {
+  it('has its own event bus without a fixed name', () => {
     template.resourceCountIs('AWS::Events::EventBus', 1)
   })
 
-  it('leitet OrderPlaced in eine Queue mit Dead Letter Queue nach drei Versuchen', () => {
+  it('routes OrderPlaced to a queue with a dead letter queue after three attempts', () => {
     template.resourcePropertiesCountIs('AWS::Events::Rule', { EventPattern: orderPlaced }, 2)
     template.hasResourceProperties('AWS::SQS::Queue', {
       RedrivePolicy: { deadLetterTargetArn: Match.anyValue(), maxReceiveCount: 3 },
@@ -30,14 +30,14 @@ describe.skip('OrdersStack, Teil zwei', () => {
     })
   })
 
-  it('startet pro Bestellung die State Machine nur mit detail', () => {
+  it('starts the state machine per order with detail only', () => {
     template.hasResourceProperties('AWS::Events::Rule', {
       EventPattern: orderPlaced,
       Targets: [Match.objectLike({ InputPath: '$.detail' })],
     })
   })
 
-  it('bezahlt mit Retry, storniert im Catch und bestätigt per SES', () => {
+  it('charges with retry, cancels in the catch and confirms via SES', () => {
     const machine = Object.values(template.findResources('AWS::StepFunctions::StateMachine'))[0]
     const definition = JSON.stringify(machine?.Properties.DefinitionString)
     for (const text of ['PaymentProviderTimeout', 'PaymentDeclined', 'Stornieren', 'Versenden', 'Bestaetigen'])
@@ -47,7 +47,7 @@ describe.skip('OrdersStack, Teil zwei', () => {
     })
   })
 
-  it('legt keine SES-Identity an', () => {
+  it('creates no SES identity', () => {
     template.resourceCountIs('AWS::SES::EmailIdentity', 0)
   })
 })

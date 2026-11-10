@@ -1,4 +1,4 @@
-// Baut ein Lambda-Bundle wie NodejsFunction und misst die Größe.
+// Builds a Lambda bundle like NodejsFunction and measures its size.
 //   node src/bundle-size.ts
 import { fileURLToPath } from 'node:url'
 import { build } from 'esbuild'

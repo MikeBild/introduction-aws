@@ -1,5 +1,5 @@
 export type ParsedMail = { from?: string; subject?: string; orderId?: string; text: string }
 
-// TODO: Header (bis zur ersten Leerzeile) und Body trennen, From und Subject lesen,
-//       die Bestellnummer aus "Bestellung <id>" im Betreff ziehen.
+// TODO: Split header (up to the first empty line) and body, read From and Subject,
+//       extract the order number from "Bestellung <id>" in the subject.
 export const parseMail = (raw: string): ParsedMail => ({ text: raw })

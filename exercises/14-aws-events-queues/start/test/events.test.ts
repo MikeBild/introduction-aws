@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald Rule, DLQ, Partial Batch Response und Conditional Write stehen.
+// TODO: Remove .skip once rule, DLQ, partial batch response and conditional write are in place.
 import { ConditionalCheckFailedException } from '@aws-sdk/client-dynamodb'
 import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge'
 import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb'
@@ -34,7 +34,7 @@ const run = async (...records: ReturnType<typeof message>[]) =>
   (await reserveStock({ Records: records } as SQSEvent, {} as Context, () => {})) as SQSBatchResponse
 
 describe.skip('publishOrderPlaced', () => {
-  it('schickt OrderPlaced ohne Preise auf den Bus orders', async () => {
+  it('sends OrderPlaced without prices to the bus orders', async () => {
     events.on(PutEventsCommand).resolves({ FailedEntryCount: 0, Entries: [{ EventId: 'e-1' }] })
     expect(await publishOrderPlaced(order)).toBe('e-1')
     const entry = events.commandCalls(PutEventsCommand)[0]?.args[0].input.Entries?.[0]
@@ -42,20 +42,20 @@ describe.skip('publishOrderPlaced', () => {
     expect(JSON.parse(entry?.Detail ?? '')).toEqual({ orderId: 'A7', customerId: 'c-1', items: [{ productId: 'p-1', quantity: 2 }] })
   })
 
-  it('wirft, wenn EventBridge den Eintrag ablehnt', async () => {
+  it('throws when EventBridge rejects the entry', async () => {
     events.on(PutEventsCommand).resolves({ FailedEntryCount: 1, Entries: [{ ErrorMessage: 'kaputt' }] })
     await expect(publishOrderPlaced(order)).rejects.toThrow('kaputt')
   })
 })
 
 describe.skip('reserveStock', () => {
-  it('meldet nur die fehlgeschlagene Nachricht zurück', async () => {
+  it('reports only the failed message back', async () => {
     const response = await run(message('m-1', 'A7', 'p-1'), message('m-2', 'A8', 'UNKNOWN-1'), message('m-3', 'A9', 'p-2'))
     expect(response.batchItemFailures).toEqual([{ itemIdentifier: 'm-2' }])
     expect(db.commandCalls(PutCommand)).toHaveLength(2)
   })
 
-  it('schreibt die Bestellnummer nur, wenn es sie noch nicht gibt', async () => {
+  it('writes the order number only if it does not exist yet', async () => {
     await run(message('m-1', 'A7', 'p-1'))
     const input = db.commandCalls(PutCommand)[0]?.args[0].input
     expect(input).toMatchObject({
@@ -65,13 +65,13 @@ describe.skip('reserveStock', () => {
     })
   })
 
-  it('überspringt eine doppelte Zustellung, ohne sie zurückzumelden', async () => {
+  it('skips a duplicate delivery without reporting it back', async () => {
     db.on(PutCommand).rejects(new ConditionalCheckFailedException({ message: 'gibt es schon', $metadata: {} }))
     const response = await run(message('m-1', 'A7', 'p-1'))
     expect(response.batchItemFailures).toEqual([])
   })
 
-  it('meldet echte DynamoDB-Fehler zurück', async () => {
+  it('reports real DynamoDB errors back', async () => {
     db.on(PutCommand).rejects(new Error('Throttling'))
     const response = await run(message('m-1', 'A7', 'p-1'))
     expect(response.batchItemFailures).toEqual([{ itemIdentifier: 'm-1' }])

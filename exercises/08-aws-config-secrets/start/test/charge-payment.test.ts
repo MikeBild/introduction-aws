@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald Handler und Stack den Parameter Store nutzen.
+// TODO: Remove .skip once handler and stack use the Parameter Store.
 import { GetParameterCommand, SSMClient } from '@aws-sdk/client-ssm'
 import { clearCaches } from '@aws-lambda-powertools/parameters'
 import { mockClient } from 'aws-sdk-client-mock'
@@ -17,19 +17,19 @@ beforeEach(() => {
 })
 
 describe.skip('charge-payment', () => {
-  it('lädt den API Key entschlüsselt aus SSM', async () => {
+  it('loads the API key decrypted from SSM', async () => {
     expect(await handler({ orderId: 'A7', amount: 10, items: 1 })).toEqual({ orderId: 'A7', status: 'CHARGED' })
     const apiKeyCall = ssm.commandCalls(GetParameterCommand).find((c) => c.args[0].input.Name === '/orders/payments/api-key')
     expect(apiKeyCall?.args[0].input.WithDecryption).toBe(true)
   })
 
-  it('cacht die Parameter zwischen Aufrufen', async () => {
+  it('caches the parameters between invocations', async () => {
     await handler({ orderId: 'A7', amount: 10, items: 1 })
     await handler({ orderId: 'A8', amount: 10, items: 1 })
     expect(ssm.commandCalls(GetParameterCommand)).toHaveLength(2)
   })
 
-  it('wendet das Limit aus dem Parameter Store an', async () => {
+  it('applies the limit from the Parameter Store', async () => {
     expect(await handler({ orderId: 'A9', amount: 10, items: 5 })).toMatchObject({ status: 'REJECTED' })
   })
 })

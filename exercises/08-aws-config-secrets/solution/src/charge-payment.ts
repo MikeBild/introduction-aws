@@ -4,7 +4,7 @@ import { chargePayment, type PaymentEvent } from './payment.ts'
 const FIVE_MINUTES = 300
 
 export const handler = async (event: PaymentEvent) => {
-  // SecureString: entschlüsselt laden, fünf Minuten im Execution Environment cachen.
+  // SecureString: load decrypted, cache for five minutes in the execution environment.
   const apiKey = await getParameter(process.env.API_KEY_PARAMETER!, { decrypt: true, maxAge: FIVE_MINUTES })
   const limit = await getParameter(process.env.MAX_ITEMS_PARAMETER!, { maxAge: FIVE_MINUTES })
   return chargePayment({ apiKey: apiKey!, limit: Number(limit), event })

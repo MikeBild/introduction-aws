@@ -4,9 +4,9 @@ export type Order = { id: string; email: string; total: number }
 
 const ses = new SESv2Client({})
 
-// Ausgangslage: Betreff und Text stehen im Code.
-// TODO: Auf Content.Template mit TemplateName 'order-confirmed' und
-//       TemplateData { orderId, total } umstellen, ReplyTo auf REPLY_TO_ADDRESS setzen.
+// Starting point: subject and text are in the code.
+// TODO: Switch to Content.Template with TemplateName 'order-confirmed' and
+//       TemplateData { orderId, total }, set ReplyTo to REPLY_TO_ADDRESS.
 export const sendConfirmation = (order: Order) =>
   ses.send(new SendEmailCommand({
     FromEmailAddress: process.env.FROM_ADDRESS,

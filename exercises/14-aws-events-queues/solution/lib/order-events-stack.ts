@@ -23,15 +23,15 @@ export class OrderEventsStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // Produzent: Orders Service veröffentlicht OrderPlaced
+    // Producer: the orders service publishes OrderPlaced
     const bus = new EventBus(this, 'Orders', { eventBusName: 'orders' })
     const placeOrder = fn('PlaceOrder', 'publish.ts', { EVENT_BUS_NAME: bus.eventBusName })
     bus.grantPutEventsTo(placeOrder)
 
-    // Konsument: Lager, entkoppelt über eine Queue mit Dead Letter Queue
+    // Consumer: stock, decoupled through a queue with a dead letter queue
     const deadLetterQueue = new Queue(this, 'StockDlq', { retentionPeriod: Duration.days(14) })
     const stockQueue = new Queue(this, 'StockQueue', {
-      // Mindestens sechsmal so lang wie der Timeout der Funktion.
+      // At least six times the timeout of the function.
       visibilityTimeout: Duration.seconds(60),
       deadLetterQueue: { queue: deadLetterQueue, maxReceiveCount: 3 },
     })
@@ -42,7 +42,7 @@ export class OrderEventsStack extends Stack {
       targets: [new SqsQueue(stockQueue)],
     })
 
-    // Eine Reservierung pro Bestellnummer. Der Conditional Write verhindert doppelte Wirkung.
+    // One reservation per order number. The conditional write prevents a duplicate effect.
     const reservations = new TableV2(this, 'Reservations', {
       partitionKey: { name: 'orderId', type: AttributeType.STRING },
       removalPolicy: RemovalPolicy.DESTROY,

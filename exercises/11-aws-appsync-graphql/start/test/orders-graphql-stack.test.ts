@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald Mutation, Subscription und createOrder-Resolver stehen.
+// TODO: Remove .skip once the mutation, the subscription and the createOrder resolver are in place.
 import { App } from 'aws-cdk-lib'
 import { Match, Template } from 'aws-cdk-lib/assertions'
 import { describe, expect, it } from 'vitest'
@@ -9,7 +9,7 @@ const schema = (): string =>
   Object.values(template.findResources('AWS::AppSync::GraphQLSchema'))[0]?.Properties.Definition
 
 describe.skip('OrdersGraphqlStack', () => {
-  it('nutzt API Key als Standard und IAM als zweiten Modus', () => {
+  it('uses the API key as default and IAM as second mode', () => {
     template.hasResourceProperties('AWS::AppSync::GraphQLApi', {
       AuthenticationType: 'API_KEY',
       AdditionalAuthenticationProviders: [Match.objectLike({ AuthenticationType: 'AWS_IAM' })],
@@ -21,7 +21,7 @@ describe.skip('OrdersGraphqlStack', () => {
     template.resourceCountIs('AWS::Cognito::UserPool', 0)
   })
 
-  it('hat JavaScript-Resolver für order und createOrder', () => {
+  it('has JavaScript resolvers for order and createOrder', () => {
     for (const [TypeName, FieldName] of [['Query', 'order'], ['Mutation', 'createOrder']]) {
       template.hasResourceProperties('AWS::AppSync::Resolver', {
         TypeName, FieldName, Runtime: { Name: 'APPSYNC_JS', RuntimeVersion: '1.0.0' },
@@ -29,11 +29,11 @@ describe.skip('OrdersGraphqlStack', () => {
     }
   })
 
-  it('verbindet die Subscription mit createOrder', () => {
+  it('connects the subscription to createOrder', () => {
     expect(schema()).toContain('@aws_subscribe(mutations: ["createOrder"])')
   })
 
-  it('erlaubt API Key und IAM auf allen Wurzeltypen', () => {
+  it('allows API key and IAM on all root types', () => {
     for (const type of ['Order', 'Query', 'Mutation', 'Subscription'])
       expect(schema()).toMatch(new RegExp(`type ${type} @aws_api_key @aws_iam`))
   })

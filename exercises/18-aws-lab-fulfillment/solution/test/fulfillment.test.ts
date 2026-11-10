@@ -33,12 +33,12 @@ const run = async (...records: ReturnType<typeof message>[]) =>
   (await reserveStock({ Records: records } as SQSEvent, {} as Context, () => {})) as SQSBatchResponse
 
 describe('ReserveStock', () => {
-  it('meldet nur die fehlgeschlagene Nachricht zurück', async () => {
+  it('reports only the failed message back', async () => {
     const response = await run(message('m-1', placed('A7')), message('m-2', placed('A8', 'UNKNOWN-1')))
     expect(response.batchItemFailures).toEqual([{ itemIdentifier: 'm-2' }])
   })
 
-  it('reserviert per Conditional Write auf die Bestellnummer', async () => {
+  it('reserves with a conditional write on the order number', async () => {
     await run(message('m-1', placed('A7')))
     expect(db.commandCalls(PutCommand)[0]?.args[0].input).toMatchObject({
       TableName: 'orders',
@@ -47,19 +47,19 @@ describe('ReserveStock', () => {
     })
   })
 
-  it('überspringt eine doppelte Zustellung', async () => {
+  it('skips a duplicate delivery', async () => {
     db.on(PutCommand).rejects(new ConditionalCheckFailedException({ message: 'gibt es schon', $metadata: {} }))
     expect((await run(message('m-1', placed('A7')))).batchItemFailures).toEqual([])
   })
 })
 
-describe('Schritte der State Machine', () => {
-  it('bezahlt bis 1000 Euro und lehnt darüber mit PaymentDeclined ab', async () => {
+describe('Steps of the state machine', () => {
+  it('charges up to 1000 euros and declines above with PaymentDeclined', async () => {
     expect(await chargePayment(placed('A7'))).toEqual({ paymentId: 'PAY-A7' })
     await expect(chargePayment(placed('A9', 'p-1', 100_001))).rejects.toMatchObject({ name: 'PaymentDeclined' })
   })
 
-  it('storniert nur eine Bestellung im Status placed', async () => {
+  it('cancels only an order in status placed', async () => {
     db.on(UpdateCommand).resolves({})
     expect(await cancelOrder(placed('A9'))).toEqual({ status: 'cancelled' })
     expect(db.commandCalls(UpdateCommand)[0]?.args[0].input).toMatchObject({
@@ -68,13 +68,13 @@ describe('Schritte der State Machine', () => {
     })
   })
 
-  it('schickt die Bestätigung an die verifizierte Adresse', async () => {
+  it('sends the confirmation to the verified address', async () => {
     ses.on(SendEmailCommand).resolves({ MessageId: 'mail-1' })
     expect(await sendConfirmation({ ...placed('A7'), trackingId: 'TRACK-A7' })).toEqual({ messageId: 'mail-1' })
     const input = ses.commandCalls(SendEmailCommand)[0]?.args[0].input
     expect(input?.Destination?.ToAddresses).toEqual(['ich@example.com'])
     expect(input?.Content?.Simple?.Subject?.Data).toBe('Bestellung A7 bestätigt')
-    // Intl setzt ein geschütztes Leerzeichen vor das Euro-Zeichen.
+    // Intl puts a non-breaking space before the euro sign.
     expect(formatEuro(2598)).toMatch(/^25,98\s€$/)
   })
 })

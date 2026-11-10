@@ -1,7 +1,7 @@
 import type { APIGatewayProxyHandlerV2 } from 'aws-lambda'
 import { parseOrder, totalCents } from './order.ts'
 
-// Der Handler bleibt dünn: parsen, prüfen, Fachlogik aufrufen, antworten.
+// The handler stays thin: parse, validate, call the business logic, respond.
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const order = parseOrder(event.body)
   if (!order)

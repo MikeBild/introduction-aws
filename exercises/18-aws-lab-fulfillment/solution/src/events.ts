@@ -3,8 +3,8 @@ import type { Order } from './order.ts'
 
 const events = new EventBridgeClient({})
 
-// Das Fakt nach dem Speichern. Die Keys der Bestellung stecken drin, damit spätere
-// Schritte sie wiederfinden.
+// The fact after saving. The keys of the order are included so that later
+// steps can find it again.
 export type OrderPlaced = Pick<Order, 'orderId' | 'customerId' | 'createdAt' | 'totalCents' | 'items'>
 
 export const publishOrderPlaced = async (order: Order) => {
@@ -18,6 +18,6 @@ export const publishOrderPlaced = async (order: Order) => {
       Detail: JSON.stringify(detail),
     }],
   }))
-  // PutEvents meldet Teilfehler im Ergebnis, nicht als Exception.
+  // PutEvents reports partial failures in the result, not as an exception.
   if (result.FailedEntryCount) throw new Error(`OrderPlaced nicht veröffentlicht: ${result.Entries?.[0]?.ErrorMessage}`)
 }

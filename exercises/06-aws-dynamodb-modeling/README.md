@@ -1,37 +1,39 @@
-# 06 · DynamoDB modellieren
+*English · [Deutsch](README.de.md)*
 
-**ID:** `aws-dynamodb-modeling` · **Format:** Breakout oder Whiteboard, danach Code
+# 06 · Modeling DynamoDB
 
-## Aufgabe
+**ID:** `aws-dynamodb-modeling` · **Format:** breakout or whiteboard, then code
 
-Schreib fünf Zugriffsmuster für Bestellungen bei deinem Unternehmen auf und leite daraus Keys und GSIs ab. Prüf jedes Muster mit einer Query statt Scan.
+## Task
 
-## Ablauf
+Write down five access patterns for orders at your company and derive keys and GSIs from them. Check each pattern with a Query instead of a Scan.
 
-1. Füll [`start/ZUGRIFFSMUSTER.md`](start/ZUGRIFFSMUSTER.md) aus: erst die Fragen, dann Keys und Indexe.
-2. Vergleich mit dem Beispiel in [`solution/ZUGRIFFSMUSTER.md`](solution/ZUGRIFFSMUSTER.md).
-3. In [`start/src/orders-repository.ts`](start/src/orders-repository.ts) beantwortet jede Funktion ihre Frage per `Scan`. Ersetze jeden Scan durch `GetItem` oder `Query`.
-4. Ergänze die GSIs in [`start/lib/orders-table-stack.ts`](start/lib/orders-table-stack.ts).
-5. Entferne das `.skip` in den Tests. Sie schlagen fehl, sobald irgendwo ein `Scan` läuft.
-6. Optional gegen AWS:
+## Steps
+
+1. Fill in [`start/ZUGRIFFSMUSTER.md`](start/ZUGRIFFSMUSTER.md): first the questions, then keys and indexes.
+2. Compare with the example in [`solution/ZUGRIFFSMUSTER.md`](solution/ZUGRIFFSMUSTER.md).
+3. In [`start/src/orders-repository.ts`](start/src/orders-repository.ts), every function answers its question with a `Scan`. Replace each Scan with `GetItem` or `Query`.
+4. Add the GSIs in [`start/lib/orders-table-stack.ts`](start/lib/orders-table-stack.ts).
+5. Remove the `.skip` in the tests. They fail as soon as a `Scan` runs anywhere.
+6. Optionally against AWS:
 
    ```bash
    cd exercises/06-aws-dynamodb-modeling/start
    npx cdk deploy
-   TABLE_NAME=<TableName aus dem Output> node src/seed.ts
+   TABLE_NAME=<TableName from the output> node src/seed.ts
    aws dynamodb query --table-name <TableName> \
      --key-condition-expression 'pk = :pk AND begins_with(sk, :o)' \
      --expression-attribute-values '{":pk":{"S":"CUSTOMER#42"},":o":{"S":"ORDER#"}}' \
      --no-scan-index-forward --return-consumed-capacity TOTAL
    ```
 
-   Vergleich `ConsumedCapacity` mit einem `aws dynamodb scan` auf dieselbe Table.
+   Compare `ConsumedCapacity` with an `aws dynamodb scan` on the same table.
 
-## Prüfen
+## Check
 
-- Jede der fünf Fragen hat einen Key oder GSI und läuft per `GetItem` oder `Query`.
-- Kein `Scan` im Request-Pfad.
+- Each of the five questions has a key or GSI and runs via `GetItem` or `Query`.
+- No `Scan` in the request path.
 
-## Lösung
+## Solution
 
 [`solution/`](solution/)

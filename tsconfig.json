@@ -18,11 +18,11 @@
     "checkJs": true,
     "noEmit": true,
     "skipLibCheck": true,
-    // AppSync-Resolver importieren den Subpath ohne Endung, wie in der AWS-Doku.
+    // AppSync resolvers import the subpath without an extension, as in the AWS docs.
     "paths": {
       "@aws-appsync/utils/dynamodb": ["./node_modules/@aws-appsync/utils/dynamodb.d.ts"]
     }
   },
   "include": ["exercises/**/*.ts", "exercises/**/*.js", "scripts/**/*.ts", "vitest.config.ts"],
-  "exclude": ["node_modules", "legacy", "**/cdk.out"]
+  "exclude": ["node_modules", "archive", "**/cdk.out"]
 }

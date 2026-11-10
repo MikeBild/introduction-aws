@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitest/config'
 
-// Die Tests laufen ohne AWS-Konto. Dummy-Werte verhindern, dass SDK-Clients
-// beim Import nach Region oder Credentials suchen.
+// The tests run without an AWS account. Dummy values keep SDK clients from
+// looking for a region or credentials on import.
 const env = {
   AWS_REGION: 'eu-central-1',
   AWS_ACCESS_KEY_ID: 'test',
@@ -17,7 +17,7 @@ export default defineConfig({
         test: {
           name: 'solution',
           include: ['exercises/*/solution/**/*.test.ts'],
-          exclude: ['**/node_modules/**', '**/cdk.out/**', 'legacy/**'],
+          exclude: ['**/node_modules/**', '**/cdk.out/**', 'archive/**'],
           env,
         },
       },
@@ -25,7 +25,7 @@ export default defineConfig({
         test: {
           name: 'start',
           include: ['exercises/*/start/**/*.test.ts'],
-          exclude: ['**/node_modules/**', '**/cdk.out/**', 'legacy/**'],
+          exclude: ['**/node_modules/**', '**/cdk.out/**', 'archive/**'],
           env,
         },
       },

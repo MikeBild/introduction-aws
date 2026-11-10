@@ -20,8 +20,8 @@ export class OrderWorkflowStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // Payload ist standardmäßig {% $states.input %}. Die Ausgabe ist die
-    // bisherigen Daten plus das Ergebnis des Schritts.
+    // The payload defaults to {% $states.input %}. The output is the
+    // data so far plus the result of the step.
     const step = (id: string, file: string) =>
       LambdaInvoke.jsonata(this, id, {
         lambdaFunction: fn(`${id}Fn`, file),
@@ -34,14 +34,14 @@ export class OrderWorkflowStack extends Stack {
     const reorder = step('Nachbestellen', 'reorder.ts')
     const cancel = step('Stornieren', 'cancel-order.ts')
 
-    // Vorübergehende Fehler: bis zu drei weitere Versuche mit Backoff 2 s, 4 s, 8 s.
+    // Transient errors: up to three more attempts with backoff 2 s, 4 s, 8 s.
     charge.addRetry({
       errors: ['PaymentProviderTimeout'],
       interval: Duration.seconds(2),
       backoffRate: 2,
       maxAttempts: 3,
     })
-    // Fachlicher Fehler: kein Retry, sondern Kompensation.
+    // Business error: no retry, but compensation.
     charge.addCatch(cancel, {
       errors: ['PaymentDeclined'],
       outputs: '{% $merge([$states.input, { "error": $states.errorOutput }]) %}',

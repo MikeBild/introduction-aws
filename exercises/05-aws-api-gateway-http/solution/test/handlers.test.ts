@@ -12,7 +12,7 @@ const call = async (h: typeof listOrders, event: Partial<APIGatewayProxyEventV2>
   (await h(event as APIGatewayProxyEventV2, {} as Context, () => {})) as APIGatewayProxyStructuredResultV2
 
 describe('POST /orders', () => {
-  it('speichert die Bestellung und antwortet mit 201', async () => {
+  it('saves the order and responds with 201', async () => {
     db.on(PutCommand).resolves({})
     const response = await call(placeOrder, {
       body: JSON.stringify({ customerId: '42', items: [{ sku: 'BOOK', quantity: 1 }] }),
@@ -21,7 +21,7 @@ describe('POST /orders', () => {
     expect(db.commandCalls(PutCommand)[0]?.args[0].input.Item).toMatchObject({ pk: 'CUSTOMER#42' })
   })
 
-  it('lehnt eine Bestellung ohne Artikel mit 400 ab', async () => {
+  it('rejects an order without items with 400', async () => {
     const response = await call(placeOrder, { body: JSON.stringify({ customerId: '42', items: [] }) })
     expect(response.statusCode).toBe(400)
     expect(db.commandCalls(PutCommand)).toHaveLength(0)
@@ -29,7 +29,7 @@ describe('POST /orders', () => {
 })
 
 describe('GET /orders', () => {
-  it('liefert die Bestellungen eines Kunden per Query', async () => {
+  it('returns the orders of a customer via Query', async () => {
     db.on(QueryCommand).resolves({ Items: [{ orderId: 'A7' }] })
     const response = await call(listOrders, { queryStringParameters: { customerId: '42' } })
     expect(response.statusCode).toBe(200)
@@ -37,7 +37,7 @@ describe('GET /orders', () => {
     expect(db.commandCalls(QueryCommand)[0]?.args[0].input.ExpressionAttributeValues).toMatchObject({ ':pk': 'CUSTOMER#42' })
   })
 
-  it('verlangt eine customerId', async () => {
+  it('requires a customerId', async () => {
     expect((await call(listOrders, {})).statusCode).toBe(400)
   })
 })

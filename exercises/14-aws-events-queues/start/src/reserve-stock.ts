@@ -6,8 +6,8 @@ import { type OrderPlaced, reserveStock } from './order.ts'
 const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 
 // TODO: Bedingt schreiben: ConditionExpression 'attribute_not_exists(orderId)'.
-//       Wirft DynamoDB ConditionalCheckFailedException (prüf error.name), gab es die
-//       Bestellung schon: 'duplicate' zurückgeben statt zu werfen.
+//       If DynamoDB throws ConditionalCheckFailedException (check error.name), the order
+//       already existed: return 'duplicate' instead of throwing.
 export const reserveOnce = async (event: OrderPlaced): Promise<'reserved' | 'duplicate'> => {
   const reservation = reserveStock(event)
   await db.send(new PutCommand({
@@ -17,10 +17,10 @@ export const reserveOnce = async (event: OrderPlaced): Promise<'reserved' | 'dup
   return 'reserved'
 }
 
-// Ausgangslage: Schlägt eine Nachricht fehl, kommt der ganze Batch zurück in die Queue –
-// und bereits verarbeitete Bestellungen werden doppelt reserviert.
-// TODO: Jede Nachricht in try/catch verarbeiten, fehlgeschlagene als
-//       { itemIdentifier: record.messageId } sammeln und { batchItemFailures } zurückgeben.
+// Starting point: if one message fails, the whole batch goes back to the queue –
+// and orders that were already processed get reserved twice.
+// TODO: Process each message in try/catch, collect failed ones as
+//       { itemIdentifier: record.messageId } and return { batchItemFailures }.
 export const handler: SQSHandler = async (event) => {
   for (const record of event.Records) {
     const message = JSON.parse(record.body) as EventBridgeEvent<'OrderPlaced', OrderPlaced>

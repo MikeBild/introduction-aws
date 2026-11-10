@@ -19,17 +19,17 @@ export class OrdersGraphqlStack extends Stack {
       name: 'orders',
       definition: Definition.fromFile(file('schema.graphql')),
       authorizationConfig: {
-        // Zum Entwickeln: ein API Key, der nach sieben Tagen abläuft.
+        // For development: an API key that expires after seven days.
         defaultAuthorization: {
           authorizationType: AuthorizationType.API_KEY,
           apiKeyConfig: { expires: Expiration.after(Duration.days(7)) },
         },
-        // Für Backends: Aufrufe mit IAM-Signatur, erlaubt per api.grantMutation(...).
+        // For backends: calls with an IAM signature, allowed via api.grantMutation(...).
         additionalAuthorizationModes: [{ authorizationType: AuthorizationType.IAM }],
       },
     })
 
-    // Data Source mit Lese- und Schreibrechten auf genau diese Table.
+    // Data source with read and write access to exactly this table.
     const orders = api.addDynamoDbDataSource('Orders', table)
 
     orders.createResolver('GetOrder', {
@@ -38,11 +38,11 @@ export class OrdersGraphqlStack extends Stack {
       runtime: FunctionRuntime.JS_1_0_0,
       code: Code.fromAsset(file('resolvers/get-order.js')),
     })
-    // TODO: Resolver für Mutation.createOrder mit resolvers/create-order.js
+    // TODO: Resolver for Mutation.createOrder with resolvers/create-order.js
 
 
     new CfnOutput(this, 'GraphqlUrl', { value: api.graphqlUrl })
-    // Nur für Übungen: Der Key steht damit im Klartext in den Stack Outputs.
+    // For exercises only: this puts the key in plain text into the stack outputs.
     new CfnOutput(this, 'ApiKey', { value: api.apiKey ?? '' })
   }
 }

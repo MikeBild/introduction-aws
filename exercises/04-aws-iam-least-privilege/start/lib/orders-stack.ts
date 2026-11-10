@@ -25,9 +25,9 @@ export class OrdersStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // Ausgangslage: beide Funktionen dürfen alles mit jeder Table.
-    // TODO: ListOrders nur Lesezugriff, PlaceOrder nur Schreibzugriff –
-    //       mit grant-Methoden statt eigener Policy Statements.
+    // Starting point: both functions may do anything with any table.
+    // TODO: ListOrders read access only, PlaceOrder write access only –
+    //       with grant methods instead of custom policy statements.
     const tooBroad = new PolicyStatement({ actions: ['dynamodb:*'], resources: ['*'] })
 
     const listOrders = fn('ListOrders', 'list-orders.ts')

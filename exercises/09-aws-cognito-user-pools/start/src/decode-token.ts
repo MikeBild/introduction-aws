@@ -1,4 +1,4 @@
-// Aufruf: node src/decode-token.ts <token>
+// Usage: node src/decode-token.ts <token>
 import { decodeJwt, describeToken } from './jwt.ts'
 
 const token = process.argv[2]

@@ -1,19 +1,21 @@
-# 01 · Serverless-Grundhaltung
+*English · [Deutsch](README.de.md)*
 
-**ID:** `aws-serverless-mindset` · **Format:** Whiteboard oder Diskussion, kein Code
+# 01 · Serverless mindset
 
-## Aufgabe
+**ID:** `aws-serverless-mindset` · **Format:** whiteboard or discussion, no code
 
-Zeichne die Architektur einer Anwendung deines Unternehmens und markiere je Baustein, ob ein Managed Service ihn übernehmen kann.
+## Task
 
-## Ablauf
+Draw the architecture of an application at your company and mark for each building block whether a managed service can take it over.
 
-1. Öffne [`start/ARCHITEKTUR.md`](start/ARCHITEKTUR.md) und kopier das Arbeitsblatt in dein Whiteboard oder in eine eigene Datei.
-2. Trag jeden Baustein ein, den dein Team heute selbst betreibt: Server, Datenbank, Auth, Jobs, Mail, Queues.
-3. Notiere je Baustein, wer ihn betreibt, was er kostet und was nachts schiefgehen kann.
-4. Ordne jedem Baustein einen Managed Service zu – oder begründe, warum er bleibt.
-5. Markiere die zwei Bausteine, bei denen der Wechsel am meisten Betriebsaufwand spart.
+## Steps
 
-## Lösung
+1. Open [`start/ARCHITEKTUR.md`](start/ARCHITEKTUR.md) and copy the worksheet into your whiteboard or into a file of your own.
+2. Enter every building block your team runs itself today: servers, database, auth, jobs, mail, queues.
+3. For each block, note who runs it, what it costs and what can go wrong at night.
+4. Assign a managed service to each block – or explain why it stays.
+5. Mark the two blocks where switching saves the most operational effort.
 
-[`solution/ARCHITEKTUR.md`](solution/ARCHITEKTUR.md) zeigt das ausgefüllte Blatt für einen Bestell-Shop. Diese Anwendung baust du in den folgenden Lektionen Stück für Stück.
+## Solution
+
+[`solution/ARCHITEKTUR.md`](solution/ARCHITEKTUR.md) shows the completed sheet for an order shop. You build this application step by step in the following lessons.

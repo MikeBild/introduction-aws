@@ -11,7 +11,7 @@ export class OrdersStack extends Stack {
 
     const table = new TableV2(this, 'Orders', {
       partitionKey: { name: 'pk', type: AttributeType.STRING },
-      // Nur für Übungen: Table verschwindet mit cdk destroy.
+      // For exercises only: the table disappears with cdk destroy.
       removalPolicy: RemovalPolicy.DESTROY,
     })
 

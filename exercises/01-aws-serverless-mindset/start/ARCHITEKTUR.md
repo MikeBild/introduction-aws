@@ -1,34 +1,36 @@
-# Arbeitsblatt: Was betreibt dein Team selbst?
+*English · [Deutsch](ARCHITEKTUR.de.md)*
 
-Anwendung: _______________________
+# Worksheet: What does your team run itself?
 
-## Bausteine
+Application: _______________________
 
-| Baustein | Heute betrieben als | Wer betreibt ihn? | Was geht nachts schief? | Managed Service | Entscheidung |
+## Building blocks
+
+| Building block | Run today as | Who runs it? | What goes wrong at night? | Managed service | Decision |
 | --- | --- | --- | --- | --- | --- |
-| Auth / Login | | | | | |
+| Auth / login | | | | | |
 | API | | | | | |
-| Fachlogik | | | | | |
-| Datenbank | | | | | |
-| Hintergrund-Jobs, Cron | | | | | |
-| Abläufe über mehrere Schritte | | | | | |
-| Nachrichten zwischen Services | | | | | |
-| Mail-Versand und -Empfang | | | | | |
-| Logs, Metriken, Tracing | | | | | |
+| Business logic | | | | | |
+| Database | | | | | |
+| Background jobs, cron | | | | | |
+| Multi-step workflows | | | | | |
+| Messages between services | | | | | |
+| Sending and receiving mail | | | | | |
+| Logs, metrics, tracing | | | | | |
 
-## Skizze
+## Sketch
 
-Zeichne die Bausteine und ihre Verbindungen. Färbe alles, was ein Managed Service übernehmen kann.
+Draw the building blocks and their connections. Color everything a managed service can take over.
 
 ```mermaid
 flowchart LR
   client["Client"] --> api["API"]
-  api --> logic["Fachlogik"]
-  logic --> db["Datenbank"]
+  api --> logic["Business logic"]
+  logic --> db["Database"]
 ```
 
-## Fragen für die Diskussion
+## Questions for the discussion
 
-- Welcher Baustein kostet dein Team heute am meisten Betriebszeit?
-- Wo braucht dein Team Kontrolle, die ein Managed Service nicht bietet?
-- Wofür zahlt dein Team heute, auch wenn niemand die Anwendung nutzt?
+- Which building block costs your team the most operating time today?
+- Where does your team need control that a managed service does not offer?
+- What does your team pay for today even when nobody uses the application?

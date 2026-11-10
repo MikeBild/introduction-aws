@@ -1,5 +1,5 @@
-// Testdaten für die deployte Table:
-//   TABLE_NAME=<Wert aus dem Output> node src/seed.ts
+// Test data for the deployed table:
+//   TABLE_NAME=<value from the output> node src/seed.ts
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
 import { BatchWriteCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb'
 import { customerPk, orderGsi1pk, orderSk, PROFILE_SK, statusGsi2pk } from './keys.ts'

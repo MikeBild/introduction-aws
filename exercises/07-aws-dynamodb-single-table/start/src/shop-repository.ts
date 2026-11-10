@@ -5,7 +5,7 @@ import type { Customer, Order, OrderLine, ShopItem } from './items.ts'
 const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 const tableName = () => process.env.TABLE_NAME
 
-// Fertig: Kunde und Bestellungen in einer Query.
+// Done: customer and orders in one query.
 export const getCustomerWithOrders = async (customerId: string) => {
   const { Items = [] } = await db.send(new QueryCommand({
     TableName: tableName(),
@@ -20,13 +20,13 @@ export const getCustomerWithOrders = async (customerId: string) => {
   }
 }
 
-// TODO: Query auf pk = ORDER#id mit begins_with(sk, 'PRODUCT#')
+// TODO: Query on pk = ORDER#id with begins_with(sk, 'PRODUCT#')
 export const getOrderLines = async (_orderId: string): Promise<OrderLine[]> => {
   throw new Error('TODO: getOrderLines implementieren')
 }
 
-// Ausgangslage: liest die ganze Table.
-// TODO: Query auf einen Inverted Index GSI1 (Partition Key sk, Sort Key pk).
+// Starting point: reads the whole table.
+// TODO: Query on an inverted index GSI1 (partition key sk, sort key pk).
 export const getOrdersOfProduct = async (productId: string) => {
   const { Items = [] } = await db.send(new ScanCommand({
     TableName: tableName(),

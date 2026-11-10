@@ -6,14 +6,14 @@ export class ShopTableStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    // Eine Table für Kunden, Bestellungen, Positionen und Produkte.
+    // One table for customers, orders, line items and products.
     const table = new TableV2(this, 'Shop', {
       partitionKey: { name: 'pk', type: AttributeType.STRING },
       sortKey: { name: 'sk', type: AttributeType.STRING },
       removalPolicy: RemovalPolicy.DESTROY,
       globalSecondaryIndexes: [
         {
-          // Inverted Index: sk wird Partition Key, pk wird Sort Key.
+          // Inverted index: sk becomes the partition key, pk the sort key.
           indexName: 'GSI1',
           partitionKey: { name: 'sk', type: AttributeType.STRING },
           sortKey: { name: 'pk', type: AttributeType.STRING },

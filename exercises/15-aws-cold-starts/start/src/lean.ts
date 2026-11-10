@@ -1,3 +1,3 @@
-// TODO: Schlanke Variante von heavy.ts – nur DynamoDBClient und GetItemCommand
-//       importieren, Client auf Modulebene, Eingabe ohne zod prüfen.
+// TODO: Lean variant of heavy.ts – import only DynamoDBClient and GetItemCommand,
+//       client at module level, validate the input without zod.
 export { handler } from './heavy.ts'

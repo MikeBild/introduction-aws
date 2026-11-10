@@ -22,17 +22,17 @@ const getAs = async (sub: string, orderId: string) =>
   )) as APIGatewayProxyStructuredResultV2
 
 describe('GET /orders/{orderId}', () => {
-  it('liefert die eigene Bestellung', async () => {
+  it('returns your own order', async () => {
     const response = await getAs('ada', 'A7')
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body ?? '')).toEqual({ orderId: 'A7', ownerId: 'ada', items: [] })
   })
 
-  it('antwortet mit 404 bei fremder Bestellung', async () => {
+  it('responds with 404 for an order of another customer', async () => {
     expect((await getAs('grace', 'A7')).statusCode).toBe(404)
   })
 
-  it('antwortet mit 404, wenn es die Bestellung nicht gibt', async () => {
+  it('responds with 404 when the order does not exist', async () => {
     expect((await getAs('ada', 'XX')).statusCode).toBe(404)
   })
 })

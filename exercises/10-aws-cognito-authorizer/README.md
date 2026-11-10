@@ -1,18 +1,20 @@
-# 10 · API mit Cognito absichern
+*English · [Deutsch](README.de.md)*
 
-**ID:** `aws-cognito-authorizer` · Zusatzkapitel
+# 10 · Securing the API with Cognito
 
-## Aufgabe
+**ID:** `aws-cognito-authorizer` · additional chapter
 
-Schütz `GET /orders/{orderId}` mit einem `HttpUserPoolAuthorizer` und gib `404` zurück, wenn die Bestellung jemand anderem gehört.
+## Task
 
-## Ablauf
+Protect `GET /orders/{orderId}` with an `HttpUserPoolAuthorizer` and return `404` when the order belongs to someone else.
 
-1. [`start/`](start/) enthält User Pool, Table, HTTP-API und zwei Funktionen – noch ohne Authorizer.
-2. Leg in [`start/lib/secure-orders-stack.ts`](start/lib/secure-orders-stack.ts) einen `HttpUserPoolAuthorizer` an und häng ihn an beide Routes.
-3. Ergänze in [`start/src/get-order.ts`](start/src/get-order.ts) den Owner-Check: `sub` aus den Claims gegen `order.ownerId`.
-4. Entferne das `.skip` in den Tests.
-5. Deploy und probier es mit zwei Konten aus (Anmeldung wie in Lektion 09):
+## Steps
+
+1. [`start/`](start/) contains a user pool, a table, an HTTP API and two functions – without an authorizer so far.
+2. In [`start/lib/secure-orders-stack.ts`](start/lib/secure-orders-stack.ts), create an `HttpUserPoolAuthorizer` and attach it to both routes.
+3. In [`start/src/get-order.ts`](start/src/get-order.ts), add the owner check: `sub` from the claims against `order.ownerId`.
+4. Remove the `.skip` in the tests.
+5. Deploy and try it with two accounts (sign in as in lesson 09):
 
    ```bash
    cd exercises/10-aws-cognito-authorizer/start
@@ -23,15 +25,15 @@ Schütz `GET /orders/{orderId}` mit einem `HttpUserPoolAuthorizer` und gib `404`
    ORDER=$(curl -s -X POST "$API/orders" -H "authorization: Bearer $ADA" -d '{"items":["BOOK"]}' | jq -r .orderId)
    curl -s -w '\n%{http_code}\n' "$API/orders/$ORDER" -H "authorization: Bearer $ADA"    # 200
    curl -s -w '\n%{http_code}\n' "$API/orders/$ORDER" -H "authorization: Bearer $GRACE"  # 404
-   # GRACE ist das Access Token eines zweiten Kontos, angemeldet wie ADA
+   # GRACE is the access token of a second account, signed in like ADA
    curl -s -w '\n%{http_code}\n' "$API/orders/$ORDER"                                    # 401
    ```
 
-## Prüfen
+## Check
 
-- Ohne Token antwortet die API mit `401`, bevor die Funktion läuft.
-- Mit fremdem Token antwortet die Funktion mit `404`, nicht mit `403`.
+- Without a token the API responds with `401` before the function runs.
+- With someone else’s token the function responds with `404`, not with `403`.
 
-## Lösung
+## Solution
 
 [`solution/`](solution/)

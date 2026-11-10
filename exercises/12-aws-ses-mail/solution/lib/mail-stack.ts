@@ -15,16 +15,16 @@ export class MailStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    // Per Context überschreiben: -c fromAddress=shop@deine-domain.de -c domain=deine-domain.de
+    // Override via context: -c fromAddress=shop@deine-domain.de -c domain=deine-domain.de
     const domain: string = this.node.tryGetContext('domain') ?? 'example.com'
     const fromAddress: string = this.node.tryGetContext('fromAddress') ?? `shop@${domain}`
     const replyAddress = `reply@${domain}`
 
-    // Absender verifizieren: SES schickt einen Bestätigungslink an diese Adresse.
+    // Verify the sender: SES sends a confirmation link to this address.
     const sender = new EmailIdentity(this, 'Sender', { identity: Identity.email(fromAddress) })
 
-    // Empfang setzt eine verifizierte Domain voraus. SES erzeugt dafür DKIM-Einträge,
-    // die du in deinem DNS anlegst (Console: SES -> Identities -> deine Domain).
+    // Receiving requires a verified domain. SES generates DKIM records for it,
+    // which you add to your DNS (console: SES -> Identities -> your domain).
     new EmailIdentity(this, 'Domain', { identity: Identity.domain(domain) })
 
     new CfnTemplate(this, 'OrderConfirmed', {
@@ -45,7 +45,7 @@ export class MailStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // Ausgehend: Bestätigung per Template
+    // Outbound: confirmation via template
     const sendConfirmation = fn('SendConfirmation', 'send-confirmation.ts', {
       FROM_ADDRESS: fromAddress,
       REPLY_TO_ADDRESS: replyAddress,

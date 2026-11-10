@@ -6,10 +6,10 @@ export type Report = {
   initDurationMs?: number
 }
 
-// TODO: Zahlen aus einer REPORT-Zeile lesen. Init Duration gibt es nur bei Cold Starts.
+// TODO: Read the numbers from a REPORT line. Init Duration only exists for cold starts.
 export const parseReport = (_line: string): Report | undefined => undefined
 
-// TODO: Aufrufe und Cold Starts zählen, Init Duration und Duration mitteln.
+// TODO: Count invocations and cold starts, average Init Duration and Duration.
 export const summarize = (lines: string[]) => {
   const reports = lines.map(parseReport).filter((r): r is Report => r !== undefined)
   return { invocations: reports.length, coldStarts: 0, avgInitDurationMs: 0, avgDurationMs: 0 }

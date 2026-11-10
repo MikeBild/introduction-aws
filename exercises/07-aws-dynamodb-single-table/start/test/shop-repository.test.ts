@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald GSI1 steht und die Queries ohne Scan laufen.
+// TODO: Remove .skip once GSI1 is in place and the queries run without Scan.
 import { DynamoDBDocumentClient, QueryCommand, ScanCommand } from '@aws-sdk/lib-dynamodb'
 import { mockClient } from 'aws-sdk-client-mock'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
@@ -12,7 +12,7 @@ afterEach(() => expect(db.commandCalls(ScanCommand)).toHaveLength(0))
 const lastQuery = () => db.commandCalls(QueryCommand).at(-1)?.args[0].input
 
 describe.skip('Single-Table', () => {
-  it('lädt Kunde und Bestellungen mit einer Query', async () => {
+  it('loads customer and orders with one query', async () => {
     db.on(QueryCommand).resolves({ Items: seedItems.filter((i) => i.pk === 'CUSTOMER#42') })
     const { customer, orders } = await getCustomerWithOrders('42')
     expect(customer?.name).toBe('Ada')
@@ -20,13 +20,13 @@ describe.skip('Single-Table', () => {
     expect(db.commandCalls(QueryCommand)).toHaveLength(1)
   })
 
-  it('lädt die Positionen einer Bestellung', async () => {
+  it('loads the line items of an order', async () => {
     db.on(QueryCommand).resolves({ Items: seedItems.filter((i) => i.pk === 'ORDER#A7') })
     expect(await getOrderLines('A7')).toHaveLength(2)
     expect(lastQuery()?.ExpressionAttributeValues).toEqual({ ':pk': 'ORDER#A7', ':product': 'PRODUCT#' })
   })
 
-  it('beantwortet „Bestellungen eines Produkts“ über den Inverted Index', async () => {
+  it('answers “orders of a product” via the inverted index', async () => {
     db.on(QueryCommand).resolves({
       Items: seedItems.filter((i) => i.sk === 'PRODUCT#9' && i.pk.startsWith('ORDER#')),
     })

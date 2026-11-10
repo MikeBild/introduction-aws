@@ -20,8 +20,8 @@ export class OrderWorkflowStack extends Stack {
         bundling: { format: OutputFormat.ESM, minify: true },
       })
 
-    // Payload ist standardmäßig {% $states.input %}. Die Ausgabe ist die
-    // bisherigen Daten plus das Ergebnis des Schritts.
+    // The payload defaults to {% $states.input %}. The output is the
+    // data so far plus the result of the step.
     const step = (id: string, file: string) =>
       LambdaInvoke.jsonata(this, id, {
         lambdaFunction: fn(`${id}Fn`, file),
@@ -31,12 +31,12 @@ export class OrderWorkflowStack extends Stack {
     const charge = step('Bezahlen', 'charge-payment.ts')
     const ship = step('Versenden', 'ship-order.ts')
 
-    // Ausgangslage: Bezahlen, dann Versenden – ohne Fehlerbehandlung und ohne Lager.
+    // Starting point: Bezahlen (charge), then Versenden (ship) – no error handling, no stock check.
     // TODO: Schritte LagerPruefen (check-stock.ts), Nachbestellen (reorder.ts), Stornieren (cancel-order.ts)
-    // TODO: Retry für PaymentProviderTimeout: 2 s Intervall, Backoff 2, maximal 3 Versuche
-    // TODO: Catch für PaymentDeclined -> Stornieren, Fehler per outputs an die Eingabe hängen
-    // TODO: Choice.jsonata 'Verfuegbar' mit Condition.jsonata('{% $states.input.available %}')
-    //       -> Versenden, sonst Nachbestellen
+    // TODO: Retry for PaymentProviderTimeout: 2 s interval, backoff 2, at most 3 attempts
+    // TODO: Catch for PaymentDeclined -> Stornieren, attach the error to the input via outputs
+    // TODO: Choice.jsonata 'Verfuegbar' with Condition.jsonata('{% $states.input.available %}')
+    //       -> Versenden, otherwise Nachbestellen
 
     const workflow = new StateMachine(this, 'OrderWorkflow', {
       stateMachineType: StateMachineType.STANDARD,

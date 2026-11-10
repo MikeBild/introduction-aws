@@ -1,4 +1,4 @@
-// TODO: Entferne .skip, sobald Retry, Catch und Choice im Workflow stehen.
+// TODO: Remove .skip once Retry, Catch and Choice are in the workflow.
 import { App } from 'aws-cdk-lib'
 import { Template } from 'aws-cdk-lib/assertions'
 import { describe, expect, it } from 'vitest'
@@ -6,8 +6,8 @@ import { OrderWorkflowStack } from '../lib/order-workflow-stack.ts'
 
 const template = Template.fromStack(new OrderWorkflowStack(new App({ context: { 'aws:cdk:bundling-stacks': [] } }), 'Test'))
 
-// DefinitionString ist ein Fn::Join aus Text und Function-ARNs. Für die Prüfung
-// ersetzen wir die ARNs durch Platzhalter und lesen die Definition als JSON.
+// DefinitionString is an Fn::Join of text and function ARNs. For the assertions
+// we replace the ARNs with placeholders and parse the definition as JSON.
 type Definition = { QueryLanguage: string; StartAt: string; States: Record<string, any> }
 const definition = (): Definition => {
   const sm = Object.values(template.findResources('AWS::StepFunctions::StateMachine'))[0]
@@ -16,25 +16,25 @@ const definition = (): Definition => {
 }
 
 describe.skip('OrderWorkflowStack', () => {
-  it('ist ein Standard Workflow mit JSONata', () => {
+  it('is a Standard Workflow with JSONata', () => {
     template.hasResourceProperties('AWS::StepFunctions::StateMachine', { StateMachineType: 'STANDARD' })
     expect(definition().QueryLanguage).toBe('JSONata')
     expect(definition().StartAt).toBe('Bezahlen')
   })
 
-  it('wiederholt die Zahlung bei PaymentProviderTimeout mit Backoff', () => {
+  it('retries the payment on PaymentProviderTimeout with backoff', () => {
     expect(definition().States.Bezahlen.Retry).toContainEqual(
       expect.objectContaining({ ErrorEquals: ['PaymentProviderTimeout'], IntervalSeconds: 2, BackoffRate: 2, MaxAttempts: 3 }),
     )
   })
 
-  it('storniert bei PaymentDeclined', () => {
+  it('cancels on PaymentDeclined', () => {
     expect(definition().States.Bezahlen.Catch).toContainEqual(
       expect.objectContaining({ ErrorEquals: ['PaymentDeclined'], Next: 'Stornieren' }),
     )
   })
 
-  it('verzweigt nach der Lagerprüfung', () => {
+  it('branches after the stock check', () => {
     const choice = definition().States.Verfuegbar
     expect(choice.Type).toBe('Choice')
     expect(choice.Choices[0]).toMatchObject({ Condition: '{% $states.input.available %}', Next: 'Versenden' })

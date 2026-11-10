@@ -12,11 +12,11 @@ export class PaymentsStack extends Stack {
       entry: fileURLToPath(new URL('../src/charge-payment.ts', import.meta.url)),
       runtime: Runtime.NODEJS_24_X,
       architecture: Architecture.ARM_64,
-      // Ausgangslage: der Key steht im Template und in der Lambda Console.
-      // TODO: Nur Parameter-Namen übergeben (API_KEY_PARAMETER, MAX_ITEMS_PARAMETER)
+      // Starting point: the key is in the template and in the Lambda console.
+      // TODO: Pass only parameter names (API_KEY_PARAMETER, MAX_ITEMS_PARAMETER)
       // TODO: SecureString per StringParameter.fromSecureStringParameterAttributes referenzieren
-      // TODO: /orders/max-items als StringParameter anlegen
-      // TODO: Leserechte mit grantRead vergeben
+      // TODO: Create /orders/max-items as a StringParameter
+      // TODO: Grant read access with grantRead
       environment: {
         PAYMENT_API_KEY: 'sk_test_nur_ein_beispiel',
         MAX_ITEMS: '20',

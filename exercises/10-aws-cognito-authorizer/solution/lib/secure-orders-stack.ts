@@ -43,7 +43,7 @@ export class SecureOrdersStack extends Stack {
     const placeOrder = fn('PlaceOrder', 'place-order.ts')
     table.grantWriteData(placeOrder)
 
-    // Prüft Signatur, Ablauf und Client des Tokens, bevor die Funktion läuft.
+    // Verifies signature, expiry and client of the token before the function runs.
     const authorizer = new HttpUserPoolAuthorizer('Users', userPool, {
       userPoolClients: [webClient],
     })

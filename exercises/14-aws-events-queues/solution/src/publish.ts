@@ -17,10 +17,10 @@ export const publishOrderPlaced = async (order: Order) => {
       Detail: JSON.stringify(detail),
     }],
   }))
-  // PutEvents meldet Teilfehler im Ergebnis, nicht als Exception.
+  // PutEvents reports partial failures in the result, not as an exception.
   if (result.FailedEntryCount) throw new Error(`OrderPlaced nicht veröffentlicht: ${result.Entries?.[0]?.ErrorMessage}`)
   return result.Entries?.[0]?.EventId
 }
 
-// Zum Ausprobieren: aws lambda invoke mit einer Bestellung als Payload.
+// To try it out: aws lambda invoke with an order as payload.
 export const handler = async (order: Order) => ({ eventId: await publishOrderPlaced(order) })

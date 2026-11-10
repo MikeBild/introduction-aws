@@ -1,4 +1,4 @@
-// TODO: Leg hier die Key-Formate fest, die du aus ZUGRIFFSMUSTER.md ableitest.
+// TODO: Define the key formats you derive from ZUGRIFFSMUSTER.md here.
 export const customerPk = (customerId: string) => `CUSTOMER#${customerId}`
 export const PROFILE_SK = 'PROFILE'
 export const orderSk = (createdAt: string, orderId: string) => `ORDER#${createdAt}#${orderId}`

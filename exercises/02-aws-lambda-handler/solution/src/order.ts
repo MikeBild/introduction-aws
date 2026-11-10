@@ -1,4 +1,4 @@
-// Werkstatt-Shop: Geld immer als ganze Cent, nie als Kommazahl.
+// Workshop shop: money always as whole cents, never as a decimal.
 export type OrderItem = { productId: string; quantity: number; priceCents: number }
 export type Order = { customerId: string; items: OrderItem[] }
 
@@ -10,7 +10,7 @@ const isItem = (value: unknown): value is OrderItem => {
   return isText(item?.productId) && isWhole(item?.quantity, 1) && isWhole(item?.priceCents, 0)
 }
 
-// Prüft den Body und liefert eine Bestellung oder undefined – auch bei kaputtem JSON.
+// Validates the body and returns an order or undefined – also for broken JSON.
 export const parseOrder = (body: string | undefined): Order | undefined => {
   let data: unknown
   try {
@@ -24,6 +24,6 @@ export const parseOrder = (body: string | undefined): Order | undefined => {
   return { customerId: order.customerId, items: order.items.map(({ productId, quantity, priceCents }) => ({ productId, quantity, priceCents })) }
 }
 
-// Reine Fachlogik: kein Event, kein AWS, leicht zu testen.
+// Pure business logic: no event, no AWS, easy to test.
 export const totalCents = (order: Order): number =>
   order.items.reduce((sum, item) => sum + item.quantity * item.priceCents, 0)
