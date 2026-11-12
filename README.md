@@ -128,16 +128,16 @@ With normal use, all exercises stay within the Free Tier or cost a few cents. Ta
 
 ## Workshop and slides
 
-- Workshop: [“AWS serverless with Lambda, CDK, and DynamoDB”](https://workshops.mikebild.dev/w/aws-serverless/remote/)
-- Slides: [slides.mikebild.dev/introduction-aws-serverless](https://slides.mikebild.dev/introduction-aws-serverless.html)
-- PDF: [slides.mikebild.dev/introduction-aws-serverless.pdf](https://slides.mikebild.dev/introduction-aws-serverless.pdf)
-- Articles on mikebild.dev (in German):
-  - [Serverless-Auth mit Cognito User Pools](https://www.mikebild.dev/de/blog/cognito-userpool-auth-serverless/)
-  - [Serverless-Workflows mit AWS Step Functions](https://www.mikebild.dev/de/blog/step-functions-serverless-workflows/)
-  - [GraphQL-APIs mit AppSync und DynamoDB](https://www.mikebild.dev/de/blog/appsync-dynamodb-graphql-api/)
-  - [DynamoDB-Datenmodellierung: Single-Table-Design](https://www.mikebild.dev/de/blog/dynamodb-datenmodellierung-single-table/)
-  - [Transaktionale E-Mails serverless: SES und Lambda](https://www.mikebild.dev/de/blog/ses-email-hook-serverless/)
-  - [Lambda-Performance und Cold Starts verstehen](https://www.mikebild.dev/de/blog/lambda-performance-und-cold-starts/)
+- Workshop (held in German): [“AWS serverless with Lambda, CDK, and DynamoDB”](https://workshops.mikebild.dev/w/aws-serverless/remote/)
+- Slides: [slides.mikebild.dev/introduction-aws-serverless.en](https://slides.mikebild.dev/introduction-aws-serverless.en.html)
+- PDF: [introduction-aws-serverless.en.pdf](https://objects.upraft.mikebild.info/site-media/mikebild/decks/introduction-aws-serverless/introduction-aws-serverless.en.pdf)
+- Posts on mikebild.dev:
+  - [Serverless Auth with Cognito User Pools](https://www.mikebild.dev/en/blog/serverless-auth-with-cognito-user-pools/)
+  - [Serverless Workflows with AWS Step Functions](https://www.mikebild.dev/en/blog/serverless-workflows-with-aws-step-functions/)
+  - [GraphQL APIs with AppSync and DynamoDB](https://www.mikebild.dev/en/blog/graphql-apis-with-appsync-and-dynamodb/)
+  - [DynamoDB Data Modeling: Single-Table Design](https://www.mikebild.dev/en/blog/dynamodb-data-modeling-single-table-design/)
+  - [Serverless Transactional Email: SES and Lambda](https://www.mikebild.dev/en/blog/serverless-transactional-email-with-ses-and-lambda/)
+  - [Understanding Lambda Performance and Cold Starts](https://www.mikebild.dev/en/blog/understanding-lambda-performance-and-cold-starts/)
 
 ## Archive
 
