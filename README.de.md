@@ -131,6 +131,7 @@ Alle Übungen bleiben bei normaler Nutzung im Free Tier oder bei wenigen Cent. T
 - Workshop: [„AWS Serverless mit Lambda, CDK und DynamoDB“](https://workshops.mikebild.dev/w/aws-serverless/remote/)
 - Folien: [slides.mikebild.dev/introduction-aws-serverless](https://slides.mikebild.dev/introduction-aws-serverless.html)
 - PDF: [introduction-aws-serverless.pdf](https://objects.upraft.mikebild.info/site-media/mikebild/decks/introduction-aws-serverless/introduction-aws-serverless.pdf)
+- Video: [introduction-aws-serverless.mp4](https://objects.upraft.mikebild.info/site-media/mikebild/decks/introduction-aws-serverless/introduction-aws-serverless.mp4)
 - Beiträge auf mikebild.dev:
   - [Serverless-Auth mit Cognito User Pools](https://www.mikebild.dev/de/blog/cognito-userpool-auth-serverless/)
   - [Serverless-Workflows mit AWS Step Functions](https://www.mikebild.dev/de/blog/step-functions-serverless-workflows/)
